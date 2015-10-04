@@ -1,6 +1,5 @@
-package com.callbell.callbell;
+package com.callbell.callbell.service;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 

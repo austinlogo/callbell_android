@@ -1,34 +1,39 @@
-package com.callbell.callbell;
+package com.callbell.callbell.presentation;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.app.Fragment;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.callbell.callbell.R;
+import com.callbell.callbell.dagger.AndroidModule;
+import com.callbell.callbell.data.PrefManager;
+import com.callbell.callbell.service.RegistrationIntentService;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import javax.inject.Inject;
 
 import java.io.IOException;
+
+import dagger.ObjectGraph;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private String SENDER_ID = "434312104937";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static String TAG = DashboardActivity.class.getSimpleName();
+
+    @Inject
+    PrefManager mPrefManager;
 
     GoogleCloudMessaging gcm;
     SharedPreferences prefs;
@@ -40,6 +45,10 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard2);
+
+        ((CallBellApplication) getApplication()).inject(this);
+
+        ObjectGraph objectGraph = ObjectGraph.create(new AndroidModule());
 
         txt = (EditText) findViewById(R.id.edit_text_reg_id);
         prefs = getSharedPreferences("Chat", 0);
@@ -53,10 +62,9 @@ public class DashboardActivity extends AppCompatActivity {
             txt.setText("Reg Id set: " + reg );
             Log.d("REG", reg);
         }else if(checkPlayServices()){
-//            new Register().execute();
-            Intent intent = new Intent(this, RegistrationIntentService.class);
-            startService(intent);
-
+//            Intent intent = new Intent(this, RegistrationIntentService.class);
+//            startService(intent);
+            txt.setText(mPrefManager.getToken());
         }else{
             Toast.makeText(getApplicationContext(), "This device is not supported", Toast.LENGTH_SHORT).show();
         }
