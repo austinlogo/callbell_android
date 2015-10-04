@@ -2,6 +2,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
-.DS_Store
+.idea/
+CallBell.iml
 /build
 /captures
