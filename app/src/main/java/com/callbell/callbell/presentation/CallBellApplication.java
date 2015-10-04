@@ -3,6 +3,7 @@ package com.callbell.callbell.presentation;
 import android.app.Application;
 
 import com.callbell.callbell.dagger.AndroidModule;
+import com.callbell.callbell.dagger.ServiceModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class CallBellApplication extends Application {
 
         moduleList = new ArrayList<>();
         moduleList.add(new AndroidModule());
+        moduleList.add(new ServiceModule());
     }
 
     private void createObjectGraphIfNeeded() {

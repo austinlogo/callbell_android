@@ -5,18 +5,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.callbell.callbell.R;
 import com.callbell.callbell.dagger.AndroidModule;
 import com.callbell.callbell.data.PrefManager;
+import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.RegistrationIntentService;
 
+import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -40,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity {
     Context context;
     String regid;
     EditText txt;
+    Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +57,27 @@ public class DashboardActivity extends AppCompatActivity {
         ObjectGraph objectGraph = ObjectGraph.create(new AndroidModule());
 
         txt = (EditText) findViewById(R.id.edit_text_reg_id);
-        prefs = getSharedPreferences("Chat", 0);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         context = getApplicationContext();
+        mButton = (Button) findViewById(R.id.nurse_button);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServerMessage sm = new ServerMessage("receive", "A1228", "A1228", "Hello");
+                new PostRequestTask(getApplication()).execute(sm);
+            }
+        });
 
         String reg = "";
-        if(!(reg = prefs.getString("REG_FROM","")).isEmpty()){
-            txt.setText("Reg Id set: " + reg);
-            Log.d("REG", reg);
-        }else  if(!(reg = prefs.getString("REG_FROM","")).isEmpty()){
-            txt.setText("Reg Id set: " + reg );
+        if( prefs.getBoolean(mPrefManager.REG_UPLOADED, false) && prefs.getString(mPrefManager.REG_ID, "").length() > 0) {
+            txt.setText("Reg Id set: " + prefs.getString(mPrefManager.REG_ID, ""));
             Log.d("REG", reg);
         }else if(checkPlayServices()){
-//            Intent intent = new Intent(this, RegistrationIntentService.class);
-//            startService(intent);
-            txt.setText(mPrefManager.getToken());
+            txt.setText("REG ID being set");
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+
         }else{
             Toast.makeText(getApplicationContext(), "This device is not supported", Toast.LENGTH_SHORT).show();
         }
@@ -105,38 +118,5 @@ public class DashboardActivity extends AppCompatActivity {
             return false;
         }
         return true;
-    }
-
-    private class Register extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... args) {
-            try {
-                if (gcm == null) {
-                    gcm = GoogleCloudMessaging.getInstance(context);
-                    regid = gcm.register(SENDER_ID);
-                    Log.d("RegId", regid);
-
-                    SharedPreferences.Editor edit = prefs.edit();
-                    edit.putString("REG_ID", regid);
-                    Log.d("REG", regid);
-                    edit.commit();
-
-                }
-
-                return  regid;
-
-            } catch (IOException ex) {
-                Log.e("Error", ex.getMessage());
-                return "Fails";
-
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String json) {
-            txt.setText("Success. you're new reg_id is: " + regid);
-        }
-
     }
 }

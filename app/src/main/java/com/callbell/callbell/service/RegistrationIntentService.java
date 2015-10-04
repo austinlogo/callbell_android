@@ -6,8 +6,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.callbell.callbell.data.PrefManager;
+import com.callbell.callbell.models.ServerMessage;
+import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
+
+import javax.inject.Inject;
 
 public class RegistrationIntentService extends IntentService {
 
@@ -17,35 +22,33 @@ public class RegistrationIntentService extends IntentService {
         super(TAG);
     }
 
+    @Inject
+    PrefManager mPrefManager;
+
     @Override
     protected void onHandleIntent(Intent intent) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (prefs.getString(mPrefManager.DEFAULT_SENDER_ID, "").isEmpty()) {
+            prefs.edit().putString(mPrefManager.DEFAULT_SENDER_ID, "434312104937");
+        }
 
         Log.d(TAG, "Started Registration Handler");
 
         try {
-            // [START register_for_gcm]
-            // Initially this call goes out to the network to retrieve the token, subsequent calls
-            // are local.
-            // [START get_token]
+
             InstanceID instanceID = InstanceID.getInstance(this);
             String token = instanceID.getToken("434312104937", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             // [END get_token]
-            Log.i(TAG, "GCM Registration Token: " + token);
+            Log.d(TAG, "GCM Registration Token: " + token);
 
             // TODO: Implement this method to send any registration to your app's servers.
             sendRegistrationToServer(token);
-
-            // You should store a boolean that indicates whether the generated token has been
-            // sent to your server. If the boolean is false, send the token to your server,
-            // otherwise your server should have already received the token.
-            sharedPreferences.edit().putBoolean("gcm_reg_token_sent_to_server", true).apply();
-            // [END register_for_gcm]
+            prefs.edit().putString(mPrefManager.REG_ID, token).apply();
+            prefs.edit().putBoolean(mPrefManager.REG_UPLOADED, true).apply();
         } catch (Exception e) {
-            Log.d(TAG, "Failed to complete token refresh", e);
-            // If an exception happens while fetching the new token or updating our registration data
-            // on a third-party server, this ensures that we'll attempt the update at a later time.
-            sharedPreferences.edit().putBoolean("gcm_reg_token_sent_to_server", false).apply();
+            Log.e(TAG, "Failed to complete token refresh", e);
+            prefs.edit().putBoolean(mPrefManager.REG_UPLOADED, false).apply();
         }
 
     }
@@ -59,6 +62,7 @@ public class RegistrationIntentService extends IntentService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
+        ServerMessage message = new ServerMessage("register", "A1228", null, token);
+        new PostRequestTask(getApplication()).execute(message);
     }
 }
