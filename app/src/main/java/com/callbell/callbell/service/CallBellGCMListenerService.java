@@ -9,6 +9,7 @@ public class CallBellGCMListenerService extends GcmListenerService {
 
     public static String TAG = CallBellGCMListenerService.class.getSimpleName();
 
+    @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
         Log.d(TAG, "From: " + from);

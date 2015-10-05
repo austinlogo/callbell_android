@@ -19,6 +19,7 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.dagger.AndroidModule;
 import com.callbell.callbell.data.PrefManager;
 import com.callbell.callbell.models.ServerMessage;
+import com.callbell.callbell.service.CallBellGCMListenerService;
 import com.callbell.callbell.service.RegistrationIntentService;
 
 import com.callbell.callbell.service.tasks.PostRequestTask;
@@ -49,21 +50,28 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //TODO: verify that this works, please
+        Intent i = new Intent(this, CallBellGCMListenerService.class);
+        startService(i);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard2);
 
         ((CallBellApplication) getApplication()).inject(this);
 
-        ObjectGraph objectGraph = ObjectGraph.create(new AndroidModule());
-
         txt = (EditText) findViewById(R.id.edit_text_reg_id);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        prefs.edit().clear().apply();
         context = getApplicationContext();
         mButton = (Button) findViewById(R.id.nurse_button);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
+                getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
+
                 ServerMessage sm = new ServerMessage("receive", "A1228", "A1228", "Hello");
                 new PostRequestTask(getApplication()).execute(sm);
             }

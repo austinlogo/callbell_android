@@ -62,7 +62,7 @@ public class RegistrationIntentService extends IntentService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        ServerMessage message = new ServerMessage("register", "A1228", null, token);
+        ServerMessage message = new ServerMessage("register", "A1229", null, token);
         new PostRequestTask(getApplication()).execute(message);
     }
 }
