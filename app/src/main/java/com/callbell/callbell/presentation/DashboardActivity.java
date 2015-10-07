@@ -72,7 +72,7 @@ public class DashboardActivity extends AppCompatActivity {
                 getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
                 getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
 
-                ServerMessage sm = new ServerMessage("receive", "A1228", "A1228", "Hello");
+                ServerMessage sm = new ServerMessage("Swedish hos", "receive", "A1", "A2", "Hello");
                 new PostRequestTask(getApplication()).execute(sm);
             }
         });
