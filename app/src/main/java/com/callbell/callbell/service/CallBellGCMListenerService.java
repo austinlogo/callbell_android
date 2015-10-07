@@ -1,6 +1,8 @@
 package com.callbell.callbell.service;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
@@ -14,5 +16,10 @@ public class CallBellGCMListenerService extends GcmListenerService {
         String message = data.getString("message");
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + data.toString());
+
+        Intent i = new Intent("Message Received");
+        i.putExtra("message", message);
+        i.putExtra("From", from);
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
     }
 }

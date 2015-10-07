@@ -1,11 +1,13 @@
 package com.callbell.callbell.presentation;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -13,10 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.dagger.AndroidModule;
 import com.callbell.callbell.data.PrefManager;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.CallBellGCMListenerService;
@@ -27,10 +29,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import javax.inject.Inject;
-
-import java.io.IOException;
-
-import dagger.ObjectGraph;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -44,7 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
     GoogleCloudMessaging gcm;
     SharedPreferences prefs;
     Context context;
-    String regid;
+    TextView text;
     EditText txt;
     Button mButton;
 
@@ -61,10 +59,11 @@ public class DashboardActivity extends AppCompatActivity {
         ((CallBellApplication) getApplication()).inject(this);
 
         txt = (EditText) findViewById(R.id.edit_text_reg_id);
+        text = (TextView) findViewById(R.id.text_view);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 //        prefs.edit().clear().apply();
         context = getApplicationContext();
-        mButton = (Button) findViewById(R.id.nurse_button);
+        mButton = (Button) findViewById(R.id.call_button);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +88,13 @@ public class DashboardActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "This device is not supported", Toast.LENGTH_SHORT).show();
         }
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                text.setText(intent.getExtras().getString("message"));
+            }
+        }, new IntentFilter("Message Received"));
     }
 
     @Override
