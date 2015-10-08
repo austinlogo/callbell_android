@@ -1,5 +1,6 @@
 package com.callbell.callbell.presentation;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,14 +23,14 @@ import com.callbell.callbell.data.PrefManager;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.CallBellGCMListenerService;
 import com.callbell.callbell.service.RegistrationIntentService;
-
 import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+
 import javax.inject.Inject;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends Activity {
 
     private String SENDER_ID = "434312104937";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;

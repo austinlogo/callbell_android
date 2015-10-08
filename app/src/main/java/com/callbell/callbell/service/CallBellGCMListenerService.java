@@ -20,6 +20,7 @@ public class CallBellGCMListenerService extends GcmListenerService {
         Intent i = new Intent("Message Received");
         i.putExtra("message", message);
         i.putExtra("From", from);
+
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
     }
 }

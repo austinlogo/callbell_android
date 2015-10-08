@@ -1,10 +1,16 @@
 package com.callbell.callbell.models;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by austin on 10/4/15.
  */
-public class ServerMessage {
+public class ServerMessage extends Request {
 
+    private static final String TAG = ServerMessage.class.getSimpleName();
     private String from,
             to,
             message,
@@ -37,6 +43,23 @@ public class ServerMessage {
 
     public String getOperation() {
         return "/" + operation;
+    }
+
+    public JSONObject toJSON() {
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("hospital_id", getHospital());
+            jsonObject.put("to_id", getTo());
+            jsonObject.put("from_id", getFrom());
+            jsonObject.put("payload", getMessage());
+
+            return jsonObject;
+        } catch (JSONException e) {
+            Log.e(TAG, "An error has occurred creating a jsonObject");
+        }
+
+        return null;
     }
 
 }

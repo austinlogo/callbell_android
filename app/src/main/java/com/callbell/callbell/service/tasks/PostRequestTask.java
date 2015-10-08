@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
+import com.callbell.callbell.models.Request;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.presentation.CallBellApplication;
 import com.callbell.callbell.service.ServerEndpoints;
@@ -20,7 +21,7 @@ import java.util.Scanner;
 
 import javax.inject.Inject;
 
-public class PostRequestTask extends AsyncTask<ServerMessage, String, JSONArray> {
+public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
 
 
     private static final String TAG = PostRequestTask.class.getSimpleName();
@@ -37,9 +38,9 @@ public class PostRequestTask extends AsyncTask<ServerMessage, String, JSONArray>
     }
 
     @Override
-    protected JSONArray doInBackground(ServerMessage... params) {
-        ServerMessage message = params[0];
-        JSONObject request = mJsonTranslator.ServerMessageToJSON(message);
+    protected JSONArray doInBackground(Request... params) {
+        Request message = params[0];
+        JSONObject request = message.toJSON();
 
         Log.d(TAG, "String: " + request.toString());
 

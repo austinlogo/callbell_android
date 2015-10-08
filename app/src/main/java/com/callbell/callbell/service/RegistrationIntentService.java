@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.callbell.callbell.data.PrefManager;
+import com.callbell.callbell.models.RegisterRequest;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -43,7 +44,7 @@ public class RegistrationIntentService extends IntentService {
             Log.d(TAG, "GCM Registration Token: " + token);
 
             // TODO: Implement this method to send any registration to your app's servers.
-            sendRegistrationToServer(token);
+            sendRegistrationToServer(token, intent.getStringExtra("location"), intent.getStringExtra("hospital_id"));
             prefs.edit().putString(mPrefManager.REG_ID, token).apply();
             prefs.edit().putBoolean(mPrefManager.REG_UPLOADED, true).apply();
         } catch (Exception e) {
@@ -61,8 +62,8 @@ public class RegistrationIntentService extends IntentService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(String token) {
-        ServerMessage message = new ServerMessage(null, "register", "A1229", null, token);
-        new PostRequestTask(getApplication()).execute(message);
+    private void sendRegistrationToServer(String token, String location, String hos) {
+        RegisterRequest msg = new RegisterRequest(hos, location, token);
+        new PostRequestTask(getApplication()).execute(msg);
     }
 }

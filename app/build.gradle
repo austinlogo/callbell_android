@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
@@ -25,6 +29,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
     compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
     compile files('libs/dagger-1.2.2.jar')
     compile files('libs/javax.inject.jar')
     compile files('libs/dagger-compiler-1.2.2.jar')

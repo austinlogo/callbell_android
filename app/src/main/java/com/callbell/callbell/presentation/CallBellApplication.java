@@ -22,7 +22,7 @@ public class CallBellApplication extends Application {
         }
 
         moduleList = new ArrayList<>();
-        moduleList.add(new AndroidModule());
+        moduleList.add(new AndroidModule(this));
         moduleList.add(new ServiceModule());
     }
 
