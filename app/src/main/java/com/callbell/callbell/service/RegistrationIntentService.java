@@ -6,9 +6,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.callbell.callbell.data.PrefManager;
+import com.callbell.callbell.config.PrefManager;
 import com.callbell.callbell.models.RegisterRequest;
-import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
@@ -30,8 +29,8 @@ public class RegistrationIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (prefs.getString(mPrefManager.DEFAULT_SENDER_ID, "").isEmpty()) {
-            prefs.edit().putString(mPrefManager.DEFAULT_SENDER_ID, "434312104937");
+        if (prefs.getString(mPrefManager.DEFAULT_SENDER_KEY, "").isEmpty()) {
+            prefs.edit().putString(mPrefManager.DEFAULT_SENDER_KEY, "434312104937");
         }
 
         Log.d(TAG, "Started Registration Handler");
@@ -46,10 +45,10 @@ public class RegistrationIntentService extends IntentService {
             // TODO: Implement this method to send any registration to your app's servers.
             sendRegistrationToServer(token, intent.getStringExtra("location"), intent.getStringExtra("hospital_id"));
             prefs.edit().putString(mPrefManager.REG_ID, token).apply();
-            prefs.edit().putBoolean(mPrefManager.REG_UPLOADED, true).apply();
+
         } catch (Exception e) {
             Log.e(TAG, "Failed to complete token refresh", e);
-            prefs.edit().putBoolean(mPrefManager.REG_UPLOADED, false).apply();
+            prefs.edit().putBoolean(mPrefManager.REG_UPLOADED_KEY, false).apply();
         }
 
     }

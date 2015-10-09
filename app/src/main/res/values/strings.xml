@@ -13,4 +13,6 @@
     <string name="food_water">Food / Water</string>
     <string name="restroom">Restroom</string>
     <string name="call_bell_title">Need Help?</string>
+    <string name="hospital_name">Enter Hospital</string>
+    <string name="location_hint">Enter Location</string>
 </resources>

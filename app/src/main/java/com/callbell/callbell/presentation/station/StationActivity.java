@@ -5,16 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.callbell.callbell.R;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class StationActivity extends AppCompatActivity implements StationFragment.OnFragmentInteractionListener {
     StationFragment mStationFragment;
@@ -32,7 +28,7 @@ public class StationActivity extends AppCompatActivity implements StationFragmen
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container, mStationFragment)
+                .add(R.id.base_fragment_container, mStationFragment)
                 .commit();
 
 

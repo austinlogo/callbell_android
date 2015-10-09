@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.data.PrefManager;
+import com.callbell.callbell.config.PrefManager;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.CallBellGCMListenerService;
 import com.callbell.callbell.service.RegistrationIntentService;
@@ -77,7 +77,7 @@ public class DashboardActivity extends Activity {
         });
 
         String reg = "";
-        if( prefs.getBoolean(mPrefManager.REG_UPLOADED, false) && prefs.getString(mPrefManager.REG_ID, "").length() > 0) {
+        if( prefs.getBoolean(mPrefManager.REG_UPLOADED_KEY, false) && prefs.getString(mPrefManager.REG_ID, "").length() > 0) {
             txt.setText("Reg Id set: " + prefs.getString(mPrefManager.REG_ID, ""));
             Log.d("REG", reg);
         }else if(checkPlayServices()){

@@ -1,14 +1,18 @@
 package com.callbell.callbell.dagger;
 
 import android.app.Application;
-import android.util.Log;
+import android.content.Context;
 
 import com.callbell.callbell.business.MessageRouting;
-import com.callbell.callbell.data.PrefManager;
+import com.callbell.callbell.config.PrefManager;
+import com.callbell.callbell.data.ServerMessageToJSONTranslator;
 import com.callbell.callbell.presentation.CallBellApplication;
 import com.callbell.callbell.presentation.DashboardActivity;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
 import com.callbell.callbell.presentation.login.LoginActivity;
+import com.callbell.callbell.presentation.login.LoginFragment;
+import com.callbell.callbell.service.ServerEndpoints;
+import com.callbell.callbell.service.tasks.PostRequestTask;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,7 +22,9 @@ import javax.inject.Singleton;
         DashboardActivity.class,
         MessageRouting.class,
         BedModeActivity.class,
-        LoginActivity.class
+        LoginActivity.class,
+        PostRequestTask.class,
+        LoginFragment.class
 }
 )
 public class AndroidModule {
@@ -37,6 +43,16 @@ public class AndroidModule {
     @Provides @Singleton
     Application provideApplication() {
         return application;
+    }
+
+    @Provides
+    ServerMessageToJSONTranslator provideServerMessageToJSONTranslator() {
+        return new ServerMessageToJSONTranslator();
+    }
+
+    @Provides @Singleton
+    ServerEndpoints provideServerEndpoints() {
+        return new ServerEndpoints();
     }
 
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.callbell.callbell.config.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
 import com.callbell.callbell.models.Request;
 import com.callbell.callbell.models.ServerMessage;
@@ -32,6 +33,9 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
 
     @Inject
     ServerEndpoints mServerEndpoints;
+
+    @Inject
+    PrefManager prefs;
 
     public PostRequestTask (Application application) {
         ((CallBellApplication) application).inject(this);
@@ -70,6 +74,11 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
                 response += in.nextLine();
             }
             Log.d(TAG, "Response: " + response);
+
+            if (message.getOperation() == "/register") {
+                //TODO ADD logic that actually checks this
+                prefs.uploadedToken(true);
+            }
 
         } catch (Exception e) {
             Log.e(TAG, "Caught Error on Post Request: " + e);

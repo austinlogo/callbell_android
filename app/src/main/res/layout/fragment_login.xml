@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/hospital_id"
+            android:hint="@string/hospital_name"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <EditText
+        android:id="@+id/login_id"
+        android:hint="@string/location_hint"
+        android:layout_width="match_parent"
+            android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/launch_station_experience"
+            android:text="@string/station"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/launch_bed_experience"
+            android:text="@string/bed"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

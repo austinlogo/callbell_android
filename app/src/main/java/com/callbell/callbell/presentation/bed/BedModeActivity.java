@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.config.PrefManager;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.presentation.CallBellApplication;
 
@@ -23,6 +24,9 @@ public class BedModeActivity extends AppCompatActivity implements CallBellsFragm
 
     @Inject
     MessageRouting messageRouting;
+
+    @Inject
+    PrefManager prefs;
 
     @InjectView(R.id.test_text)
     TextView mTextView;
@@ -51,7 +55,7 @@ public class BedModeActivity extends AppCompatActivity implements CallBellsFragm
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
 
         //Send GCM Message
-        messageRouting.sendMessage("Test_hospital", "Test_hospital_station", "category_me", msg);
+        messageRouting.sendMessage(prefs.getStationTabletName(), prefs.CATEGORY_CALL_BELL, msg);
 
     }
 }
