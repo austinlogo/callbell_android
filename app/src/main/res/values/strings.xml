@@ -15,4 +15,8 @@
     <string name="call_bell_title">Need Help?</string>
     <string name="hospital_name">Enter Hospital</string>
     <string name="location_hint">Enter Location</string>
+    <string name="group_name">Enter Group</string>
+    <string name="call_bell_alarm_title">Someone\'s Calling</string>
+    <string name="acknowledge">Acknowledge</string>
+    <string name="dismiss">Dismiss</string>
 </resources>

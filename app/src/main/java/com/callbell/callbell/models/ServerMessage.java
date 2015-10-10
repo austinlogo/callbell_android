@@ -2,6 +2,8 @@ package com.callbell.callbell.models;
 
 import android.util.Log;
 
+import com.callbell.callbell.util.PrefManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,22 +13,19 @@ import org.json.JSONObject;
 public class ServerMessage extends Request {
 
     private static final String TAG = ServerMessage.class.getSimpleName();
-    private String from,
-            to,
-            message,
-            hospital,
-            operation;
+    private State mState;
+    private String to,
+            message;
 
-    public ServerMessage(String hos, String op, String fr, String t, String msg) {
-        hospital = hos;
-        operation = op;
-        from = fr;
-        to = t;
+    public ServerMessage(State st, String ti, String msg) {
+        mState = st;
+        to = ti;
         message = msg;
+
     }
 
     public String getHospital() {
-        return hospital;
+        return mState.getHospital();
     }
 
     public String getMessage() {
@@ -38,20 +37,19 @@ public class ServerMessage extends Request {
     }
 
     public String getFrom() {
-        return from;
+        return mState.getLocation();
     }
 
     public String getOperation() {
-        return "/" + operation;
+        return "/receive";
     }
 
     public JSONObject toJSON() {
         try {
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put("hospital_id", getHospital());
+            jsonObject.put(PrefManager.STATE_KEY, mState.toJson());
             jsonObject.put("to_id", getTo());
-            jsonObject.put("from_id", getFrom());
             jsonObject.put("payload", getMessage());
 
             return jsonObject;

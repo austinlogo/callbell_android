@@ -15,7 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.config.PrefManager;
+import com.callbell.callbell.models.State;
+import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.presentation.CallBellApplication;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
 import com.callbell.callbell.presentation.station.StationActivity;
@@ -41,10 +42,14 @@ public class LoginFragment extends Fragment {
     private static final String TAG = LoginFragment.class.getSimpleName();
     private LoginFragmentCallback mListener;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private State LastState;
 
     @InjectView(R.id.login_id)
     EditText location_id;
 
+    @InjectView(R.id.group_id)
+    EditText group_id;
+    
     @InjectView(R.id.hospital_id)
     EditText hospital_id;
 
@@ -83,8 +88,7 @@ public class LoginFragment extends Fragment {
         ((CallBellApplication) getActivity().getApplication()).inject(this);
         ButterKnife.inject(this, view);
 
-        hospital_id.setText(prefs.hospital());
-        location_id.setText(prefs.location());
+        intiStateAndUI();
         setButtonsEnableStatus();
 
         bedButton.setOnClickListener(new View.OnClickListener() {
@@ -144,36 +148,40 @@ public class LoginFragment extends Fragment {
     }
 
     public void register(String mod) {
-        String mode = prefs.mode();
-        String hospital = prefs.hospital();
-        String location = prefs.location();
+        State thisState = new State(hospital_id.getText().toString(),
+                group_id.getText().toString(),
+                location_id.getText().toString(),
+                mod);
 
-        //check if this has the same info we have on the server
-        if (mode.length() > 0 && mode.equals(mod)
-                && hospital.length() > 0 && hospital.equals(hospital_id.getText().toString())
-                && location.length() > 0 && location.equals(location_id.getText().toString())) {
+//        check if this has the same info we have on the server
+        if (LastState.equals(thisState)) {
+            prefs.setState(thisState);
             Log.d(TAG, "Already Registered");
         //Something has changed or it's a new tablet either way we should update the token on the server.
         } else if (checkPlayServices()) {
+//        if (checkPlayServices()) {
+            prefs.getPreferences().edit().putBoolean(prefs.REG_UPLOADED_KEY, false).apply();
+//            if (hospital.length() == 0 || !hospital.equals(hospital_id.getText().toString())) {
+//                hospital = hospital_id.getText().toString();
+//            }
+//            if (mode.length() == 0 || !mode.equals(mod)) {
+//                mode = mod;
+//            }
 
-            if (hospital.length() == 0 || !hospital.equals(hospital_id.getText().toString())) {
-                hospital = hospital_id.getText().toString();
-            }
-            if (mode.length() == 0 || !mode.equals(mod)) {
-                mode = mod;
-            }
 
-            prefs.setState(hospital, location_id.getText().toString(), mode);
 
             Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
-            intent.putExtra("hospital_id", hospital);
-            if (mode.equals(prefs.STATION_MODE) ) {
-                intent.putExtra("location", prefs.getStationTabletName());
+            intent.putExtra(prefs.HOSPITAL_KEY, thisState.getHospital());
+            intent.putExtra(prefs.GROUP_KEY, thisState.getGroup());
+            if (thisState.getMode().equals(prefs.STATION_MODE) ) {
+                thisState.setLocation(prefs.getStationTabletName());
+                intent.putExtra(prefs.LOCATION_KEY, prefs.getStationTabletName());
             } else {
-                intent.putExtra("location", location_id.getText().toString());
+                intent.putExtra(prefs.LOCATION_KEY, thisState.getLocation());
             }
 
-            Log.d(TAG, "starting Service: " + mode);
+            Log.d(TAG, "starting Service: " + thisState.getMode());
+            prefs.setState(thisState);
             getActivity().startService(intent);
 
         }else{
@@ -196,12 +204,37 @@ public class LoginFragment extends Fragment {
         return true;
     }
 
-    private void setButtonsEnableStatus() {
-        boolean enable = location_id.getText().length() > 0
-                && hospital_id.getText().length() > 0;
+    private boolean hasStateChanged(String mod) {
+        String mode = prefs.mode();
+        String hospital = prefs.hospital();
+        String location = prefs.location();
 
-        bedButton.setEnabled(enable);
-        stationButton.setEnabled(enable);
+        //check if this has the same info we have on the server
+        if (mode.length() > 0 && mode.equals(mod)
+                && hospital.length() > 0 && hospital.equals(hospital_id.getText().toString())
+                && location.length() > 0 && location.equals(location_id.getText().toString())) {
+
+            return false;
+        }
+        return true;
+    }
+
+    private void intiStateAndUI() {
+        LastState = new State(prefs.hospital(), prefs.group(), prefs.location(), prefs.mode());
+        hospital_id.setText(LastState.getHospital());
+        group_id.setText(LastState.getGroup());
+        location_id.setText(LastState.getLocation());
+    }
+    
+    private void setButtonsEnableStatus() {
+        boolean enableStation = group_id.getText().length() > 0
+                && hospital_id.getText().length() > 0;
+        boolean enableBed = location_id.getText().length() > 0
+                && hospital_id.getText().length() > 0
+                && group_id.getText().length() > 0;
+
+        bedButton.setEnabled(enableBed);
+        stationButton.setEnabled(enableStation);
     }
 
     /**

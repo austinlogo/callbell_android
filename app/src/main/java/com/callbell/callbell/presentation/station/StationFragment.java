@@ -2,6 +2,7 @@ package com.callbell.callbell.presentation.station;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,8 +47,6 @@ public class StationFragment extends Fragment {
         Log.d(TAG, "Created Fragment");
         View view = inflater.inflate(R.layout.fragment_station, container, false);
         ButterKnife.inject(this, view);
-
-        mStationText.setText("Started");
 
         return view;
     }

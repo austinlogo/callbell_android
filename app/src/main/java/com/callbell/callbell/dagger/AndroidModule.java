@@ -1,13 +1,12 @@
 package com.callbell.callbell.dagger;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.callbell.callbell.business.MessageRouting;
-import com.callbell.callbell.config.PrefManager;
+import com.callbell.callbell.service.RegistrationIntentService;
+import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
 import com.callbell.callbell.presentation.CallBellApplication;
-import com.callbell.callbell.presentation.DashboardActivity;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
 import com.callbell.callbell.presentation.login.LoginActivity;
 import com.callbell.callbell.presentation.login.LoginFragment;
@@ -19,15 +18,16 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module ( injects = {
-        DashboardActivity.class,
         MessageRouting.class,
         BedModeActivity.class,
         LoginActivity.class,
         PostRequestTask.class,
-        LoginFragment.class
+        LoginFragment.class,
+        RegistrationIntentService.class,
 }
 )
 public class AndroidModule {
+
 
     private final CallBellApplication application;
 

@@ -5,10 +5,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.callbell.callbell.config.PrefManager;
+import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
 import com.callbell.callbell.models.Request;
-import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.presentation.CallBellApplication;
 import com.callbell.callbell.service.ServerEndpoints;
 

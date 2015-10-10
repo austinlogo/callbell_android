@@ -38,7 +38,7 @@ public class ServerMessageToJSONTranslator {
             JSONObject jsonObject = new JSONObject();
 
             jsonObject.put("hospital_id", message.getHospitalId());
-            jsonObject.put("bed_id", message.getBedId());
+            jsonObject.put("bed_id", message.getLocationId());
             jsonObject.put("register_id", message.getRegisterId());
 
             return jsonObject;

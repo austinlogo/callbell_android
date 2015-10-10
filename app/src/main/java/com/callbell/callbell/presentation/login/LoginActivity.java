@@ -1,19 +1,9 @@
 package com.callbell.callbell.presentation.login;
 
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.config.PrefManager;
-
-import javax.inject.Inject;
-
-import butterknife.InjectView;
 
 public class LoginActivity extends AppCompatActivity implements LoginFragment.LoginFragmentCallback {
 

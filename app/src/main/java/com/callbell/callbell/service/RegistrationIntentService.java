@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.callbell.callbell.config.PrefManager;
+import com.callbell.callbell.models.State;
+import com.callbell.callbell.presentation.CallBellApplication;
+import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.models.RegisterRequest;
 import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -23,32 +25,31 @@ public class RegistrationIntentService extends IntentService {
     }
 
     @Inject
-    PrefManager mPrefManager;
+    PrefManager prefs;
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-        if (prefs.getString(mPrefManager.DEFAULT_SENDER_KEY, "").isEmpty()) {
-            prefs.edit().putString(mPrefManager.DEFAULT_SENDER_KEY, "434312104937");
-        }
-
         Log.d(TAG, "Started Registration Handler");
 
-        try {
+        ((CallBellApplication) getApplication()).inject(this);
 
+        if (prefs.getPreferences().getString(prefs.DEFAULT_SENDER_KEY, "").isEmpty()) {
+            prefs.getPreferences().edit().putString(prefs.DEFAULT_SENDER_KEY, prefs.senderId());
+        }
+
+        try {
             InstanceID instanceID = InstanceID.getInstance(this);
-            String token = instanceID.getToken("434312104937", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+            String token = instanceID.getToken(prefs.senderId(), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             // [END get_token]
             Log.d(TAG, "GCM Registration Token: " + token);
 
             // TODO: Implement this method to send any registration to your app's servers.
-            sendRegistrationToServer(token, intent.getStringExtra("location"), intent.getStringExtra("hospital_id"));
-            prefs.edit().putString(mPrefManager.REG_ID, token).apply();
+            sendRegistrationToServer(token, State.getStateFromIntent(intent));
+            prefs.getPreferences().edit().putString(prefs.REG_ID, token).apply();
 
         } catch (Exception e) {
             Log.e(TAG, "Failed to complete token refresh", e);
-            prefs.edit().putBoolean(mPrefManager.REG_UPLOADED_KEY, false).apply();
+            prefs.getPreferences().edit().putBoolean(prefs.REG_UPLOADED_KEY, false).apply();
         }
 
     }
@@ -61,8 +62,8 @@ public class RegistrationIntentService extends IntentService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(String token, String location, String hos) {
-        RegisterRequest msg = new RegisterRequest(hos, location, token);
+    private void sendRegistrationToServer(String token, State state) {
+        RegisterRequest msg = new RegisterRequest(state, token);
         new PostRequestTask(getApplication()).execute(msg);
     }
 }

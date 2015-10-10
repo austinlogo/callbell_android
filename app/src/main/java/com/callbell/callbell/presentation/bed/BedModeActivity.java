@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
-import com.callbell.callbell.config.PrefManager;
-import com.callbell.callbell.models.ServerMessage;
+import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.presentation.CallBellApplication;
 
 import javax.inject.Inject;
