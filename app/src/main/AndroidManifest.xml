@@ -50,17 +50,21 @@
             android:exported="false" >
         </service>
 
-        <activity android:name=".presentation.login.LoginActivity" >
+
+        <activity
+            android:name=".presentation.login.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".presentation.bed.BedModeActivity"
             android:label="@string/title_activity_bed_mode"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
         <activity android:name=".presentation.station.StationActivity" >
         </activity>

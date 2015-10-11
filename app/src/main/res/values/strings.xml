@@ -19,4 +19,10 @@
     <string name="call_bell_alarm_title">Someone\'s Calling</string>
     <string name="acknowledge">Acknowledge</string>
     <string name="dismiss">Dismiss</string>
+    <string name="staff_physician">Physician</string>
+    <string name="staff_nurse">Nurse</string>
+    <string name="staff_resident">Resident:</string>
+    <string name="admin_mode">Admin Mode</string>
+    <string name="su_enter_alarm_title">Enter Admin Password</string>
+    <string name="user_mode">User Mode</string>
 </resources>

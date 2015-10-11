@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.callbell.callbell.util.PrefManager;
 import com.google.android.gms.gcm.GcmListenerService;
 
 public class CallBellGCMListenerService extends GcmListenerService {
@@ -17,7 +18,7 @@ public class CallBellGCMListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + data.toString());
 
-        Intent i = new Intent("Message Received");
+        Intent i = new Intent(PrefManager.EVENT_MESSAGE_RECEIVED);
         i.putExtra("message", message);
         i.putExtra("From", from);
 

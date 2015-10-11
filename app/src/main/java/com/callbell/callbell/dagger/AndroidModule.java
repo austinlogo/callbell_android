@@ -3,6 +3,8 @@ package com.callbell.callbell.dagger;
 import android.app.Application;
 
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.presentation.StaffFragment;
+import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.service.RegistrationIntentService;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
@@ -23,7 +25,10 @@ import javax.inject.Singleton;
         LoginActivity.class,
         PostRequestTask.class,
         LoginFragment.class,
+        StaffFragment.class,
+        EnableSuperUserDialog.class,
         RegistrationIntentService.class,
+
 }
 )
 public class AndroidModule {

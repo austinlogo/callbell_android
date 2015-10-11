@@ -20,8 +20,12 @@ public class State {
     private String hospital,
         group,
         location,
-        mode;
+        mode,
+        physician,
+        nurse,
+        resident;
 
+    //only used for getting a state from an intent
     public State(String hos, String grp, String loc) {
         hospital = hos;
         group = grp;
@@ -29,11 +33,14 @@ public class State {
         mode = "";
     }
 
-    public State(String hos, String grp, String loc, String mod) {
+    public State(String hos, String grp, String loc, String mod, String doc, String nurs, String res) {
         hospital = hos;
         group = grp;
         location = loc;
         mode = mod;
+        physician = doc;
+        nurse = nurs;
+        resident = res;
     }
 
     public State(State st) {
@@ -41,6 +48,9 @@ public class State {
         group = st.getGroup();
         location = st.getLocation();
         mode = st.getMode();
+        physician = st.getPhysician();
+        resident = st.getResident();
+        nurse = st.getNurse();
     }
 
     public String getHospital() {
@@ -59,6 +69,18 @@ public class State {
         return mode;
     }
 
+    public String getPhysician() {
+        return (physician != null) ? physician : "";
+    }
+
+    public String getNurse() {
+        return (nurse != null) ? nurse : "";
+    }
+
+    public String getResident() {
+        return (resident != null) ? resident : "";
+    }
+
     public void setHospital(String hos) {
         hospital = hos;
     }
@@ -73,6 +95,12 @@ public class State {
 
     public void setMode(String mod) {
         mode = mod;
+    }
+
+    public void setStaff(String doc, String res, String nurs) {
+        physician = doc;
+        resident = res;
+        nurse = nurs;
     }
 
     public boolean equals(State other) {

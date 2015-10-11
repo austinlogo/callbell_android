@@ -151,7 +151,7 @@ public class LoginFragment extends Fragment {
         State thisState = new State(hospital_id.getText().toString(),
                 group_id.getText().toString(),
                 location_id.getText().toString(),
-                mod);
+                mod, prefs.physician(), prefs.nurse(), prefs.resident());
 
 //        check if this has the same info we have on the server
         if (LastState.equals(thisState)) {
@@ -161,12 +161,6 @@ public class LoginFragment extends Fragment {
         } else if (checkPlayServices()) {
 //        if (checkPlayServices()) {
             prefs.getPreferences().edit().putBoolean(prefs.REG_UPLOADED_KEY, false).apply();
-//            if (hospital.length() == 0 || !hospital.equals(hospital_id.getText().toString())) {
-//                hospital = hospital_id.getText().toString();
-//            }
-//            if (mode.length() == 0 || !mode.equals(mod)) {
-//                mode = mod;
-//            }
 
 
 
@@ -220,7 +214,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void intiStateAndUI() {
-        LastState = new State(prefs.hospital(), prefs.group(), prefs.location(), prefs.mode());
+        LastState = new State(prefs.hospital(), prefs.group(), prefs.location(), prefs.mode(), prefs.physician(), prefs.nurse(), prefs.resident());
         hospital_id.setText(LastState.getHospital());
         group_id.setText(LastState.getGroup());
         location_id.setText(LastState.getLocation());

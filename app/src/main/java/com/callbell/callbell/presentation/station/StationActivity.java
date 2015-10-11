@@ -1,6 +1,5 @@
 package com.callbell.callbell.presentation.station;
 
-import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.presentation.CallBellApplication;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
+import com.callbell.callbell.util.PrefManager;
 
 public class StationActivity extends AppCompatActivity implements StationFragment.OnFragmentInteractionListener {
     StationFragment mStationFragment;
@@ -50,12 +49,10 @@ public class StationActivity extends AppCompatActivity implements StationFragmen
                 mStationFragment.setText(intent.getStringExtra("message"));
                 CallBellDialog alert = CallBellDialog.newInstance(intent.getExtras());
 
-                getSupportFragmentManager().beginTransaction()
-                        .add(alert, "Alert")
-                        .commit();
+                alert.show(getSupportFragmentManager(), "Dialog");
 
             }
-        }, new IntentFilter("Message Received"));
+        }, new IntentFilter(PrefManager.EVENT_MESSAGE_RECEIVED));
     }
 
     @Override

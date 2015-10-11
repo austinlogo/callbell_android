@@ -43,7 +43,7 @@ public class RegistrationIntentService extends IntentService {
             // [END get_token]
             Log.d(TAG, "GCM Registration Token: " + token);
 
-            // TODO: Implement this method to send any registration to your app's servers.
+
             sendRegistrationToServer(token, State.getStateFromIntent(intent));
             prefs.getPreferences().edit().putString(prefs.REG_ID, token).apply();
 
