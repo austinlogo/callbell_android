@@ -8,7 +8,7 @@ import android.util.Log;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
 import com.callbell.callbell.models.Request;
-import com.callbell.callbell.presentation.CallBellApplication;
+import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.service.ServerEndpoints;
 
 import org.json.JSONArray;

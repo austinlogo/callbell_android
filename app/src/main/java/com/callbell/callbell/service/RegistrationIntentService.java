@@ -2,12 +2,10 @@ package com.callbell.callbell.service;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.callbell.callbell.models.State;
-import com.callbell.callbell.presentation.CallBellApplication;
+import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.models.RegisterRequest;
 import com.callbell.callbell.service.tasks.PostRequestTask;

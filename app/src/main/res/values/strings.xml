@@ -25,4 +25,9 @@
     <string name="admin_mode">Admin Mode</string>
     <string name="su_enter_alarm_title">Enter Admin Password</string>
     <string name="user_mode">User Mode</string>
+
+    <string name="title_activity_plan_of_care">PlanOfCareActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="incorrect_password">Sorry, that password was incorrect</string>
 </resources>

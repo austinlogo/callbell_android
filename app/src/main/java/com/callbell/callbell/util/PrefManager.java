@@ -1,5 +1,6 @@
 package com.callbell.callbell.util;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -17,6 +18,7 @@ public class PrefManager {
     public static final String KEY_PASSWORD = "PASSWORD_ID";
     public static final String REG_UPLOADED_KEY = "REGISTRATION_UPLOADED_TO_GCM_SERVER";
     public static final String DEFAULT_SENDER_KEY = "DEFAULT_SENDER";
+    public static final String SU_STATUS = "SUPER_USER_STATUS";
 
     //STATE
     public static final String HOSPITAL_KEY = "hospital_id";
@@ -38,11 +40,12 @@ public class PrefManager {
 
     //EVENTS
     public static final String EVENT_MESSAGE_RECEIVED = "MESSAGE RECEIVED";
-    public static final String EVENT_SU_MODE_ENABLED = "SU MODE ENABLED";
+    public static final String EVENT_SU_MODE_CHANGE = "SU MODE CHANGE";
 
     //MISC. VALUES
     public static final String DEFAULT_SU_PASSWORD = "2468";
     private static final String TAG = PrefManager.class.getSimpleName();
+
 
 
     public static SharedPreferences prefs;
@@ -143,10 +146,5 @@ public class PrefManager {
 
     public String senderId() {
         return "434312104937";
-    }
-
-
-    public void setSuperUser(boolean superUser) {
-        isSuperUser = superUser;
     }
 }

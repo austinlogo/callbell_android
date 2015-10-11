@@ -1,9 +1,12 @@
 package com.callbell.callbell.presentation.login;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,7 +20,7 @@ import android.widget.Toast;
 import com.callbell.callbell.R;
 import com.callbell.callbell.models.State;
 import com.callbell.callbell.util.PrefManager;
-import com.callbell.callbell.presentation.CallBellApplication;
+import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
 import com.callbell.callbell.presentation.station.StationActivity;
 import com.callbell.callbell.service.RegistrationIntentService;
@@ -90,6 +93,7 @@ public class LoginFragment extends Fragment {
 
         intiStateAndUI();
         setButtonsEnableStatus();
+        setSUpermissions(prefs.isSuperUser());
 
         bedButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +130,13 @@ public class LoginFragment extends Fragment {
                 setButtonsEnableStatus();
             }
         });
+
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                setSUpermissions(prefs.isSuperUser());
+            }
+        }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
 
         return view;
     }
@@ -218,6 +229,12 @@ public class LoginFragment extends Fragment {
         hospital_id.setText(LastState.getHospital());
         group_id.setText(LastState.getGroup());
         location_id.setText(LastState.getLocation());
+    }
+
+    private void setSUpermissions(boolean isSuperUser) {
+        hospital_id.setEnabled(isSuperUser);
+        group_id.setEnabled(isSuperUser);
+        stationButton.setEnabled(isSuperUser);
     }
     
     private void setButtonsEnableStatus() {

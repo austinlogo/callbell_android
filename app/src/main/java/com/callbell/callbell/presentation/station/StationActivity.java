@@ -11,10 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.util.PrefManager;
 
-public class StationActivity extends AppCompatActivity implements StationFragment.OnFragmentInteractionListener {
+public class StationActivity extends BaseActivity implements StationFragment.OnFragmentInteractionListener {
     StationFragment mStationFragment;
     public static final String TAG = StationActivity.class.getSimpleName();
 
