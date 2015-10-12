@@ -162,7 +162,7 @@ public class LoginFragment extends Fragment {
         State thisState = new State(hospital_id.getText().toString(),
                 group_id.getText().toString(),
                 location_id.getText().toString(),
-                mod, prefs.physician(), prefs.nurse(), prefs.resident());
+                mod, prefs.physician(), prefs.nurse(), prefs.resident(), prefs.chiefComplaint());
 
 //        check if this has the same info we have on the server
         if (LastState.equals(thisState)) {
@@ -225,7 +225,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void intiStateAndUI() {
-        LastState = new State(prefs.hospital(), prefs.group(), prefs.location(), prefs.mode(), prefs.physician(), prefs.nurse(), prefs.resident());
+        LastState = new State(prefs);
         hospital_id.setText(LastState.getHospital());
         group_id.setText(LastState.getGroup());
         location_id.setText(LastState.getLocation());

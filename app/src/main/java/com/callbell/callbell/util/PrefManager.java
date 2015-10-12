@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State;
 
 import javax.inject.Inject;
@@ -30,6 +31,8 @@ public class PrefManager {
     public static final String NURSE_KEY = "nurse_id";
     public static final String RESIDENT_KEY = "resident_id";
     public static final String STATE_KEY = "state_id";
+    public static final String CHIEF_COMPLAINT_KEY = "chief_complaint_key";
+    public static final String SHOWN_ACTION_KEY = "shown_actions_id";
 
     //GLOBAL VALUES
     public static final String BED_MODE = "bed_mode";
@@ -95,6 +98,10 @@ public class PrefManager {
         return prefs.getString(NURSE_KEY, "");
     }
 
+    public String chiefComplaint() {
+        return prefs.getString(CHIEF_COMPLAINT_KEY, POCValues.DEFAULT_CHOICE);
+    }
+
     public boolean isSuperUser() {
         return isSuperUser;
     }
@@ -111,6 +118,7 @@ public class PrefManager {
         sp.putString(PHYSICIAN_KEY, newState.getPhysician());
         sp.putString(NURSE_KEY, newState.getNurse());
         sp.putString(RESIDENT_KEY, newState.getResident());
+        sp.putString(CHIEF_COMPLAINT_KEY, newState.getChiefComplaint());
         sp.apply();
 
         Log.d(TAG, "RES2: " + resident());
@@ -147,4 +155,5 @@ public class PrefManager {
     public String senderId() {
         return "434312104937";
     }
+
 }

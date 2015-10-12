@@ -14,16 +14,27 @@ import javax.inject.Inject;
  */
 public class State {
 
-    @Inject
-    PrefManager prefs;
-
     private String hospital,
         group,
         location,
         mode,
         physician,
         nurse,
-        resident;
+        resident,
+        chiefComplaint;
+
+    private String[] shownActions;
+
+    public State(PrefManager prefs) {
+        hospital = prefs.hospital();
+        group = prefs.group();
+        location = prefs.location();
+        mode = prefs.mode();
+        physician = prefs.physician();
+        nurse = prefs.nurse();
+        resident = prefs.resident();
+        chiefComplaint = prefs.chiefComplaint();
+    }
 
     //only used for getting a state from an intent
     public State(String hos, String grp, String loc) {
@@ -33,7 +44,7 @@ public class State {
         mode = "";
     }
 
-    public State(String hos, String grp, String loc, String mod, String doc, String nurs, String res) {
+    public State(String hos, String grp, String loc, String mod, String doc, String nurs, String res, String cc) {
         hospital = hos;
         group = grp;
         location = loc;
@@ -41,6 +52,7 @@ public class State {
         physician = doc;
         nurse = nurs;
         resident = res;
+        chiefComplaint = cc;
     }
 
     public State(State st) {
@@ -51,6 +63,8 @@ public class State {
         physician = st.getPhysician();
         resident = st.getResident();
         nurse = st.getNurse();
+        chiefComplaint = st.getChiefComplaint();
+
     }
 
     public String getHospital() {
@@ -81,6 +95,11 @@ public class State {
         return (resident != null) ? resident : "";
     }
 
+    public String getChiefComplaint() {
+        return (chiefComplaint != null) ? chiefComplaint : "";
+    }
+
+
     public void setHospital(String hos) {
         hospital = hos;
     }
@@ -95,6 +114,10 @@ public class State {
 
     public void setMode(String mod) {
         mode = mod;
+    }
+
+    public void setChiefComplaint(String cc) {
+        chiefComplaint = cc;
     }
 
     public void setStaff(String doc, String res, String nurs) {

@@ -1,16 +1,22 @@
 package com.callbell.callbell.presentation.bed;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -18,7 +24,11 @@ import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
-import com.callbell.callbell.presentation.bed.dummy.DummyContent;
+import com.callbell.callbell.data.POCValues;
+import com.callbell.callbell.presentation.bed.adapter.ComplaintActionArrayAdapter;
+import com.callbell.callbell.util.PrefManager;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -37,10 +47,19 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
     private OnFragmentInteractionListener mListener;
 
     @InjectView (R.id.main_complaint_spinner)
-    Spinner mainComplaint;
+    Spinner chiefComplaint;
 
     @InjectView(R.id.action_list)
     ListView actionList;
+
+    @Inject
+    PrefManager prefs;
+
+    @Inject
+    POCValues pocValues;
+
+    private String[] allComplaintActions;
+    private String[] shownComplaintActions;
 
     // TODO: Rename and change types of parameters
     public static PlanOfCareFragment newInstance() {
@@ -68,26 +87,36 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         View view = inflater.inflate(R.layout.fragment_planofcare, container, false);
 
         ButterKnife.inject(this, view);
-//        ((CallBellApplication) getActivity().getApplication()).inject(this);
+        ((CallBellApplication) getActivity().getApplication()).inject(this);
 
-        String[] spinnerList = {"Abdominal Pain", "Eye pain", "headache"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerList);
-        mainComplaint.setAdapter(adapter);
+        String[] spinnerArray = pocValues.pocMap.keySet().toArray(new String[0]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
+        chiefComplaint.setAdapter(adapter);
+        chiefComplaint.setSelection(adapter.getPosition(prefs.getCurrentState().getChiefComplaint()));
+        chiefComplaint.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
 
-        String[] actionArray = {"Task one", "Task two", "task three"};
-        ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, actionArray);
+        String[] allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
+        ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, allComplaintActions);
         actionList.setAdapter(actionArrayAdapter);
         actionList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        actionList.setItemChecked(0, true);
-        actionList.setItemsCanFocus(false);
 
-        actionList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-
+        actionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "Size: " + actionList.getCheckedItemPositions().size());
+                CheckedTextView cView = ((CheckedTextView) view);
+                cView.setChecked(!cView.isChecked());
+//                view.setVisibility(View.GONE);
             }
         });
+
+        setSuperUserpermissions(prefs.isSuperUser());
+
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                setSuperUserpermissions(prefs.isSuperUser());
+            }
+        }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
 
         return view;
     }
@@ -106,31 +135,53 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
     @Override
     public void onDetach() {
         super.onDetach();
+
         mListener = null;
+    }
+
+
+    private void setSuperUserpermissions(boolean isSuperUser) {
+        chiefComplaint.setEnabled(isSuperUser);
+
+        actionList.setChoiceMode(isSuperUser ? ListView.CHOICE_MODE_NONE : ListView.CHOICE_MODE_MULTIPLE);
+        actionList.setEnabled(isSuperUser);
+
+//        SparseBooleanArray checkedItems = actionList.getCheckedItemPositions();
+//        for (int i = 0; i < checkedItems.size(); i++) {
+//            boolean itemChecked = checkedItems.get(i);
+//            actionList.getAdapter().getItem(i).
+//        }
+//        actionList.getAdapter().notify();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-        }
+
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(String id);
+    }
+
+    //Spinner Listener
+    public class ChiefComplaintItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            String selectedComplaint = parent.getSelectedItem().toString();
+            prefs.getCurrentState().setChiefComplaint(selectedComplaint);
+
+            String[] actionArray = POCValues.pocMap.get(selectedComplaint);
+            ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, actionArray);
+            actionList.setAdapter(actionArrayAdapter);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     }
 
 }

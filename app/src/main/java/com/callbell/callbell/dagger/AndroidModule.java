@@ -3,6 +3,7 @@ package com.callbell.callbell.dagger;
 import android.app.Application;
 
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.presentation.bed.StaffFragment;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.service.RegistrationIntentService;
@@ -27,6 +28,7 @@ import javax.inject.Singleton;
         LoginFragment.class,
         StaffFragment.class,
         EnableSuperUserDialog.class,
+        PlanOfCareFragment.class,
         RegistrationIntentService.class,
 
 }

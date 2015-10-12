@@ -96,6 +96,7 @@ public class BaseActivity extends AppCompatActivity {
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
             adminButton.setTitle(R.string.admin_mode);
+            prefs.setState(prefs.getCurrentState());
         }
     }
 }
