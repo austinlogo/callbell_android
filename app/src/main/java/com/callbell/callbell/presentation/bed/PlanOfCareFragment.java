@@ -63,6 +63,7 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
     private String[] allComplaintActions;
     private String[] shownComplaintActions;
     private ListView checkedItems;
+    private boolean initComplete = false;
 
     // TODO: Rename and change types of parameters
     public static PlanOfCareFragment newInstance() {
@@ -101,12 +102,9 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         String[] allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
         ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, allComplaintActions);
         actionList.setAdapter(actionArrayAdapter);
-        Log.d(TAG, "Count : " + actionList.getCount());
-        actionList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        actionList.setItemChecked(2, true);
-        Log.d(TAG, ""+ actionList.getCheckedItemPosition());
-//        setCheckedItems();
-//        setSuperUserpermissions(prefs.isSuperUser());
+        actionList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        setCheckedItems();
+        setSuperUserpermissions(prefs.isSuperUser());
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
             @Override
@@ -143,13 +141,13 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         if (!isSuperUser && checked != null) {
 
             Log.d(TAG, "booleanArray: " + checked.toString());
-            Log.d(TAG, "checked size is " + checked.size());
-            int[] checkedArray = new int[checked.size()];
+            Log.d(TAG, "checked size is " + actionList.getCheckedItemCount());
+            int[] checkedArray = new int[getCheckedItemCount(actionList)];
 
             int checkedArrayIndex = 0;
             for (int index = 0; index < actionList.getAdapter().getCount(); index++) {
                 Log.d(TAG, "Checked value at " + index + " is " + checked.get(index));
-                if (checked.valueAt(index)) {
+                if (checked.get(index)) {
                     checkedArray[checkedArrayIndex++] = index;
                 }
             }
@@ -171,6 +169,18 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
 //            actionList.getAdapter().getItem(i).
 //        }
 //        actionList.getAdapter().notify();
+    }
+
+    private int getCheckedItemCount(ListView list) {
+        SparseBooleanArray checkedItems = actionList.getCheckedItemPositions();
+        int count = 0;
+
+        for (int index = 0; index < list.getAdapter().getCount(); index++) {
+            if (checkedItems.get(index)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
@@ -215,6 +225,10 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
             String[] actionArray = POCValues.pocMap.get(selectedComplaint);
             ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, actionArray);
             actionList.setAdapter(actionArrayAdapter);
+            if (!initComplete) {
+                initComplete = true;
+                setCheckedItems();
+            }
         }
 
         @Override
