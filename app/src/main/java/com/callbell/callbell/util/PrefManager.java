@@ -8,6 +8,10 @@ import android.util.Log;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -58,6 +62,7 @@ public class PrefManager {
     @Inject
     public PrefManager(Context c) {
         prefs = PreferenceManager.getDefaultSharedPreferences(c);
+        currentState = new State(this);
         isSuperUser = false;
 
     }
@@ -102,6 +107,25 @@ public class PrefManager {
         return prefs.getString(CHIEF_COMPLAINT_KEY, POCValues.DEFAULT_CHOICE);
     }
 
+    public int[] shownActions() {
+        try {
+            String arrayString = prefs.getString(SHOWN_ACTION_KEY, "");
+            Log.d(TAG, "array: " + arrayString);
+            JSONArray jArray = new JSONArray(arrayString);
+
+            int[] intArray = new int[jArray.length()];
+            for (int index = 0; index < jArray.length(); index++) {
+                intArray[index] = jArray.optInt(index);
+            }
+
+            return intArray;
+        } catch (JSONException e) {
+            Log.e(TAG, "unable to parse JSON in ShownActions");
+        }
+
+        return new int[0];
+    }
+
     public boolean isSuperUser() {
         return isSuperUser;
     }
@@ -138,6 +162,18 @@ public class PrefManager {
         sp.putString(RESIDENT_KEY, res);
         sp.putString(NURSE_KEY, nurse);
         sp.commit();
+    }
+
+    public void setShownActions(int[] shownActions) {
+        SharedPreferences.Editor sp = prefs.edit();
+
+        JSONArray array = new JSONArray();
+        for (int i : shownActions) {
+            array.put(i);
+        }
+
+        Log.d(TAG, "Array: " + array.toString());
+        sp.putString(SHOWN_ACTION_KEY, array.toString()).apply();
     }
 
     public void uploadedToken(boolean bool) {

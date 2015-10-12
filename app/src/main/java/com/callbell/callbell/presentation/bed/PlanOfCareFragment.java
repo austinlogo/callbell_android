@@ -28,6 +28,8 @@ import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.bed.adapter.ComplaintActionArrayAdapter;
 import com.callbell.callbell.util.PrefManager;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -60,6 +62,7 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
 
     private String[] allComplaintActions;
     private String[] shownComplaintActions;
+    private ListView checkedItems;
 
     // TODO: Rename and change types of parameters
     public static PlanOfCareFragment newInstance() {
@@ -98,18 +101,12 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         String[] allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
         ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, allComplaintActions);
         actionList.setAdapter(actionArrayAdapter);
-        actionList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        actionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CheckedTextView cView = ((CheckedTextView) view);
-                cView.setChecked(!cView.isChecked());
-//                view.setVisibility(View.GONE);
-            }
-        });
-
-        setSuperUserpermissions(prefs.isSuperUser());
+        Log.d(TAG, "Count : " + actionList.getCount());
+        actionList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        actionList.setItemChecked(2, true);
+        Log.d(TAG, ""+ actionList.getCheckedItemPosition());
+//        setCheckedItems();
+//        setSuperUserpermissions(prefs.isSuperUser());
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
             @Override
@@ -141,10 +138,32 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
 
 
     private void setSuperUserpermissions(boolean isSuperUser) {
+        SparseBooleanArray checked = actionList.getCheckedItemPositions();
+
+        if (!isSuperUser && checked != null) {
+
+            Log.d(TAG, "booleanArray: " + checked.toString());
+            Log.d(TAG, "checked size is " + checked.size());
+            int[] checkedArray = new int[checked.size()];
+
+            int checkedArrayIndex = 0;
+            for (int index = 0; index < actionList.getAdapter().getCount(); index++) {
+                Log.d(TAG, "Checked value at " + index + " is " + checked.get(index));
+                if (checked.valueAt(index)) {
+                    checkedArray[checkedArrayIndex++] = index;
+                }
+            }
+
+            prefs.setShownActions(checkedArray);
+        }
+
         chiefComplaint.setEnabled(isSuperUser);
 
-        actionList.setChoiceMode(isSuperUser ? ListView.CHOICE_MODE_NONE : ListView.CHOICE_MODE_MULTIPLE);
+//        actionList.setChoiceMode(!isSuperUser ? ListView.CHOICE_MODE_NONE : ListView.CHOICE_MODE_MULTIPLE);
         actionList.setEnabled(isSuperUser);
+
+        //save which actions are checked.
+
 
 //        SparseBooleanArray checkedItems = actionList.getCheckedItemPositions();
 //        for (int i = 0; i < checkedItems.size(); i++) {
@@ -157,6 +176,26 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    private void setCheckedItems() {
+        int oldMode = ListView.CHOICE_MODE_MULTIPLE;
+        if(actionList.getChoiceMode() != ListView.CHOICE_MODE_MULTIPLE) {
+            oldMode = actionList.getChoiceMode();
+            actionList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        }
+
+        int[] checkedItems = prefs.shownActions();
+        Log.d(TAG, "mode: " + actionList.getChoiceMode());
+        Log.d(TAG, "Checked items length: "+ checkedItems.length);
+
+        for (int index : checkedItems) {
+            Log.d(TAG, "CheckedItem: " + index);
+            actionList.setItemChecked(index, true);
+        }
+
+        Log.d(TAG, "cool: " + actionList.getCheckedItemPositions().toString());
+        actionList.setChoiceMode(oldMode);
     }
 
     public interface OnFragmentInteractionListener {
