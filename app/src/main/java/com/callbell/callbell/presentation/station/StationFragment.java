@@ -1,8 +1,6 @@
 package com.callbell.callbell.presentation.station;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,9 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
+import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
+import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.adapter.StationItemAdapter;
+import com.callbell.callbell.util.PrefManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,9 +29,11 @@ public class StationFragment extends Fragment {
     private static final String TAG = StationFragment.class.getSimpleName();
     private OnFragmentInteractionListener mListener;
 
+    @Inject
+    PrefManager prefs;
 
-    @InjectView(R.id.station_fragment_text)
-    TextView mStationText;
+    @InjectView(R.id.station_state_list)
+    ListView stationStateList;
 
     // TODO: Rename and change types and number of parameters
     public static StationFragment newInstance() {
@@ -47,6 +56,15 @@ public class StationFragment extends Fragment {
         Log.d(TAG, "Created Fragment");
         View view = inflater.inflate(R.layout.fragment_station, container, false);
         ButterKnife.inject(this, view);
+        ((CallBellApplication) getActivity().getApplication()).inject(this);
+
+
+        List<State> sl = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            sl.add(prefs.getCurrentState());
+        }
+        StationItemAdapter adapter = new StationItemAdapter(getActivity().getApplicationContext(), sl);
+        stationStateList.setAdapter(adapter);
 
         return view;
     }
@@ -66,10 +84,6 @@ public class StationFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public void setText(String msg) {
-        mStationText.setText(msg);
     }
 
     /**

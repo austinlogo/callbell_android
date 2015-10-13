@@ -47,7 +47,7 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "OnReceiveCalled");
-                mStationFragment.setText(intent.getStringExtra("message"));
+//                mStationFragment.setText(intent.getStringExtra("message"));
                 CallBellDialog alert = CallBellDialog.newInstance(intent.getExtras());
 
                 alert.show(getSupportFragmentManager(), "Dialog");

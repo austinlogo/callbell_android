@@ -42,7 +42,7 @@ public class RegistrationIntentService extends IntentService {
             Log.d(TAG, "GCM Registration Token: " + token);
 
 
-            sendRegistrationToServer(token, State.getStateFromIntent(intent));
+            sendRegistrationToServer(token);
             prefs.getPreferences().edit().putString(prefs.REG_ID, token).apply();
 
         } catch (Exception e) {
@@ -60,8 +60,8 @@ public class RegistrationIntentService extends IntentService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(String token, State state) {
-        RegisterRequest msg = new RegisterRequest(state, token);
+    private void sendRegistrationToServer(String token) {
+        RegisterRequest msg = new RegisterRequest(prefs.getCurrentState(), token);
         new PostRequestTask(getApplication()).execute(msg);
     }
 }

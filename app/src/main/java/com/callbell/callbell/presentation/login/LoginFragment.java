@@ -65,6 +65,9 @@ public class LoginFragment extends Fragment {
     @Inject
     PrefManager prefs;
 
+    //for Debug purposes
+    private boolean forceRegister = true;
+
     // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
@@ -165,24 +168,16 @@ public class LoginFragment extends Fragment {
                 mod, prefs.physician(), prefs.nurse(), prefs.resident(), prefs.chiefComplaint());
 
 //        check if this has the same info we have on the server
-        if (LastState.equals(thisState)) {
+        if (LastState.equals(thisState) && !forceRegister) {
             prefs.setState(thisState);
             Log.d(TAG, "Already Registered");
         //Something has changed or it's a new tablet either way we should update the token on the server.
         } else if (checkPlayServices()) {
-//        if (checkPlayServices()) {
             prefs.getPreferences().edit().putBoolean(prefs.REG_UPLOADED_KEY, false).apply();
-
-
-
             Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
-            intent.putExtra(prefs.HOSPITAL_KEY, thisState.getHospital());
-            intent.putExtra(prefs.GROUP_KEY, thisState.getGroup());
+
             if (thisState.getMode().equals(prefs.STATION_MODE) ) {
                 thisState.setLocation(prefs.getStationTabletName());
-                intent.putExtra(prefs.LOCATION_KEY, prefs.getStationTabletName());
-            } else {
-                intent.putExtra(prefs.LOCATION_KEY, thisState.getLocation());
             }
 
             Log.d(TAG, "starting Service: " + thisState.getMode());

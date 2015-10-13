@@ -42,6 +42,9 @@ public class StaffFragment extends Fragment {
     @InjectView(R.id.staff_resident_field)
     EditText residentField;
 
+    @InjectView(R.id.staff_nurse_field)
+    EditText nurseField;
+
     @InjectView(R.id.staff_physician_box)
     LinearLayout physicianBox;
 
@@ -51,8 +54,7 @@ public class StaffFragment extends Fragment {
     @InjectView(R.id.staff_resident_box)
     LinearLayout residentBox;
 
-    @InjectView(R.id.staff_nurse_field)
-    EditText nurseField;
+
 
     public static StaffFragment newInstance() {
         StaffFragment fragment = new StaffFragment();

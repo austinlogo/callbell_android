@@ -145,6 +145,10 @@ public class State {
         object.put(PrefManager.HOSPITAL_KEY, hospital);
         object.put(PrefManager.GROUP_KEY, group);
         object.put(PrefManager.LOCATION_KEY, location);
+        object.put(PrefManager.PHYSICIAN_KEY, physician);
+        object.put(PrefManager.NURSE_KEY, nurse);
+        object.put(PrefManager.RESIDENT_KEY, resident);
+        object.put(PrefManager.CHIEF_COMPLAINT_KEY, chiefComplaint);
 
         return object;
     }

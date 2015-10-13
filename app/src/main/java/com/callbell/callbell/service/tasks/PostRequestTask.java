@@ -45,7 +45,7 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
         Request message = params[0];
         JSONObject request = message.toJSON();
 
-        Log.d(TAG, "String: " + request.toString());
+        Log.d(TAG, "Request: " + request.toString());
 
         try {
 

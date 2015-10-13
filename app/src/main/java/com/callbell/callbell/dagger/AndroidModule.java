@@ -6,6 +6,8 @@ import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.presentation.bed.StaffFragment;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
+import com.callbell.callbell.presentation.station.StationActivity;
+import com.callbell.callbell.presentation.station.StationFragment;
 import com.callbell.callbell.service.RegistrationIntentService;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
@@ -29,6 +31,8 @@ import javax.inject.Singleton;
         StaffFragment.class,
         EnableSuperUserDialog.class,
         PlanOfCareFragment.class,
+        StationFragment.class,
+        StationActivity.class,
         RegistrationIntentService.class,
 
 }

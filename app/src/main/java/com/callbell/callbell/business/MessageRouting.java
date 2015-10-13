@@ -23,7 +23,7 @@ public class MessageRouting {
     }
 
     public void sendMessage(String to, String cat, String msg) {
-        ServerMessage sm = new ServerMessage(prefs.currentState, to, msg);
+        ServerMessage sm = new ServerMessage(prefs.getCurrentState(), to, msg);
         Log.d(TAG, "To: " + to);
         Log.d(TAG, "From: " + prefs.location());
         Log.d(TAG, "Mode: " + prefs.mode());

@@ -155,7 +155,7 @@ public class PrefManager {
     }
 
     public void setStaff(String doc, String res, String nurse) {
-        currentState.setStaff(doc, nurse, res);
+        currentState.setStaff(doc, res, nurse);
 
         SharedPreferences.Editor sp = prefs.edit();
         sp.putString(PHYSICIAN_KEY, doc);

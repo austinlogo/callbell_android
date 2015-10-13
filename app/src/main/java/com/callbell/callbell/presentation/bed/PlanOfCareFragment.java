@@ -1,6 +1,5 @@
 package com.callbell.callbell.presentation.bed;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,19 +15,13 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.data.POCValues;
-import com.callbell.callbell.presentation.bed.adapter.ComplaintActionArrayAdapter;
 import com.callbell.callbell.util.PrefManager;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -100,7 +93,7 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         chiefComplaint.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
 
         String[] allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
-        ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, allComplaintActions);
+        ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.item_multi_check, allComplaintActions);
         actionList.setAdapter(actionArrayAdapter);
         actionList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         setCheckedItems();
@@ -156,19 +149,7 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         }
 
         chiefComplaint.setEnabled(isSuperUser);
-
-//        actionList.setChoiceMode(!isSuperUser ? ListView.CHOICE_MODE_NONE : ListView.CHOICE_MODE_MULTIPLE);
         actionList.setEnabled(isSuperUser);
-
-        //save which actions are checked.
-
-
-//        SparseBooleanArray checkedItems = actionList.getCheckedItemPositions();
-//        for (int i = 0; i < checkedItems.size(); i++) {
-//            boolean itemChecked = checkedItems.get(i);
-//            actionList.getAdapter().getItem(i).
-//        }
-//        actionList.getAdapter().notify();
     }
 
     private int getCheckedItemCount(ListView list) {
