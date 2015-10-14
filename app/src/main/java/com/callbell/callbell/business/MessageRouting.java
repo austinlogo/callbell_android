@@ -3,6 +3,8 @@ package com.callbell.callbell.business;
 import android.app.Application;
 import android.util.Log;
 
+import com.callbell.callbell.models.GetStatesRequest;
+import com.callbell.callbell.service.tasks.PostRequestWithResponseTask;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.tasks.PostRequestTask;
@@ -28,5 +30,13 @@ public class MessageRouting {
         Log.d(TAG, "From: " + prefs.location());
         Log.d(TAG, "Mode: " + prefs.mode());
         new PostRequestTask(context).execute(sm);
+    }
+
+    public void getDeviceStates() {
+
+        GetStatesRequest request = new GetStatesRequest(prefs.getCurrentState());
+
+        PostRequestWithResponseTask task = new PostRequestWithResponseTask(context, PrefManager.EVENT_STATES_RECEIVED);
+        task.execute(request);
     }
 }

@@ -12,7 +12,12 @@
         android:layout_height="wrap_content">
     </Spinner>
 
-    <ListView android:id="@+id/action_list"
+    <ListView android:id="@+id/action_list_admin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ListView android:id="@+id/action_list_patient"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

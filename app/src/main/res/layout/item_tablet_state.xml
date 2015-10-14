@@ -8,6 +8,8 @@
         android:id="@+id/station_item_bed_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_margin"
+        android:textColor="@color/black"
         android:layout_weight="1"
         />
 
@@ -15,6 +17,8 @@
         android:id="@+id/station_item_physician"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_margin"
+        android:textColor="@color/black"
         android:layout_weight="1"
         />
 
@@ -22,6 +26,8 @@
         android:id="@+id/station_item_nurse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_margin"
+        android:textColor="@color/black"
         android:layout_weight="1"
         />
 
@@ -29,6 +35,8 @@
         android:id="@+id/station_item_chief_complaint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_margin"
+        android:textColor="@color/black"
         android:layout_weight="1"
         />
 
@@ -36,6 +44,8 @@
         android:id="@+id/station_item_pain_rating"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_margin"
+        android:textColor="@color/black"
         android:layout_weight="1"
         />
 </LinearLayout>

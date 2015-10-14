@@ -1,7 +1,9 @@
 package com.callbell.callbell.models;
 
 import android.content.Intent;
+import android.util.Log;
 
+import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
@@ -14,6 +16,7 @@ import javax.inject.Inject;
  */
 public class State {
 
+    private static final String TAG = State.class.getSimpleName();
     private String hospital,
         group,
         location,
@@ -65,6 +68,21 @@ public class State {
         nurse = st.getNurse();
         chiefComplaint = st.getChiefComplaint();
 
+    }
+
+    public State(JSONObject object) {
+        try {
+            hospital = object.has("HOSPITAL_ID") ? object.getString("HOSPITAL_ID") : "";
+            group = "";
+            location = object.has("LOCATION_ID") ? object.getString("LOCATION_ID") : "";
+            mode = "";
+            physician = object.has("PHYSICIAN") ? object.getString("PHYSICIAN") : "";
+            resident = "";
+            nurse = object.has("NURSE") ? object.getString("NURSE") : "";
+            chiefComplaint = object.has("CHIEF_COMPLAINT") ? object.getString("CHIEF_COMPLAINT") : "";
+        } catch (JSONException e) {
+            Log.e(TAG, "Exception occurred: " + e.getMessage());
+        }
     }
 
     public String getHospital() {

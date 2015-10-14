@@ -9,6 +9,7 @@ import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.station.StationActivity;
 import com.callbell.callbell.presentation.station.StationFragment;
 import com.callbell.callbell.service.RegistrationIntentService;
+import com.callbell.callbell.service.tasks.PostRequestWithResponseTask;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
 import com.callbell.callbell.CallBellApplication;
@@ -33,6 +34,7 @@ import javax.inject.Singleton;
         PlanOfCareFragment.class,
         StationFragment.class,
         StationActivity.class,
+        PostRequestWithResponseTask.class,
         RegistrationIntentService.class,
 
 }

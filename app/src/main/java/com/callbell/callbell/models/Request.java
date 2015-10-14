@@ -1,5 +1,6 @@
 package com.callbell.callbell.models;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -7,7 +8,7 @@ import org.json.JSONObject;
  */
 public class Request {
 
-    public JSONObject toJSON () {
+    public JSONObject toJSON () throws JSONException {
         return null;
     }
 

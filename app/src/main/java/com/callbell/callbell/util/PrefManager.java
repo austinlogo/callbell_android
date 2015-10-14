@@ -47,6 +47,7 @@ public class PrefManager {
 
     //EVENTS
     public static final String EVENT_MESSAGE_RECEIVED = "MESSAGE RECEIVED";
+    public static final String EVENT_STATES_RECEIVED = "STATES RECEIVED";
     public static final String EVENT_SU_MODE_CHANGE = "SU MODE CHANGE";
 
     //MISC. VALUES

@@ -61,13 +61,6 @@ public class BedModeActivity extends BaseActivity
         }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
     }
 
-
-
-
-
-
-
-
     @Override
     public void onCallBellPressed(String msg) {
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));

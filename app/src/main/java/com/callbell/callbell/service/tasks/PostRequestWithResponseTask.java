@@ -1,17 +1,18 @@
 package com.callbell.callbell.service.tasks;
 
 import android.app.Application;
-import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.callbell.callbell.util.PrefManager;
-import com.callbell.callbell.data.ServerMessageToJSONTranslator;
-import com.callbell.callbell.models.Request;
 import com.callbell.callbell.CallBellApplication;
+import com.callbell.callbell.models.Request;
 import com.callbell.callbell.service.ServerEndpoints;
+import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
@@ -21,14 +22,12 @@ import java.util.Scanner;
 
 import javax.inject.Inject;
 
-public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
+/**
+ * Created by austin on 10/13/15.
+ */
+public class PostRequestWithResponseTask extends AsyncTask<Request, String, String> {
 
-
-    private static final String TAG = PostRequestTask.class.getSimpleName();
-    private Context context;
-
-    @Inject
-    ServerMessageToJSONTranslator mJsonTranslator;
+    private static final String TAG = PostRequestWithResponseTask.class.getSimpleName();
 
     @Inject
     ServerEndpoints mServerEndpoints;
@@ -36,12 +35,30 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
     @Inject
     PrefManager prefs;
 
-    public PostRequestTask (Application application) {
-        ((CallBellApplication) application).inject(this);
+    private Application app;
+    private String intentEvent;
+
+    private String response;
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+        Intent i = new Intent(intentEvent);
+        i.putExtra("response", s);
+        LocalBroadcastManager.getInstance(app).sendBroadcast(i);
+    }
+
+    public PostRequestWithResponseTask (Application application, String ie) {
+        app = application;
+        ((CallBellApplication) app).inject(this);
+
+        intentEvent = ie;
+        response = "";
     }
 
     @Override
-    protected JSONArray doInBackground(Request... params) {
+    protected String doInBackground(Request... params) {
 
         try {
 
@@ -49,6 +66,7 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
             JSONObject request = message.toJSON();
 
             Log.d(TAG, "Request: " + request.toString());
+
 
             //Setup connection
             URL url = new URL("http://" + mServerEndpoints.EMULATOR_LOCALHOST_SERVER_ENDPOINT + message.getOperation());
@@ -67,8 +85,6 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
             printout.flush();
             printout.close();
 
-            String response = "";
-
             Scanner in = new Scanner(httpRequest.getInputStream());
             while (in.hasNextLine()) {
                 response += in.nextLine();
@@ -83,6 +99,6 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
         } catch (Exception e) {
             Log.e(TAG, "Caught Error on Post Request: " + e);
         }
-        return null;
+        return response;
     }
 }
