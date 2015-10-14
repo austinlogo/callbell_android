@@ -37,6 +37,7 @@ public class PrefManager {
     public static final String STATE_KEY = "state_id";
     public static final String CHIEF_COMPLAINT_KEY = "chief_complaint_key";
     public static final String SHOWN_ACTION_KEY = "shown_actions_id";
+    public static final String STATELIST_KEY = "stateList";
 
     //GLOBAL VALUES
     public static final String BED_MODE = "bed_mode";
@@ -53,6 +54,7 @@ public class PrefManager {
     //MISC. VALUES
     public static final String DEFAULT_SU_PASSWORD = "2468";
     private static final String TAG = PrefManager.class.getSimpleName();
+    public static final String STATELIST_RESPONSE = "STATELIST RESPONSE";
 
 
 

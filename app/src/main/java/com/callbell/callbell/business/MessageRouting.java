@@ -1,10 +1,12 @@
 package com.callbell.callbell.business;
 
 import android.app.Application;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.callbell.callbell.models.GetStatesRequest;
-import com.callbell.callbell.service.tasks.PostRequestWithResponseTask;
+import com.callbell.callbell.service.tasks.PostRequestWithCallbackTask;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.models.ServerMessage;
 import com.callbell.callbell.service.tasks.PostRequestTask;
@@ -12,7 +14,7 @@ import com.callbell.callbell.service.tasks.PostRequestTask;
 import javax.inject.Inject;
 
 //@Singleton
-public class MessageRouting {
+public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTaskListener {
 
     private static final String TAG = MessageRouting.class.getSimpleName();
     @Inject
@@ -36,7 +38,14 @@ public class MessageRouting {
 
         GetStatesRequest request = new GetStatesRequest(prefs.getCurrentState());
 
-        PostRequestWithResponseTask task = new PostRequestWithResponseTask(context, PrefManager.EVENT_STATES_RECEIVED);
+        PostRequestWithCallbackTask task = new PostRequestWithCallbackTask(context, PrefManager.EVENT_STATES_RECEIVED, this);
         task.execute(request);
+    }
+
+    @Override
+    public void onTaskCompleted(String response) {
+        Intent i = new Intent(PrefManager.EVENT_STATES_RECEIVED);
+        i.putExtra(PrefManager.STATELIST_RESPONSE, response);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(i);
     }
 }

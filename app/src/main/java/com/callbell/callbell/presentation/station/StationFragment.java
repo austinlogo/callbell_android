@@ -19,6 +19,7 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.models.State;
 import com.callbell.callbell.models.adapter.StationItemAdapter;
+import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONArray;
@@ -83,8 +84,7 @@ public class StationFragment extends Fragment {
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                String stateList = intent.getStringExtra("response");
-                setListFromJSONString(stateList);
+                setListFromJSONString( intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
             }
         }, new IntentFilter(PrefManager.EVENT_STATES_RECEIVED));
 
@@ -108,34 +108,12 @@ public class StationFragment extends Fragment {
         mListener = null;
     }
 
-    private void setListFromJSONString(String stateList) {
-        Log.d(TAG, "STATELIST: " + stateList);
-        List<State> sl = getArray(stateList);
+    private void setListFromJSONString(String stateListString) {
+        Log.d(TAG, "STATELIST: " + stateListString);
+        List<State> sl = JSONUtil.getStateListFromJSONArray(JSONUtil.getJSONFromString(stateListString));
 
         StationItemAdapter adapter = new StationItemAdapter(getActivity().getApplicationContext(), sl);
         stationStateList.setAdapter(adapter);
-    }
-
-    private List<State> getArray(String array) {
-        ArrayList<State> result = new ArrayList<>();
-        try {
-            JSONObject obj = new JSONObject(array);
-            JSONArray myArray = obj.getJSONArray("stateList");
-
-            Log.d(TAG, "ARRAY: " + ((JSONObject) myArray.get(0)).getString("LOCATION_ID"));
-
-            for (int index = 0; index < myArray.length(); index++) {
-                result.add(new State( (JSONObject) myArray.get(index)));
-                Log.d(TAG, result.get(result.size() - 1).getPhysician());
-            }
-
-            return result;
-
-        } catch (JSONException e) {
-
-        }
-
-        return new ArrayList<>();
     }
 
     /**

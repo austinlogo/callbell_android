@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 import javax.inject.Inject;
 
-public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
+public class PostRequestTask extends AsyncTask<Request, String, String> {
 
 
     private static final String TAG = PostRequestTask.class.getSimpleName();
@@ -36,12 +36,18 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
     @Inject
     PrefManager prefs;
 
+    protected Application app;
+    protected String response;
+
     public PostRequestTask (Application application) {
-        ((CallBellApplication) application).inject(this);
+        app = application;
+        ((CallBellApplication) app).inject(this);
+
+        response = "";
     }
 
     @Override
-    protected JSONArray doInBackground(Request... params) {
+    protected String doInBackground(Request... params) {
 
         try {
 
@@ -67,7 +73,7 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
             printout.flush();
             printout.close();
 
-            String response = "";
+            response = "";
 
             Scanner in = new Scanner(httpRequest.getInputStream());
             while (in.hasNextLine()) {
@@ -83,6 +89,6 @@ public class PostRequestTask extends AsyncTask<Request, String, JSONArray> {
         } catch (Exception e) {
             Log.e(TAG, "Caught Error on Post Request: " + e);
         }
-        return null;
+        return response;
     }
 }
