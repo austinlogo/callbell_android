@@ -15,6 +15,10 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckedTextView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -22,6 +26,9 @@ import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.util.PrefManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -50,14 +57,23 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
     @InjectView(R.id.action_list_patient)
     ListView actionListPatient;
 
+    @InjectView(R.id.other_layout)
+    LinearLayout otherLayout;
+
+    @InjectView(R.id.other_submit)
+    Button submitOther;
+
+    @InjectView(R.id.other_edittext)
+    EditText otherEditText;
+
     @Inject
     PrefManager prefs;
 
     @Inject
     POCValues pocValues;
 
-    private String[] allComplaintActions;
-    private ListView checkedItems;
+    private List<String> allComplaintActions;
+    private List<String> patientPlanOfCareList;
     private boolean initComplete = false;
 
     // TODO: Rename and change types of parameters
@@ -88,23 +104,66 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         ButterKnife.inject(this, view);
         ((CallBellApplication) getActivity().getApplication()).inject(this);
 
+
+//        checkedItems = prefs.shownActions();
+
+        initLists();
+        initListeners();
+
+//        setSuperUserPermissions(prefs.isSuperUser());
+
+        return view;
+    }
+
+    private void initLists() {
         //Inflate the spinner
         String[] spinnerArray = pocValues.pocMap.keySet().toArray(new String[0]);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
         chiefComplaint.setAdapter(adapter);
+        Log.d(TAG, "Current Selection: " + prefs.getCurrentState().getChiefComplaint());
         chiefComplaint.setSelection(adapter.getPosition(prefs.getCurrentState().getChiefComplaint()));
         chiefComplaint.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
 
         //Inflate the Admin Checkbox
-        allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
-        setAdminListAdapter();
+        allComplaintActions = new ArrayList<>(POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString()));
+        Log.d(TAG, "orig size: " + allComplaintActions.size());
         actionListAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        setCheckedItems();
+        ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.item_multi_check, allComplaintActions);
+        actionListAdmin.setAdapter(actionArrayAdapter);
+
+        ((ArrayAdapter)actionListAdmin.getAdapter()).clear();
+        allComplaintActions = new ArrayList<>(POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString()));
+        Log.d(TAG, "orig size2: " + allComplaintActions.size());
+
+        setCheckedAdminItems();
 
         //Inflate the patient Checkbox
-        setPatientListAdapter();
+        patientPlanOfCareList = filterSelectedChoices();
+        Log.d(TAG, "patientPOCLIST length:" + patientPlanOfCareList.size());
+        Log.d(TAG, "Activity: " + getActivity());
+        ArrayAdapter<String> patientPlanOfCareListAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, patientPlanOfCareList);
+        actionListPatient.setAdapter(patientPlanOfCareListAdapter);
+        actionListPatient.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        actionListPatient.setItemsCanFocus(true);
 
-        setSuperUserPermissions(prefs.isSuperUser());
+        //Set enabled state
+        boolean isSuperUser = prefs.isSuperUser();
+        chiefComplaint.setEnabled(isSuperUser);
+        actionListAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        actionListPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+    }
+
+    private void initListeners() {
+
+        submitOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String action = otherEditText.getText().toString();
+                allComplaintActions.add(action);
+                ((ArrayAdapter) actionListAdmin.getAdapter()).add(action);
+            }
+        });
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
             @Override
@@ -112,17 +171,12 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
                 setSuperUserPermissions(prefs.isSuperUser());
             }
         }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
-
-        return view;
     }
-
-
-
-
 
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
+        Log.d(TAG, "onAttach called");
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -134,34 +188,34 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
     @Override
     public void onDetach() {
         super.onDetach();
-
+        Log.d(TAG, "onDetach called");
         mListener = null;
     }
-
 
     private void setSuperUserPermissions(boolean isSuperUser) {
         SparseBooleanArray checked = actionListAdmin.getCheckedItemPositions();
 
-        actionListAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-        actionListPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
 
         if (!isSuperUser && checked != null) {
 
             Log.d(TAG, "booleanArray: " + checked.toString());
             Log.d(TAG, "checked size is " + actionListAdmin.getCheckedItemCount());
-            int[] checkedArray = new int[getCheckedItemCount(actionListAdmin)];
+            List<Integer> checkedArray = new ArrayList<>(getCheckedItemCount(actionListAdmin));
 
-            int checkedArrayIndex = 0;
             for (int index = 0; index < actionListAdmin.getAdapter().getCount(); index++) {
                 Log.d(TAG, "Checked value at " + index + " is " + checked.get(index));
                 if (checked.get(index)) {
-                    checkedArray[checkedArrayIndex++] = index;
+                    checkedArray.add(index);
                 }
             }
 
             prefs.setShownActions(checkedArray);
             setPatientListAdapter();
         }
+
+        actionListAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        actionListPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
 
         chiefComplaint.setEnabled(isSuperUser);
         actionListAdmin.setEnabled(isSuperUser);
@@ -184,24 +238,16 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
 
     }
 
-    private void setCheckedItems() {
-        int oldMode = ListView.CHOICE_MODE_MULTIPLE;
-        if(actionListAdmin.getChoiceMode() != ListView.CHOICE_MODE_MULTIPLE) {
-            oldMode = actionListAdmin.getChoiceMode();
-            actionListAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+    private void setCheckedAdminItems() {
+
+        Log.d(TAG, "Checked items length: "+ prefs.shownActions().size());
+
+        for (int i = 0; i < allComplaintActions.size(); i++) {
+
+            actionListAdmin.setItemChecked(i, prefs.shownActions().contains(i));
         }
 
-        int[] checkedItems = prefs.shownActions();
-        Log.d(TAG, "mode: " + actionListAdmin.getChoiceMode());
-        Log.d(TAG, "Checked items length: "+ checkedItems.length);
-
-        for (int index : checkedItems) {
-            Log.d(TAG, "CheckedItem: " + index);
-            actionListAdmin.setItemChecked(index, true);
-        }
-
-        Log.d(TAG, "cool: " + actionListAdmin.getCheckedItemPositions().toString());
-        actionListAdmin.setChoiceMode(oldMode);
+        Log.d(TAG, "CheckedItemPositions: " + actionListAdmin.getCheckedItemPositions().toString());
     }
 
     public interface OnFragmentInteractionListener {
@@ -209,31 +255,27 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
         public void onFragmentInteraction(String id);
     }
 
-    private void setAdminListAdapter() {
-        ArrayAdapter<String> actionArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.item_multi_check, allComplaintActions);
-        actionListAdmin.setAdapter(actionArrayAdapter);
-    }
-
     private void setPatientListAdapter() {
-        String[] patientPlanOfCareList = filterSelectedChoices();
-        ArrayAdapter<String> patientPlanOfCareListAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, patientPlanOfCareList);
-        actionListPatient.setAdapter(patientPlanOfCareListAdapter);
-        actionListPatient.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        actionListPatient.setItemsCanFocus(true);
+        patientPlanOfCareList = filterSelectedChoices();
+        ((ArrayAdapter)actionListPatient.getAdapter()).clear();
+        ((ArrayAdapter)actionListPatient.getAdapter()).addAll(patientPlanOfCareList);
     }
 
-    private String[] filterSelectedChoices() {
+    private List<String> filterSelectedChoices() {
         Log.d(TAG, "Filter Selected Choices");
-        int[] shownActions = prefs.shownActions();
-        String[] selectedActions = new String[shownActions.length];
+        Log.d(TAG, "Length: " + prefs.shownActions().size());
+        ArrayList<String> selectedActions = new ArrayList<>(prefs.shownActions().size());
 
-        int index = 0;
-        for (int i : shownActions) {
-            Log.d(TAG, "ITEM: "+ allComplaintActions[i]);
-            selectedActions[index++] = allComplaintActions[i];
+        for (int i : prefs.shownActions()) {
+            //check for if there were any temp actions stored when we closed out.
+            if (i >= allComplaintActions.size()) {
+                continue;
+            }
+            Log.d(TAG, "ITEM: "+ allComplaintActions.get(i));
+            selectedActions.add(allComplaintActions.get(i));
         }
 
-        return selectedActions;
+        return selectedActions == null ? new ArrayList<String>() : selectedActions;
     }
 
     //Spinner Listener
@@ -245,13 +287,22 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
             String selectedComplaint = parent.getSelectedItem().toString();
             prefs.getCurrentState().setChiefComplaint(selectedComplaint);
 
-            allComplaintActions = POCValues.pocMap.get(selectedComplaint);
-            setAdminListAdapter();
-            setPatientListAdapter();
+            ((ArrayAdapter) actionListAdmin.getAdapter()).clear();
+
+            allComplaintActions = new ArrayList<>(POCValues.pocMap.get(selectedComplaint));
+            ((ArrayAdapter) actionListAdmin.getAdapter()).addAll(allComplaintActions);
+            allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
+
             if (!initComplete) {
+                Log.d(TAG, "First Time onItemSelected");
                 initComplete = true;
-                setCheckedItems();
+
+            } else {
+                Log.d(TAG, "NEXT Time on Item Selected");
+                prefs.setShownActions(null);
             }
+
+            setCheckedAdminItems();
         }
 
         @Override
@@ -259,5 +310,4 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
 
         }
     }
-
 }

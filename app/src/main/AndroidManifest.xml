@@ -67,12 +67,8 @@
             android:label="@string/title_activity_bed_mode"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
-        <activity android:name=".presentation.station.StationActivity" >
-        </activity>
-        <activity
-            android:name=".presentation.planofcare.PlanOfCareActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_plan_of_care">
+        <activity android:name=".presentation.station.StationActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
     </application>
 

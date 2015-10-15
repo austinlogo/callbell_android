@@ -12,6 +12,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -62,11 +66,14 @@ public class PrefManager {
     public static State currentState;
     public static boolean isSuperUser;
 
+    private static List<Integer> shownActions;
+
     @Inject
     public PrefManager(Context c) {
         prefs = PreferenceManager.getDefaultSharedPreferences(c);
         currentState = new State(this);
         isSuperUser = false;
+        shownActions = pullShownActionsFromPrefs();
 
     }
 
@@ -110,23 +117,34 @@ public class PrefManager {
         return prefs.getString(CHIEF_COMPLAINT_KEY, POCValues.DEFAULT_CHOICE);
     }
 
-    public int[] shownActions() {
+    public List<Integer> shownActions() {
+
+        return shownActions == null ? new ArrayList<Integer>() : shownActions;
+
+    }
+
+    private List<Integer> pullShownActionsFromPrefs() {
         try {
             String arrayString = prefs.getString(SHOWN_ACTION_KEY, "");
-            Log.d(TAG, "array: " + arrayString);
+            Log.d(TAG, "shownActions-checkedValuePostions: " + arrayString);
+
+            if (arrayString.isEmpty()) {
+                return new ArrayList<Integer>();
+            }
+
             JSONArray jArray = new JSONArray(arrayString);
 
-            int[] intArray = new int[jArray.length()];
+            List<Integer> intArray = new ArrayList<>(jArray.length());
             for (int index = 0; index < jArray.length(); index++) {
-                intArray[index] = jArray.optInt(index);
+                intArray.add(jArray.optInt(index));
             }
 
             return intArray;
         } catch (JSONException e) {
-            Log.e(TAG, "unable to parse JSON in ShownActions");
+            Log.e(TAG, "unable to parse JSON in ShownActions: " + e);
         }
 
-        return new int[0];
+        return new ArrayList<>();
     }
 
     public boolean isSuperUser() {
@@ -167,15 +185,22 @@ public class PrefManager {
         sp.commit();
     }
 
-    public void setShownActions(int[] shownActions) {
+    public void setShownActions(List<Integer> sa) {
+        Log.d(TAG, "SET SHOWN ACTIONS");
         SharedPreferences.Editor sp = prefs.edit();
+        shownActions = sa;
+
+        if (shownActions == null) {
+            sp.putString(SHOWN_ACTION_KEY, "").apply();
+            return;
+        }
 
         JSONArray array = new JSONArray();
         for (int i : shownActions) {
             array.put(i);
         }
 
-        Log.d(TAG, "Array: " + array.toString());
+        Log.d(TAG, "setShownActions-Array: " + array.toString());
         sp.putString(SHOWN_ACTION_KEY, array.toString()).apply();
     }
 

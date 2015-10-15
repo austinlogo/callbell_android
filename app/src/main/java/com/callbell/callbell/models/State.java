@@ -3,6 +3,7 @@ package com.callbell.callbell.models;
 import android.content.Intent;
 import android.util.Log;
 
+import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.util.PrefManager;
 
@@ -114,7 +115,7 @@ public class State {
     }
 
     public String getChiefComplaint() {
-        return (chiefComplaint != null) ? chiefComplaint : "";
+        return (chiefComplaint != null) ? chiefComplaint : POCValues.DEFAULT_CHOICE;
     }
 
 

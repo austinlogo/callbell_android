@@ -31,4 +31,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="incorrect_password">Sorry, that password was incorrect</string>
     <string name="nurse_chief_complaint">Chief Complaint</string>
+    <string name="other">Other</string>
+    <string name="add">Add</string>
 </resources>
