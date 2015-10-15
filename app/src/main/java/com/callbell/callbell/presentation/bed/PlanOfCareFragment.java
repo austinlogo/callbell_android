@@ -291,7 +291,7 @@ public class PlanOfCareFragment extends Fragment implements AbsListView.OnItemCl
 
             allComplaintActions = new ArrayList<>(POCValues.pocMap.get(selectedComplaint));
             ((ArrayAdapter) actionListAdmin.getAdapter()).addAll(allComplaintActions);
-            allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
+//            allComplaintActions = POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString());
 
             if (!initComplete) {
                 Log.d(TAG, "First Time onItemSelected");
