@@ -167,9 +167,10 @@ public class LoginFragment extends Fragment {
                 location_id.getText().toString(),
                 mod, prefs.physician(), prefs.nurse(), prefs.resident(), prefs.chiefComplaint());
 
+        prefs.setState(thisState);
+
 //        check if this has the same info we have on the server
         if (LastState.equals(thisState) && !forceRegister) {
-            prefs.setState(thisState);
             Log.d(TAG, "Already Registered");
         //Something has changed or it's a new tablet either way we should update the token on the server.
         } else if (checkPlayServices()) {
@@ -178,10 +179,10 @@ public class LoginFragment extends Fragment {
 
             if (thisState.getMode().equals(prefs.STATION_MODE) ) {
                 thisState.setLocation(prefs.getStationTabletName());
+                prefs.setState(thisState);
             }
 
             Log.d(TAG, "starting Service: " + thisState.getMode());
-            prefs.setState(thisState);
             getActivity().startService(intent);
 
         }else{

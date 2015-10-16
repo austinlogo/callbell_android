@@ -44,6 +44,7 @@ public class EnableSuperUserDialog extends DialogFragment {
 
     }
 
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         ((CallBellApplication) getActivity().getApplication()).inject(this);

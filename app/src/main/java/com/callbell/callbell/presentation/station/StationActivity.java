@@ -43,21 +43,26 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
 
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(PrefManager.EVENT_STATES_RECEIVED);
+        filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
         LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d(TAG, "OnReceiveCalled");
-//                mStationFragment.setText(intent.getStringExtra("message"));
-                CallBellDialog alert = CallBellDialog.newInstance(intent.getExtras());
 
-                alert.show(getSupportFragmentManager(), "Dialog");
+                if (intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
+                    Log.d(TAG, "OnReceiveCalled");
+//                mStationFragment.setText(intent.getStringExtra("message"));
+                    CallBellDialog alert = CallBellDialog.newInstance(intent.getExtras());
+
+                    alert.show(getSupportFragmentManager(), "Dialog");
+                } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
+                    mStationFragment.setListFromJSONString( intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
+                }
 
             }
-        }, new IntentFilter(PrefManager.EVENT_MESSAGE_RECEIVED));
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
+        }, filter);
     }
 }
+
+

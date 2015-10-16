@@ -80,14 +80,6 @@ public class StationFragment extends Fragment {
 //        }
 //        StationItemAdapter adapter = new StationItemAdapter(getActivity().getApplicationContext(), sl);
 //        stationStateList.setAdapter(adapter);
-
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                setListFromJSONString( intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
-            }
-        }, new IntentFilter(PrefManager.EVENT_STATES_RECEIVED));
-
         return view;
     }
 
@@ -108,9 +100,15 @@ public class StationFragment extends Fragment {
         mListener = null;
     }
 
-    private void setListFromJSONString(String stateListString) {
+    public void setListFromJSONString(String stateListString) {
         Log.d(TAG, "STATELIST: " + stateListString);
-        List<State> sl = JSONUtil.getStateListFromJSONArray(JSONUtil.getJSONFromString(stateListString));
+
+        List<State> sl;
+        if (!stateListString.isEmpty()) {
+            sl = JSONUtil.getStateListFromJSONArray(JSONUtil.getJSONFromString(stateListString));
+        } else {
+            sl = new ArrayList<>();
+        }
 
         StationItemAdapter adapter = new StationItemAdapter(getActivity().getApplicationContext(), sl);
         stationStateList.setAdapter(adapter);
@@ -127,8 +125,7 @@ public class StationFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+
     }
 
 }

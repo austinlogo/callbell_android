@@ -59,7 +59,8 @@ public class PrefManager {
     public static final String DEFAULT_SU_PASSWORD = "2468";
     private static final String TAG = PrefManager.class.getSimpleName();
     public static final String STATELIST_RESPONSE = "STATELIST RESPONSE";
-
+    public static final String CALL_BELL_MESSAGE_BODY = "message_body";
+    public static final String CALL_BELL_MESSAGE_FROM = "message_from";
 
 
     public static SharedPreferences prefs;

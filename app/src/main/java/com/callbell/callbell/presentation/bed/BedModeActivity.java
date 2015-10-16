@@ -11,6 +11,7 @@ import android.util.Log;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.BaseActivity;
+import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.CallBellApplication;
 
@@ -19,7 +20,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 
 public class BedModeActivity extends BaseActivity
-        implements CallBellsFragment.OnFragmentInteractionListener, PlanOfCareFragment.OnFragmentInteractionListener {
+        implements CallBellsFragment.OnFragmentInteractionListener, PlanOfCareFragment.PlanOfCareInteraction {
 
     private static final String TAG = BedModeActivity.class.getSimpleName();
 
@@ -72,7 +73,7 @@ public class BedModeActivity extends BaseActivity
     }
 
     @Override
-    public void onFragmentInteraction(String id) {
-
+    public void showInfoDialog(String tit, String bod) {
+        PlanOfCareInfoDialog.newInstance(tit, bod).show(getSupportFragmentManager(), "INFO DIALOG");
     }
 }
