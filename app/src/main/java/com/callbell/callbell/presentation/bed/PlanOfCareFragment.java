@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
@@ -149,15 +150,20 @@ public class PlanOfCareFragment extends Fragment {
         actionListPatient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.showInfoDialog("HELLO", "HELLO, WORLD");
+                mListener.showInfoDialog("EDUCATION TITLE", "This is some education text. It will get filled in later");
             }
         });
 
         submitOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (otherEditText.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String action = otherEditText.getText().toString();
                 actionArrayAdapter.add(action);
+                actionListAdmin.setItemChecked(actionArrayAdapter.getCount() - 1, true);
             }
         });
 

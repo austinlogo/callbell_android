@@ -224,7 +224,7 @@ public class LoginFragment extends Fragment {
         LastState = new State(prefs);
         hospital_id.setText(LastState.getHospital());
         group_id.setText(LastState.getGroup());
-        location_id.setText(LastState.getLocation());
+        location_id.setText(LastState.getLocation().endsWith(PrefManager.STATION_SUFFIX) ? "" : LastState.getLocation());
     }
 
     private void setSUpermissions(boolean isSuperUser) {

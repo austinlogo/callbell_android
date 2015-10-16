@@ -71,7 +71,7 @@ public class EnableSuperUserDialog extends DialogFragment {
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);
         } else {
-            Toast.makeText(getActivity(), R.string.incorrect_password, Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(), R.string.incorrect_password, Toast.LENGTH_SHORT).show();
         }
     }
 }

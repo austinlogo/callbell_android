@@ -33,9 +33,9 @@ public class CallBellDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        mTitle = getText(R.string.bed) + ": " + getArguments().getString(MESSAGE_KEY);//getArguments().getString(PrefManager)\
-        mMessage = getArguments().getString(FROM_KEY) + " has been pressed";
+        Log.d(TAG, "Bundle: " + getArguments().toString());
+        mTitle = getText(R.string.bed) + ": " + getArguments().getString(FROM_KEY);//getArguments().getString(PrefManager)\
+        mMessage = getArguments().getString(MESSAGE_KEY) + " has been pressed";
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {

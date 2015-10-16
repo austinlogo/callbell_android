@@ -20,8 +20,7 @@ public class CallBellGCMListenerService extends GcmListenerService {
         Log.d(TAG, "Message: " + data.toString());
 
         Intent i = new Intent(PrefManager.EVENT_MESSAGE_RECEIVED);
-        i.putExtra(PrefManager.CALL_BELL_MESSAGE_BODY, data.getString(CallBellDialog.MESSAGE_KEY));
-        i.putExtra(PrefManager.CALL_BELL_MESSAGE_FROM, data.getString(CallBellDialog.FROM_KEY));
+        i.putExtras(data);
 
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
     }
