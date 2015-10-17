@@ -73,7 +73,7 @@ public class PlanOfCareFragment extends Fragment {
     @Inject
     POCValues pocValues;
 
-    PlanOfCareCheckBoxAdapter<String> actionArrayAdapter;
+    PlanOfCareCheckBoxAdapter actionArrayAdapter;
     ArrayAdapter<String> patientPlanOfCareListAdapter;
 
     private List<String> patientPlanOfCareList;
@@ -113,7 +113,8 @@ public class PlanOfCareFragment extends Fragment {
 
     private void initLists() {
         //Inflate the spinner
-        String[] spinnerArray = pocValues.pocMap.keySet().toArray(new String[0]);
+        List<String> spinnerArray = new ArrayList<>(pocValues.pocMap.keySet());
+        Collections.sort(spinnerArray);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
         chiefComplaint.setAdapter(adapter);
         Log.d(TAG, "Current Selection: " + prefs.getCurrentState().getChiefComplaint());
@@ -125,9 +126,9 @@ public class PlanOfCareFragment extends Fragment {
         List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
                 ? prefsAdminList
                 : new ArrayList<>(POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString()));
-        Collections.sort(initialAdminValues); //initialAdminValue
+//        Collections.sort(initialAdminValues); //initialAdminValue
         actionListAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        actionArrayAdapter = new PlanOfCareCheckBoxAdapter<>(getActivity(), R.layout.item_multi_check, initialAdminValues);
+        actionArrayAdapter = new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminValues);
         actionListAdmin.setAdapter(actionArrayAdapter);
         setCheckedAdminItems();
 

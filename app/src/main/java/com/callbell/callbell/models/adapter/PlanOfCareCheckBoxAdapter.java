@@ -7,19 +7,20 @@ import com.callbell.callbell.data.POCValues;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by austin on 10/15/15.
  */
-public class PlanOfCareCheckBoxAdapter<T> extends ArrayAdapter<T>{
+public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
     public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects) {
         super(context, resource, objects);
     }
 
-    public List<T> getList() {
-        List<T> list = new ArrayList<>();
+    public List<String> getList() {
+        List<String> list = new ArrayList<>();
         for (int index = 0; index < getCount(); index++) {
             list.add(getItem(index));
         }
@@ -29,7 +30,7 @@ public class PlanOfCareCheckBoxAdapter<T> extends ArrayAdapter<T>{
         return list;
     }
 
-    public boolean contains(T item) {
+    public boolean contains(String item) {
         if (item == null) {
             return false;
         }
@@ -42,13 +43,16 @@ public class PlanOfCareCheckBoxAdapter<T> extends ArrayAdapter<T>{
         return false;
     }
 
+
     public void resetList(String key) {
         super.clear();
-        super.addAll((Collection<? extends T>) new ArrayList<>(POCValues.pocMap.get(key)));
+        List<String> newList = new ArrayList<>(POCValues.pocMap.get(key));
+//        Collections.sort(newList);
+        super.addAll(newList);
     }
 
     @Override
-    public T getItem(int position) {
+    public String getItem(int position) {
         return super.getItem(position);
     }
 }

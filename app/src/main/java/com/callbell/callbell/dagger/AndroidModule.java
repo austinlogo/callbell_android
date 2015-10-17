@@ -1,8 +1,10 @@
 package com.callbell.callbell.dagger;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.presentation.bed.StaffFragment;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
@@ -34,6 +36,7 @@ import javax.inject.Singleton;
         PlanOfCareFragment.class,
         StationFragment.class,
         StationActivity.class,
+        POCValues.class,
         PostRequestWithCallbackTask.class,
         RegistrationIntentService.class,
 
@@ -55,6 +58,11 @@ public class AndroidModule {
 
     @Provides @Singleton
     Application provideApplication() {
+        return application;
+    }
+
+    @Provides
+    Context provideContext() {
         return application;
     }
 
