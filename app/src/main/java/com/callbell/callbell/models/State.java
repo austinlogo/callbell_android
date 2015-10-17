@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
+import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
@@ -16,6 +17,15 @@ import javax.inject.Inject;
  * Created by austin on 10/9/15.
  */
 public class State {
+
+    public static final String HOSPITAL_ID = "HOSPITAL_ID";
+    public static final String GROUP_ID = "GROUP_ID";
+    public static final String LOCATION_ID = "LOCATION_ID";
+    public static final String MODE_ID = "MODE_ID";
+    public static final String PHYSICIAN = "PHYSICIAN";
+    public static final String NURSE = "NURSE";
+    public static final String RESIDENT = "RESIDENT";
+    public static final String CHIEF_COMPLAINT = "CHIEF_COMPLAINT";
 
     private static final String TAG = State.class.getSimpleName();
     private String hospital,
@@ -72,18 +82,24 @@ public class State {
     }
 
     public State(JSONObject object) {
-        try {
-            hospital = object.has("HOSPITAL_ID") ? object.getString("HOSPITAL_ID") : "";
-            group = "";
-            location = object.has("LOCATION_ID") ? object.getString("LOCATION_ID") : "";
-            mode = "";
-            physician = object.has("PHYSICIAN") ? object.getString("PHYSICIAN") : "";
-            resident = "";
-            nurse = object.has("NURSE") ? object.getString("NURSE") : "";
-            chiefComplaint = object.has("CHIEF_COMPLAINT") ? object.getString("CHIEF_COMPLAINT") : "";
-        } catch (JSONException e) {
-            Log.e(TAG, "Exception occurred: " + e.getMessage());
-        }
+        hospital = JSONUtil.getValueIfExists(object, HOSPITAL_ID);
+        group = JSONUtil.getValueIfExists(object, GROUP_ID);
+        location = JSONUtil.getValueIfExists(object, LOCATION_ID);
+        mode = JSONUtil.getValueIfExists(object, MODE_ID);
+        physician = JSONUtil.getValueIfExists(object, PHYSICIAN);
+        resident = JSONUtil.getValueIfExists(object, RESIDENT);
+        nurse = JSONUtil.getValueIfExists(object, NURSE);
+        chiefComplaint = JSONUtil.getValueIfExists(object, CHIEF_COMPLAINT);
+
+//            hospital = object.has("HOSPITAL_ID") ? object.getString() : "";
+//            group = object.has("GROUP_ID") ? object.getString("GROUP_ID");
+//            location = object.has("LOCATION_ID") ? object.getString("LOCATION_ID") : "";
+//            mode = "";
+//            physician = object.has("PHYSICIAN") ? object.getString("PHYSICIAN") : "";
+//            resident = "";
+//            nurse = object.has("NURSE") ? object.getString("NURSE") : "";
+//            chiefComplaint = object.has("CHIEF_COMPLAINT") ? object.getString("CHIEF_COMPLAINT") : "";
+
     }
 
     public String getHospital() {
@@ -148,8 +164,7 @@ public class State {
     public boolean equals(State other) {
         return this.hospital.equals(other.getHospital())
                 && this.group.equals(other.getGroup())
-                && this.location.equals(other.getLocation())
-                && this.mode.equals(other.getMode());
+                && this.location.equals(other.getLocation());
     }
 
     public static State getStateFromIntent(Intent i) {
@@ -170,5 +185,12 @@ public class State {
         object.put(PrefManager.CHIEF_COMPLAINT_KEY, chiefComplaint);
 
         return object;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(LOCATION_ID + ": " + location);
+        sb.append(CHIEF_COMPLAINT + ": " + chiefComplaint);
+        return sb.toString();
     }
 }

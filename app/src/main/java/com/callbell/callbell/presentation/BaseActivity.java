@@ -15,6 +15,7 @@ import android.view.WindowManager;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
+import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.util.PrefManager;
 
@@ -26,10 +27,14 @@ import javax.inject.Inject;
 public class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
+
     @Inject
     PrefManager prefs;
 
-    protected Menu optionsMenu;
+    @Inject
+    MessageRouting mMessageRouting;
+
+    protected Menu mOptionsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,7 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "BaseActivity Broadcast Receiver");
-                determineSuperUserText(optionsMenu);
+                determineSuperUserText(mOptionsMenu);
             }
         }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
     }
@@ -52,7 +57,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        optionsMenu = menu;
+        mOptionsMenu = menu;
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_bed_mode, menu);
@@ -87,6 +92,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void adminSettingsAction(MenuItem adminButton) {
+
+        // Moving into SuperUser Mode
         if (!prefs.isSuperUser()) {
             EnableSuperUserDialog d = EnableSuperUserDialog.newInstance(null);
             d.show(getSupportFragmentManager(), "SUDO");

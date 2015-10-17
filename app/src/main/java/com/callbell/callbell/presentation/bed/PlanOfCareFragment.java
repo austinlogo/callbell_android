@@ -164,15 +164,9 @@ public class PlanOfCareFragment extends Fragment {
                 String action = otherEditText.getText().toString();
                 actionArrayAdapter.add(action);
                 actionListAdmin.setItemChecked(actionArrayAdapter.getCount() - 1, true);
+                otherEditText.setText("");
             }
         });
-
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                setSuperUserPermissions(prefs.isSuperUser());
-            }
-        }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
     }
 
     @Override
@@ -194,7 +188,7 @@ public class PlanOfCareFragment extends Fragment {
         mListener = null;
     }
 
-    private void setSuperUserPermissions(boolean isSuperUser) {
+    public void setSuperUserPermissions(boolean isSuperUser) {
         SparseBooleanArray checked = actionListAdmin.getCheckedItemPositions();
 
         // Setting Checked Items

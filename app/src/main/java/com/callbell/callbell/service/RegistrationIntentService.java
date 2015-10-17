@@ -4,10 +4,9 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
-import com.callbell.callbell.models.State;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.util.PrefManager;
-import com.callbell.callbell.models.RegisterRequest;
+import com.callbell.callbell.models.request.RegisterRequest;
 import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;

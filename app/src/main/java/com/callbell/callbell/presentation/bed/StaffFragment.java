@@ -79,15 +79,6 @@ public class StaffFragment extends Fragment {
         setStaffValues(false);
         enableSuperUserAccess(prefs.isSuperUser());
 
-
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                enableSuperUserAccess(prefs.isSuperUser());
-            }
-        }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
-
-
         return view;
     }
 

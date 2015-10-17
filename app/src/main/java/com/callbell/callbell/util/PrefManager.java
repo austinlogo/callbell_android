@@ -48,11 +48,15 @@ public class PrefManager {
     public static final String STATION_MODE = "station_mode";
     public static final String STATION_SUFFIX = "_STATION";
     public static final String GROUP_SUFFIX = "_GROUP";
+
+    //CATEGORIES
     public static final String CATEGORY_CALL_BELL = "call_bell";
+    public static final String CATEGORY_TABLET_STATE_UPDATE = "tablet_state";
 
     //EVENTS
     public static final String EVENT_MESSAGE_RECEIVED = "MESSAGE RECEIVED";
     public static final String EVENT_STATES_RECEIVED = "STATES RECEIVED";
+    public static final String EVENT_STATE_UPDATE = "TABLET STATE UPDATED";
     public static final String EVENT_SU_MODE_CHANGE = "SU MODE CHANGE";
 
     //MISC. VALUES

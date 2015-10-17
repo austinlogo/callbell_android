@@ -1,6 +1,7 @@
 package com.callbell.callbell.models.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.List;
 public class StationItemAdapter extends BaseAdapter {
 
 
+    private static final String TAG = StationItemAdapter.class.getSimpleName();
     private Context context;
     private List<State> stateList;
     private static LayoutInflater mInflater = null;
@@ -64,5 +66,18 @@ public class StationItemAdapter extends BaseAdapter {
 //        painRatingField.setText(stateList[position].getRating());
 
         return convertView;
+    }
+
+    public void updateItem(State st) {
+        Log.d(TAG, "UPDATING ITEM");
+        for (int index = 0; index < stateList.size(); index++) {
+            if (st.equals(stateList.get(index))) {
+                Log.d(TAG, "WE have a winner");
+                stateList.set(index, new State(st));
+                notifyDataSetChanged();
+                return;
+            }
+        }
+        return;
     }
 }

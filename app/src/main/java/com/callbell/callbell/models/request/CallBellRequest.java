@@ -1,7 +1,8 @@
-package com.callbell.callbell.models;
+package com.callbell.callbell.models.request;
 
 import android.util.Log;
 
+import com.callbell.callbell.models.State;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
@@ -10,18 +11,18 @@ import org.json.JSONObject;
 /**
  * Created by austin on 10/4/15.
  */
-public class ServerMessage extends Request {
+public class CallBellRequest extends Request {
 
-    private static final String TAG = ServerMessage.class.getSimpleName();
+
+    private static final String TAG = CallBellRequest.class.getSimpleName();
     private State mState;
     private String to,
             message;
 
-    public ServerMessage(State st, String ti, String msg) {
+    public CallBellRequest(State st, String ti, String msg) {
         mState = st;
         to = ti;
         message = msg;
-
     }
 
     public String getHospital() {
@@ -44,20 +45,15 @@ public class ServerMessage extends Request {
         return "/receive";
     }
 
-    public JSONObject toJSON() {
-        try {
-            JSONObject jsonObject = new JSONObject();
+    public JSONObject toJSON() throws JSONException{
+        JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put(PrefManager.STATE_KEY, mState.toJson());
-            jsonObject.put("to_id", getTo());
-            jsonObject.put("payload", getMessage());
+        jsonObject.put(PrefManager.STATE_KEY, mState.toJson());
+        jsonObject.put(TO_KEY, getTo());
+        jsonObject.put(CATEGORY_KEY, PrefManager.CATEGORY_CALL_BELL);
+        jsonObject.put(PAYLOAD_KEY, getMessage());
 
-            return jsonObject;
-        } catch (JSONException e) {
-            Log.e(TAG, "An error has occurred creating a jsonObject");
-        }
-
-        return null;
+        return jsonObject;
     }
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.callbell.callbell.models.request.Request;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.util.PrefManager;
 import com.google.android.gms.gcm.GcmListenerService;
@@ -15,13 +16,24 @@ public class CallBellGCMListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("message");
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + data.toString());
 
-        Intent i = new Intent(PrefManager.EVENT_MESSAGE_RECEIVED);
-        i.putExtras(data);
+        Log.d(TAG, data.toString());
+        String category = data.getString(Request.CATEGORY_KEY);
 
-        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+        if (PrefManager.CATEGORY_CALL_BELL.equals(category)) {
+            Log.d(TAG, "From: " + from);
+            Log.d(TAG, "Message: " + data.toString());
+
+            Intent i = new Intent(PrefManager.EVENT_MESSAGE_RECEIVED);
+            i.putExtras(data);
+
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+        } else if (PrefManager.CATEGORY_TABLET_STATE_UPDATE.equals(category)) {
+            Log.d(TAG, "Category called");
+            Intent i = new Intent(PrefManager.EVENT_STATE_UPDATE);
+            i.putExtras(data);
+
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+        }
     }
 }

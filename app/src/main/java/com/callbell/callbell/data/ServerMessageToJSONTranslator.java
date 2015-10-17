@@ -3,8 +3,8 @@ package com.callbell.callbell.data;
 
 import android.util.Log;
 
-import com.callbell.callbell.models.RegisterRequest;
-import com.callbell.callbell.models.ServerMessage;
+import com.callbell.callbell.models.request.RegisterRequest;
+import com.callbell.callbell.models.request.CallBellRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +16,7 @@ public class ServerMessageToJSONTranslator {
 
     private static final String TAG = ServerMessageToJSONTranslator.class.getSimpleName();
 
-    public JSONObject ServerMessageToJSON(ServerMessage message) {
+    public JSONObject ServerMessageToJSON(CallBellRequest message) {
         try {
             JSONObject jsonObject = new JSONObject();
 

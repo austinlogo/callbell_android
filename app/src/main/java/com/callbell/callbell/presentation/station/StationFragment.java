@@ -26,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,19 @@ public class StationFragment extends Fragment {
     private static final String TAG = StationFragment.class.getSimpleName();
     private OnFragmentInteractionListener mListener;
 
+    // Inserted to fix Bug in V4 Fragment implementation
+    private static final Field sChildFragmentManagerField;
+    static {
+        Field f = null;
+        try {
+            f = Fragment.class.getDeclaredField("mChildFragmentManager");
+            f.setAccessible(true);
+        } catch (NoSuchFieldException e) {
+            Log.e(TAG, "Error getting mChildFragmentManager field", e);
+        }
+        sChildFragmentManagerField = f;
+    }
+
     @Inject
     PrefManager prefs;
 
@@ -47,6 +61,8 @@ public class StationFragment extends Fragment {
 
     @InjectView(R.id.station_state_list)
     ListView stationStateList;
+
+    private StationItemAdapter adapter;
 
     // TODO: Rename and change types and number of parameters
     public static StationFragment newInstance() {
@@ -73,13 +89,6 @@ public class StationFragment extends Fragment {
 
         messageRouting.getDeviceStates();
 
-
-//        List<State> sl = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            sl.add(prefs.getCurrentState());
-//        }
-//        StationItemAdapter adapter = new StationItemAdapter(getActivity().getApplicationContext(), sl);
-//        stationStateList.setAdapter(adapter);
         return view;
     }
 
@@ -97,7 +106,21 @@ public class StationFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
         mListener = null;
+
+        //Needed to Fix Bug in V4 Fragment Implementation
+        if (sChildFragmentManagerField != null) {
+            try {
+                sChildFragmentManagerField.set(this, null);
+            } catch (Exception e) {
+                Log.e(TAG, "Error setting mChildFragmentManager field", e);
+            }
+        }
+    }
+
+    public void updateList(State st) {
+        adapter.updateItem(st);
     }
 
     public void setListFromJSONString(String stateListString) {
@@ -110,7 +133,7 @@ public class StationFragment extends Fragment {
             sl = new ArrayList<>();
         }
 
-        StationItemAdapter adapter = new StationItemAdapter(getActivity().getApplicationContext(), sl);
+        adapter = new StationItemAdapter(getContext(), sl);
         stationStateList.setAdapter(adapter);
     }
 

@@ -48,4 +48,13 @@ public class JSONUtil {
 
         return new ArrayList<>();
     }
+
+    public static String getValueIfExists(JSONObject obj, String key) {
+        try {
+            return obj.has(key) ? obj.getString(key) : "";
+        } catch (JSONException e) {
+
+        }
+        return "";
+    }
 }

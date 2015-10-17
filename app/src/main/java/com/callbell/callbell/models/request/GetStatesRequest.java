@@ -1,5 +1,6 @@
-package com.callbell.callbell.models;
+package com.callbell.callbell.models.request;
 
+import com.callbell.callbell.models.State;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;

@@ -22,14 +22,14 @@ public class PostRequestWithCallbackTask extends PostRequestTask {
     PrefManager prefs;
 
     private Application app;
-    private String intentEvent;
+    private String intentAction;
     private PostRequestTaskListener mListener;
 
 
     public PostRequestWithCallbackTask(Application application, String ie, Object caller) {
         super(application);
 
-        intentEvent = ie;
+        intentAction = ie;
 
         try {
             mListener = (PostRequestTaskListener) caller;
@@ -42,17 +42,13 @@ public class PostRequestWithCallbackTask extends PostRequestTask {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        mListener.onTaskCompleted(s);
-//        Intent i = new Intent(intentEvent);
-//        i.putExtra("response", s);
-
-//        LocalBroadcastManager.getInstance(app).sendBroadcast(i);
+        mListener.onTaskCompleted(intentAction, s);
     }
 
 
 
     public interface PostRequestTaskListener {
-        void onTaskCompleted(String response);
+        void onTaskCompleted(String intentAction, String response);
     }
 
 }

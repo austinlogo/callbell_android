@@ -30,9 +30,10 @@ public class BedModeActivity extends BaseActivity
     @Inject
     PrefManager prefs;
 
-    StaffFragment mStaffFragment;
-    CallBellsFragment mCallBellsFragment;
-    PlanOfCareFragment mPlanOfCareFragment;
+    private BroadcastReceiver mBroadcastReceiver;
+    private StaffFragment mStaffFragment;
+    private CallBellsFragment mCallBellsFragment;
+    private PlanOfCareFragment mPlanOfCareFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +54,27 @@ public class BedModeActivity extends BaseActivity
                 .add(R.id.bed_mode_CallBellsFragment_container, mCallBellsFragment, "Call Bells")
                 .commit();
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
+        mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
                 mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
+                mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
+
+                if (!prefs.isSuperUser()) {
+                    messageRouting.updateState();
+                }
+                mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
             }
-        }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
+        };
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
     }
 
     @Override

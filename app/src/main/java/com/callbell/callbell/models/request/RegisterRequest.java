@@ -1,13 +1,12 @@
-package com.callbell.callbell.models;
+package com.callbell.callbell.models.request;
 
 import android.util.Log;
 
+import com.callbell.callbell.models.State;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.inject.Inject;
 
 /**
  * Created by austin on 10/7/15.
