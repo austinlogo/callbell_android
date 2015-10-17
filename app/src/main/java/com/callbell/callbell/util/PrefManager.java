@@ -14,7 +14,9 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -42,6 +44,7 @@ public class PrefManager {
     public static final String CHIEF_COMPLAINT_KEY = "chief_complaint_key";
     public static final String SHOWN_ACTION_KEY = "shown_actions_id";
     public static final String STATELIST_KEY = "stateList";
+    public static final String ALL_ACTION_ITEMS_KEY = "all_action_items";
 
     //GLOBAL VALUES
     public static final String BED_MODE = "bed_mode";
@@ -67,11 +70,13 @@ public class PrefManager {
     public static final String CALL_BELL_MESSAGE_FROM = "message_from";
 
 
+
     public static SharedPreferences prefs;
     public static State currentState;
     public static boolean isSuperUser;
 
     private static List<Integer> shownActions;
+    private static List<String> allActionItems;
 
     @Inject
     public PrefManager(Context c) {
@@ -120,6 +125,15 @@ public class PrefManager {
 
     public String chiefComplaint() {
         return prefs.getString(CHIEF_COMPLAINT_KEY, POCValues.DEFAULT_CHOICE);
+    }
+
+    public List<String> allActionItems() {
+        if (allActionItems == null) {
+            Set<String> set = prefs.getStringSet(ALL_ACTION_ITEMS_KEY, new HashSet<String>());
+            return new ArrayList<>(set);
+        }
+
+        return allActionItems;
     }
 
     public List<Integer> shownActions() {
@@ -207,6 +221,13 @@ public class PrefManager {
 
         Log.d(TAG, "setShownActions-Array: " + array.toString());
         sp.putString(SHOWN_ACTION_KEY, array.toString()).apply();
+    }
+
+    public void setAllActionItems(List<String> actionList) {
+        allActionItems = actionList;
+
+        SharedPreferences.Editor sp = prefs.edit();
+        sp.putStringSet(ALL_ACTION_ITEMS_KEY, new HashSet<>(actionList)).commit();
     }
 
     public void uploadedToken(boolean bool) {

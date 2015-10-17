@@ -120,7 +120,10 @@ public class PlanOfCareFragment extends Fragment {
 
 
         //Inflate the Admin Checkbox
-        List<String> initialAdminValues = new ArrayList<>(POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString()));
+        List<String> prefsAdminList = prefs.allActionItems();
+        List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
+                ? prefsAdminList
+                : new ArrayList<>(POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString()));
         actionListAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         actionArrayAdapter = new PlanOfCareCheckBoxAdapter<>(getActivity(), R.layout.item_multi_check, initialAdminValues);
         actionListAdmin.setAdapter(actionArrayAdapter);
@@ -206,6 +209,7 @@ public class PlanOfCareFragment extends Fragment {
             }
 
             prefs.setShownActions(checkedArray);
+            prefs.setAllActionItems(actionArrayAdapter.getList());
             setPatientListAdapter();
         }
 

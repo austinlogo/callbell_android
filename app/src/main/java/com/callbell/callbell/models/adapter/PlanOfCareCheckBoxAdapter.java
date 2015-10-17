@@ -18,6 +18,15 @@ public class PlanOfCareCheckBoxAdapter<T> extends ArrayAdapter<T>{
         super(context, resource, objects);
     }
 
+    public List<T> getList() {
+        List<T> list = new ArrayList<>();
+        for (int index = 0; index < getCount(); index++) {
+            list.add(getItem(index));
+        }
+
+        return list;
+    }
+
     public void resetList(String key) {
         super.clear();
         super.addAll((Collection<? extends T>) new ArrayList<>(POCValues.pocMap.get(key)));
