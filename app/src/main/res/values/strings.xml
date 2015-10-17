@@ -34,4 +34,5 @@
     <string name="other">Other</string>
     <string name="add">Add</string>
     <string name="empty_action_item">The action Item is empty</string>
+    <string name="duplicate_item">This is a duplicate item</string>
 </resources>

@@ -28,6 +28,7 @@ import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -124,6 +125,7 @@ public class PlanOfCareFragment extends Fragment {
         List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
                 ? prefsAdminList
                 : new ArrayList<>(POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString()));
+        Collections.sort(initialAdminValues); //initialAdminValue
         actionListAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         actionArrayAdapter = new PlanOfCareCheckBoxAdapter<>(getActivity(), R.layout.item_multi_check, initialAdminValues);
         actionListAdmin.setAdapter(actionArrayAdapter);
@@ -160,8 +162,12 @@ public class PlanOfCareFragment extends Fragment {
         submitOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (otherEditText.getText().toString().isEmpty()) {
+                String item = otherEditText.getText().toString();
+                if (item.isEmpty()) {
                     Toast.makeText(getContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (actionArrayAdapter.contains(item)) {
+                    Toast.makeText(getContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String action = otherEditText.getText().toString();

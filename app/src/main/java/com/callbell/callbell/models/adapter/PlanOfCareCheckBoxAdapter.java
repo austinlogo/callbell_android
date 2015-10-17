@@ -24,7 +24,22 @@ public class PlanOfCareCheckBoxAdapter<T> extends ArrayAdapter<T>{
             list.add(getItem(index));
         }
 
+
+
         return list;
+    }
+
+    public boolean contains(T item) {
+        if (item == null) {
+            return false;
+        }
+        for (int index = 0; index < getCount(); index++) {
+            if (item.equals(getItem(index))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void resetList(String key) {
