@@ -42,7 +42,7 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
 
         mStationFragment = StationFragment.newInstance();
 
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
                 .add(R.id.base_fragment_container, mStationFragment)
                 .commit();
@@ -65,7 +65,7 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
 //                mStationFragment.setText(intent.getStringExtra("message"));
                     CallBellDialog alert = CallBellDialog.newInstance(intent.getExtras());
 
-                    alert.show(getSupportFragmentManager(), "Dialog");
+                    alert.show(getFragmentManager(), "Dialog");
                 } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
                     mStationFragment.setListFromJSONString(intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
                 } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {

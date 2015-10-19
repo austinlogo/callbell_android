@@ -1,12 +1,17 @@
 package com.callbell.callbell.presentation.dialogs;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
-import android.content.DialogInterface;
+import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.callbell.callbell.R;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by austin on 10/15/15.
@@ -16,6 +21,16 @@ public class PlanOfCareInfoDialog extends DialogFragment {
     public static final String TITLE_KEY = "DIALOG_TITLE";
     public static final String BODY_KEY = "DIALOG_BODY";
 
+    @InjectView(R.id.poc_info_body)
+    TextView mBodyText;
+
+    @InjectView(R.id.poc_info_title)
+    TextView mTitleText;
+
+    @InjectView(R.id.poc_info_dismiss)
+    Button dismissButton;
+
+    private View mCustomView;
     private String mTitle;
     private String mBody;
 
@@ -41,15 +56,22 @@ public class PlanOfCareInfoDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        return new AlertDialog.Builder(getActivity())
-                .setTitle(mTitle)
-                .setMessage(mBody)
-                .setPositiveButton(R.string.acknowledge, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dismiss();
-                    }
-                })
-                .create();
+        Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_poc_info);
+
+        ButterKnife.inject(this, dialog);
+
+        mTitleText.setText(mTitle);
+        mBodyText.setText(mBody);
+
+        dismissButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
+        return dialog;
     }
 }

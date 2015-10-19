@@ -1,5 +1,6 @@
 package com.callbell.callbell.presentation.bed;
 
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -165,10 +166,10 @@ public class PlanOfCareFragment extends Fragment {
             public void onClick(View v) {
                 String item = otherEditText.getText().toString();
                 if (item.isEmpty()) {
-                    Toast.makeText(getContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
                     return;
                 } else if (actionArrayAdapter.contains(item)) {
-                    Toast.makeText(getContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String action = otherEditText.getText().toString();

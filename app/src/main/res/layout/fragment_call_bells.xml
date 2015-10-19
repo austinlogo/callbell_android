@@ -1,6 +1,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    style="@style/Bea_Theme.Call_Bell"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,30 +17,35 @@
         android:id="@+id/call_button_restroom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/Bea_Theme.Button"
         android:text="@string/restroom"
         android:layout_weight="1"/>
     <Button
         android:id="@+id/call_button_food_water"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/Bea_Theme.Button"
         android:text="@string/food_water"
         android:layout_weight="1"/>
     <Button
         android:id="@+id/call_button_blanket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/Bea_Theme.Button"
         android:text="@string/blanket"
         android:layout_weight="1"/>
     <Button
         android:id="@+id/call_button_pain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/Bea_Theme.Button"
         android:text="@string/pain"
         android:layout_weight="1"/>
     <Button
         android:id="@+id/call_button_help"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/Bea_Theme.Button"
         android:text="@string/help"
         android:layout_weight="1"/>
 

@@ -15,7 +15,7 @@ public class LoginActivity extends BaseActivity implements LoginFragment.LoginFr
 
         LoginFragment loginFragment = LoginFragment.newInstance();
 
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
                 .add(R.id.base_fragment_container, loginFragment)
                 .commit();

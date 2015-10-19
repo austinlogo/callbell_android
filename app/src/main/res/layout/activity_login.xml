@@ -21,6 +21,7 @@
         <Button
             android:id="@+id/launch_station_experience"
             android:text="@string/station"
+
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content" />

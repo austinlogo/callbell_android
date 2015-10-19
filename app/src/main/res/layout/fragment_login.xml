@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    style="@style/Bea_Theme.Activity"
     android:gravity="center">
 
     <LinearLayout
@@ -42,12 +43,14 @@
 
         <Button
             android:id="@+id/launch_station_experience"
+            style="@style/Bea_Theme.Button"
             android:text="@string/station"
-            android:layout_width="match_parent"
             android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/launch_bed_experience"
+            style="@style/Bea_Theme.Button"
             android:text="@string/bed"
             android:layout_weight="1"
             android:layout_width="match_parent"

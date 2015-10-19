@@ -1,11 +1,11 @@
 package com.callbell.callbell.presentation.login;
 
+import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.callbell.callbell.R;
 import com.callbell.callbell.models.State;
 import com.callbell.callbell.util.PrefManager;
@@ -141,6 +140,7 @@ public class LoginFragment extends Fragment {
             }
         }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
 
+        location_id.requestFocus();
         return view;
     }
 

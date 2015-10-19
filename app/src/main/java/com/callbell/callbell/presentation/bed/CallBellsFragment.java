@@ -1,5 +1,6 @@
 package com.callbell.callbell.presentation.bed;
 
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

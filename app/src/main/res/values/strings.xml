@@ -138,5 +138,6 @@
     <string name="blood_in_urine">Blood in Urine</string>
     <string name="flank_pain">Flank Pain</string>
     <string name="chest_pain">Chest Pain</string>
+    <string name="back">Back</string>
 
 </resources>

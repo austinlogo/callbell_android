@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.util.PrefManager;
-import com.callbell.callbell.CallBellApplication;
 
 import javax.inject.Inject;
 
@@ -89,6 +89,6 @@ public class BedModeActivity extends BaseActivity
 
     @Override
     public void showInfoDialog(String tit, String bod) {
-        PlanOfCareInfoDialog.newInstance(tit, bod).show(getSupportFragmentManager(), "INFO DIALOG");
+        PlanOfCareInfoDialog.newInstance(tit, bod).show(getFragmentManager(), "INFO DIALOG");
     }
 }

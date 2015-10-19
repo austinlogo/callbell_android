@@ -2,12 +2,17 @@ package com.callbell.callbell.presentation.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.InputType;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,6 +21,9 @@ import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by austin on 10/9/15.
@@ -26,7 +34,11 @@ public class EnableSuperUserDialog extends DialogFragment {
     @Inject
     PrefManager prefs;
 
-    private EditText password;
+    @InjectView(R.id.dialog_password)
+    EditText passwordEditText;
+
+    @InjectView(R.id.dialog_submit)
+    Button submitButton;
 
     public static EnableSuperUserDialog newInstance(Bundle bundle) {
         EnableSuperUserDialog dialog = new EnableSuperUserDialog();
@@ -38,33 +50,33 @@ public class EnableSuperUserDialog extends DialogFragment {
     @Override
     public void onCreate(Bundle saved) {
         super.onCreate(saved);
-        password = new EditText(getActivity());
-        password.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-
 
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         ((CallBellApplication) getActivity().getApplication()).inject(this);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.su_enter_alarm_title)
-                .setPositiveButton(R.string.acknowledge, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        checkPassword();
-                    }
-                });
+        Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dialog_superuser);
+        ButterKnife.inject(this, dialog);
 
-        builder.setView(password);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPassword();
+                dismiss();
+            }
+        });
 
-        return builder.create();
+        passwordEditText.getBackground().setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.SRC_ATOP);
+
+        return dialog;
     }
 
     private void checkPassword() {
-        boolean enableSUMode = PrefManager.DEFAULT_SU_PASSWORD.equals(password.getText().toString());
+        boolean enableSUMode = PrefManager.DEFAULT_SU_PASSWORD.equals(passwordEditText.getText().toString());
 
         if (enableSUMode) {
             prefs.setSuperUserStatus(true);

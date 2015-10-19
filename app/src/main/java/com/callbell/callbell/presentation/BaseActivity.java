@@ -1,5 +1,6 @@
 package com.callbell.callbell.presentation;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -55,6 +56,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         mOptionsMenu = menu;
@@ -96,7 +98,7 @@ public class BaseActivity extends AppCompatActivity {
         // Moving into SuperUser Mode
         if (!prefs.isSuperUser()) {
             EnableSuperUserDialog d = EnableSuperUserDialog.newInstance(null);
-            d.show(getSupportFragmentManager(), "SUDO");
+            d.show(getFragmentManager(), "SUDO");
 
         } else {
             prefs.setSuperUserStatus(false);
