@@ -1,11 +1,11 @@
 <resources>
+
+    // GENERAL
     <string name="app_name">Call Bell</string>
     <string name="action_settings">Settings</string>
     <string name="station">Station</string>
     <string name="bed">Bed</string>
     <string name="title_activity_bed_mode">BedModeActivity</string>
-
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="help">help</string>
     <string name="pain">pain</string>
@@ -37,7 +37,7 @@
     <string name="duplicate_item">This is a duplicate item</string>
 
 
-    //MEDICAL STUFF
+    //TESTS AND COMPLAINTS
     <string name="abdominal_pain">Abdominal Pain</string>
     <string name="arm_pain">Arm Pain</string>
     <string name="asthma">Asthma</string>
@@ -140,4 +140,164 @@
     <string name="chest_pain">Chest Pain</string>
     <string name="back">Back</string>
 
+    //TEST DESCRIPTIONS
+    <string name="medical_evalutation_description">
+        This examination is done by a physician or qualified healthcare provider.
+        It is done to evaluate the body for signs or symptoms of disease, injury or illness.
+        Prior medical conditions as well as current symptoms you may be experiencing will all
+        help theprovider in concentrating their focus on specific blood tests, imaging or
+        medication to treat your current problems.
+    </string>
+
+    <string name="cbc_description">
+        (Complete Blood Count) This is a blood test is used to assess your overall health.  It’s commonly performed during any exam by a health provider and checks for infection, decreased blood counts, and other diseases.
+    </string>
+
+    <string name="bmp_description">
+
+    </string>
+
+    <string name="inr_description">
+
+    </string>
+
+    <string name="cmp_description">
+
+    </string>
+
+    <string name="lipase_description">
+
+    </string>
+
+    <string name="esr_description">
+
+    </string>
+
+    <string name="d_dimer_description">
+
+    </string>
+
+    <string name="troponin_description">
+
+    </string>
+
+    <string name="amylase_description">
+
+    </string>
+
+    <string name="stool_culture_description">
+
+    </string>
+
+    <string name="lft_description">
+
+    </string>
+
+    <string name="hcg_description">
+
+    </string>
+
+    <string name="tsh_description">
+
+    </string>
+
+    <string name="uric_acid_description">
+
+    </string>
+
+    <string name="type_screen_description">
+
+    </string>
+
+    <string name="urinalysis_description">
+
+    </string>
+
+    <string name="abg_vbg_description">
+
+    </string>
+
+    <string name="ekg_description">
+
+    </string>
+
+    <string name="iv_placement_description">
+
+    </string>
+
+    <string name="iv_therapy_description">
+
+    </string>
+
+    <string name="flu_screening_description">
+
+    </string>
+
+    <string name="rapid_strep_screen_description">
+
+    </string>
+
+    <string name="finger_glucose_check_description">
+
+    </string>
+
+    <string name="catheterization_description">
+
+    </string>
+
+    <string name="pelvic_exam_description">
+
+    </string>
+
+    <string name="nebulizer_description">
+
+    </string>
+
+    <string name="peak_flow_meter_description">
+
+    </string>
+
+    <string name="eye_irrigatino_description">
+
+    </string>
+
+    <string name="pain_medication_description">
+
+    </string>
+
+    <string name="nausea_medication_description">
+
+    </string>
+
+    <string name="blood_transfusion_description">
+
+    </string>
+
+    <string name="tetanus_shot_description">
+
+    </string>
+
+    <string name="x_ray_description">
+
+    </string>
+
+    <string name="ct_scan_description">
+
+    </string>
+
+    <string name="ultrasound_description">
+
+    </string>
+
+    <string name="mri_description">
+
+    </string>
+
+    <string name="echo_test_description">
+
+    </string>
+
+    <string name="stress_test_description">
+
+    </string>
 </resources>

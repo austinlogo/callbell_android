@@ -1,7 +1,9 @@
 package com.callbell.callbell.presentation.bed;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,7 +52,7 @@ public class StaffFragment extends Fragment {
     @InjectView(R.id.staff_resident_box)
     LinearLayout residentBox;
 
-
+    private Drawable defaultTextBackground;
 
     public static StaffFragment newInstance() {
         StaffFragment fragment = new StaffFragment();
@@ -71,6 +73,8 @@ public class StaffFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_staff, container, false);
         ((CallBellApplication) getActivity().getApplication()).inject(this);
         ButterKnife.inject(this, view);
+
+        defaultTextBackground = physicianField.getBackground();
 
         setStaffValues(false);
         enableSuperUserAccess(prefs.isSuperUser());
@@ -102,12 +106,12 @@ public class StaffFragment extends Fragment {
                     physicianField.getText().toString(),
                     residentField.getText().toString(),
                     nurseField.getText().toString());
-
-            //Remove focusUnderline
-            physicianField.setBackgroundColor(0);
-            nurseField.setBackgroundColor(0);
-            residentField.setBackgroundColor(0);
         }
+
+        //Remove focusUnderline
+        physicianField.setBackground(setSuperUserStatus ? defaultTextBackground : null);
+        nurseField.setBackground(setSuperUserStatus ? defaultTextBackground : null);
+        residentField.setBackground(setSuperUserStatus ? defaultTextBackground : null);
 
         setStaffVisibility(setSuperUserStatus);
 
