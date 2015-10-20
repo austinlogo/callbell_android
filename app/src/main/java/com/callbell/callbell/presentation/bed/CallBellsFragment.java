@@ -2,12 +2,14 @@ package com.callbell.callbell.presentation.bed;
 
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.callbell.callbell.R;
 
@@ -19,19 +21,19 @@ public class CallBellsFragment extends Fragment {
     private OnFragmentInteractionListener mActivityListener;
 
     @InjectView(R.id.call_button_restroom)
-    Button mButtonRestroom;
+    ImageButton mButtonRestroom;
 
     @InjectView(R.id.call_button_food_water)
-    Button mButtonFoodWater;
+    ImageButton mButtonFoodWater;
 
     @InjectView(R.id.call_button_blanket)
-    Button mButtonBlanket;
+    ImageButton mButtonBlanket;
 
     @InjectView(R.id.call_button_pain)
-    Button mButtonPain;
+    ImageButton mButtonPain;
 
     @InjectView(R.id.call_button_help)
-    Button mButtonHelp;
+    ImageButton mButtonHelp;
 
     public static CallBellsFragment newInstance() {
 
