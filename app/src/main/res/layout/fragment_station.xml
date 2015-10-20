@@ -16,7 +16,6 @@
             android:text="@string/bed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
             android:layout_weight="1"
             />
 
@@ -25,7 +24,6 @@
             android:text="@string/staff_physician"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
             android:layout_weight="1"
             />
 
@@ -34,7 +32,6 @@
             android:text="@string/staff_nurse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
             android:layout_weight="1"
             />
 
@@ -43,7 +40,6 @@
             android:text="@string/nurse_chief_complaint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
             android:layout_weight="1"
             />
 
@@ -52,7 +48,6 @@
             android:text="@string/pain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
             android:layout_weight="1"
             />
     </LinearLayout>

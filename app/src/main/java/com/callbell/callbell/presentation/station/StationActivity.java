@@ -42,7 +42,7 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
 
         mStationFragment = StationFragment.newInstance();
 
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.base_fragment_container, mStationFragment)
                 .commit();
