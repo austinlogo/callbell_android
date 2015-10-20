@@ -52,7 +52,9 @@ public class StaffFragment extends Fragment {
     @InjectView(R.id.staff_resident_box)
     LinearLayout residentBox;
 
-    private Drawable defaultTextBackground;
+    private Drawable defaultTextBackgroundPhysician;
+    private Drawable defaultTextBackgroundNurse;
+    private Drawable defaultTextBackgroundResident;
 
     public static StaffFragment newInstance() {
         StaffFragment fragment = new StaffFragment();
@@ -74,7 +76,9 @@ public class StaffFragment extends Fragment {
         ((CallBellApplication) getActivity().getApplication()).inject(this);
         ButterKnife.inject(this, view);
 
-        defaultTextBackground = physicianField.getBackground();
+        defaultTextBackgroundPhysician = physicianField.getBackground();
+        defaultTextBackgroundNurse = nurseField.getBackground();
+        defaultTextBackgroundResident = nurseField.getBackground();
 
         setStaffValues(false);
         enableSuperUserAccess(prefs.isSuperUser());
@@ -109,9 +113,9 @@ public class StaffFragment extends Fragment {
         }
 
         //Remove focusUnderline
-        physicianField.setBackground(setSuperUserStatus ? defaultTextBackground : null);
-        nurseField.setBackground(setSuperUserStatus ? defaultTextBackground : null);
-        residentField.setBackground(setSuperUserStatus ? defaultTextBackground : null);
+        physicianField.setBackground(setSuperUserStatus ? defaultTextBackgroundPhysician : null);
+        nurseField.setBackground(setSuperUserStatus ? defaultTextBackgroundNurse : null);
+        residentField.setBackground(setSuperUserStatus ? defaultTextBackgroundResident : null);
 
         setStaffVisibility(setSuperUserStatus);
 

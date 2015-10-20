@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.callbell.callbell.R;
 
@@ -21,19 +23,19 @@ public class CallBellsFragment extends Fragment {
     private OnFragmentInteractionListener mActivityListener;
 
     @InjectView(R.id.call_button_restroom)
-    ImageButton mButtonRestroom;
+    RelativeLayout mButtonRestroom;
 
     @InjectView(R.id.call_button_food_water)
-    ImageButton mButtonFoodWater;
+    RelativeLayout mButtonFoodWater;
 
     @InjectView(R.id.call_button_blanket)
-    ImageButton mButtonBlanket;
+    RelativeLayout mButtonBlanket;
 
     @InjectView(R.id.call_button_pain)
-    ImageButton mButtonPain;
+    RelativeLayout mButtonPain;
 
     @InjectView(R.id.call_button_help)
-    ImageButton mButtonHelp;
+    RelativeLayout mButtonHelp;
 
     public static CallBellsFragment newInstance() {
 
@@ -104,8 +106,28 @@ public class CallBellsFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Button clicked = (Button) v;
-            mActivityListener.onCallBellPressed(clicked.getText().toString());
+            String clickedText;
+            RelativeLayout clicked = (RelativeLayout) v;
+            switch (clicked.getId()) {
+                case R.id.call_button_pain:
+                    clickedText = getString(R.string.pain);
+                    break;
+                case R.id.call_button_blanket:
+                    clickedText = getString(R.string.blanket);
+                    break;
+                case R.id.call_button_food_water:
+                    clickedText = getString(R.string.food_water);
+                    break;
+                case R.id.call_button_restroom:
+                    clickedText = getString(R.string.restroom);
+                    break;
+                case R.id.call_button_help:
+                    clickedText = getString(R.string.help);
+                    break;
+                default:
+                    clickedText = getString(R.string.help);
+            }
+            mActivityListener.onCallBellPressed(clickedText);
 
         }
     }

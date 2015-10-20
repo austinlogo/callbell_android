@@ -5,124 +5,130 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/call_button_restroom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
-        <ImageButton
+        <ImageView
             android:id="@+id/call_button_restroom_image"
-            android:background="@drawable/call_bell_restroom"
+            android:src="@drawable/call_bell_restroom"
+            android:background="@null"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             style="@style/Bea_Theme.Button"
-            android:text="@string/restroom"
-            android:layout_weight="1"/>
+            android:layout_centerHorizontal="true"
+            android:text="@string/restroom"/>
 
         <TextView
+            android:id="@+id/call_button_restroom_text"
             android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="8"
+            android:textAlignment="center"
             android:text="@string/restroom"/>
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/call_button_food_water"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/call_button_food_water"
-            android:background="@drawable/call_bell_restroom"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="match_parent"
-            style="@style/Bea_Theme.Button"
-            android:text="@string/restroom"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="8"
-            android:text="@string/restroom"/>
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/call_button_blanket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
-        <ImageButton
+        <ImageView
             android:id="@+id/call_button_blanket_image"
-            android:background="@drawable/call_bell_restroom"
+            android:src="@drawable/call_bell_blanket"
+            android:background="@null"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             style="@style/Bea_Theme.Button"
-            android:text="@string/restroom"
-            android:layout_weight="1"/>
+            android:text="@string/restroom"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="8"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
             android:text="@string/restroom"/>
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/call_button_pain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
-        <ImageButton
+        <ImageView
             android:id="@+id/call_button_pain_image"
-            android:background="@drawable/call_bell_restroom"
+            android:src="@drawable/call_bell_pain"
+            android:background="@null"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             style="@style/Bea_Theme.Button"
-            android:text="@string/restroom"
-            android:layout_weight="1"/>
+            android:text="@string/restroom"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="8"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
             android:text="@string/restroom"/>
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/call_button_food_water"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/call_button_food_image"
+            android:src="@drawable/call_bell_food"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            style="@style/Bea_Theme.Button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/restroom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
+            android:text="@string/restroom"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/call_button_help"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
-        <ImageButton
+        <ImageView
             android:id="@+id/call_button_help_image"
-            android:background="@drawable/call_bell_restroom"
+            android:src="@drawable/call_bell_help"
+            android:background="@null"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             style="@style/Bea_Theme.Button"
-            android:text="@string/restroom"
-            android:layout_weight="1"/>
+            android:layout_centerHorizontal="true"
+            android:text="@string/restroom"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="8"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
             android:text="@string/restroom"/>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
