@@ -78,7 +78,7 @@ public class StaffFragment extends Fragment {
 
         defaultTextBackgroundPhysician = physicianField.getBackground();
         defaultTextBackgroundNurse = nurseField.getBackground();
-        defaultTextBackgroundResident = nurseField.getBackground();
+        defaultTextBackgroundResident = residentField.getBackground();
 
         setStaffValues(false);
         enableSuperUserAccess(prefs.isSuperUser());

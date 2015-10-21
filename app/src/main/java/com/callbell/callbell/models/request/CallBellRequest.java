@@ -14,12 +14,19 @@ import org.json.JSONObject;
 public class CallBellRequest extends Request {
 
 
+    public static final int RESTROOM_ID = 0;
+    public static final int BLANKET_ID = 1;
+    public static final int PAIN_ID = 2;
+    public static final int FOOD_ID = 3;
+    public static final int HELP_ID = 4;
+
+
     private static final String TAG = CallBellRequest.class.getSimpleName();
     private State mState;
-    private String to,
-            message;
+    private String to;
+    private int message;
 
-    public CallBellRequest(State st, String ti, String msg) {
+    public CallBellRequest(State st, String ti, int msg) {
         mState = st;
         to = ti;
         message = msg;
@@ -29,7 +36,7 @@ public class CallBellRequest extends Request {
         return mState.getHospital();
     }
 
-    public String getMessage() {
+    public int getMessage() {
         return message;
     }
 

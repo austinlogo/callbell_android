@@ -8,6 +8,6 @@
         android:topLeftRadius="@dimen/corner_radius"
         android:topRightRadius="@dimen/corner_radius" />
     <solid android:color="#2200FF00" />
-    <stroke android:width="@dimen/stroke" android:color="@color/colorPrimary" />
+    <!--<stroke android:width="@dimen/stroke" android:color="@color/colorPrimary" />-->
 
 </shape>

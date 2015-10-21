@@ -27,7 +27,7 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     public MessageRouting() {
     }
 
-    public void sendMessage(String to, String cat, String msg) {
+    public void sendMessage(String to, String cat, int msg) {
         CallBellRequest sm = new CallBellRequest(prefs.getCurrentState(), to, msg);
         Log.d(TAG, "To: " + to);
         Log.d(TAG, "From: " + prefs.location());

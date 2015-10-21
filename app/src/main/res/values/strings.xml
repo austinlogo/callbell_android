@@ -238,70 +238,71 @@
     </string>
 
     <string name="rapid_strep_screen_description">
-
+         (Strep Throat Test)  This test is performed by the healthcare provider by when a patient has a sore throat or swollen tonsils.  Bacteria from the throat and tonsils is collected using a swab put into the back of the mouth.
     </string>
 
     <string name="finger_glucose_check_description">
-
+        (blood sugar level)  This test is performed to evaluate the sugar level in a the blood.  After pricking the finger, a small drop of blood is tested using an blood glucose level machine.  This test may be performed to asses causes of blurred vision, increased urination, weight loss, increased thirst, confusion, or other diabetes.  The test results are usually available in less than 15 seconds.
     </string>
 
     <string name="catheterization_description">
-
+        (foley catheter, in/out cath)  During this procedure, a tube is inserted through the penis or urethra into the bladder.  This is commonly used when a patient is having difficulty urinating, has blood in their urine, is unaware when they are urinating, or when it’s important to monitor how much urine the body is producing.  There is a short period of discomfort when the catheter is inserted.  In some cases the catheter is left in the bladder for an extended time and in other instances, the catheter is placed to obtain urine and then immediately removed.
     </string>
 
     <string name="pelvic_exam_description">
-
+        During this examination, a healthcare provider will commonly insert a speculum into the vagina and examine the vulva (external genital), cervix (opening from vagina to uterus), uterus (the womb), fallopian tubes (tubes that carry eggs to the uterus), bladder (holds urine), and the rectum (area that connects the colon to the anus).
     </string>
 
     <string name="nebulizer_description">
-
+        (Breathing Treatment)  These treatments are given to people who are having a hard time breathing.  It is a liquid medicine that forced into a mist then inhaled into the lungs.  The patient puts the mouth piece of the device into their mouth and breathes in the medication to their lungs.  These are commonly used for patients with asthma or other breathing conditions.
     </string>
 
     <string name="peak_flow_meter_description">
-
+        This is a device that is used to measure the amount of air that flows out of a person’s lungs when they breathe.  It is most commonly used to assess the status of a patient with asthma.  Low readings compared to a patient’s normal reading may mean the lungs are not performing as they should be.
     </string>
 
-    <string name="eye_irrigatino_description">
-
+    <string name="eye_irrigation_description">
+        If a chemical gets into a patients eye, commonly the eye is irrigated with a sterile water solution.  This can be done over a sink using an emergency eye wash system or using a Morgan Lens which covers the cornea and allows for continuous flow of solution to give relief from chemical or thermal burns as well as foreign materials that are not embedded in the eye.
     </string>
 
     <string name="pain_medication_description">
-
+        (Narcotic, non-narcotic, NSAIDS, central analgesics, topical anesthetics)  There are a variety of pain medications that are given to patients.  Each medication is given by a healthcare provider with direction of a medical doctor.  It is important to ask the healthcare provider side effects of these medications as well as make them aware of any allergies you may have to these pain medications.
     </string>
 
     <string name="nausea_medication_description">
-
+        (Antiemetics)  These medications are used to treat nausea and vomiting.  They are commonly used in the emergency department or after surgery.  They can be given orally or be given through a patient’s IV catheter in their vein.
     </string>
 
     <string name="blood_transfusion_description">
-
+        (RBC &amp; FFP)  Blood products such a red blood cells or fresh frozen plasma are given during sudden blood loss from trauma, surgery, or in patients who have chronic low blood counts (anemia).  Prior to receiving blood through the IV catheter, a patient’s blood type will be identified to ensure a blood transfusion reaction does not occur.  Your physician will inform you of the risks and benefits of receiving blood transfusions.
     </string>
 
     <string name="tetanus_shot_description">
-
+         (Tetanus)  Tetanus is a potentially fatal disease in the central nervous system.  The bacteria can enter into the body through a cut in the skin. It can take anywhere from 3-21 days to have symptoms of tetanus which include jaw stiffness (lockjaw), fast heart rate, sweating, stiffness in facial muscles, difficult swallowing and others.  Children and adults are given tetanus vaccines through intramuscular shots as well as booster shots.  Consult with your physician to get the most up to date information on your tetanus vaccination status.
     </string>
 
     <string name="x_ray_description">
-
+        This type of imaging uses small levels of radiation to show images of organs, bones, and other parts of the body to diagnose infections such as pneumonia, fractures, intestinal blockages, excessive fluid around the heart, and many other medical problems.  X-rays are commonly used in emergency departments as well as part of a physical exams.
     </string>
 
     <string name="ct_scan_description">
-
+        (Computed Tomography)  This type of scan produces images of different parts of the body including organs, muscles, fat, and bones.  This imaging is more detailed than an X-Ray and may involve the use of IV contrast which is a dye that goes into the IV catheter for a more detailed view of specific organ systems.  The CT scan does use radiation and you should make your physician aware of any kidney disease you have prior to a CT scan.
     </string>
 
     <string name="ultrasound_description">
-
+        (abdominal ultrasound, fetal ultrasound, trans-vaginal ultrasound)  This noninvasive procedures is most commonly used to asses the function of organs such as kidneys, arteries, breasts, or heart as well as fetal ultrasounds which check the status of a pregnancy.   This procedures is not painful, but can be uncomfortable if the area being imaged is of concern for pain.
     </string>
 
     <string name="mri_description">
-
+        (Magnetic Resonance Imaging)  This imaging uses magnet, radio waves and a computer to create the most detailed images of the body’s organs, bones, fat and tissue.  During this test, the patient lays flat on a table and is moved into a tube shaped scanner.  An MRI is used to further evaluate conditions in the body while not emitting any radiation to the patient.
     </string>
 
     <string name="echo_test_description">
-
+        (Echocardiogram)  This is a noninvasive procedure that evaluates the function of the heart and structures around the heart.  Similar to an ultrasound, a probe is put up against the chest and picture is created in real time of the heart on the computer screen. This painless procedure is used to diagnose diseases such as congenital heart diseases and defects, cardiomyopathy, congestive heart failure, aneurysms as well as infections around the heart such as Pericarditis.
     </string>
 
     <string name="stress_test_description">
-
+         (Treadmill Test)  This test is done by walking on a treadmill or riding a stationary bike while being evaluated by a healthcare professional.  Your heart rate, blood pressure and breathing is monitored.  This test is used if a doctor believes you may have adequate blood flow to your heart, abnormal heart rhythms, or lack of oxygen reaching your heart.
     </string>
+    <string name="no_information">Sorry, we don\'t have information on this test yet.</string>
 </resources>

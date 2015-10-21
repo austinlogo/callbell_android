@@ -78,7 +78,7 @@ public class BedModeActivity extends BaseActivity
     }
 
     @Override
-    public void onCallBellPressed(String msg) {
+    public void onCallBellPressed(int msg) {
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
 

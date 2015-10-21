@@ -158,11 +158,8 @@ public class PlanOfCareFragment extends Fragment {
         actionListPatient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView item = (TextView) view;
-                String resourceDescriptionName = getResources().getResourceEntryName(view.getId()) + "_description";
-                int textId = getResources().getIdentifier(resourceDescriptionName, "string", "com.callbell.callbell");
-                Log.d(TAG, "CLICKED: " + resourceDescriptionName);
-                mListener.showInfoDialog(item.getText().toString(), getText(textId).toString());
+                String itemText = ((TextView) view).getText().toString();
+                mListener.showInfoDialog(itemText, POCValues.testDescriptions.get(itemText));
             }
         });
 

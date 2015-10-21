@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.models.request.CallBellRequest;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -99,33 +100,33 @@ public class CallBellsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onCallBellPressed(String msg);
+        public void onCallBellPressed(int msg);
     }
 
     public class CallBellListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            String clickedText;
+            int clickedText;
             RelativeLayout clicked = (RelativeLayout) v;
             switch (clicked.getId()) {
                 case R.id.call_button_pain:
-                    clickedText = getString(R.string.pain);
+                    clickedText = CallBellRequest.PAIN_ID;
                     break;
                 case R.id.call_button_blanket:
-                    clickedText = getString(R.string.blanket);
+                    clickedText = CallBellRequest.BLANKET_ID;
                     break;
                 case R.id.call_button_food_water:
-                    clickedText = getString(R.string.food_water);
+                    clickedText = CallBellRequest.FOOD_ID;
                     break;
                 case R.id.call_button_restroom:
-                    clickedText = getString(R.string.restroom);
+                    clickedText = CallBellRequest.RESTROOM_ID;
                     break;
                 case R.id.call_button_help:
-                    clickedText = getString(R.string.help);
+                    clickedText = CallBellRequest.HELP_ID;
                     break;
                 default:
-                    clickedText = getString(R.string.help);
+                    clickedText = CallBellRequest.PAIN_ID;
             }
             mActivityListener.onCallBellPressed(clickedText);
 
