@@ -7,9 +7,10 @@
     <dimen name="item_margin">8dp</dimen>
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="stroke">2dp</dimen>
-    <dimen name="standard_padding">7dp</dimen>
+    <dimen name="standard_padding">14dp</dimen>
     <dimen name="indent_padding">14dp</dimen>
 
-    <dimen name="paragraph">18dp</dimen>
-    <dimen name="title_size">20pt</dimen>
+    <dimen name="small_text">8pt</dimen>
+    <dimen name="paragraph">10pt</dimen>
+    <dimen name="title_size">16pt</dimen>
 </resources>

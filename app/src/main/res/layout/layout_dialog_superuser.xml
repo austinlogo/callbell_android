@@ -8,6 +8,7 @@
     android:layout_height="wrap_content">
 
     <TextView
+        style="@style/Bea_Theme.Title"
         android:padding="@dimen/standard_padding"
         android:text="@string/su_enter_alarm_title"
         android:id="@+id/dialog_title"
@@ -22,6 +23,7 @@
         android:inputType="numberPassword"
         android:textColor="@color/black"
         android:textCursorDrawable="@null"
+        android:textSize="@dimen/paragraph"
         android:padding="@dimen/standard_padding"
         android:paddingStart="@dimen/indent_padding"
         android:paddingEnd="0dp"

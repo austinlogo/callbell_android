@@ -8,6 +8,7 @@
     android:layout_height="wrap_content">
 
     <TextView
+        style="@style/Bea_Theme.Title"
         android:padding="@dimen/standard_padding"
         android:id="@+id/poc_info_title"
         android:background="@color/colorPrimary"
@@ -21,6 +22,7 @@
         android:textColor="@color/black"
         android:padding="@dimen/standard_padding"
         android:layout_weight="1"
+        android:textSize="@dimen/paragraph"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

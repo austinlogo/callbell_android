@@ -269,7 +269,7 @@
          (Treadmill Test)  This test is done by walking on a treadmill or riding a stationary bike while being evaluated by a healthcare professional.  Your heart rate, blood pressure and breathing is monitored.  This test is used if a doctor believes you may have adequate blood flow to your heart, abnormal heart rhythms, or lack of oxygen reaching your heart.
     </string>
 
-    <string name="oxygen_description">
+    <string name="oxygen_description" formatted="false">
          (O2)  This supplemental oxygen is used to increase levels of oxygen in the body.  It can be administered through non rebreather (mask) or a nasal cannula (tubing that directs oxygen in the nose).  This supplemental air is 100% oxygen while the air we breathe all around us is 21% oxygen.
     </string>
 
@@ -312,5 +312,4 @@
     <string name="general_surgery_description">
         Surgeons are doctors who perform invasive procedures to help treat or repair diseases or injuries inside the body.
     </string>
-
 </resources>

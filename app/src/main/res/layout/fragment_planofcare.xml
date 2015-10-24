@@ -12,14 +12,6 @@
         android:layout_height="wrap_content">
     </Spinner>
 
-<!--
-    For thos unfamiliar with Relative Layouts. Look to the layout_below/layout_above to get how this
-    works out. essenitally we're going
-
-    Spinner
-    ListViews
-    Other Button
--->
     <LinearLayout
         android:id="@+id/other_layout"
         android:layout_width="match_parent"
@@ -36,6 +28,7 @@
         <EditText
             android:id="@+id/other_edittext"
             android:hint="@string/other"
+            android:paddingStart="@dimen/indent_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

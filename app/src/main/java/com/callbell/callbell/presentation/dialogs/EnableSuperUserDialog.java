@@ -105,7 +105,6 @@ public class EnableSuperUserDialog extends DialogFragment {
 
 
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                Log.d("HELLO", "HELLO");
                 checkPassword();
                 return true;
             }

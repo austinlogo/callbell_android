@@ -10,9 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -169,20 +171,26 @@ public class PlanOfCareFragment extends Fragment {
         submitOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String item = otherEditText.getText().toString();
-                if (item.isEmpty()) {
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (actionArrayAdapter.contains(item)) {
-                    Toast.makeText(getActivity().getApplicationContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String action = otherEditText.getText().toString();
-                actionArrayAdapter.add(action);
-                actionListAdmin.setItemChecked(actionArrayAdapter.getCount() - 1, true);
-                otherEditText.setText("");
+                submitOtherTestItem();
             }
         });
+
+        otherEditText.setOnEditorActionListener(new SubmitOtherTextListener());
+    }
+
+    public void submitOtherTestItem() {
+        String item = otherEditText.getText().toString();
+        if (item.isEmpty()) {
+            Toast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
+            return;
+        } else if (actionArrayAdapter.contains(item)) {
+            Toast.makeText(getActivity().getApplicationContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String action = otherEditText.getText().toString();
+        actionArrayAdapter.add(action);
+        actionListAdmin.setItemChecked(actionArrayAdapter.getCount() - 1, true);
+        otherEditText.setText("");
     }
 
     @Override
@@ -305,5 +313,19 @@ public class PlanOfCareFragment extends Fragment {
 
     public interface PlanOfCareInteraction {
         public void showInfoDialog(String tit, String bod);
+    }
+
+    public class SubmitOtherTextListener implements TextView.OnEditorActionListener {
+
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                submitOtherTestItem();
+                return true;
+            }
+
+            return false;
+        }
     }
 }
