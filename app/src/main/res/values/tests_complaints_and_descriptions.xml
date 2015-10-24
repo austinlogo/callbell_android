@@ -101,6 +101,7 @@
     <string name="blood_in_urine">Blood in Urine</string>
     <string name="flank_pain">Flank Pain</string>
     <string name="chest_pain">Chest Pain</string>
+    <string name="general_surgery">General Surgery</string>
     <string name="back">Back</string>
 
     //TEST DESCRIPTIONS
@@ -266,6 +267,50 @@
 
     <string name="stress_test_description">
          (Treadmill Test)  This test is done by walking on a treadmill or riding a stationary bike while being evaluated by a healthcare professional.  Your heart rate, blood pressure and breathing is monitored.  This test is used if a doctor believes you may have adequate blood flow to your heart, abnormal heart rhythms, or lack of oxygen reaching your heart.
+    </string>
+
+    <string name="oxygen_description">
+         (O2)  This supplemental oxygen is used to increase levels of oxygen in the body.  It can be administered through non rebreather (mask) or a nasal cannula (tubing that directs oxygen in the nose).  This supplemental air is 100% oxygen while the air we breathe all around us is 21% oxygen.
+    </string>
+
+    <string name="crp_description">
+        ( C-reactive protein)  This blood test indicates inflammation inside the body.  If there is inflammation inside the body, the level of this test will rise.
+    </string>
+
+    <string name="ammonia_description">
+        This blood test is used to investigate changes in a person’s mental status or overall behavior.   It may also be performed on a person who has known liver disease and has started to experience worsening symptoms or possibly become severely ill.
+    </string>
+
+    <string name="lactic_acid_description">
+        (Lactate)  This blood test is ordered when a patient has signs or symptoms related to septic shock, heart attack, congestive heart failure, kidney failure or trauma.  Elevated levels of lactate in the body mean a disease or condition is causing the accumulation of lactate in the body.  Lactic is produced by the cells in the body when there is a lack of oxygen.  This test does not specifically indicate failure of a specific organ, but it does give indication of the severity of the disease or condition in the body.
+    </string>
+
+    <string name="swallow_screen_description">
+        Swallow Screen is an evaluation that assesses if it is safe to allow a patient to swallow food, water, or medication.  If a patient has difficulty completing the swallow screen, generally the patient will not be allowed to eat or drink (NPO).  These are done mainly on patients who exhibit signs or symptoms of having had or recently had a stroke.
+    </string>
+
+    <string name="neurosurgery_consult_description">
+        A doctor that treats diseases and conditions in a surgical or no surgical means effecting the brain, spinal cord, nerves and nervous system.
+    </string>
+
+    <string name="neurology_consult_description">
+        Neurologists are doctors who are trained in treating disorders and diseases of the brain and nervous system, nerves, muscles and spinal cord.
+    </string>
+
+    <string name="urology_consult_description">
+        Urologists are doctors who specialize in the treatment and care of the female and male urinary tract as well as the male reproductive organs.
+    </string>
+
+    <string name="social_work_consult_description">
+        Social workers are professionals who help to improve the overall care as well as life of patients within the hospital.  They can be beneficial in helping with finding appropriate care after leaving the hospital, providing resources helping with addiction, helping to organize family care and many other aspects of patient care.
+    </string>
+
+    <string name="cardiology_consult_description">
+        A cardiologist is a doctor who has been trained to treat and care for problems with the heart, arteries and veins.
+    </string>
+
+    <string name="general_surgery_description">
+        Surgeons are doctors who perform invasive procedures to help treat or repair diseases or injuries inside the body.
     </string>
 
 </resources>

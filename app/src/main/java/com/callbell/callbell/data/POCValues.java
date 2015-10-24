@@ -52,7 +52,6 @@ public class POCValues {
     public final String D_DIMER;
     public final String C_REACTIVE_PROTEIN;
     public final String URIC_ACID;
-    public final String ULTRASOUND__;
     public final String PREGNANCY_PROBLEMS;
     public final String HCG;
     public final String PELVIC_EXAM;
@@ -125,9 +124,7 @@ public class POCValues {
     public final String BLOOD_IN_URINE;
     public final String FLANK_PAIN;
     public final String CHEST_PAIN;
-
-
-    public static String OTHER_CHOICE = "Other";
+    public final String GENERAL_SURGERY;
 
     //TODO: array values should be constants defined staticly that way we can reference better track these things
     @Inject
@@ -163,7 +160,6 @@ public class POCValues {
         D_DIMER = mContext.getString(R.string.d_dimer);
         C_REACTIVE_PROTEIN = mContext.getString(R.string.c_reactive_protein);
         URIC_ACID = mContext.getString(R.string.uric_acid);
-        ULTRASOUND__ = mContext.getString(R.string.ultrasound__);
         PREGNANCY_PROBLEMS = mContext.getString(R.string.pregnancy_problems);
         HCG = mContext.getString(R.string.hcg);
         PELVIC_EXAM = mContext.getString(R.string.pelvic_exam);
@@ -236,6 +232,7 @@ public class POCValues {
         BLOOD_IN_URINE = mContext.getString(R.string.blood_in_urine);
         FLANK_PAIN = mContext.getString(R.string.flank_pain);
         CHEST_PAIN = mContext.getString(R.string.chest_pain);
+        GENERAL_SURGERY = mContext.getString(R.string.general_surgery);
 
         pocMap.put(DEFAULT_CHOICE, new ArrayList<String>());
 
@@ -737,26 +734,25 @@ public class POCValues {
         testDescriptions.put(CT_SCAN, mContext.getString(R.string.ct_scan_description));
         testDescriptions.put(ULTRASOUND, mContext.getString(R.string.ultrasound_description));
         testDescriptions.put(X_RAY, mContext.getString(R.string.x_ray_description));
-//        testDescriptions.put(UROLOGY_CONSULT, mContext.getString(R.string.urology_consult_description));
+        testDescriptions.put(UROLOGY_CONSULT, mContext.getString(R.string.urology_consult_description));
 //        testDescriptions.put(HEADACHE, mContext.getString(R.string.headache_description));
 //        testDescriptions.put(MEDICAL_EVALUATION, mContext.getString(R.string.medical_evaluation_description));
         testDescriptions.put(CBC, mContext.getString(R.string.cbc_description));
-//        testDescriptions.put(CRP, mContext.getString(R.string.crp_description));
+        testDescriptions.put(CRP, mContext.getString(R.string.crp_description));
         testDescriptions.put(BMP, mContext.getString(R.string.bmp_description));
         testDescriptions.put(INR, mContext.getString(R.string.inr_description));
-//        testDescriptions.put(LACTIC_ACID, mContext.getString(R.string.lactic_acid_description));
+        testDescriptions.put(LACTIC_ACID, mContext.getString(R.string.lactic_acid_description));
         testDescriptions.put(IV_THERAPY, mContext.getString(R.string.iv_therapy_description));
 //        testDescriptions.put(IV_FLUID, mContext.getString(R.string.iv_fluid_description));
         testDescriptions.put(MRI, mContext.getString(R.string.mri_description));
-//        testDescriptions.put(NEUROSURGERY_CONSULT, mContext.getString(R.string.neurosurgery_consult_description));
-//        testDescriptions.put(NEUROLOGY_CONSULT, mContext.getString(R.string.neurology_consult_description));
+        testDescriptions.put(NEUROSURGERY_CONSULT, mContext.getString(R.string.neurosurgery_consult_description));
+        testDescriptions.put(NEUROLOGY_CONSULT, mContext.getString(R.string.neurology_consult_description));
 //        testDescriptions.put(LEG_PAIN, mContext.getString(R.string.leg_pain_description));
         testDescriptions.put(CMP, mContext.getString(R.string.cmp_description));
         testDescriptions.put(ESR, mContext.getString(R.string.esr_description));
         testDescriptions.put(D_DIMER, mContext.getString(R.string.d_dimer_description));
 //        testDescriptions.put(C_REACTIVE_PROTEIN, mContext.getString(R.string.c_reactive_protein_description));
         testDescriptions.put(URIC_ACID, mContext.getString(R.string.uric_acid_description));
-//        testDescriptions.put(ULTRASOUND__, mContext.getString(R.string.ultrasound___description));
 //        testDescriptions.put(PREGNANCY_PROBLEMS, mContext.getString(R.string.pregnancy_problems_description));
         testDescriptions.put(HCG, mContext.getString(R.string.hcg_description));
         testDescriptions.put(PELVIC_EXAM, mContext.getString(R.string.pelvic_exam_description));
@@ -767,7 +763,7 @@ public class POCValues {
 //        testDescriptions.put(CHEST_X_RAY, mContext.getString(R.string.chest_x_ray_description));
 //        testDescriptions.put(SHORTNESS_OF_BREATH, mContext.getString(R.string.shortness_of_breath_description));
         testDescriptions.put(EKG, mContext.getString(R.string.ekg_description));
-//        testDescriptions.put(OXYGEN, mContext.getString(R.string.oxygen_description));
+        testDescriptions.put(OXYGEN, mContext.getString(R.string.oxygen_description));
         testDescriptions.put(TROPONIN, mContext.getString(R.string.troponin_description));
 //        testDescriptions.put(BNP, mContext.getString(R.string.bnp_description));
 //        testDescriptions.put(BLOOD_GAS, mContext.getString(R.string.blood_gas_description));
@@ -777,9 +773,9 @@ public class POCValues {
         testDescriptions.put(PEAK_FLOW_METER, mContext.getString(R.string.peak_flow_meter_description));
 //        testDescriptions.put(INPATIENT_CONSULT, mContext.getString(R.string.inpatient_consult_description));
 //        testDescriptions.put(SLURRED_SPEAK, mContext.getString(R.string.slurred_speak_description));
-//        testDescriptions.put(AMMONIA, mContext.getString(R.string.ammonia_description));
+        testDescriptions.put(AMMONIA, mContext.getString(R.string.ammonia_description));
 //        testDescriptions.put(FINGER_STICK, mContext.getString(R.string.finger_stick_description));
-//        testDescriptions.put(SWALLOW_SCREEN, mContext.getString(R.string.swallow_screen_description));
+        testDescriptions.put(SWALLOW_SCREEN, mContext.getString(R.string.swallow_screen_description));
 //        testDescriptions.put(TESTICULAR_PAIN, mContext.getString(R.string.testicular_pain_description));
 //        testDescriptions.put(FOLEY_CATHETER, mContext.getString(R.string.foley_catheter_description));
 //        testDescriptions.put(VAGINAL_BLEEDING, mContext.getString(R.string.vaginal_bleeding_description));
@@ -814,13 +810,13 @@ public class POCValues {
 //        testDescriptions.put(REPEAT_TROPONIN, mContext.getString(R.string.repeat_troponin_description));
         testDescriptions.put(STRESS_TEST, mContext.getString(R.string.stress_test_description));
 //        testDescriptions.put(HOLTER_MONITOR, mContext.getString(R.string.holter_monitor_description));
-//        testDescriptions.put(CARDIOLOGY_CONSULT, mContext.getString(R.string.cardiology_consult_description));
+        testDescriptions.put(CARDIOLOGY_CONSULT, mContext.getString(R.string.cardiology_consult_description));
 //        testDescriptions.put(RASH, mContext.getString(R.string.rash_description));
 //        testDescriptions.put(IV_INSERTION, mContext.getString(R.string.iv_insertion_description));
 //        testDescriptions.put(OVERDOSE, mContext.getString(R.string.overdose_description));
 //        testDescriptions.put(ACETAMINOPHEN_LEVEL, mContext.getString(R.string.acetaminophen_level_description));
 //        testDescriptions.put(ASPIRIN_LEVEL, mContext.getString(R.string.aspirin_level_description));
-//        testDescriptions.put(SOCIAL_WORK_CONSULT, mContext.getString(R.string.social_work_consult_description));
+        testDescriptions.put(SOCIAL_WORK_CONSULT, mContext.getString(R.string.social_work_consult_description));
 //        testDescriptions.put(ABNORMAL_LABS, mContext.getString(R.string.abnormal_labs_description));
         testDescriptions.put(TSH, mContext.getString(R.string.tsh_description));
 //        testDescriptions.put(ARM_PAIN, mContext.getString(R.string.arm_pain_description));
@@ -829,6 +825,7 @@ public class POCValues {
 //        testDescriptions.put(BLOOD_IN_URINE, mContext.getString(R.string.blood_in_urine_description));
 //        testDescriptions.put(FLANK_PAIN, mContext.getString(R.string.flank_pain_description));
 //        testDescriptions.put(CHEST_PAIN, mContext.getString(R.string.chest_pain_description));
+        testDescriptions.put(GENERAL_SURGERY, mContext.getString(R.string.general_surgery_description));
 
 
 
