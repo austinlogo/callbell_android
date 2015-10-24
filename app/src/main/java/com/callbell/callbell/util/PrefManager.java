@@ -68,7 +68,7 @@ public class PrefManager {
     public static final String STATELIST_RESPONSE = "STATELIST RESPONSE";
     public static final String CALL_BELL_MESSAGE_BODY = "message_body";
     public static final String CALL_BELL_MESSAGE_FROM = "message_from";
-
+    public static final String CATEGORY_CALL_BELL_RESPONSE = "call_bell_response";
 
 
     public static SharedPreferences prefs;
@@ -239,7 +239,7 @@ public class PrefManager {
     }
 
     public String getStationTabletName() {
-        return hospital() + STATION_SUFFIX;
+        return hospital() + "_" + group() + STATION_SUFFIX;
     }
 
     public String senderId() {

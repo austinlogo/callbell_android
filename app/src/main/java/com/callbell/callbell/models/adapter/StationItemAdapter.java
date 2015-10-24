@@ -78,6 +78,9 @@ public class StationItemAdapter extends BaseAdapter {
                 return;
             }
         }
+
+        stateList.add(new State(st));
+        notifyDataSetChanged();
         return;
     }
 }

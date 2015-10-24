@@ -3,6 +3,7 @@ package com.callbell.callbell.presentation.dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -10,10 +11,15 @@ import android.os.Bundle;
 
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.InputType;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.callbell.callbell.R;
@@ -62,11 +68,13 @@ public class EnableSuperUserDialog extends DialogFragment {
         dialog.setContentView(R.layout.layout_dialog_superuser);
         ButterKnife.inject(this, dialog);
 
+        passwordEditText.setOnEditorActionListener(new EditTextListener());
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkPassword();
-                dismiss();
+
             }
         });
 
@@ -82,8 +90,27 @@ public class EnableSuperUserDialog extends DialogFragment {
             prefs.setSuperUserStatus(true);
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);
+            dismiss();
         } else {
             Toast.makeText(getActivity(), R.string.incorrect_password, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+    public class EditTextListener implements TextView.OnEditorActionListener {
+
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                Log.d("HELLO", "HELLO");
+                checkPassword();
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -51,7 +51,10 @@
         </service>
 
         <activity
-            android:name=".presentation.login.LoginActivity">
+            android:name=".presentation.login.LoginActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
@@ -64,12 +67,19 @@
 
         <activity
             android:name=".presentation.bed.BedModeActivity"
-            android:label="@string/title_activity_bed_mode">
+            android:label="@string/title_activity_bed_mode"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation">
         </activity>
-        <activity android:name=".presentation.BaseActivity">
+        <activity android:name=".presentation.BaseActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation">
 
         </activity>
-        <activity android:name=".presentation.station.StationActivity">
+        <activity
+            android:name=".presentation.station.StationActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation">
         </activity>
     </application>
 

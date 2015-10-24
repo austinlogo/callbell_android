@@ -15,15 +15,13 @@
         <FrameLayout
             android:id="@+id/bed_mode_staff_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4">
+            android:layout_height="wrap_content">
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/bed_mode_plan_of_care_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
         </FrameLayout>
     </LinearLayout>
 

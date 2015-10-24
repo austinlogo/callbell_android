@@ -101,18 +101,20 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Clicked Bed");
-                register(prefs.BED_MODE);
-                Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
-                startActivity(newActivity);
+                if (register(prefs.BED_MODE)) {
+                    Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
+                    startActivity(newActivity);
+                }
             }
         });
 
         stationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register(prefs.STATION_MODE);
-                Intent newActivity = new Intent(getActivity().getApplicationContext(), StationActivity.class);
-                startActivity(newActivity);
+                if (register(prefs.STATION_MODE)) {
+                    Intent newActivity = new Intent(getActivity().getApplicationContext(), StationActivity.class);
+                    startActivity(newActivity);
+                }
             }
         });
 
@@ -161,7 +163,7 @@ public class LoginFragment extends Fragment {
         mListener = null;
     }
 
-    public void register(String mod) {
+    public boolean register(String mod) {
         State thisState = new State(hospital_id.getText().toString(),
                 group_id.getText().toString(),
                 location_id.getText().toString(),
@@ -184,10 +186,12 @@ public class LoginFragment extends Fragment {
 
             Log.d(TAG, "starting Service: " + thisState.getMode());
             getActivity().startService(intent);
-
+            return true;
         }else{
             Toast.makeText(getActivity().getApplicationContext(), "This device is not supported", Toast.LENGTH_SHORT).show();
         }
+
+        return false;
     }
 
     private boolean checkPlayServices() {
@@ -198,7 +202,7 @@ public class LoginFragment extends Fragment {
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
                 Log.i(TAG, "This device is not supported.");
-                getActivity().finish();
+//                getActivity().finish();
             }
             return false;
         }

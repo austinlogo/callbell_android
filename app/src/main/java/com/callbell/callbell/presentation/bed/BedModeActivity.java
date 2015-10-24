@@ -7,11 +7,13 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.BaseActivity;
+import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.util.PrefManager;
 
@@ -54,21 +56,32 @@ public class BedModeActivity extends BaseActivity
                 .add(R.id.bed_mode_CallBellsFragment_container, mCallBellsFragment, "Call Bells")
                 .commit();
 
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(PrefManager.EVENT_SU_MODE_CHANGE);
+        filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
+
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
-                mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
-                mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
 
-                if (!prefs.isSuperUser()) {
-                    messageRouting.updateState();
+                if(intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
+                    int messageId = Integer.parseInt(intent.getStringExtra(CallBellDialog.MESSAGE_KEY));
+                    playSound();
+                    Toast.makeText(getApplicationContext(), getString(messageId), Toast.LENGTH_SHORT).show();
+                } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
+                    Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
+                    mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
+                    mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
+
+                    if (!prefs.isSuperUser()) {
+                        messageRouting.updateState();
+                    }
+                    mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
                 }
-                mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
             }
         };
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, filter);
     }
 
     @Override
@@ -79,8 +92,10 @@ public class BedModeActivity extends BaseActivity
 
     @Override
     public void onCallBellPressed(int msg) {
+
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
+        Toast.makeText(this, R.string.message_sent, Toast.LENGTH_SHORT).show();
 
         //Send GCM Message
         messageRouting.sendMessage(prefs.getStationTabletName(), prefs.CATEGORY_CALL_BELL, msg);

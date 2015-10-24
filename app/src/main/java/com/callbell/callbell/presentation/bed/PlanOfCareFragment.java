@@ -159,7 +159,10 @@ public class PlanOfCareFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemText = ((TextView) view).getText().toString();
-                mListener.showInfoDialog(itemText, POCValues.testDescriptions.get(itemText));
+                String bodyText = POCValues.testDescriptions.get(itemText) != null
+                        ? POCValues.testDescriptions.get(itemText)
+                        : POCValues.testDescriptions.get(POCValues.DEFAULT_CHOICE);
+                mListener.showInfoDialog(itemText, bodyText);
             }
         });
 

@@ -19,16 +19,19 @@ public class CallBellRequest extends Request {
     public static final int PAIN_ID = 2;
     public static final int FOOD_ID = 3;
     public static final int HELP_ID = 4;
+    public static final int ACKNOWLEDGE_ID = 5;
 
 
     private static final String TAG = CallBellRequest.class.getSimpleName();
     private State mState;
-    private String to;
+    private String to,
+            category;
     private int message;
 
-    public CallBellRequest(State st, String ti, int msg) {
+    public CallBellRequest(State st, String ti, int msg, String cat) {
         mState = st;
         to = ti;
+        category = cat;
         message = msg;
     }
 
@@ -57,7 +60,7 @@ public class CallBellRequest extends Request {
 
         jsonObject.put(PrefManager.STATE_KEY, mState.toJson());
         jsonObject.put(TO_KEY, getTo());
-        jsonObject.put(CATEGORY_KEY, PrefManager.CATEGORY_CALL_BELL);
+        jsonObject.put(CATEGORY_KEY, category);
         jsonObject.put(PAYLOAD_KEY, getMessage());
 
         return jsonObject;

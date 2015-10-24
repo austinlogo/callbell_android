@@ -26,6 +26,7 @@
         <ImageView
             android:id="@+id/dialog_station_image"
             android:layout_width="wrap_content"
+            android:maxHeight="10dp"
             android:src="@drawable/call_bell_pain"
             android:layout_height="wrap_content"
             />
@@ -50,12 +51,29 @@
 
         <Button
             android:id="@+id/dialog_station_acknowledge"
-            android:text="@string/back"
+            android:text="@string/acknowledge"
             android:textColor="@color/black"
             android:background="@android:color/transparent"
-            android:layout_weight="6"
             android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/dialog_station_omw"
+            android:text="@string/on_my_way"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@id/dialog_station_acknowledge"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/dialog_station_wait"
+            android:text="@string/wait"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/dialog_station_omw"/>
+
     </RelativeLayout>
 
 

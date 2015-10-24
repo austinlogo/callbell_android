@@ -20,7 +20,9 @@ public class CallBellGCMListenerService extends GcmListenerService {
         Log.d(TAG, data.toString());
         String category = data.getString(Request.CATEGORY_KEY);
 
-        if (PrefManager.CATEGORY_CALL_BELL.equals(category)) {
+
+        if (PrefManager.CATEGORY_CALL_BELL.equals(category)
+                || PrefManager.CATEGORY_CALL_BELL_RESPONSE.equals(category)) {
             Log.d(TAG, "From: " + from);
             Log.d(TAG, "Message: " + data.toString());
 
@@ -28,6 +30,8 @@ public class CallBellGCMListenerService extends GcmListenerService {
             i.putExtras(data);
 
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+//        } else if(PrefManager.CATEGORY_CALL_BELL_RESPONSE.equals(category)) {
+
         } else if (PrefManager.CATEGORY_TABLET_STATE_UPDATE.equals(category)) {
             Log.d(TAG, "Category called");
             Intent i = new Intent(PrefManager.EVENT_STATE_UPDATE);

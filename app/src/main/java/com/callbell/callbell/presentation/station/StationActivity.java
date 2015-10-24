@@ -62,9 +62,8 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
 
                 if (intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
                     Log.d(TAG, "OnReceiveCalled");
-//                mStationFragment.setText(intent.getStringExtra("message"));
+                    playSound();
                     CallBellDialog alert = CallBellDialog.newInstance(intent.getExtras());
-
                     alert.show(getFragmentManager(), "Dialog");
                 } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
                     mStationFragment.setListFromJSONString(intent.getStringExtra(PrefManager.STATELIST_RESPONSE));

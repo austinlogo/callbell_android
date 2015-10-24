@@ -9,5 +9,7 @@
     <dimen name="stroke">2dp</dimen>
     <dimen name="standard_padding">7dp</dimen>
     <dimen name="indent_padding">14dp</dimen>
-    <dimen name="title_size">14pt</dimen>
+
+    <dimen name="paragraph">18dp</dimen>
+    <dimen name="title_size">20pt</dimen>
 </resources>

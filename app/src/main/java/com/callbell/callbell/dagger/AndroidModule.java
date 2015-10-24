@@ -7,6 +7,7 @@ import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.presentation.bed.StaffFragment;
+import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.station.StationActivity;
 import com.callbell.callbell.presentation.station.StationFragment;
@@ -26,20 +27,27 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module ( injects = {
+        //Data
         MessageRouting.class,
-        BedModeActivity.class,
-        LoginActivity.class,
         PostRequestTask.class,
-        LoginFragment.class,
-        StaffFragment.class,
-        EnableSuperUserDialog.class,
-        PlanOfCareFragment.class,
-        StationFragment.class,
-        StationActivity.class,
         POCValues.class,
         PostRequestWithCallbackTask.class,
         RegistrationIntentService.class,
 
+        //Activity
+        BedModeActivity.class,
+        LoginActivity.class,
+        StationActivity.class,
+
+        //Fragment
+        LoginFragment.class,
+        StaffFragment.class,
+        PlanOfCareFragment.class,
+        StationFragment.class,
+
+        //Dialog
+        EnableSuperUserDialog.class,
+        CallBellDialog.class
 }
 )
 public class AndroidModule {
