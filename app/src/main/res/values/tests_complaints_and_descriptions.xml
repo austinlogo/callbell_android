@@ -105,7 +105,7 @@
     <string name="back">Back</string>
 
     //TEST DESCRIPTIONS
-    <string name="medical_evalutation_description">
+    <string name="medical_evaluation_description">
         This examination is done by a physician or qualified healthcare provider.
         It is done to evaluate the body for signs or symptoms of disease, injury or illness.
         Prior medical conditions as well as current symptoms you may be experiencing will all
@@ -217,7 +217,7 @@
         During this examination, a healthcare provider will commonly insert a speculum into the vagina and examine the vulva (external genital), cervix (opening from vagina to uterus), uterus (the womb), fallopian tubes (tubes that carry eggs to the uterus), bladder (holds urine), and the rectum (area that connects the colon to the anus).
     </string>
 
-    <string name="nebulizer_description">
+    <string name="nebulizer_treatment_description">
         (Breathing Treatment)  These treatments are given to people who are having a hard time breathing.  It is a liquid medicine that forced into a mist then inhaled into the lungs.  The patient puts the mouth piece of the device into their mouth and breathes in the medication to their lungs.  These are commonly used for patients with asthma or other breathing conditions.
     </string>
 
