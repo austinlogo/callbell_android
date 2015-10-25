@@ -1,17 +1,11 @@
 package com.callbell.callbell.models;
 
-import android.content.Intent;
-import android.util.Log;
-
 import com.callbell.callbell.data.POCValues;
-import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.inject.Inject;
 
 /**
  * Created by austin on 10/9/15.
@@ -26,6 +20,7 @@ public class State {
     public static final String NURSE = "NURSE";
     public static final String RESIDENT = "RESIDENT";
     public static final String CHIEF_COMPLAINT = "CHIEF_COMPLAINT";
+    public static final String PAIN_RATING = "PAIN_RATING";
 
     private static final String TAG = State.class.getSimpleName();
     private String hospital,
@@ -36,6 +31,8 @@ public class State {
         nurse,
         resident,
         chiefComplaint;
+
+    private int painRating;
 
     private String[] shownActions;
 
@@ -48,17 +45,10 @@ public class State {
         nurse = prefs.nurse();
         resident = prefs.resident();
         chiefComplaint = prefs.chiefComplaint();
+        painRating = prefs.painRating();
     }
 
-    //only used for getting a state from an intent
-    public State(String hos, String grp, String loc) {
-        hospital = hos;
-        group = grp;
-        location = loc;
-        mode = "";
-    }
-
-    public State(String hos, String grp, String loc, String mod, String doc, String nurs, String res, String cc) {
+    public State(String hos, String grp, String loc, String mod, String doc, String nurs, String res, String cc, int pr) {
         hospital = hos;
         group = grp;
         location = loc;
@@ -67,6 +57,7 @@ public class State {
         nurse = nurs;
         resident = res;
         chiefComplaint = cc;
+        painRating = pr;
     }
 
     public State(State st) {
@@ -78,28 +69,20 @@ public class State {
         resident = st.getResident();
         nurse = st.getNurse();
         chiefComplaint = st.getChiefComplaint();
+        painRating = st.getPainRating();
 
     }
 
     public State(JSONObject object) {
-        hospital = JSONUtil.getValueIfExists(object, HOSPITAL_ID);
-        group = JSONUtil.getValueIfExists(object, GROUP_ID);
-        location = JSONUtil.getValueIfExists(object, LOCATION_ID);
-        mode = JSONUtil.getValueIfExists(object, MODE_ID);
-        physician = JSONUtil.getValueIfExists(object, PHYSICIAN);
-        resident = JSONUtil.getValueIfExists(object, RESIDENT);
-        nurse = JSONUtil.getValueIfExists(object, NURSE);
-        chiefComplaint = JSONUtil.getValueIfExists(object, CHIEF_COMPLAINT);
-
-//            hospital = object.has("HOSPITAL_ID") ? object.getString() : "";
-//            group = object.has("GROUP_ID") ? object.getString("GROUP_ID");
-//            location = object.has("LOCATION_ID") ? object.getString("LOCATION_ID") : "";
-//            mode = "";
-//            physician = object.has("PHYSICIAN") ? object.getString("PHYSICIAN") : "";
-//            resident = "";
-//            nurse = object.has("NURSE") ? object.getString("NURSE") : "";
-//            chiefComplaint = object.has("CHIEF_COMPLAINT") ? object.getString("CHIEF_COMPLAINT") : "";
-
+        hospital = JSONUtil.getValueStringIfExists(object, HOSPITAL_ID);
+        group = JSONUtil.getValueStringIfExists(object, GROUP_ID);
+        location = JSONUtil.getValueStringIfExists(object, LOCATION_ID);
+        mode = JSONUtil.getValueStringIfExists(object, MODE_ID);
+        physician = JSONUtil.getValueStringIfExists(object, PHYSICIAN);
+        resident = JSONUtil.getValueStringIfExists(object, RESIDENT);
+        nurse = JSONUtil.getValueStringIfExists(object, NURSE);
+        chiefComplaint = JSONUtil.getValueStringIfExists(object, CHIEF_COMPLAINT);
+        painRating = JSONUtil.getValueIntIfExists(object, PAIN_RATING);
     }
 
     public String getHospital() {
@@ -167,12 +150,6 @@ public class State {
                 && this.location.equals(other.getLocation());
     }
 
-    public static State getStateFromIntent(Intent i) {
-        return new State(i.getStringExtra(PrefManager.HOSPITAL_KEY),
-                i.getStringExtra(PrefManager.GROUP_KEY),
-                i.getStringExtra(PrefManager.LOCATION_KEY));
-    }
-
     public JSONObject toJson() throws JSONException {
         JSONObject object = new JSONObject();
 
@@ -183,6 +160,7 @@ public class State {
         object.put(PrefManager.NURSE_KEY, nurse);
         object.put(PrefManager.RESIDENT_KEY, resident);
         object.put(PrefManager.CHIEF_COMPLAINT_KEY, chiefComplaint);
+        object.put(PrefManager.PAIN_RATING_KEY, painRating);
 
         return object;
     }
@@ -192,5 +170,13 @@ public class State {
         sb.append(LOCATION_ID + ": " + location);
         sb.append(CHIEF_COMPLAINT + ": " + chiefComplaint);
         return sb.toString();
+    }
+
+    public int getPainRating() {
+        return painRating;
+    }
+
+    public void setPainRating(int painRating) {
+        this.painRating = painRating;
     }
 }

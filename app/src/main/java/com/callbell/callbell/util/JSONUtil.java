@@ -49,12 +49,21 @@ public class JSONUtil {
         return new ArrayList<>();
     }
 
-    public static String getValueIfExists(JSONObject obj, String key) {
+    public static String getValueStringIfExists(JSONObject obj, String key) {
         try {
             return obj.has(key) ? obj.getString(key) : "";
         } catch (JSONException e) {
 
         }
         return "";
+    }
+
+    public static int getValueIntIfExists(JSONObject obj, String key) {
+        try {
+            return obj.has(key) ? obj.getInt(key) : 0;
+        } catch (JSONException e) {
+
+        }
+        return 0;
     }
 }

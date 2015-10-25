@@ -62,9 +62,10 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="Bea_Theme.View">
+    <style name="Bea_Theme.DialogView">
         <item name="android:background">@color/silver</item>
         <item name="android:color">@color/black</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Bea_Theme.Call_Bell">

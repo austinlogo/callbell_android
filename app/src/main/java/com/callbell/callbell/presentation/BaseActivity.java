@@ -22,6 +22,7 @@ import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
+import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -91,6 +92,9 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.admin_setting:
                 adminSettingsAction(item);
                 break;
+            case R.id.timer_setting:
+                PainRatingDialog prDialog = new PainRatingDialog();
+                prDialog.show(getFragmentManager(), "PAIN RATING DIALOG");
             default:
                 super.onOptionsItemSelected(item);
         }

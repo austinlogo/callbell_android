@@ -3,5 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.callbell.callbell.presentation.bed.BedModeActivity">
     <item android:id="@+id/admin_setting" android:title="@string/admin_mode"
-        android:orderInCategory="1" app:showAsAction="ifRoom" />
+        android:orderInCategory="1" app:showAsAction="always" />
+    <item android:id="@+id/timer_setting" android:title="@string/timer"
+        android:orderInCategory="1" app:showAsAction="always" />
 </menu>

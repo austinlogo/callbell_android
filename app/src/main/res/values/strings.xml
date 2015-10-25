@@ -41,4 +41,7 @@
     <string name="wait">Hold On</string>
     <string name="call_received">Call Received</string>
     <string name="message_sent">Message Sent</string>
+    <string name="pain_header">How much pain are you in?</string>
+    <string name="timer">Timer</string>
+    <string name="submit">Submit</string>
 </resources>

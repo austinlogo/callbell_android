@@ -164,10 +164,17 @@ public class LoginFragment extends Fragment {
     }
 
     public boolean register(String mod) {
-        State thisState = new State(hospital_id.getText().toString(),
+        State thisState = new State(
+                hospital_id.getText().toString(),
                 group_id.getText().toString(),
                 location_id.getText().toString(),
-                mod, prefs.physician(), prefs.nurse(), prefs.resident(), prefs.chiefComplaint());
+                mod,
+                prefs.physician(),
+                prefs.nurse(),
+                prefs.resident(),
+                prefs.chiefComplaint(),
+                prefs.painRating());
+
 
         prefs.setState(thisState);
 

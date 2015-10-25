@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.adapter.StationItemAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +43,7 @@ public class PrefManager {
     public static final String RESIDENT_KEY = "resident_id";
     public static final String STATE_KEY = "state_id";
     public static final String CHIEF_COMPLAINT_KEY = "chief_complaint_key";
+    public static final String PAIN_RATING_KEY = "pain_rating_id";
     public static final String SHOWN_ACTION_KEY = "shown_actions_id";
     public static final String STATELIST_KEY = "stateList";
     public static final String ALL_ACTION_ITEMS_KEY = "all_action_items";
@@ -109,6 +111,10 @@ public class PrefManager {
 
     public String group() {
         return prefs.getString(GROUP_KEY, "");
+    }
+
+    public int painRating() {
+        return prefs.getInt(State.PAIN_RATING, 0);
     }
 
     public String physician() {
@@ -183,6 +189,7 @@ public class PrefManager {
         sp.putString(NURSE_KEY, newState.getNurse());
         sp.putString(RESIDENT_KEY, newState.getResident());
         sp.putString(CHIEF_COMPLAINT_KEY, newState.getChiefComplaint());
+        sp.putInt(State.PAIN_RATING, newState.getPainRating());
         sp.apply();
 
         Log.d(TAG, "RES2: " + resident());
@@ -238,6 +245,11 @@ public class PrefManager {
         isSuperUser = bool;
     }
 
+    public void setPainRating(int rating) {
+        currentState.setPainRating(rating);
+        prefs.edit().putInt(State.PAIN_RATING, rating).apply();
+    }
+
     public String getStationTabletName() {
         return hospital() + "_" + group() + STATION_SUFFIX;
     }
@@ -245,5 +257,6 @@ public class PrefManager {
     public String senderId() {
         return "434312104937";
     }
+
 
 }
