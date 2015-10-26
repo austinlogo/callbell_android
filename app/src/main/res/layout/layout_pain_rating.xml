@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="500dp"
+    android:padding="@dimen/standard_padding"
+    style="@style/Bea_Theme.DialogView">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:padding="@dimen/standard_padding"
+        android:text="@string/pain_header" />
+
+    <TextView
+        android:id="@+id/dialog_pain_rating_value"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_size"
+        android:layout_height="wrap_content" />
+    <SeekBar
+        android:id="@+id/dialog_pain_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_padding"
+        android:max="10"/>
+    <Button
+        style="@style/Bea_Theme.Button"
+        android:id="@+id/dialog_pain_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"/>
+</LinearLayout>
