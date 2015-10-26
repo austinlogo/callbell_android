@@ -9,6 +9,7 @@ import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.presentation.bed.StaffFragment;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
+import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.station.StationActivity;
 import com.callbell.callbell.presentation.station.StationFragment;
 import com.callbell.callbell.service.RegistrationIntentService;
@@ -47,7 +48,8 @@ import javax.inject.Singleton;
 
         //Dialog
         EnableSuperUserDialog.class,
-        CallBellDialog.class
+        CallBellDialog.class,
+        PainRatingDialog.class
 }
 )
 public class AndroidModule {

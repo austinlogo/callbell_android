@@ -23,6 +23,7 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
+import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -93,8 +94,8 @@ public class BaseActivity extends AppCompatActivity {
                 adminSettingsAction(item);
                 break;
             case R.id.timer_setting:
-                PainRatingDialog prDialog = new PainRatingDialog();
-                prDialog.show(getFragmentManager(), "PAIN RATING DIALOG");
+                painSettingsDisplayAction();
+                break;
             default:
                 super.onOptionsItemSelected(item);
         }
@@ -123,6 +124,16 @@ public class BaseActivity extends AppCompatActivity {
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
             adminButton.setTitle(R.string.admin_mode);
             prefs.setState(prefs.getCurrentState());
+        }
+    }
+
+    public void painSettingsDisplayAction() {
+        if (prefs.isSuperUser()) {
+            SetPainRatingDialog dialog = new SetPainRatingDialog();
+            dialog.show(getFragmentManager(), "PAIN SET");
+        } else {
+            PainRatingDialog prDialog = new PainRatingDialog();
+            prDialog.show(getFragmentManager(), "PAIN RATING DIALOG");
         }
     }
 

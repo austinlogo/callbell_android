@@ -57,13 +57,13 @@ public class StationItemAdapter extends BaseAdapter {
         TextView physicianField = (TextView) convertView.findViewById(R.id.station_item_physician);
         TextView nurseField = (TextView) convertView.findViewById(R.id.station_item_nurse);
         TextView chiefComplaintField = (TextView) convertView.findViewById(R.id.station_item_chief_complaint);
-//        TextView painRatingField = (TextView) convertView.findViewById(R.id.station_item_pain_rating);
+        TextView painRatingField = (TextView) convertView.findViewById(R.id.station_item_pain_rating);
 
         locationField.setText(stateList.get(position).getLocation());
         physicianField.setText(stateList.get(position).getPhysician());
         nurseField.setText(stateList.get(position).getNurse());
         chiefComplaintField.setText(stateList.get(position).getChiefComplaint());
-//        painRatingField.setText(stateList[position].getRating());
+        painRatingField.setText(String.valueOf(stateList.get(position).getPainRating()));
 
         return convertView;
     }
