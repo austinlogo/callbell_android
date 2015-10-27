@@ -5,5 +5,5 @@
     <item android:id="@+id/admin_setting" android:title="@string/admin_mode"
         android:orderInCategory="1" app:showAsAction="always" />
     <item android:id="@+id/timer_setting" android:title="@string/pain"
-        android:orderInCategory="1" app:showAsAction="always" />
+        android:orderInCategory="1" app:showAsAction="always" android:visible="false"/>
 </menu>

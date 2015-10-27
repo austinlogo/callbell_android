@@ -7,6 +7,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -36,6 +38,16 @@ public class BedModeActivity extends BaseActivity
     private StaffFragment mStaffFragment;
     private CallBellsFragment mCallBellsFragment;
     private PlanOfCareFragment mPlanOfCareFragment;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuItem item = menu.findItem(R.id.timer_setting);
+        item.setVisible(true);
+
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

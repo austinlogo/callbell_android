@@ -3,6 +3,7 @@ package com.callbell.callbell.presentation.dialogs;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -37,6 +38,8 @@ public class PainRatingDialog
     @InjectView(R.id.dialog_pain_submit)
     Button mPainSubmitButton;
 
+    private DialogDismissedCallback mCallback;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,10 @@ public class PainRatingDialog
         mPainSeekbar.setProgress(progress);
 
         return dialog;
+    }
+
+    public void setCallback(DialogDismissedCallback callback) {
+        mCallback = callback;
     }
 
     public class SubmitClicked implements View.OnClickListener {
