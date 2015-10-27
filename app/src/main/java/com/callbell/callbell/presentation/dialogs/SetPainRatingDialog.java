@@ -3,6 +3,7 @@ package com.callbell.callbell.presentation.dialogs;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.presentation.bed.PainRatingAsyncTaskActivity;
 import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
 
 import butterknife.ButterKnife;
@@ -20,6 +22,7 @@ import butterknife.InjectView;
  */
 public class SetPainRatingDialog extends DialogFragment {
 
+    private static final String TAG = SetPainRatingDialog.class.getSimpleName();
     @InjectView(R.id.dialog_set_pain_toggle)
     ToggleButton toggleButton;
 
@@ -51,8 +54,17 @@ public class SetPainRatingDialog extends DialogFragment {
                 return;
             }
 
-            PainRatingAsyncTask loopTask = new PainRatingAsyncTask(getActivity());
-            loopTask.execute(Integer.valueOf(intervalValue.getText().toString()));
+            Log.d(TAG, "Submitted new Pain Rating Task");
+            Log.d(TAG, "ACtivity: " + getActivity());
+
+            try {
+                PainRatingAsyncTask loopTask = new PainRatingAsyncTask(getActivity());
+                ((PainRatingAsyncTaskActivity) getActivity()).setPainRatingAsyncTask(loopTask);
+                loopTask.execute(Integer.valueOf(intervalValue.getText().toString()));
+            } catch (ClassCastException e) {
+                Log.e(TAG, "Activity does not implement PainRatingAsyncTaskActivity: " + e.getMessage());
+            }
+
             dismiss();
         }
     }

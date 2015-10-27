@@ -42,7 +42,8 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     }
 
     public void getDeviceStates() {
-
+        Log.d(TAG, "getDeviceStates");
+        Log.d(TAG, "CurrentState: " + prefs.getCurrentState().toString());
         GetStatesRequest request = new GetStatesRequest(prefs.getCurrentState());
 
         PostRequestWithCallbackTask task = new PostRequestWithCallbackTask(context, PrefManager.EVENT_STATES_RECEIVED, this);

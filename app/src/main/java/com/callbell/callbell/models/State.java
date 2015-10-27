@@ -167,8 +167,10 @@ public class State {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(PHYSICIAN + ": " + physician);
         sb.append(LOCATION_ID + ": " + location);
         sb.append(CHIEF_COMPLAINT + ": " + chiefComplaint);
+        sb.append(PAIN_RATING + ": " + painRating);
         return sb.toString();
     }
 

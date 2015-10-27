@@ -17,6 +17,7 @@ import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
+import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -24,7 +25,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 
 public class BedModeActivity extends BaseActivity
-        implements CallBellsFragment.OnFragmentInteractionListener, PlanOfCareFragment.PlanOfCareInteraction {
+        implements CallBellsFragment.OnFragmentInteractionListener, PlanOfCareFragment.PlanOfCareInteraction, PainRatingAsyncTaskActivity {
 
     private static final String TAG = BedModeActivity.class.getSimpleName();
 
@@ -38,6 +39,7 @@ public class BedModeActivity extends BaseActivity
     private StaffFragment mStaffFragment;
     private CallBellsFragment mCallBellsFragment;
     private PlanOfCareFragment mPlanOfCareFragment;
+    private PainRatingAsyncTask mPainRatingAsyncTask;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,6 +102,11 @@ public class BedModeActivity extends BaseActivity
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+
+        if (mPainRatingAsyncTask != null) {
+            mPainRatingAsyncTask.setLoop(false);
+            mPainRatingAsyncTask.interrupt();
+        }
     }
 
     @Override
@@ -112,6 +119,18 @@ public class BedModeActivity extends BaseActivity
         //Send GCM Message
         messageRouting.sendMessage(prefs.getStationTabletName(), prefs.CATEGORY_CALL_BELL, msg);
 
+    }
+
+    @Override
+    public void setPainRatingAsyncTask(PainRatingAsyncTask task) {
+
+        //finish the current Pain rating loop if it exists
+        if (mPainRatingAsyncTask != null) {
+            mPainRatingAsyncTask.setLoop(false);
+            mPainRatingAsyncTask.interrupt();
+        }
+
+        mPainRatingAsyncTask = task;
     }
 
     @Override

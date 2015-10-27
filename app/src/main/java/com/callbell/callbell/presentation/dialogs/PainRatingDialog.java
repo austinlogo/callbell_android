@@ -70,11 +70,17 @@ public class PainRatingDialog
         mCallback = callback;
     }
 
+
+
     public class SubmitClicked implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             prefs.setPainRating(mPainSeekbar.getProgress());
+
+            if (mCallback != null) {
+                mCallback.onDialogDismissed();
+            }
             dismiss();
         }
     }
@@ -95,5 +101,9 @@ public class PainRatingDialog
         public void onStopTrackingTouch(SeekBar seekBar) {
             // NOOP
         }
+    }
+
+    public interface DialogDismissedCallback {
+        void onDialogDismissed();
     }
 }
