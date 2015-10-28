@@ -7,8 +7,8 @@
     <string name="bed">Bed</string>
     <string name="title_activity_bed_mode">BedModeActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="help">help</string>
-    <string name="pain">pain</string>
+    <string name="help">Help</string>
+    <string name="pain">Pain</string>
     <string name="blanket">Warm Blanket</string>
     <string name="food_water">Food / Water</string>
     <string name="restroom">Restroom</string>
@@ -19,16 +19,12 @@
     <string name="call_bell_alarm_title">Someone\'s Calling</string>
     <string name="acknowledge">Acknowledge</string>
     <string name="dismiss">Dismiss</string>
-    <string name="staff_physician">Physician</string>
-    <string name="staff_nurse">Nurse</string>
-    <string name="staff_resident">Resident:</string>
-    <string name="admin_mode">Admin Mode</string>
+    <string name="staff_physician">your Doctor is:</string>
+    <string name="staff_nurse">Your Nurse is:</string>
+    <string name="staff_resident">Your Resident is:</string>
+    <string name="admin_mode">Go to Admin Mode</string>
     <string name="su_enter_alarm_title">Enter Admin Password</string>
-    <string name="user_mode">User Mode</string>
-
-    <string name="title_activity_plan_of_care">PlanOfCareActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="user_mode">Go to User Mode</string>
     <string name="incorrect_password">Sorry, that password was incorrect</string>
     <string name="nurse_chief_complaint">Chief Complaint</string>
     <string name="other">Other</string>
@@ -46,4 +42,5 @@
     <string name="submit">Submit</string>
     <string name="enable_pain_questions">Enable pain Questionaire</string>
     <string name="how_often">How Often (in Minutes)?</string>
+    <string name="current_tests_title">Your Current Tests:</string>
 </resources>

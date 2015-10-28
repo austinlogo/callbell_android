@@ -12,6 +12,7 @@ import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.station.StationActivity;
 import com.callbell.callbell.presentation.station.StationFragment;
+import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.RegistrationIntentService;
 import com.callbell.callbell.service.tasks.PostRequestWithCallbackTask;
 import com.callbell.callbell.util.PrefManager;
@@ -45,6 +46,7 @@ import javax.inject.Singleton;
         StaffFragment.class,
         PlanOfCareFragment.class,
         StationFragment.class,
+        TitleBarFragment.class,
 
         //Dialog
         EnableSuperUserDialog.class,

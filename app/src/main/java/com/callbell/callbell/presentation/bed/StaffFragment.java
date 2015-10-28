@@ -112,7 +112,7 @@ public class StaffFragment extends Fragment {
                     nurseField.getText().toString());
         }
 
-        //Remove focusUnderline
+        //setFocusUnderline
         physicianField.setBackground(setSuperUserStatus ? defaultTextBackgroundPhysician : null);
         nurseField.setBackground(setSuperUserStatus ? defaultTextBackgroundNurse : null);
         residentField.setBackground(setSuperUserStatus ? defaultTextBackgroundResident : null);
@@ -123,6 +123,9 @@ public class StaffFragment extends Fragment {
         physicianField.setEnabled(setSuperUserStatus);
         nurseField.setEnabled(setSuperUserStatus);
         residentField.setEnabled(setSuperUserStatus);
+
+        //TestsTitle
+
 
 
         prefs.setSuperUserStatus(setSuperUserStatus);

@@ -15,6 +15,7 @@
 
         <EditText
             android:id="@+id/hospital_id"
+            style="@style/Bea_Theme.EditText"
             android:hint="@string/hospital_name"
             android:layout_width="match_parent"
             android:layout_weight="1"
@@ -23,6 +24,7 @@
 
         <EditText
             android:id="@+id/group_id"
+            style="@style/Bea_Theme.EditText"
             android:hint="@string/group_name"
             android:layout_width="match_parent"
             android:layout_weight="1"
@@ -30,6 +32,7 @@
 
         <EditText
         android:id="@+id/login_id"
+        style="@style/Bea_Theme.EditText"
         android:hint="@string/location_hint"
         android:layout_width="match_parent"
         android:layout_weight="1"

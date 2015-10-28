@@ -4,6 +4,7 @@
     android:id="@+id/staff_fragment_layout"
     android:orientation="horizontal"
     android:focusable="true"
+    android:paddingStart="@dimen/standard_padding"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,7 +21,9 @@
             android:layout_height="wrap_content"
             android:text="@string/staff_physician"/>
         <EditText
+            style="@style/Bea_Theme.EditText"
             android:id="@+id/staff_physician_field"
+            android:nextFocusDown="@+id/staff_nurse_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -38,6 +41,8 @@
             android:text="@string/staff_nurse"/>
         <EditText
             android:id="@+id/staff_nurse_field"
+            style="@style/Bea_Theme.EditText"
+            android:nextFocusDown="@+id/staff_resident_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -55,6 +60,8 @@
             android:text="@string/staff_resident"/>
         <EditText
             android:id="@+id/staff_resident_field"
+            style="@style/Bea_Theme.EditText"
+            android:nextFocusDown="@+id/staff_physician_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

@@ -1,13 +1,9 @@
 package com.callbell.callbell.presentation.bed;
 
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
@@ -53,8 +49,11 @@ public class PlanOfCareFragment extends Fragment {
     private static final String TAG = PlanOfCareFragment.class.getSimpleName();
     private PlanOfCareInteraction mListener;
 
-    @InjectView (R.id.main_complaint_spinner)
-    Spinner chiefComplaint;
+    @InjectView (R.id.fragment_poc_main_complaint_spinner)
+    Spinner chiefComplaintSpinner;
+
+    @InjectView (R.id.fragment_poc_tests_title)
+    TextView mTestsTitle;
 
     @InjectView(R.id.action_list_admin)
     ListView actionListAdmin;
@@ -111,6 +110,7 @@ public class PlanOfCareFragment extends Fragment {
 
         initLists();
         initListeners();
+        setSuperUserPermissions(prefs.isSuperUser());
 
         return view;
     }
@@ -120,16 +120,16 @@ public class PlanOfCareFragment extends Fragment {
         List<String> spinnerArray = new ArrayList<>(pocValues.pocMap.keySet());
         Collections.sort(spinnerArray);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
-        chiefComplaint.setAdapter(adapter);
+        chiefComplaintSpinner.setAdapter(adapter);
         Log.d(TAG, "Current Selection: " + prefs.getCurrentState().getChiefComplaint());
-        chiefComplaint.setSelection(adapter.getPosition(prefs.getCurrentState().getChiefComplaint()), false);
+        chiefComplaintSpinner.setSelection(adapter.getPosition(prefs.getCurrentState().getChiefComplaint()), false);
 
 
         //Inflate the Admin Checkbox
         List<String> prefsAdminList = prefs.allActionItems();
         List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
                 ? prefsAdminList
-                : new ArrayList<>(POCValues.pocMap.get(chiefComplaint.getSelectedItem().toString()));
+                : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
 //        Collections.sort(initialAdminValues); //initialAdminValue
         actionListAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         actionArrayAdapter = new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminValues);
@@ -147,7 +147,7 @@ public class PlanOfCareFragment extends Fragment {
 
         //Set enabled state
         boolean isSuperUser = prefs.isSuperUser();
-        chiefComplaint.setEnabled(isSuperUser);
+        chiefComplaintSpinner.setEnabled(isSuperUser);
         actionListAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         actionListPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
@@ -155,7 +155,7 @@ public class PlanOfCareFragment extends Fragment {
 
     private void initListeners() {
 
-        chiefComplaint.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
+        chiefComplaintSpinner.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
 
         actionListPatient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -238,8 +238,11 @@ public class PlanOfCareFragment extends Fragment {
         actionListAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         actionListPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-        chiefComplaint.setEnabled(isSuperUser);
+        chiefComplaintSpinner.setEnabled(isSuperUser);
         actionListAdmin.setEnabled(isSuperUser);
+        chiefComplaintSpinner.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        mTestsTitle.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+
     }
 
     private int getCheckedItemCount(ListView list) {

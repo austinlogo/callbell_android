@@ -17,6 +17,7 @@ import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
+import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
 import com.callbell.callbell.util.PrefManager;
 
@@ -40,6 +41,7 @@ public class BedModeActivity extends BaseActivity
     private CallBellsFragment mCallBellsFragment;
     private PlanOfCareFragment mPlanOfCareFragment;
     private PainRatingAsyncTask mPainRatingAsyncTask;
+    private TitleBarFragment mTitleBarFragment;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,9 +64,11 @@ public class BedModeActivity extends BaseActivity
         mStaffFragment = StaffFragment.newInstance();
         mCallBellsFragment = CallBellsFragment.newInstance();
         mPlanOfCareFragment = PlanOfCareFragment.newInstance();
+        mTitleBarFragment = TitleBarFragment.newInstance();
 
         getSupportFragmentManager()
                 .beginTransaction()
+                .add(R.id.bed_mode_title_bar_fragment_container, mTitleBarFragment, "Title Bar")
                 .add(R.id.bed_mode_staff_fragment_container, mStaffFragment, "Staff Information")
                 .add(R.id.bed_mode_plan_of_care_fragment_container, mPlanOfCareFragment, "Plan of Care")
                 .add(R.id.bed_mode_CallBellsFragment_container, mCallBellsFragment, "Call Bells")

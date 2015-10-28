@@ -91,7 +91,7 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.admin_setting:
-                adminSettingsAction(item);
+                adminSettingsAction();
                 break;
             case R.id.timer_setting:
                 painSettingsDisplayAction();
@@ -111,7 +111,7 @@ public class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    private void adminSettingsAction(MenuItem adminButton) {
+    public void adminSettingsAction() {
 
         // Moving into SuperUser Mode
         if (!prefs.isSuperUser()) {
@@ -122,7 +122,7 @@ public class BaseActivity extends AppCompatActivity {
             prefs.setSuperUserStatus(false);
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
-            adminButton.setTitle(R.string.admin_mode);
+//            adminButton.setTitle(R.string.admin_mode);
             prefs.setState(prefs.getCurrentState());
         }
     }
