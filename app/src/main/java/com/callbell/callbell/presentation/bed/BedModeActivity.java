@@ -66,7 +66,7 @@ public class BedModeActivity extends BaseActivity
         mPlanOfCareFragment = PlanOfCareFragment.newInstance();
         mTitleBarFragment = TitleBarFragment.newInstance();
 
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
                 .add(R.id.bed_mode_title_bar_fragment_container, mTitleBarFragment, "Title Bar")
                 .add(R.id.bed_mode_staff_fragment_container, mStaffFragment, "Staff Information")
@@ -88,8 +88,10 @@ public class BedModeActivity extends BaseActivity
                     Toast.makeText(getApplicationContext(), getString(messageId), Toast.LENGTH_SHORT).show();
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
+
                     mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
                     mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
+                    mTitleBarFragment.setSuperUserSettings(prefs.isSuperUser());
 
                     if (!prefs.isSuperUser()) {
                         messageRouting.updateState();

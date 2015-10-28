@@ -1,5 +1,6 @@
 package com.callbell.callbell.presentation;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +10,15 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
@@ -31,7 +33,7 @@ import javax.inject.Inject;
 /**
  * Created by austin on 10/11/15.
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
@@ -91,10 +93,10 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.admin_setting:
-                adminSettingsAction();
+//                adminSettingsAction();
                 break;
             case R.id.timer_setting:
-                painSettingsDisplayAction();
+//                painSettingsDisplayAction();
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -111,8 +113,8 @@ public class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    public void adminSettingsAction() {
-
+    public void adminSettingsAction(View view) {
+        Button button = (Button)view;
         // Moving into SuperUser Mode
         if (!prefs.isSuperUser()) {
             EnableSuperUserDialog d = EnableSuperUserDialog.newInstance(null);
@@ -122,12 +124,12 @@ public class BaseActivity extends AppCompatActivity {
             prefs.setSuperUserStatus(false);
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
-//            adminButton.setTitle(R.string.admin_mode);
+            button.setText(R.string.admin_mode);
             prefs.setState(prefs.getCurrentState());
         }
     }
 
-    public void painSettingsDisplayAction() {
+    public void painSettingsDisplayAction(View view) {
         if (prefs.isSuperUser()) {
             SetPainRatingDialog dialog = new SetPainRatingDialog();
             dialog.show(getFragmentManager(), "PAIN SET");
