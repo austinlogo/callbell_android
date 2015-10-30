@@ -1,6 +1,7 @@
 package com.callbell.callbell.presentation.bed;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -194,7 +195,7 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
         Log.d(TAG, "onAttach called");
         try {
@@ -261,6 +262,12 @@ public class PlanOfCareFragment extends Fragment {
         for (int i = 0; i < actionListAdmin.getCount(); i++) {
             actionListAdmin.setItemChecked(i, prefs.shownActions().contains(i));
         }
+    }
+
+    public void clearValues() {
+        prefs.setShownActions(new ArrayList<Integer>());
+        patientPlanOfCareListAdapter.clear();
+        setCheckedAdminItems();
     }
 
     public interface OnFragmentInteractionListener {

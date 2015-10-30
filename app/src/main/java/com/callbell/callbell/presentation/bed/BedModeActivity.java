@@ -25,8 +25,13 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
-public class BedModeActivity extends BaseActivity
-        implements CallBellsFragment.OnFragmentInteractionListener, PlanOfCareFragment.PlanOfCareInteraction, PainRatingAsyncTaskActivity {
+public class BedModeActivity
+        extends BaseActivity
+        implements
+                CallBellsFragment.OnFragmentInteractionListener,
+                PlanOfCareFragment.PlanOfCareInteraction,
+                PainRatingAsyncTaskActivity,
+                TitleBarFragment.TitleBarListener {
 
     private static final String TAG = BedModeActivity.class.getSimpleName();
 
@@ -142,5 +147,15 @@ public class BedModeActivity extends BaseActivity
     @Override
     public void showInfoDialog(String tit, String bod) {
         PlanOfCareInfoDialog.newInstance(tit, bod).show(getFragmentManager(), "INFO DIALOG");
+    }
+
+    @Override
+    public void clearValues() {
+        if (mStaffFragment == null || mPlanOfCareFragment == null) {
+            Log.e(TAG, "One or more fragments are null");
+        }
+
+        mStaffFragment.clearValues();
+        mPlanOfCareFragment.clearValues();
     }
 }

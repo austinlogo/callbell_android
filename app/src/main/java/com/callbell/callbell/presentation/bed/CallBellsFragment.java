@@ -1,6 +1,7 @@
 package com.callbell.callbell.presentation.bed;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.media.Image;
@@ -72,7 +73,7 @@ public class CallBellsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
             mActivityListener = (OnFragmentInteractionListener) activity;

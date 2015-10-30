@@ -89,8 +89,8 @@ public class StaffFragment extends Fragment {
     private void setStaffValues(boolean isSuperUser) {
 
         Log.d(TAG, "SEtting staff values");
-        Log.d(TAG,prefs.physician());
-        Log.d(TAG,prefs.resident());
+        Log.d(TAG, prefs.physician());
+        Log.d(TAG, prefs.resident());
         Log.d(TAG,prefs.nurse());
 
         physicianField.setText(prefs.physician());
@@ -135,5 +135,12 @@ public class StaffFragment extends Fragment {
         physicianBox.setVisibility((isSuperUser || physicianField.getText().length() > 0) ? View.VISIBLE : View.GONE);
         residentBox.setVisibility((isSuperUser || residentField.getText().length() > 0) ? View.VISIBLE : View.GONE);
         nurseBox.setVisibility((isSuperUser || nurseField.getText().length() > 0) ? View.VISIBLE : View.GONE);
+    }
+
+    public void clearValues() {
+        physicianField.setText("");
+        residentField.setText("");
+        nurseField.setText("");
+        prefs.setStaff("", "", "");
     }
 }

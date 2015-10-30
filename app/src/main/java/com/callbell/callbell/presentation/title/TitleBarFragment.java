@@ -1,6 +1,8 @@
 package com.callbell.callbell.presentation.title;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -31,6 +33,8 @@ import butterknife.InjectView;
  */
 public class TitleBarFragment extends Fragment {
 
+    private TitleBarListener mListener;
+
     @Inject
     PrefManager prefs;
 
@@ -39,6 +43,9 @@ public class TitleBarFragment extends Fragment {
 
     @InjectView(R.id.fragment_title_bar_date)
     TextView mDateTextView;
+
+    @InjectView(R.id.fragment_title_bar_clear)
+    Button mClearButton;
 
     private static final String TAG = TitleBarFragment.class.getSimpleName();
 
@@ -64,15 +71,35 @@ public class TitleBarFragment extends Fragment {
                 adminSettings();
             }
         });
+
+        mClearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.clearValues();
+            }
+        });
+
+        setSuperUserSettings(prefs.isSuperUser());
         
         return view;
     }
 
+    @Override
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+
+        try {
+            mListener = ((TitleBarListener) getActivity());
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
     public void setSuperUserSettings(boolean isSuperUser) {
 
-        if (isSuperUser) {
-            mAdminButton.setText(R.string.user_mode);
-        }
+        mAdminButton.setText(isSuperUser ? R.string.user_mode : R.string.admin_mode);
+        mClearButton.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
     }
 
     public void adminSettings() {
@@ -87,5 +114,10 @@ public class TitleBarFragment extends Fragment {
             mAdminButton.setText(R.string.admin_mode);
             prefs.setState(prefs.getCurrentState());
         }
+    }
+
+
+    public interface TitleBarListener {
+        void clearValues();
     }
 }

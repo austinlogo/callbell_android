@@ -30,6 +30,12 @@
             android:text="@string/admin_mode"/>
 
         <Button
+            android:id="@+id/fragment_title_bar_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/clear"/>
+
+        <Button
             android:id="@+id/fragment_title_bar_pain"
             android:layout_alignParentRight="true"
             android:text="@string/pain_header"
