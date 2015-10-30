@@ -44,6 +44,9 @@ public class TitleBarFragment extends Fragment {
     @InjectView(R.id.fragment_title_bar_date)
     TextView mDateTextView;
 
+    @InjectView(R.id.fragment_title_bar_bed_number)
+    TextView mBedNumber;
+
     @InjectView(R.id.fragment_title_bar_clear)
     Button mClearButton;
 
@@ -64,6 +67,7 @@ public class TitleBarFragment extends Fragment {
 
         //Set the Date
         mDateTextView.setText(DateFormat.getDateInstance().format(new Date()));
+        mBedNumber.setText(getText(R.string.bed) + ": " + prefs.getCurrentState().getLocation());
 
         mAdminButton.setOnClickListener(new View.OnClickListener() {
             @Override

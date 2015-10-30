@@ -37,15 +37,17 @@
         android:orientation="horizontal">
 
         <Button
+            style="@style/Bea_Theme.NoMarginButton"
             android:id="@+id/other_submit"
             android:text="@string/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/other_edittext"
             android:hint="@string/other"
             android:paddingStart="@dimen/indent_padding"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -234,7 +234,7 @@ public class POCValues {
         CHEST_PAIN = mContext.getString(R.string.chest_pain);
         GENERAL_SURGERY = mContext.getString(R.string.general_surgery);
 
-        pocMap.put(DEFAULT_CHOICE, new ArrayList<String>());
+//        pocMap.put(DEFAULT_CHOICE, new ArrayList<String>());
 
         final List<String> abdPain = new ArrayList<>();
         abdPain.add(MEDICAL_EVALUATION);

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -69,7 +70,7 @@ public class PlanOfCareFragment extends Fragment {
     Button submitOther;
 
     @InjectView(R.id.other_edittext)
-    EditText otherEditText;
+    AutoCompleteTextView otherEditText;
 
     @Inject
     PrefManager prefs;
@@ -78,6 +79,7 @@ public class PlanOfCareFragment extends Fragment {
     POCValues pocValues;
 
     PlanOfCareCheckBoxAdapter actionArrayAdapter;
+    ArrayAdapter<String> autoCompleteOptions;
     ArrayAdapter<String> patientPlanOfCareListAdapter;
 
     private List<String> patientPlanOfCareList;
@@ -145,6 +147,13 @@ public class PlanOfCareFragment extends Fragment {
         actionListPatient.setAdapter(patientPlanOfCareListAdapter);
         actionListPatient.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         actionListPatient.setItemsCanFocus(true);
+
+        //Set AutoComplete options
+        String[] str = POCValues.testDescriptions.keySet().toArray(new String[0]);
+        autoCompleteOptions = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_dropdown_item_1line,
+                str);
+        otherEditText.setAdapter(autoCompleteOptions);
 
         //Set enabled state
         boolean isSuperUser = prefs.isSuperUser();

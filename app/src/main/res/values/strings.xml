@@ -42,6 +42,6 @@
     <string name="submit">Submit</string>
     <string name="enable_pain_questions">Enable pain Questionaire</string>
     <string name="how_often">How Often (in Minutes)?</string>
-    <string name="current_tests_title">Your Current Tests:</string>
+    <string name="current_tests_title">Your Tests:</string>
     <string name="clear">Clear Values</string>
 </resources>
