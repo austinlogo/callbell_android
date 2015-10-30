@@ -30,9 +30,11 @@
             android:text="@string/admin_mode"/>
 
         <Button
+            android:id="@+id/fragment_title_bar_pain"
             android:layout_alignParentRight="true"
             android:text="@string/pain_header"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="match_parent" />
 
     </LinearLayout>
