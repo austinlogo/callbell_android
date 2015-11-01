@@ -2,7 +2,7 @@ package com.callbell.callbell.util;
 
 import android.util.Log;
 
-import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.State.State;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +37,6 @@ public class JSONUtil {
 
             for (int index = 0; index < myArray.length(); index++) {
                 result.add(new State( (JSONObject) myArray.get(index)));
-                Log.d(TAG, result.get(result.size() - 1).getPhysician());
             }
 
             return result;

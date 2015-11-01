@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.callbell.callbell.R;
-import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.presentation.bed.BedModeActivity;

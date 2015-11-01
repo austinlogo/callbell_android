@@ -2,7 +2,6 @@ package com.callbell.callbell.presentation.title;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
-import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.util.PrefManager;
 
@@ -96,7 +94,7 @@ public class TitleBarFragment extends Fragment {
             mListener = ((TitleBarListener) getActivity());
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement StationActivityListener");
         }
     }
 
@@ -112,7 +110,7 @@ public class TitleBarFragment extends Fragment {
             d.show(getFragmentManager(), "SUDO");
 
         } else {
-            prefs.setSuperUserStatus(false);
+            prefs.setSuperUser(false);
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(i);
             mAdminButton.setText(R.string.admin_mode);

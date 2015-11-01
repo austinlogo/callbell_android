@@ -1,6 +1,6 @@
 package com.callbell.callbell.models.request;
 
-import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
@@ -26,7 +26,7 @@ public class GetStatesRequest extends Request {
     public JSONObject toJSON() throws JSONException {
 
         JSONObject result = new JSONObject();
-        result.put(PrefManager.STATE_KEY, mState.toJson());
+        result.put(State.STATE_ID, mState.toJson());
 
         return result;
     }

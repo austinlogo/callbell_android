@@ -3,19 +3,14 @@ package com.callbell.callbell.presentation.bed;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.models.request.CallBellRequest;
+import com.callbell.callbell.models.State.MessageReason;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -101,33 +96,33 @@ public class CallBellsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onCallBellPressed(int msg);
+        public void onCallBellPressed(MessageReason reason);
     }
 
     public class CallBellListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            int clickedText;
+            MessageReason clickedText;
             RelativeLayout clicked = (RelativeLayout) v;
             switch (clicked.getId()) {
                 case R.id.call_button_pain:
-                    clickedText = CallBellRequest.PAIN_ID;
+                    clickedText = MessageReason.PAIN;
                     break;
                 case R.id.call_button_blanket:
-                    clickedText = CallBellRequest.BLANKET_ID;
+                    clickedText = MessageReason.BLANKET;
                     break;
                 case R.id.call_button_food_water:
-                    clickedText = CallBellRequest.FOOD_ID;
+                    clickedText = MessageReason.FOOD;
                     break;
                 case R.id.call_button_restroom:
-                    clickedText = CallBellRequest.RESTROOM_ID;
+                    clickedText = MessageReason.RESTROOM;
                     break;
                 case R.id.call_button_help:
-                    clickedText = CallBellRequest.HELP_ID;
+                    clickedText = MessageReason.HELP;
                     break;
                 default:
-                    clickedText = CallBellRequest.PAIN_ID;
+                    clickedText = MessageReason.HELP;
             }
             mActivityListener.onCallBellPressed(clickedText);
 

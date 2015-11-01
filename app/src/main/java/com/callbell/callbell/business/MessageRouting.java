@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.request.GetStatesRequest;
 import com.callbell.callbell.models.request.UpdateStateRequest;
 import com.callbell.callbell.service.tasks.PostRequestWithCallbackTask;
@@ -27,8 +28,8 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     public MessageRouting() {
     }
 
-    public void sendMessage(String to, String cat, int msg) {
-        CallBellRequest sm = new CallBellRequest(prefs.getCurrentState(), to, msg, cat);
+    public void sendMessage(String to, String cat, MessageReason reason) {
+        CallBellRequest sm = new CallBellRequest(prefs.getCurrentState(), to, reason, cat);
         Log.d(TAG, "To: " + to);
         Log.d(TAG, "From: " + prefs.location());
         Log.d(TAG, "Mode: " + prefs.mode());

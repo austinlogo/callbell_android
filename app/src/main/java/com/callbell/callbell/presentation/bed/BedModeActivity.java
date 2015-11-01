@@ -14,8 +14,9 @@ import android.widget.Toast;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.models.State.MessageReason;
+import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
-import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
@@ -88,9 +89,10 @@ public class BedModeActivity
             public void onReceive(Context context, Intent intent) {
 
                 if(intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
-                    int messageId = Integer.parseInt(intent.getStringExtra(CallBellDialog.MESSAGE_KEY));
+                    MessageResponse response = new MessageResponse(intent.getExtras());
+//                    int messageId = Integer.parseInt(intent.getStringExtra(CallBellDialog.REASON_KEY));
                     playSound();
-                    Toast.makeText(getApplicationContext(), getString(messageId), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), response.messageReason.name(), Toast.LENGTH_SHORT).show();
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
 
@@ -121,14 +123,14 @@ public class BedModeActivity
     }
 
     @Override
-    public void onCallBellPressed(int msg) {
+    public void onCallBellPressed(MessageReason reason) {
 
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
         Toast.makeText(this, R.string.message_sent, Toast.LENGTH_SHORT).show();
 
         //Send GCM Message
-        messageRouting.sendMessage(prefs.getStationTabletName(), prefs.CATEGORY_CALL_BELL, msg);
+        messageRouting.sendMessage(prefs.getStationTabletName(), prefs.CATEGORY_CALL_BELL, reason);
 
     }
 

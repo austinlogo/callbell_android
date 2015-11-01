@@ -12,5 +12,12 @@
     <color name="colorPrimaryDisabled">#3327ae60</color>
     <color name="white_overlay">#55FFFFFF</color>
 
+
+    <color name="pain_color">#FF5555</color>
+    <color name="restroom_color">#cb00aeff</color>
+    <color name="blanket_color">#9c4ddc</color>
+    <color name="food_color">#d97532</color>
+    <color name="help_color">#2ac200</color>
+
     "
 </resources>

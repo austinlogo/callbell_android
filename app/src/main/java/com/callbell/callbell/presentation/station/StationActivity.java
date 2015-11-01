@@ -4,25 +4,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.State.State;
+import com.callbell.callbell.models.request.Request;
+import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
-import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
 
-import org.json.JSONObject;
-
-import java.lang.reflect.Field;
-
-public class StationActivity extends BaseActivity implements StationFragment.OnFragmentInteractionListener {
+public class StationActivity
+        extends BaseActivity
+        implements StationFragment.StationActivityListener {
     StationFragment mStationFragment;
     public static final String TAG = StationActivity.class.getSimpleName();
 
@@ -44,7 +40,7 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
 
         getFragmentManager()
                 .beginTransaction()
-                .add(R.id.base_fragment_container, mStationFragment)
+                .add(R.id.fragment_login_container, mStationFragment)
                 .commit();
 
         getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
@@ -61,16 +57,19 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
             public void onReceive(Context context, Intent intent) {
 
                 if (intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
+                    MessageResponse response = new MessageResponse(intent.getExtras());
+
                     Log.d(TAG, "OnReceiveCalled");
                     playSound();
-                    CallBellDialog alert = CallBellDialog.newInstance(intent.getExtras());
-                    alert.show(getFragmentManager(), "Dialog");
+                    mStationFragment.updateListItemStatus(response);
+                    Log.d(TAG, "STATE: " + response.state.toString());
                 } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
+
                     mStationFragment.setListFromJSONString(intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
                 } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {
                     Log.d(TAG, "TABLET STATE UPDATED");
 
-                    State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra("message")));
+                    State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(Request.PAYLOAD_KEY)));
                     mStationFragment.updateList(st);
                     Log.d(TAG, st.toString());
                 }
@@ -85,6 +84,11 @@ public class StationActivity extends BaseActivity implements StationFragment.OnF
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+    }
+
+    @Override
+    public void stopSound() {
+        notificationSound.pause();
     }
 }
 

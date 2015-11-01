@@ -2,7 +2,7 @@ package com.callbell.callbell.models.request;
 
 import android.util.Log;
 
-import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
@@ -50,8 +50,8 @@ public class RegisterRequest extends Request {
         try {
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put(PrefManager.STATE_KEY, mState.toJson());
-            jsonObject.put(PrefManager.REGISTRATION_KEY, getRegisterId());
+            jsonObject.put(State.STATE_ID, mState.toJson());
+            jsonObject.put(State.REGISTRATION_ID, getRegisterId());
 
             return jsonObject;
         } catch (JSONException e) {

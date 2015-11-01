@@ -8,9 +8,9 @@ import org.json.JSONObject;
  */
 public class Request {
 
-    public static final String CATEGORY_KEY = "category_id";
-    public static final String TO_KEY = "to_id";
-    public static final String PAYLOAD_KEY = "payload_id";
+    public static final String CATEGORY_KEY = "CATEGORY_ID";
+    public static final String TO_KEY = "TO_ID";
+    public static final String PAYLOAD_KEY = "PAYLOAD_ID";
 
     public JSONObject toJSON () throws JSONException {
         return null;

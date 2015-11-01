@@ -59,7 +59,8 @@
     <style name="Bea_Theme.NoMarginButton">
         <item name="android:background">@drawable/beabutton_background</item>
         <item name="android:layout_margin">0dp</item>
-        <item name="android:layout_marginRight">@dimen/standard_padding</item>
+        <item name="android:paddingRight">@dimen/standard_padding</item>
+        <item name="android:paddingLeft">@dimen/standard_padding</item>
         <item name="android:gravity">center</item>
     </style>
     

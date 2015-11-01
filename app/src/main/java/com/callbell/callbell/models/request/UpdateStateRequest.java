@@ -1,7 +1,6 @@
 package com.callbell.callbell.models.request;
 
-import com.callbell.callbell.models.State;
-import com.callbell.callbell.models.request.Request;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
@@ -29,7 +28,7 @@ public class UpdateStateRequest extends Request {
     public JSONObject toJSON() throws JSONException {
         JSONObject result = new JSONObject();
 
-        result.put(PrefManager.STATE_KEY, mState.toJson());
+        result.put(State.STATE_ID, mState.toJson());
         result.put(Request.CATEGORY_KEY, PrefManager.CATEGORY_TABLET_STATE_UPDATE);
         result.put(TO_KEY, to_id);
         return result;

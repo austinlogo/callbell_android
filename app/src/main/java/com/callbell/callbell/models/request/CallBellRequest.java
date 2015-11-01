@@ -2,7 +2,8 @@ package com.callbell.callbell.models.request;
 
 import android.util.Log;
 
-import com.callbell.callbell.models.State;
+import com.callbell.callbell.models.State.MessageReason;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
@@ -13,33 +14,24 @@ import org.json.JSONObject;
  */
 public class CallBellRequest extends Request {
 
-
-    public static final int RESTROOM_ID = 0;
-    public static final int BLANKET_ID = 1;
-    public static final int PAIN_ID = 2;
-    public static final int FOOD_ID = 3;
-    public static final int HELP_ID = 4;
-    public static final int ACKNOWLEDGE_ID = 5;
-
-
     private static final String TAG = CallBellRequest.class.getSimpleName();
     private State mState;
     private String to,
             category;
-    private int message;
+    private String message;
 
-    public CallBellRequest(State st, String ti, int msg, String cat) {
+    public CallBellRequest(State st, String ti, MessageReason reason, String cat) {
         mState = st;
         to = ti;
         category = cat;
-        message = msg;
+        message = reason.name();
     }
 
     public String getHospital() {
         return mState.getHospital();
     }
 
-    public int getMessage() {
+    public String getMessage() {
         return message;
     }
 
@@ -58,10 +50,10 @@ public class CallBellRequest extends Request {
     public JSONObject toJSON() throws JSONException{
         JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put(PrefManager.STATE_KEY, mState.toJson());
+        jsonObject.put(State.STATE_ID, mState.toJson());
         jsonObject.put(TO_KEY, getTo());
         jsonObject.put(CATEGORY_KEY, category);
-        jsonObject.put(PAYLOAD_KEY, getMessage());
+        jsonObject.put(PAYLOAD_KEY, message);
 
         return jsonObject;
     }

@@ -1,13 +1,9 @@
 package com.callbell.callbell.presentation.dialogs;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,7 +13,8 @@ import android.widget.TextView;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
-import com.callbell.callbell.models.request.CallBellRequest;
+import com.callbell.callbell.models.State.MessageReason;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -52,17 +49,22 @@ public class CallBellDialog extends DialogFragment {
     @InjectView(R.id.dialog_station_image)
     ImageView image;
 
-    public static final String MESSAGE_KEY = "message";
+    public static final String REASON_KEY = "payload";
     public static final String FROM_KEY = "bed_id";
 
     private String mTitle;
     private String fromString;
     private String mBody;
     private int mImage;
-    private int mMessage;
+    private MessageReason mReason;
 
-    public static CallBellDialog newInstance(Bundle bundle) {
+    public static CallBellDialog newInstance(State st, MessageReason reason) {
         CallBellDialog dialog = new CallBellDialog();
+        Bundle bundle = new Bundle();
+
+        bundle.putString(FROM_KEY, st.getLocation());
+        bundle.putString(REASON_KEY, reason.name());
+
         dialog.setArguments(bundle);
 
         return dialog;
@@ -72,38 +74,25 @@ public class CallBellDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((CallBellApplication) getActivity().getApplication()).inject(this);
+
         Log.d(TAG, "Bundle: " + getArguments().toString());
         fromString = getArguments().getString(FROM_KEY);
         mTitle = getText(R.string.bed) + ": " + fromString;
-        mMessage = Integer.parseInt(getArguments().getString(MESSAGE_KEY));
+        mReason = MessageReason.valueOf(getArguments().getString(REASON_KEY));
+        mBody = mReason.name() + " " + getString(R.string.requested);
 
-
-        switch(mMessage) {
-            case CallBellRequest.PAIN_ID:
-                mBody = getString(R.string.pain) + " has been pressed";
-                mImage = R.drawable.call_bell_pain;
-                break;
-            case CallBellRequest.HELP_ID:
-                mBody = getString(R.string.help) + " has been pressed";
-                mImage = R.drawable.call_bell_help;
-                break;
-            case CallBellRequest.BLANKET_ID:
-                mBody = getString(R.string.blanket) + " has been pressed";
-                mImage = R.drawable.call_bell_blanket;
-                break;
-            case CallBellRequest.FOOD_ID:
-                mBody = getString(R.string.food_water) + " has been pressed";
-                mImage = R.drawable.call_bell_food;
-                break;
-            case CallBellRequest.RESTROOM_ID:
-                mBody = getString(R.string.restroom) + " has been pressed";
-                mImage = R.drawable.call_bell_restroom;
-                break;
-                default:
-                    mBody = "";
-                    mImage = 0;
-                    break;
+        if (mReason == MessageReason.HELP) {
+            mImage = R.drawable.call_bell_help;
+        } else if (mReason == MessageReason.PAIN) {
+            mImage = R.drawable.call_bell_pain;
+        } else if (mReason == MessageReason.RESTROOM) {
+            mImage = R.drawable.call_bell_restroom;
+        } else if (mReason == MessageReason.BLANKET) {
+            mImage = R.drawable.call_bell_blanket;
+        } else if (mReason == MessageReason.FOOD) {
+            mImage = R.drawable.call_bell_food;
         }
+
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -130,21 +119,21 @@ public class CallBellDialog extends DialogFragment {
         @Override
         public void onClick(View v) {
 
-            int message = 0;
+            MessageReason reason = MessageReason.ACKNOWLEDGED;
 
             switch(v.getId()) {
                 case R.id.dialog_station_acknowledge:
-                    message = R.string.call_received;
+                    reason = MessageReason.ACKNOWLEDGED;
                     break;
                 case R.id.dialog_station_omw:
-                    message = R.string.on_my_way;
+                    reason = MessageReason.ON_MY_WAY;
                     break;
                 case R.id.dialog_station_wait:
-                    message = R.string.wait;
+                    reason = MessageReason.WAIT;
                     break;
             }
 
-            mMessageRouting.sendMessage(fromString, PrefManager.CATEGORY_CALL_BELL_RESPONSE, message);
+            mMessageRouting.sendMessage(fromString, PrefManager.CATEGORY_CALL_BELL_RESPONSE, reason);
             dismiss();
         }
     }

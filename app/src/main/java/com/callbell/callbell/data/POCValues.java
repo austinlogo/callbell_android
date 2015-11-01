@@ -725,7 +725,7 @@ public class POCValues {
         pocMap.put(ABNORMAL_LABS, abnormalLabs);
 
         testDescriptions = new HashMap<>();
-//        testDescriptions.put(POCValues.DEFAULT_CHOICE, mContext.getString(R.string.no_information));
+        testDescriptions.put(POCValues.DEFAULT_CHOICE, mContext.getString(R.string.no_information));
         testDescriptions.put(URINALYSIS, mContext.getString(R.string.urinalysis_description));
 //        testDescriptions.put(IV, mContext.getString(R.string.iv_description));
         testDescriptions.put(PAIN_MEDICATION, mContext.getString(R.string.pain_medication_description));

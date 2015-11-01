@@ -1,4 +1,4 @@
-package com.callbell.callbell.models;
+package com.callbell.callbell.models.State;
 
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.util.JSONUtil;
@@ -16,11 +16,13 @@ public class State {
     public static final String GROUP_ID = "GROUP_ID";
     public static final String LOCATION_ID = "LOCATION_ID";
     public static final String MODE_ID = "MODE_ID";
-    public static final String PHYSICIAN = "PHYSICIAN";
-    public static final String NURSE = "NURSE";
-    public static final String RESIDENT = "RESIDENT";
-    public static final String CHIEF_COMPLAINT = "CHIEF_COMPLAINT";
-    public static final String PAIN_RATING = "PAIN_RATING";
+    public static final String PHYSICIAN = "PHYSICIAN_ID";
+    public static final String NURSE = "NURSE_ID";
+    public static final String RESIDENT = "RESIDENT_ID";
+    public static final String CHIEF_COMPLAINT = "CHIEF_COMPLAINT_ID";
+    public static final String PAIN_RATING = "PAIN_RATING_ID";
+    public static final String REGISTRATION_ID = "REGISTRATION_ID";
+    public static final String STATE_ID = "STATE_ID";
 
     private static final String TAG = State.class.getSimpleName();
     private String hospital,
@@ -153,20 +155,22 @@ public class State {
     public JSONObject toJson() throws JSONException {
         JSONObject object = new JSONObject();
 
-        object.put(PrefManager.HOSPITAL_KEY, hospital);
-        object.put(PrefManager.GROUP_KEY, group);
-        object.put(PrefManager.LOCATION_KEY, location);
-        object.put(PrefManager.PHYSICIAN_KEY, physician);
-        object.put(PrefManager.NURSE_KEY, nurse);
-        object.put(PrefManager.RESIDENT_KEY, resident);
-        object.put(PrefManager.CHIEF_COMPLAINT_KEY, chiefComplaint);
-        object.put(PrefManager.PAIN_RATING_KEY, painRating);
+        object.put(HOSPITAL_ID, hospital);
+        object.put(GROUP_ID, group);
+        object.put(LOCATION_ID, location);
+        object.put(PHYSICIAN, physician);
+        object.put(NURSE, nurse);
+        object.put(RESIDENT, resident);
+        object.put(CHIEF_COMPLAINT, chiefComplaint);
+        object.put(PAIN_RATING, painRating);
 
         return object;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(HOSPITAL_ID + ": " + hospital);
+        sb.append(GROUP_ID + ": " + group);
         sb.append(PHYSICIAN + ": " + physician);
         sb.append(LOCATION_ID + ": " + location);
         sb.append(CHIEF_COMPLAINT + ": " + chiefComplaint);

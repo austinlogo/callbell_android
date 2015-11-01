@@ -3,7 +3,6 @@ package com.callbell.callbell.presentation.bed;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -128,7 +127,7 @@ public class StaffFragment extends Fragment {
 
 
 
-        prefs.setSuperUserStatus(setSuperUserStatus);
+        prefs.setSuperUser(setSuperUserStatus);
     }
 
     public void setStaffVisibility(boolean isSuperUser) {

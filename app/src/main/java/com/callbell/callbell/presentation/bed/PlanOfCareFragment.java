@@ -194,7 +194,10 @@ public class PlanOfCareFragment extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
             return;
         } else if (actionArrayAdapter.contains(item)) {
-            Toast.makeText(getActivity().getApplicationContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
+            int index = actionArrayAdapter.getPosition(item);
+//            Toast.makeText(getActivity().getApplicationContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
+            actionListAdmin.setItemChecked(index, true);
+            otherEditText.setText("");
             return;
         }
         String action = otherEditText.getText().toString();
@@ -211,7 +214,7 @@ public class PlanOfCareFragment extends Fragment {
             mListener = (PlanOfCareInteraction) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement StationActivityListener");
         }
     }
 
