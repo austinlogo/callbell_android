@@ -47,13 +47,20 @@ public class CallBellRequest extends Request {
         return "/receive";
     }
 
-    public JSONObject toJSON() throws JSONException{
-        JSONObject jsonObject = new JSONObject();
+    public JSONObject toJSON() {
+        JSONObject jsonObject;
 
-        jsonObject.put(State.STATE_ID, mState.toJson());
-        jsonObject.put(TO_KEY, getTo());
-        jsonObject.put(CATEGORY_KEY, category);
-        jsonObject.put(PAYLOAD_KEY, message);
+        try {
+            jsonObject = new JSONObject();
+
+            jsonObject.put(State.STATE_ID, mState.toJson());
+            jsonObject.put(TO_KEY, getTo());
+            jsonObject.put(CATEGORY_KEY, category);
+            jsonObject.put(PAYLOAD_KEY, message);
+        } catch (JSONException e) {
+            Log.e(TAG, "Error creating JSON: " + e);
+            jsonObject = new JSONObject();
+        }
 
         return jsonObject;
     }

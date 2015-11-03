@@ -72,12 +72,7 @@ public class LoginActivity
 //            public void call(Object... args) {
 //                Log.d(TAG, args[0].toString());
 //            }
-//        });
-
-        Intent i = new Intent(this, SocketService.class);
-        boolean bound = bindService(i, mConnection, Context.BIND_AUTO_CREATE);
-        Log.d(TAG, "Bound: " + bound);
-
+//        });o
 
         getFragmentManager()
                 .beginTransaction()
@@ -109,26 +104,11 @@ public class LoginActivity
         // NOOP
     }
 
-    private ServiceConnection mConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            SocketService.LocalBinder binder = (SocketService.LocalBinder) service;
-            mService = binder.getService();
-            mBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mBound = false;
-        }
-    };
-
     @Override
     public void register() {
-        if (mBound) {
+        if (SocketService.mService != null) {
             Log.d(TAG, "We're bound");
-            mService.registerDevice(prefs.location());
-        } else {
+            SocketService.getInstance().registerDevice(prefs.getTabletName());
             Log.d(TAG, "We're not bound, find out why");
         }
     }

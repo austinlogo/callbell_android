@@ -247,6 +247,10 @@ public class PrefManager {
         return hospital() + "_" + group() + STATION_SUFFIX;
     }
 
+    public String getTabletName() {
+        return hospital() + "_" + group() + "_" + location();
+    }
+
     public String senderId() {
         return "434312104937";
     }

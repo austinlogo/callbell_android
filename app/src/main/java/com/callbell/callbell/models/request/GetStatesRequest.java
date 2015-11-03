@@ -1,5 +1,7 @@
 package com.callbell.callbell.models.request;
 
+import android.util.Log;
+
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.util.PrefManager;
 
@@ -11,6 +13,7 @@ import org.json.JSONObject;
  */
 public class GetStatesRequest extends Request {
 
+    private static final String TAG = GetStatesRequest.class.getSimpleName();
     private State mState;
 
     public GetStatesRequest(State currentState) {
@@ -23,10 +26,13 @@ public class GetStatesRequest extends Request {
     }
 
     @Override
-    public JSONObject toJSON() throws JSONException {
-
+    public JSONObject toJSON() {
         JSONObject result = new JSONObject();
-        result.put(State.STATE_ID, mState.toJson());
+        try {
+            result.put(State.STATE_ID, mState.toJson());
+        } catch (JSONException e) {
+            Log.e(TAG, "Error creating JSON object: " + e);
+        }
 
         return result;
     }

@@ -19,6 +19,7 @@ import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
+import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
 import com.callbell.callbell.util.PrefManager;
 
@@ -114,6 +115,7 @@ public class BedModeActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SocketService.getInstance().unregisterDevice(prefs.getTabletName());
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
 
         if (mPainRatingAsyncTask != null) {

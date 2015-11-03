@@ -107,11 +107,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Clicked Bed");
-                mListener.register();
-//                if (register(prefs.BED_MODE)) {
+
+                if (register(prefs.BED_MODE)) {
                     Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
                     startActivity(newActivity);
-//                }
+                }
             }
         });
 
@@ -189,22 +189,21 @@ public class LoginFragment extends Fragment {
         if (LastState.equals(thisState) && !forceRegister) {
             Log.d(TAG, "Already Registered");
         //Something has changed or it's a new tablet either way we should update the token on the server.
-        } else if (checkPlayServices()) {
-            prefs.getPreferences().edit().putBoolean(prefs.REG_UPLOADED_KEY, false).apply();
-            Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
+        } else {
+//            prefs.getPreferences().edit().putBoolean(prefs.REG_UPLOADED_KEY, false).apply();
+//            Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
 
             if (thisState.getMode().equals(prefs.STATION_MODE) ) {
-                thisState.setLocation(prefs.getStationTabletName());
+                thisState.setLocation("STATION");
                 prefs.setState(thisState);
             }
 
-            Log.d(TAG, "starting Service: " + thisState.getMode());
-            getActivity().startService(intent);
-            return true;
-        }else{
-            Toast.makeText(getActivity().getApplicationContext(), "This device is not supported", Toast.LENGTH_SHORT).show();
-        }
+//            Log.d(TAG, "starting Service: " + thisState.getMode());
+//            getActivity().startService(intent);
 
+            mListener.register();
+            return true;
+        }
         return false;
     }
 

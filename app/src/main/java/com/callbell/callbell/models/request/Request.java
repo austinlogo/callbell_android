@@ -12,8 +12,8 @@ public class Request {
     public static final String TO_KEY = "TO_ID";
     public static final String PAYLOAD_KEY = "PAYLOAD_ID";
 
-    public JSONObject toJSON () throws JSONException {
-        return null;
+    public JSONObject toJSON ()  {
+        return new JSONObject();
     }
 
     public String getOperation() {
