@@ -1,11 +1,17 @@
 package com.callbell.callbell.presentation.login;
 
+import android.app.Activity;
+import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.os.Binder;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.callbell.callbell.R;
 import com.callbell.callbell.models.State.State;
+import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
@@ -81,7 +88,6 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
     }
 
     @Override
@@ -101,10 +107,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Clicked Bed");
-                if (register(prefs.BED_MODE)) {
+                mListener.register();
+//                if (register(prefs.BED_MODE)) {
                     Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
                     startActivity(newActivity);
-                }
+//                }
             }
         });
 
@@ -147,7 +154,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
             mListener = (LoginFragmentCallback) activity;
@@ -266,8 +273,7 @@ public class LoginFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface LoginFragmentCallback {
-        // TODO: Update argument type and name
+        void register();
 
     }
-
 }

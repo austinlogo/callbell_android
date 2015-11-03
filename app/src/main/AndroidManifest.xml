@@ -32,6 +32,12 @@
         </receiver>
 
         <service
+            android:name=".service.services.SocketService"
+            android:exported="false">
+
+        </service>
+
+        <service
             android:name=".service.CallBellGCMListenerService"
             android:exported="false" >
             <intent-filter>
