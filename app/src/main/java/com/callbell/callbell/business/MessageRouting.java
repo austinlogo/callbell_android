@@ -6,7 +6,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.callbell.callbell.models.State.MessageReason;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.GetStatesRequest;
+import com.callbell.callbell.models.request.RegisterRequest;
 import com.callbell.callbell.models.request.UpdateStateRequest;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.service.tasks.PostRequestWithCallbackTask;
@@ -32,22 +34,27 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     public void sendMessage(String to, String cat, MessageReason reason) {
         CallBellRequest sm = new CallBellRequest(prefs.getCurrentState(), to, reason, cat);
         SocketService.getInstance().sendMessage(sm);
-//        new PostRequestTask(context).execute(sm);
     }
 
     public void updateState() {
         Log.d(TAG, "Updating State");
-        UpdateStateRequest usr = new UpdateStateRequest(prefs.getCurrentState(), prefs.getStationTabletName());
-        new PostRequestTask(context).execute(usr);
+        UpdateStateRequest usr = new UpdateStateRequest(prefs.getCurrentState(), prefs.getStationName());
+        SocketService.getInstance().sendMessage(usr);
+//        new PostRequestTask(context).execute(usr);
     }
 
     public void getDeviceStates() {
         Log.d(TAG, "getDeviceStates");
         Log.d(TAG, "CurrentState: " + prefs.getCurrentState().toString());
         GetStatesRequest request = new GetStatesRequest(prefs.getCurrentState());
-
+//        SocketService.getInstance().getDeviceState(request);
         PostRequestWithCallbackTask task = new PostRequestWithCallbackTask(context, PrefManager.EVENT_STATES_RECEIVED, this);
         task.execute(request);
+    }
+
+    public void register(State st, String registrationId) {
+        RegisterRequest request = new RegisterRequest(st, registrationId);
+        SocketService.getInstance().registerDevice(request);
     }
 
     @Override
@@ -60,4 +67,6 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
             LocalBroadcastManager.getInstance(context).sendBroadcast(i);
         }
     }
+
+
 }

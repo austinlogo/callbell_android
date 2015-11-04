@@ -60,7 +60,7 @@ public class StationActivity
                     MessageResponse response = new MessageResponse(intent.getExtras());
 
                     Log.d(TAG, "OnReceiveCalled");
-                    playSound();
+                    playContinualNotificationSound();
                     mStationFragment.updateListItemStatus(response);
                     Log.d(TAG, "STATE: " + response.state.toString());
                 } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
@@ -69,7 +69,7 @@ public class StationActivity
                 } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {
                     Log.d(TAG, "TABLET STATE UPDATED");
 
-                    State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(Request.PAYLOAD_KEY)));
+                    State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
                     mStationFragment.updateList(st);
                     Log.d(TAG, st.toString());
                 }

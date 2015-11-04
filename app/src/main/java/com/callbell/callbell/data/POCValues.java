@@ -22,7 +22,7 @@ public class POCValues {
     public static Map<String, String> testDescriptions;
     private Context mContext;
 
-    public static String DEFAULT_CHOICE = "Select Chief Complaint...";
+    public static String DEFAULT_CHOICE = "";
 
     //TESTS
     public final String ABDOMINAL_PAIN;

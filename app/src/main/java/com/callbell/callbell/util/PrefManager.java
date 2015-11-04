@@ -243,8 +243,8 @@ public class PrefManager {
         isSuperUser = bool;
     }
 
-    public String getStationTabletName() {
-        return hospital() + "_" + group() + STATION_SUFFIX;
+    public String getStationName() {
+        return "STATION";
     }
 
     public String getTabletName() {

@@ -150,9 +150,19 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressWarnings("all")
-    public void playSound() {
+    public void playContinualNotificationSound() {
         try {
+            notificationSound.setLooping(true);
+            notificationSound.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void playSoundOnce() {
+        try {
+            notificationSound.setLooping(false);
             notificationSound.start();
         } catch (Exception e) {
             e.printStackTrace();

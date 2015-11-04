@@ -92,7 +92,7 @@ public class BedModeActivity
                 if(intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
                     MessageResponse response = new MessageResponse(intent.getExtras());
 //                    int messageId = Integer.parseInt(intent.getStringExtra(CallBellDialog.REASON_KEY));
-                    playSound();
+                    playSoundOnce();
                     Toast.makeText(getApplicationContext(), response.messageReason.name(), Toast.LENGTH_SHORT).show();
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
@@ -132,7 +132,7 @@ public class BedModeActivity
         Toast.makeText(this, R.string.message_sent, Toast.LENGTH_SHORT).show();
 
         //Send GCM Message
-        messageRouting.sendMessage(prefs.getStationTabletName(), prefs.CATEGORY_CALL_BELL, reason);
+        messageRouting.sendMessage(prefs.getStationName(), prefs.CATEGORY_CALL_BELL, reason);
 
     }
 

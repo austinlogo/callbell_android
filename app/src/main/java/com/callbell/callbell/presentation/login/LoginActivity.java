@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
+import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.ServerEndpoints;
@@ -43,6 +44,9 @@ public class LoginActivity
 
     @Inject
     PrefManager prefs;
+
+    @Inject
+    MessageRouting mMessage;
 
     private Socket mSocket;
     {
@@ -107,9 +111,8 @@ public class LoginActivity
     @Override
     public void register() {
         if (SocketService.mService != null) {
-            Log.d(TAG, "We're bound");
-            SocketService.getInstance().registerDevice(prefs.getTabletName());
-            Log.d(TAG, "We're not bound, find out why");
+            mMessage.register(prefs.getCurrentState(), prefs.getTabletName());
+
         }
     }
 }
