@@ -24,6 +24,15 @@ public class RegisterRequest extends Request {
         register_id = reg;
     }
 
+    public RegisterRequest(RegisterRequest request) {
+        mState = new State(request.getState());
+        register_id = request.getRegisterId();
+    }
+
+    public State getState() {
+        return mState;
+    }
+
     public String getHospitalId () {
         return mState.getHospital();
     }

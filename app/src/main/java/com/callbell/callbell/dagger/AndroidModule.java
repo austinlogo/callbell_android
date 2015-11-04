@@ -14,6 +14,7 @@ import com.callbell.callbell.presentation.station.StationActivity;
 import com.callbell.callbell.presentation.station.StationFragment;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.RegistrationIntentService;
+import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.service.tasks.PostRequestWithCallbackTask;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.data.ServerMessageToJSONTranslator;
@@ -51,7 +52,10 @@ import javax.inject.Singleton;
         //Dialog
         EnableSuperUserDialog.class,
         CallBellDialog.class,
-        PainRatingDialog.class
+        PainRatingDialog.class,
+
+        //Service
+        SocketService.class
 }
 )
 public class AndroidModule {

@@ -9,31 +9,43 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.callbell.callbell.models.request.RegisterRequest;
 import com.callbell.callbell.models.request.Request;
 import com.callbell.callbell.service.ServerEndpoints;
 import com.callbell.callbell.util.BundleUtil;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
+import com.callbell.callbell.util.ThreadUtil;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+
+import javax.inject.Inject;
 
 /**
  * Created by austin on 11/1/15.
  */
 public class SocketService extends Service {
 
+    @Inject
+    PrefManager prefs;
+
+    private static final long DEFAULT_PING_INTERVAL_IN_MS = 30000;
     public static SocketService mService;
+
+    private static boolean pingSent = false;
+
+    // If we lost contact with server, we'll need to re-register.
+    private static boolean registrationRequired = false;
 
     private static final String TAG = SocketService.class.getSimpleName();
     private final IBinder mBinder = new LocalBinder();
     public Socket mSocket;
-    Thread mThread;
+    Thread mThread, mPingThread;
 
     public enum SocketOperation {
         REGISTER,
@@ -50,7 +62,6 @@ public class SocketService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-
         mService = this;
 
         try {
@@ -78,7 +89,6 @@ public class SocketService extends Service {
         return mBinder;
     }
 
-
     public class SocketListeners implements Runnable {
 
         @Override
@@ -89,6 +99,13 @@ public class SocketService extends Service {
                 @Override
                 public void call(Object... args) {
                     Log.d(TAG, "message: " + args[0].toString());
+                }
+            });
+
+            mSocket.on("pong", new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    pingSent = false;
                 }
             });
 
@@ -103,46 +120,53 @@ public class SocketService extends Service {
         }
     }
 
-    public void registerDevice(Request request) {
+    public class PingServer implements Runnable {
+
+        String name;
+
+        public PingServer(String tabletName) {
+            name = tabletName;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+
+                if (!pingSent) {
+                    pingSent = true;
+                }
+
+                mSocket.emit("ping", name);
+                ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
+            }
+        }
+    }
+
+    public void registerDevice(RegisterRequest request) {
+
+        mPingThread = new Thread(new PingServer(request.getRegisterId()));
         startSocketEmitter(SocketOperation.REGISTER, request.toJSON().toString());
-//        Thread emitter = new Thread(new SocketEmitter(SocketOperation.REGISTER, name));
-//        emitter.start();
+        mPingThread.start();
     }
 
     public void unregisterDevice(String name) {
         startSocketEmitter(SocketOperation.UNREGISTER, name);
-//        Thread emitter = new Thread(new SocketEmitter(SocketOperation.UNREGISTER, name));
-//        emitter.start();
+        mPingThread.stop();
+        mThread.stop();
+
     }
 
     public void sendMessage(Request request) {
         startSocketEmitter(SocketOperation.RECEIVE, request.toJSON().toString());
     }
 
-    public void getDeviceState(Request request) {
-        startSocketEmitter(SocketOperation.GET_DEVICE_STATES, request.toJSON().toString());
-    }
+//    public void getDeviceState(Request request) {
+//        startSocketEmitter(SocketOperation.GET_DEVICE_STATES, request.toJSON().toString());
+//    }
 
     public void startSocketEmitter(SocketOperation operation, String payload) {
         Log.d(TAG, "PAYLOAD: " + payload);
         new Thread(new SocketEmitter(operation, payload)).start();
-    }
-
-    public class SocketEmitter implements Runnable {
-
-        private SocketOperation mOperation;
-        private String payload;
-
-        public SocketEmitter(SocketOperation op, String pl) {
-            mOperation = op;
-            payload = pl;
-        }
-
-        @Override
-        public void run() {
-            Log.d(TAG, "Starting SocketEmitter Runnable with Operation: " + mOperation.name());
-            mSocket.emit(mOperation.name(), payload);
-        }
     }
 
     public void handleIncomingMessages(JSONObject object) {
@@ -171,6 +195,23 @@ public class SocketService extends Service {
             i.putExtras(bundle);
 
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+        }
+    }
+
+    public class SocketEmitter implements Runnable {
+
+        private SocketOperation mOperation;
+        private String payload;
+
+        public SocketEmitter(SocketOperation op, String pl) {
+            mOperation = op;
+            payload = pl;
+        }
+
+        @Override
+        public void run() {
+            Log.d(TAG, "Starting SocketEmitter Runnable with Operation: " + mOperation.name());
+            mSocket.emit(mOperation.name(), payload);
         }
     }
 

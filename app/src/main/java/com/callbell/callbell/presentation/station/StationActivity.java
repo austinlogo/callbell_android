@@ -43,10 +43,6 @@ public class StationActivity
                 .add(R.id.fragment_login_container, mStationFragment)
                 .commit();
 
-        getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
-        getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
-
-
         IntentFilter filter = new IntentFilter();
         filter.addAction(PrefManager.EVENT_STATES_RECEIVED);
         filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
@@ -56,24 +52,23 @@ public class StationActivity
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                if (intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
-                    MessageResponse response = new MessageResponse(intent.getExtras());
+            if (intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
+                MessageResponse response = new MessageResponse(intent.getExtras());
 
-                    Log.d(TAG, "OnReceiveCalled");
-                    playContinualNotificationSound();
-                    mStationFragment.updateListItemStatus(response);
-                    Log.d(TAG, "STATE: " + response.state.toString());
-                } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
+                Log.d(TAG, "OnReceiveCalled");
+                playContinualNotificationSound();
+                mStationFragment.updateListItemStatus(response);
+                Log.d(TAG, "STATE: " + response.state.toString());
+            } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
 
-                    mStationFragment.setListFromJSONString(intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
-                } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {
-                    Log.d(TAG, "TABLET STATE UPDATED");
+                mStationFragment.setListFromJSONString(intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
+            } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {
+                Log.d(TAG, "TABLET STATE UPDATED");
+                State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
 
-                    State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
-                    mStationFragment.updateList(st);
-                    Log.d(TAG, st.toString());
-                }
-
+                mStationFragment.updateList(st);
+                Log.d(TAG, st.toString());
+            }
             }
         };
 
