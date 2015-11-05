@@ -173,7 +173,7 @@ public class PlanOfCareFragment extends Fragment {
 
         //Inflate the patient Medication List
         patientPlanOfCareMedicationList = filterSelectedChoices(prefs.shownMedicationItems(), actionListMedicationAdmin, actionArrayMedicationAdapter);
-        Log.d(TAG, "patientPOCLIST length:" + patientPlanOfCareTestList.size());
+        Log.d(TAG, "patientPOCLIST length:" + patientPlanOfCareMedicationList.size());
         Log.d(TAG, "Activity: " + getActivity());
         patientPlanOfCareListMedicationAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, patientPlanOfCareMedicationList);
         actionListMedicationPatient.setAdapter(patientPlanOfCareListMedicationAdapter);
@@ -287,20 +287,20 @@ public class PlanOfCareFragment extends Fragment {
         // Setting Checked Items
         if (!isSuperUser && checkedMedications != null) {
 
-            Log.d(TAG, "booleanArray: " + checkedMedications.toString());
+            Log.d(TAG, "Medication booleanArray: " + checkedMedications.toString());
             Log.d(TAG, "checked size is " + actionListMedicationAdmin.getCheckedItemCount());
 
-            List<Integer> checkedTestArray = new ArrayList<>(getCheckedItemCount(actionListMedicationAdmin));
+            List<Integer> checkedMedicationArray = new ArrayList<>(getCheckedItemCount(actionListMedicationAdmin));
             for (int index = 0; index < actionArrayMedicationAdapter.getCount(); index++) {
                 Log.d(TAG, "Checked value at " + index + " is " + checkedMedications.get(index));
                 if (checkedMedications.get(index)) {
-                    checkedTestArray.add(index);
+                    checkedMedicationArray.add(index);
                 }
             }
 
-            prefs.setShownTestItems(checkedTestArray);
-            prefs.setAllActionMedicationItems(actionArrayTestAdapter.getList());
-            setPatientListAdapter();
+            prefs.setShownMedicationItems(checkedMedicationArray);
+            prefs.setAllActionMedicationItems(actionArrayMedicationAdapter.getList());
+            setPatientListMedicationAdapter();
         }
 
         //Setting UI Values
@@ -351,6 +351,12 @@ public class PlanOfCareFragment extends Fragment {
         patientPlanOfCareTestList = filterSelectedChoices(prefs.shownTestItems(), actionListTestAdmin, actionArrayTestAdapter);
         ((ArrayAdapter) actionListTestPatient.getAdapter()).clear();
         ((ArrayAdapter) actionListTestPatient.getAdapter()).addAll(patientPlanOfCareTestList);
+    }
+
+    private void setPatientListMedicationAdapter() {
+        patientPlanOfCareMedicationList = filterSelectedChoices(prefs.shownMedicationItems(), actionListMedicationAdmin, actionArrayMedicationAdapter);
+        ((ArrayAdapter) actionListMedicationPatient.getAdapter()).clear();
+        ((ArrayAdapter) actionListMedicationPatient.getAdapter()).addAll(patientPlanOfCareMedicationList);
     }
 
     /**

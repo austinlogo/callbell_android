@@ -187,30 +187,32 @@ public class PrefManager {
 
     public List<Integer> shownMedicationItems() {
 
-        return shownTestItems == null ? new ArrayList<Integer>() : shownMedicationItems;
+        return shownMedicationItems == null ? new ArrayList<Integer>() : shownMedicationItems;
 
     }
 
     public void setShownTestItems(List<Integer> sa) {
+        shownTestItems = sa;
         setIntList(sa, SHOWN_TESTS_KEY);
     }
 
     public void setShownMedicationItems(List<Integer> medItems) {
+        shownMedicationItems = medItems;
         setIntList(medItems, SHOWN_MEDICATIONS_KEY);
     }
 
     public void setIntList(List<Integer> list, String key) {
         Log.d(TAG, "SET SHOWN ACTIONS");
         SharedPreferences.Editor sp = prefs.edit();
-        shownTestItems = list;
 
-        if (shownTestItems == null) {
-            sp.putString(SHOWN_TESTS_KEY, "").apply();
+
+        if (list == null) {
+            sp.putString(key, "").apply();
             return;
         }
 
         JSONArray array = new JSONArray();
-        for (int i : shownTestItems) {
+        for (int i : list) {
             array.put(i);
         }
 
