@@ -9,6 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -32,7 +33,6 @@ public class BedModeActivity
         implements
                 CallBellsFragment.OnFragmentInteractionListener,
                 PlanOfCareFragment.PlanOfCareInteraction,
-                PainRatingAsyncTaskActivity,
                 TitleBarFragment.TitleBarListener {
 
     private static final String TAG = BedModeActivity.class.getSimpleName();
@@ -71,7 +71,7 @@ public class BedModeActivity
         mStaffFragment = StaffFragment.newInstance();
         mCallBellsFragment = CallBellsFragment.newInstance();
         mPlanOfCareFragment = PlanOfCareFragment.newInstance();
-        mTitleBarFragment = TitleBarFragment.newInstance();
+        mTitleBarFragment = TitleBarFragment.newInstance(true);
 
         getFragmentManager()
                 .beginTransaction()
@@ -91,7 +91,6 @@ public class BedModeActivity
 
                 if(intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
                     MessageResponse response = new MessageResponse(intent.getExtras());
-//                    int messageId = Integer.parseInt(intent.getStringExtra(CallBellDialog.REASON_KEY));
                     playSoundOnce();
                     Toast.makeText(getApplicationContext(), response.messageReason.name(), Toast.LENGTH_SHORT).show();
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
@@ -119,7 +118,6 @@ public class BedModeActivity
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
 
         if (mPainRatingAsyncTask != null) {
-            mPainRatingAsyncTask.setLoop(false);
             mPainRatingAsyncTask.interrupt();
         }
     }
@@ -134,18 +132,6 @@ public class BedModeActivity
         //Send GCM Message
         messageRouting.sendMessage(prefs.getStationName(), prefs.CATEGORY_CALL_BELL, reason);
 
-    }
-
-    @Override
-    public void setPainRatingAsyncTask(PainRatingAsyncTask task) {
-
-        //finish the current Pain rating loop if it exists
-        if (mPainRatingAsyncTask != null) {
-            mPainRatingAsyncTask.setLoop(false);
-            mPainRatingAsyncTask.interrupt();
-        }
-
-        mPainRatingAsyncTask = task;
     }
 
     @Override

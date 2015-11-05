@@ -35,6 +35,7 @@ public class SocketService extends Service {
     PrefManager prefs;
 
     private static final long DEFAULT_PING_INTERVAL_IN_MS = 30000;
+    private static final long LOST_CONNECTION_PING_INTERVAL_IN_MS = 5000;
     public static SocketService mService;
 
     private static boolean pingSent = false;
@@ -134,10 +135,15 @@ public class SocketService extends Service {
 
                 if (!pingSent) {
                     pingSent = true;
+                    ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
+
+                } else {
+                    Log.e(TAG, "SERVER UNAVAILABLE");
+                    ThreadUtil.sleep(LOST_CONNECTION_PING_INTERVAL_IN_MS, Thread.currentThread());
                 }
 
                 mSocket.emit("ping", name);
-                ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
+
             }
         }
     }
@@ -151,8 +157,8 @@ public class SocketService extends Service {
 
     public void unregisterDevice(String name) {
         startSocketEmitter(SocketOperation.UNREGISTER, name);
-        mPingThread.stop();
-        mThread.stop();
+        mPingThread.interrupt();
+        mThread.interrupt();
 
     }
 

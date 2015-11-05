@@ -1,5 +1,4 @@
 package com.callbell.callbell.util;
-import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -28,9 +27,11 @@ public class PrefManager {
     public static final String REG_UPLOADED_KEY = "REGISTRATION_UPLOADED_TO_GCM_SERVER";
     public static final String DEFAULT_SENDER_KEY = "DEFAULT_SENDER";
     public static final String SU_STATUS = "SUPER_USER_STATUS";
-    public static final String SHOWN_ACTION_KEY = "shown_actions_id";
+    public static final String SHOWN_TESTS_KEY = "shown_actions_id";
+    public static final String SHOWN_MEDICATIONS_KEY = "shown_tests_id";
     public static final String STATELIST_KEY = "stateList";
-    public static final String ALL_ACTION_ITEMS_KEY = "all_action_items";
+    public static final String ALL_TEST_ITEMS_KEY = "all_action_items";
+    private static final String ALL_MEDICATION_ITEMS_KEY = "all_med_items";
 
 
     //GLOBAL VALUES
@@ -58,19 +59,24 @@ public class PrefManager {
     public static final String CATEGORY_CALL_BELL_RESPONSE = "call_bell_response";
 
 
+
     public static SharedPreferences prefs;
     public static State currentState;
     public static boolean isSuperUser;
 
-    private static List<Integer> shownActions;
-    private static List<String> allActionItems;
+    private static List<Integer> shownTestItems;
+    private static List<String> allTestItems;
+
+    private static List<Integer> shownMedicationItems;
+    private static List<String> allMedicationItems;
 
     @Inject
     public PrefManager(Context c) {
         prefs = PreferenceManager.getDefaultSharedPreferences(c);
         currentState = new State(this);
         isSuperUser = false;
-        shownActions = getShownActionsFromPrefs();
+        shownTestItems = getIntListFromPrefs(SHOWN_TESTS_KEY);
+        shownMedicationItems = getIntListFromPrefs(SHOWN_MEDICATIONS_KEY);
 
     }
 
@@ -164,44 +170,58 @@ public class PrefManager {
 
     // Plan of Care ////////////////////////////////////////////////////////////////////////////////
 
-    public List<String> allActionItems() {
-        if (allActionItems == null) {
-            Set<String> set = prefs.getStringSet(ALL_ACTION_ITEMS_KEY, new HashSet<String>());
+    public List<String> allTestItems() {
+        if (allTestItems == null) {
+            Set<String> set = prefs.getStringSet(ALL_TEST_ITEMS_KEY, new HashSet<String>());
             return new ArrayList<>(set);
         }
 
-        return allActionItems;
+        return allTestItems;
     }
 
-    public List<Integer> shownActions() {
+    public List<Integer> shownTestItems() {
 
-        return shownActions == null ? new ArrayList<Integer>() : shownActions;
+        return shownTestItems == null ? new ArrayList<Integer>() : shownTestItems;
 
     }
 
-    public void setShownActions(List<Integer> sa) {
+    public List<Integer> shownMedicationItems() {
+
+        return shownTestItems == null ? new ArrayList<Integer>() : shownMedicationItems;
+
+    }
+
+    public void setShownTestItems(List<Integer> sa) {
+        setIntList(sa, SHOWN_TESTS_KEY);
+    }
+
+    public void setShownMedicationItems(List<Integer> medItems) {
+        setIntList(medItems, SHOWN_MEDICATIONS_KEY);
+    }
+
+    public void setIntList(List<Integer> list, String key) {
         Log.d(TAG, "SET SHOWN ACTIONS");
         SharedPreferences.Editor sp = prefs.edit();
-        shownActions = sa;
+        shownTestItems = list;
 
-        if (shownActions == null) {
-            sp.putString(SHOWN_ACTION_KEY, "").apply();
+        if (shownTestItems == null) {
+            sp.putString(SHOWN_TESTS_KEY, "").apply();
             return;
         }
 
         JSONArray array = new JSONArray();
-        for (int i : shownActions) {
+        for (int i : shownTestItems) {
             array.put(i);
         }
 
-        Log.d(TAG, "setShownActions-Array: " + array.toString());
-        sp.putString(SHOWN_ACTION_KEY, array.toString()).apply();
+        Log.d(TAG, "setShownTestItems-Array: " + array.toString());
+        sp.putString(key, array.toString()).apply();
     }
 
-    private List<Integer> getShownActionsFromPrefs() {
+    private List<Integer> getIntListFromPrefs(String key) {
         try {
-            String arrayString = prefs.getString(SHOWN_ACTION_KEY, "");
-            Log.d(TAG, "shownActions-checkedValuePostions: " + arrayString);
+            String arrayString = prefs.getString(key, "");
+            Log.d(TAG, "shownTestItems-checkedValuePostions: " + arrayString);
 
             if (arrayString.isEmpty()) {
                 return new ArrayList<Integer>();
@@ -228,11 +248,18 @@ public class PrefManager {
         return isSuperUser;
     }
 
-    public void setAllActionItems(List<String> actionList) {
-        allActionItems = actionList;
+    public void setAllActionTestItems(List<String> actionList) {
+        allTestItems = actionList;
 
         SharedPreferences.Editor sp = prefs.edit();
-        sp.putStringSet(ALL_ACTION_ITEMS_KEY, new HashSet<>(actionList)).commit();
+        sp.putStringSet(ALL_TEST_ITEMS_KEY, new HashSet<>(actionList)).commit();
+    }
+
+    public void setAllActionMedicationItems(List<String> actionList) {
+        allMedicationItems = actionList;
+
+        SharedPreferences.Editor sp = prefs.edit();
+        sp.putStringSet(ALL_MEDICATION_ITEMS_KEY, new HashSet<>(actionList)).commit();
     }
 
     public void uploadedToken(boolean bool) {

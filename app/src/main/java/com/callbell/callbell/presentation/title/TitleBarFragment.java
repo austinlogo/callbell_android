@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
+import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
+import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
 import com.callbell.callbell.util.PrefManager;
 
 import java.text.DateFormat;
@@ -31,6 +33,7 @@ import butterknife.InjectView;
  */
 public class TitleBarFragment extends Fragment {
 
+    private static final String PAIN_VISIBILITY = "PAIN_VISIBILITY";
     private TitleBarListener mListener;
 
     @Inject
@@ -48,11 +51,23 @@ public class TitleBarFragment extends Fragment {
     @InjectView(R.id.fragment_title_bar_clear)
     Button mClearButton;
 
+    @InjectView(R.id.fragment_title_bar_pain)
+    Button mPainButton;
+
     private static final String TAG = TitleBarFragment.class.getSimpleName();
 
 
     public static TitleBarFragment newInstance() {
-        return new TitleBarFragment();
+        return newInstance(false);
+    }
+
+    public static TitleBarFragment newInstance(boolean painVisibility) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(PAIN_VISIBILITY, painVisibility);
+        TitleBarFragment fragment = new TitleBarFragment();
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     @Override
@@ -60,17 +75,42 @@ public class TitleBarFragment extends Fragment {
         Log.d(TAG, "onCreateView");
         View view = inflater.inflate(R.layout.fragment_title_bar, container, false);
 
+        Bundle bundle = getArguments();
+
         ((CallBellApplication) getActivity().getApplication()).inject(this);
         ButterKnife.inject(this, view);
 
-        //Set the Date
+        //Set Values
         mDateTextView.setText(DateFormat.getDateInstance().format(new Date()));
         mBedNumber.setText(getText(R.string.bed) + ": " + prefs.getCurrentState().getLocation());
+        mPainButton.setVisibility(bundle.getBoolean(PAIN_VISIBILITY) ? View.VISIBLE : View.GONE);
 
+
+        initListeners();
+
+        setSuperUserSettings(prefs.isSuperUser());
+        
+        return view;
+    }
+
+    public void initListeners() {
         mAdminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 adminSettings();
+            }
+        });
+
+        mPainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (prefs.isSuperUser()) {
+                    SetPainRatingDialog dialog = new SetPainRatingDialog();
+                    dialog.show(getFragmentManager(), "SET PAIN RATING");
+                } else {
+                    PainRatingDialog dialog = new PainRatingDialog();
+                    dialog.show(getFragmentManager(), "PAIN RATING");
+                }
             }
         });
 
@@ -81,9 +121,6 @@ public class TitleBarFragment extends Fragment {
             }
         });
 
-        setSuperUserSettings(prefs.isSuperUser());
-        
-        return view;
     }
 
     @Override
@@ -116,6 +153,10 @@ public class TitleBarFragment extends Fragment {
             mAdminButton.setText(R.string.admin_mode);
             prefs.setState(prefs.getCurrentState());
         }
+    }
+
+    public void setPainVisibility(int visibility) {
+        mPainButton.setVisibility(visibility);
     }
 
 

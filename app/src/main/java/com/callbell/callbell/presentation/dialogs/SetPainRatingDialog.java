@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.presentation.bed.PainRatingAsyncTaskActivity;
 import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
 
 import butterknife.ButterKnife;
@@ -55,15 +54,9 @@ public class SetPainRatingDialog extends DialogFragment {
             }
 
             Log.d(TAG, "Submitted new Pain Rating Task");
-            Log.d(TAG, "ACtivity: " + getActivity());
 
-            try {
-                PainRatingAsyncTask loopTask = new PainRatingAsyncTask(getActivity());
-                ((PainRatingAsyncTaskActivity) getActivity()).setPainRatingAsyncTask(loopTask);
-                loopTask.execute(Integer.valueOf(intervalValue.getText().toString()));
-            } catch (ClassCastException e) {
-                Log.e(TAG, "Activity does not implement PainRatingAsyncTaskActivity: " + e.getMessage());
-            }
+            PainRatingAsyncTask mTask = new PainRatingAsyncTask(getActivity());
+            mTask.execute(Integer.valueOf(intervalValue.getText().toString()));
 
             dismiss();
         }

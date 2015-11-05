@@ -2,7 +2,6 @@ package com.callbell.callbell.presentation.bed;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -16,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -57,11 +55,17 @@ public class PlanOfCareFragment extends Fragment {
     @InjectView (R.id.fragment_poc_tests_title)
     TextView mTestsTitle;
 
-    @InjectView(R.id.action_list_admin)
-    ListView actionListAdmin;
+    @InjectView(R.id.action_list_test_admin)
+    ListView actionListTestAdmin;
 
-    @InjectView(R.id.action_list_patient)
-    ListView actionListPatient;
+    @InjectView(R.id.action_list_test_patient)
+    ListView actionListTestPatient;
+
+    @InjectView(R.id.action_list_medication_admin)
+    ListView actionListMedicationAdmin;
+
+    @InjectView(R.id.action_list_medication_patient)
+    ListView actionListMedicationPatient;
 
     @InjectView(R.id.other_layout)
     LinearLayout otherLayout;
@@ -78,11 +82,15 @@ public class PlanOfCareFragment extends Fragment {
     @Inject
     POCValues pocValues;
 
-    PlanOfCareCheckBoxAdapter actionArrayAdapter;
     ArrayAdapter<String> autoCompleteOptions;
-    ArrayAdapter<String> patientPlanOfCareListAdapter;
+    PlanOfCareCheckBoxAdapter actionArrayTestAdapter;
+    ArrayAdapter<String> patientPlanOfCareListTestAdapter;
+    PlanOfCareCheckBoxAdapter actionArrayMedicationAdapter;
+    ArrayAdapter<String> patientPlanOfCareListMedicationAdapter;
 
-    private List<String> patientPlanOfCareList;
+
+    private List<String> patientPlanOfCareTestList;
+    private List<String> patientPlanOfCareMedicationList;
 
     // TODO: Rename and change types of parameters
     public static PlanOfCareFragment newInstance() {
@@ -127,26 +135,51 @@ public class PlanOfCareFragment extends Fragment {
         Log.d(TAG, "Current Selection: " + prefs.getCurrentState().getChiefComplaint());
         chiefComplaintSpinner.setSelection(adapter.getPosition(prefs.getCurrentState().getChiefComplaint()), false);
 
-
         //Inflate the Admin Checkbox
-        List<String> prefsAdminList = prefs.allActionItems();
+        List<String> prefsAdminList = prefs.allTestItems();
         List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
                 ? prefsAdminList
                 : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
-//        Collections.sort(initialAdminValues); //initialAdminValue
-        actionListAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        actionArrayAdapter = new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminValues);
-        actionListAdmin.setAdapter(actionArrayAdapter);
-        setCheckedAdminItems();
+        actionListTestAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        actionArrayTestAdapter = new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminValues);
+        actionListTestAdmin.setAdapter(actionArrayTestAdapter);
+        setCheckedAdminItems(prefs.shownTestItems(), actionListTestAdmin);
 
-        //Inflate the patient Checkbox
-        patientPlanOfCareList = filterSelectedChoices();
-        Log.d(TAG, "patientPOCLIST length:" + patientPlanOfCareList.size());
+        //Inflate the patient Test List
+        patientPlanOfCareTestList = filterSelectedChoices(prefs.shownTestItems(), actionListTestAdmin, actionArrayTestAdapter);
+        Log.d(TAG, "patientPOCLIST length:" + patientPlanOfCareTestList.size());
         Log.d(TAG, "Activity: " + getActivity());
-        patientPlanOfCareListAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, patientPlanOfCareList);
-        actionListPatient.setAdapter(patientPlanOfCareListAdapter);
-        actionListPatient.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        actionListPatient.setItemsCanFocus(true);
+        patientPlanOfCareListTestAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, patientPlanOfCareTestList);
+        actionListTestPatient.setAdapter(patientPlanOfCareListTestAdapter);
+        actionListTestPatient.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        actionListTestPatient.setItemsCanFocus(true);
+
+
+        // ======================================================================
+
+
+
+        //Inflate the Admin Medication Checkbox
+        List<String> prefsAdminMedicationList = prefs.allTestItems();
+
+        //TODO: get new source of TEXT
+        List<String> initialAdminMedicationValues = (!prefsAdminMedicationList.isEmpty() )
+                ? prefsAdminList
+                : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
+        actionListMedicationAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        actionArrayMedicationAdapter = new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminMedicationValues);
+        actionListMedicationAdmin.setAdapter(actionArrayMedicationAdapter);
+        setCheckedAdminItems(prefs.shownMedicationItems(), actionListMedicationAdmin);
+
+        //Inflate the patient Medication List
+        patientPlanOfCareMedicationList = filterSelectedChoices(prefs.shownMedicationItems(), actionListMedicationAdmin, actionArrayMedicationAdapter);
+        Log.d(TAG, "patientPOCLIST length:" + patientPlanOfCareTestList.size());
+        Log.d(TAG, "Activity: " + getActivity());
+        patientPlanOfCareListMedicationAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, patientPlanOfCareMedicationList);
+        actionListMedicationPatient.setAdapter(patientPlanOfCareListMedicationAdapter);
+        actionListMedicationPatient.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        actionListMedicationPatient.setItemsCanFocus(true);
+
 
         //Set AutoComplete options
         String[] str = POCValues.testDescriptions.keySet().toArray(new String[0]);
@@ -158,8 +191,8 @@ public class PlanOfCareFragment extends Fragment {
         //Set enabled state
         boolean isSuperUser = prefs.isSuperUser();
         chiefComplaintSpinner.setEnabled(isSuperUser);
-        actionListAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-        actionListPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        actionListTestAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        actionListTestPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
     }
 
@@ -167,7 +200,7 @@ public class PlanOfCareFragment extends Fragment {
 
         chiefComplaintSpinner.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
 
-        actionListPatient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        actionListTestPatient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemText = ((TextView) view).getText().toString();
@@ -193,16 +226,16 @@ public class PlanOfCareFragment extends Fragment {
         if (item.isEmpty()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
             return;
-        } else if (actionArrayAdapter.contains(item)) {
-            int index = actionArrayAdapter.getPosition(item);
+        } else if (actionArrayTestAdapter.contains(item)) {
+            int index = actionArrayTestAdapter.getPosition(item);
 //            Toast.makeText(getActivity().getApplicationContext(), R.string.duplicate_item, Toast.LENGTH_SHORT).show();
-            actionListAdmin.setItemChecked(index, true);
+            actionListTestAdmin.setItemChecked(index, true);
             otherEditText.setText("");
             return;
         }
         String action = otherEditText.getText().toString();
-        actionArrayAdapter.add(action);
-        actionListAdmin.setItemChecked(actionArrayAdapter.getCount() - 1, true);
+        actionArrayTestAdapter.add(action);
+        actionListTestAdmin.setItemChecked(actionArrayTestAdapter.getCount() - 1, true);
         otherEditText.setText("");
     }
 
@@ -226,40 +259,65 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     public void setSuperUserPermissions(boolean isSuperUser) {
-        SparseBooleanArray checked = actionListAdmin.getCheckedItemPositions();
+        //TESTS
+        SparseBooleanArray checked = actionListTestAdmin.getCheckedItemPositions();
 
         // Setting Checked Items
         if (!isSuperUser && checked != null) {
 
             Log.d(TAG, "booleanArray: " + checked.toString());
-            Log.d(TAG, "checked size is " + actionListAdmin.getCheckedItemCount());
-            List<Integer> checkedArray = new ArrayList<>(getCheckedItemCount(actionListAdmin));
+            Log.d(TAG, "checked size is " + actionListTestAdmin.getCheckedItemCount());
 
-            for (int index = 0; index < actionArrayAdapter.getCount(); index++) {
+            List<Integer> checkedTestArray = new ArrayList<>(getCheckedItemCount(actionListTestAdmin));
+            for (int index = 0; index < actionArrayTestAdapter.getCount(); index++) {
                 Log.d(TAG, "Checked value at " + index + " is " + checked.get(index));
                 if (checked.get(index)) {
-                    checkedArray.add(index);
+                    checkedTestArray.add(index);
                 }
             }
 
-            prefs.setShownActions(checkedArray);
-            prefs.setAllActionItems(actionArrayAdapter.getList());
+            prefs.setShownTestItems(checkedTestArray);
+            prefs.setAllActionTestItems(actionArrayTestAdapter.getList());
+            setPatientListAdapter();
+        }
+
+        //Medications
+        SparseBooleanArray checkedMedications = actionListMedicationAdmin.getCheckedItemPositions();
+
+        // Setting Checked Items
+        if (!isSuperUser && checkedMedications != null) {
+
+            Log.d(TAG, "booleanArray: " + checkedMedications.toString());
+            Log.d(TAG, "checked size is " + actionListMedicationAdmin.getCheckedItemCount());
+
+            List<Integer> checkedTestArray = new ArrayList<>(getCheckedItemCount(actionListMedicationAdmin));
+            for (int index = 0; index < actionArrayMedicationAdapter.getCount(); index++) {
+                Log.d(TAG, "Checked value at " + index + " is " + checkedMedications.get(index));
+                if (checkedMedications.get(index)) {
+                    checkedTestArray.add(index);
+                }
+            }
+
+            prefs.setShownTestItems(checkedTestArray);
+            prefs.setAllActionMedicationItems(actionArrayTestAdapter.getList());
             setPatientListAdapter();
         }
 
         //Setting UI Values
-        actionListAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-        actionListPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        actionListTestAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        actionListTestPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        actionListMedicationAdmin.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        actionListMedicationPatient.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         chiefComplaintSpinner.setEnabled(isSuperUser);
-        actionListAdmin.setEnabled(isSuperUser);
+        actionListTestAdmin.setEnabled(isSuperUser);
         chiefComplaintSpinner.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         mTestsTitle.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
 
     }
 
     private int getCheckedItemCount(ListView list) {
-        SparseBooleanArray checkedItems = actionListAdmin.getCheckedItemPositions();
+        SparseBooleanArray checkedItems = actionListTestAdmin.getCheckedItemPositions();
         int count = 0;
 
         for (int index = 0; index < list.getAdapter().getCount(); index++) {
@@ -270,16 +328,18 @@ public class PlanOfCareFragment extends Fragment {
         return count;
     }
 
-    private void setCheckedAdminItems() {
-        for (int i = 0; i < actionListAdmin.getCount(); i++) {
-            actionListAdmin.setItemChecked(i, prefs.shownActions().contains(i));
+    private void setCheckedAdminItems(List<Integer> shownItems, ListView view) {
+        for (int i = 0; i < view.getCount(); i++) {
+            view.setItemChecked(i, shownItems.contains(i));
         }
     }
 
     public void clearValues() {
-        prefs.setShownActions(new ArrayList<Integer>());
-        patientPlanOfCareListAdapter.clear();
-        setCheckedAdminItems();
+        prefs.setShownTestItems(new ArrayList<Integer>());
+        prefs.setShownMedicationItems(new ArrayList<Integer>());
+        patientPlanOfCareListTestAdapter.clear();
+        setCheckedAdminItems(prefs.shownTestItems(), actionListTestAdmin);
+
     }
 
     public interface OnFragmentInteractionListener {
@@ -288,27 +348,27 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     private void setPatientListAdapter() {
-        patientPlanOfCareList = filterSelectedChoices();
-        ((ArrayAdapter)actionListPatient.getAdapter()).clear();
-        ((ArrayAdapter)actionListPatient.getAdapter()).addAll(patientPlanOfCareList);
+        patientPlanOfCareTestList = filterSelectedChoices(prefs.shownTestItems(), actionListTestAdmin, actionArrayTestAdapter);
+        ((ArrayAdapter) actionListTestPatient.getAdapter()).clear();
+        ((ArrayAdapter) actionListTestPatient.getAdapter()).addAll(patientPlanOfCareTestList);
     }
 
     /**
      * Filters out unchecked Items from List when displaying to a patient.
      * @return List of Strings to be shown
      */
-    private List<String> filterSelectedChoices() {
+    private List<String> filterSelectedChoices(List<Integer> shownItems, ListView view, PlanOfCareCheckBoxAdapter adapter) {
         Log.d(TAG, "Filter Selected Choices");
-        Log.d(TAG, "Length: " + prefs.shownActions().size());
-        ArrayList<String> selectedActions = new ArrayList<>(prefs.shownActions().size());
+        Log.d(TAG, "Length: " + prefs.shownTestItems().size());
+        ArrayList<String> selectedActions = new ArrayList<>(shownItems.size());
 
-        for (int i : prefs.shownActions()) {
+        for (int i : shownItems) {
             //check for if there were any temp actions stored when we closed out.
-            if (i >= actionListAdmin.getCount()) {
+            if (i >= view.getCount()) {
                 continue;
             }
-            Log.d(TAG, "ITEM: " + actionArrayAdapter.getItem(i));
-            selectedActions.add(actionArrayAdapter.getItem(i));
+            Log.d(TAG, "ITEM: " + adapter.getItem(i));
+            selectedActions.add(adapter.getItem(i));
         }
 
         return selectedActions == null ? new ArrayList<String>() : selectedActions;
@@ -322,9 +382,9 @@ public class PlanOfCareFragment extends Fragment {
             String selectedComplaint = parent.getSelectedItem().toString();
 
             prefs.getCurrentState().setChiefComplaint(selectedComplaint);
-            actionArrayAdapter.resetList(selectedComplaint);
-            prefs.setShownActions(null);
-            setCheckedAdminItems();
+            actionArrayTestAdapter.resetList(selectedComplaint);
+            prefs.setShownTestItems(null);
+            setCheckedAdminItems(prefs.shownTestItems(), actionListTestAdmin);
         }
 
         @Override

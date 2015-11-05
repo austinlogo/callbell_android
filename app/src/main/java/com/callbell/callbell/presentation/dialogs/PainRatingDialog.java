@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
+import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -28,6 +30,9 @@ public class PainRatingDialog
 
     @Inject
     PrefManager prefs;
+
+    @Inject
+    MessageRouting messageRouting;
 
     @InjectView(R.id.dialog_pain_rating_value)
     TextView painRatingValueText;
@@ -66,21 +71,12 @@ public class PainRatingDialog
         return dialog;
     }
 
-    public void setCallback(DialogDismissedCallback callback) {
-        mCallback = callback;
-    }
-
-
-
     public class SubmitClicked implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             prefs.setPainRating(mPainSeekbar.getProgress());
-
-            if (mCallback != null) {
-                mCallback.onDialogDismissed();
-            }
+            messageRouting.updateState();
             dismiss();
         }
     }
