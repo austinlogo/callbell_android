@@ -19,13 +19,6 @@
             android:layout_height="wrap_content">
         </Spinner>
 
-        <TextView
-            android:id="@+id/fragment_poc_tests_title"
-            android:textSize="@dimen/title_size"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/current_tests_title"/>
-
     </LinearLayout>
 
 
@@ -61,53 +54,41 @@
        android:layout_below="@id/fragment_poc_tests_or_title_container"
        android:orientation="horizontal">
 
-       <LinearLayout
-           android:id="@+id/lists_container"
-           android:orientation="vertical"
+       <com.callbell.callbell.presentation.bed.view.DisplayItemList
+           android:id="@+id/fragment_poc_tests"
            android:layout_weight="1"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+           android:layout_height="wrap_content" />
 
-           <ListView android:id="@+id/action_list_test_admin"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:scrollbarThumbVertical="@drawable/scrollbar"
-               android:fadeScrollbars="false"
-               android:scrollbarAlwaysDrawVerticalTrack="true"/>
-
-           <ListView android:id="@+id/action_list_test_patient"
-               android:visibility="gone"
-               android:color="@color/white"
-               android:scrollbarAlwaysDrawVerticalTrack="true"
-               android:fadeScrollbars="false"
-               android:scrollbarThumbVertical="@drawable/scrollbar"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content" />
-       </LinearLayout>
-
-       <LinearLayout
-           android:id="@+id/lists_medication_container"
-           android:orientation="vertical"
+       <com.callbell.callbell.presentation.bed.view.DisplayItemList
+           android:id="@+id/fragment_poc_medications"
            android:layout_weight="1"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+           android:layout_height="wrap_content" />
 
-           <ListView android:id="@+id/action_list_medication_admin"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:scrollbarThumbVertical="@drawable/scrollbar"
-               android:fadeScrollbars="false"
-               android:scrollbarAlwaysDrawVerticalTrack="true"/>
+       <!--<LinearLayout-->
+           <!--android:id="@+id/lists_medication_container"-->
+           <!--android:orientation="vertical"-->
+           <!--android:layout_weight="1"-->
+           <!--android:layout_width="match_parent"-->
+           <!--android:layout_height="wrap_content">-->
 
-           <ListView android:id="@+id/action_list_medication_patient"
-               android:visibility="gone"
-               android:color="@color/white"
-               android:scrollbarAlwaysDrawVerticalTrack="true"
-               android:fadeScrollbars="false"
-               android:scrollbarThumbVertical="@drawable/scrollbar"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content" />
-       </LinearLayout>
+           <!--<ListView android:id="@+id/action_list_medication_admin"-->
+               <!--android:layout_width="match_parent"-->
+               <!--android:layout_height="wrap_content"-->
+               <!--android:scrollbarThumbVertical="@drawable/scrollbar"-->
+               <!--android:fadeScrollbars="false"-->
+               <!--android:scrollbarAlwaysDrawVerticalTrack="true"/>-->
+
+           <!--<ListView android:id="@+id/action_list_medication_patient"-->
+               <!--android:visibility="gone"-->
+               <!--android:color="@color/white"-->
+               <!--android:scrollbarAlwaysDrawVerticalTrack="true"-->
+               <!--android:fadeScrollbars="false"-->
+               <!--android:scrollbarThumbVertical="@drawable/scrollbar"-->
+               <!--android:layout_width="match_parent"-->
+               <!--android:layout_height="wrap_content" />-->
+       <!--</LinearLayout>-->
    </LinearLayout>
 
 
