@@ -15,16 +15,24 @@
         android:padding="@dimen/standard_padding"
         android:id="@+id/poc_info_title"
         android:background="@color/colorPrimary"
-        android:layout_weight="6"
         android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/poc_info_expanded_name"
+        android:padding="@dimen/standard_padding"
+        android:background="@color/colorAccent"
+        android:textSize="@dimen/small_text"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/poc_info_body"
         android:textColor="@color/black"
         android:padding="@dimen/standard_padding"
-        android:layout_weight="1"
         android:textSize="@dimen/paragraph"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

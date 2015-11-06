@@ -155,7 +155,13 @@ public class PlanOfCareFragment extends Fragment {
                 String bodyText = POCValues.testDescriptions.get(itemText) != null
                         ? POCValues.testDescriptions.get(itemText)
                         : POCValues.testDescriptions.get(POCValues.DEFAULT_CHOICE);
-                mListener.showInfoDialog(itemText, bodyText);
+
+                String expandedName = POCValues.expandedNames.get(itemText) != null
+                        ? POCValues.expandedNames.get(itemText)
+                        : null;
+
+                mListener.showInfoDialog(itemText, expandedName, bodyText);
+
             }
         });
 
@@ -166,7 +172,12 @@ public class PlanOfCareFragment extends Fragment {
                 String bodyText = MedicationValues.medicationMap.get(itemText) != null
                         ? MedicationValues.medicationMap.get(itemText)
                         : MedicationValues.medicationMap.get(POCValues.DEFAULT_CHOICE); // Yes I do mean POCValues
-                mListener.showInfoDialog(itemText, bodyText);
+
+                String expandedName = MedicationValues.expandedNames.get(itemText) != null
+                        ? MedicationValues.expandedNames.get(itemText)
+                        : null;
+
+                mListener.showInfoDialog(itemText, expandedName, bodyText);
             }
         });
 
@@ -261,7 +272,7 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     public interface PlanOfCareInteraction {
-        public void showInfoDialog(String tit, String bod);
+        void showInfoDialog(String tit, String expandedName, String bod);
     }
 
     public class SubmitOtherTextListener implements TextView.OnEditorActionListener {

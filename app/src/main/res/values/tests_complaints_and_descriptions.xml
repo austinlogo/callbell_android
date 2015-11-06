@@ -114,103 +114,108 @@
     </string>
 
     <string name="cbc_description">
-        (Complete Blood Count) This is a blood test is used to assess your overall health.  It’s commonly performed during any exam by a health provider and checks for infection, decreased blood counts, and other diseases.
+         This is a blood test is used to assess your overall health.  It’s commonly performed during any exam by a health provider and checks for infection, decreased blood counts, and other diseases.
     </string>
 
+
     <string name="bmp_description">
-        (Basic Metabolic Panel or Electrolyte Panel)  This is a blood test used to assess the overall health of your kidneys (creatinine and BUN), blood sugar levels (glucose), as well as electrolytes in your body such as potassium (K), Sodium (Na), and Calcium (Ca).
+        This is a blood test used to assess the overall health of your kidneys (creatinine and BUN), blood sugar levels (glucose), as well as electrolytes in your body such as potassium (K), Sodium (Na), and Calcium (Ca).
     </string>
 
     <string name="inr_description">
-        (Standardized Prothrombin time)  This blood test is calculated using a prothrombin time test and is used to regulate how fast your blood is clotting.  A person taking blood thinners will be monitoring their INR test on a regular basis to make sure it is within the range your physician thinks is therapeutic for your condition.
+          This blood test is calculated using a prothrombin time test and is used to regulate how fast your blood is clotting.  A person taking blood thinners will be monitoring their INR test on a regular basis to make sure it is within the range your physician thinks is therapeutic for your condition.
     </string>
+
 
     <string name="cmp_description">
-         (Comprehensive Metabolic Panel)-  This blood test is routinely performed as part of your physical exam by your physician in evaluating overall health.  It includes 10+ tests that asses your body’s electrolyte balance as well as test for kidney disease, liver disease and diabetes.
+        This blood test is routinely performed as part of your physical exam by your physician in evaluating overall health.  It includes 10+ tests that asses your body’s electrolyte balance as well as test for kidney disease, liver disease and diabetes.
     </string>
 
+
     <string name="lipase_description">
-        (Serum lipase) this blood test measures an enzyme produced by your pancreas which is called lipase.  Elevated levels of lipase suggest pancreatitis or inflammation of your pancreas.  Signs and symptoms of pancreatitis may include abdominal pain, nausea, vomiting and fever.
+        this blood test measures an enzyme produced by your pancreas which is called lipase.  Elevated levels of lipase suggest pancreatitis or inflammation of your pancreas.  Signs and symptoms of pancreatitis may include abdominal pain, nausea, vomiting and fever.
     </string>
 
     <string name="esr_description">
-        (Erythrocyte Sedimentation Rate, Sed Rate)  This blood test is performed to evaluate for a disease process inside your body.  Healthcare providers may use this to test for inflammation, pain, swelling or even arthritis.  It is not specific to a certain disease process, it only tells the healthcare provider if you may have a an active disease process.
+        This blood test is performed to evaluate for a disease process inside your body.  Healthcare providers may use this to test for inflammation, pain, swelling or even arthritis.  It is not specific to a certain disease process, it only tells the healthcare provider if you may have a an active disease process.
     </string>
 
     <string name="d_dimer_description">
-        (Fibrin Degradation Fragment)  This blood test is used to rule out a blood clot.  When a blood clot forms in your body, the clot releases a substance called D-Dimer into the blood stream.   If your healthcare provider suspects you have a blood clot such as a DVT (deep vein thrombosis) or a PE (pulmonary embolism), it’s likely they will perform this test before more advanced tests.  Symptoms of a blood clot include leg swelling, arm swelling, shortness of breath or a faster than normal heart beat
+          This blood test is used to rule out a blood clot.  When a blood clot forms in your body, the clot releases a substance called D-Dimer into the blood stream.   If your healthcare provider suspects you have a blood clot such as a DVT (deep vein thrombosis) or a PE (pulmonary embolism), it’s likely they will perform this test before more advanced tests.  Symptoms of a blood clot include leg swelling, arm swelling, shortness of breath or a faster than normal heart beat
     </string>
 
     <string name="troponin_description">
-        (Cardiac Troponin)  This blood test checks to see if you’ve had damage to your heart or are having a heart attack.  A decrease of oxygen to your heart can cause your heart to release an enzyme called troponin.  A healthcare provider may perform this test if you’ve had an chest pain, an abnormal EKG, chronic or acute heart failure or an infection in your heart muscle.
+        This blood test checks to see if you’ve had damage to your heart or are having a heart attack.  A decrease of oxygen to your heart can cause your heart to release an enzyme called troponin.  A healthcare provider may perform this test if you’ve had an chest pain, an abnormal EKG, chronic or acute heart failure or an infection in your heart muscle.
     </string>
 
     <string name="amylase_description">
         This blood test is used to diagnose or manage pancreatitis, appendicitis, eating disorders or infections.  This test is commonly ordered in conjunction with Lipase, LFTs (liver function tests) and hematocrit tests.  Elevated amylase levels are commonly associated with acute pancreatitis, swelling in your abdomen, ulcers, intestine blockages, sudden gallbladder swelling, alcohol use and other acute problems.
     </string>
 
+
     <string name="stool_culture_description">
-         (stool sample)  This test is a collection of your stool.  It is used to test for sources of digestive tract infections.  Symptoms which may require stool cultures include diarrhea, severe abdominal pain, or blood in stool.
+         This test is a collection of your stool.  It is used to test for sources of digestive tract infections.  Symptoms which may require stool cultures include diarrhea, severe abdominal pain, or blood in stool.
     </string>
 
+
     <string name="lft_description">
-        (hepatic function test, liver function test)  This is a blood test that checks the general health of your liver.  Your liver is a large organ in your abdomen that turns food into nutrients and energy.  You may need this test done if you have signs or symptoms such as urine that is very dark in color, abdominal discomfort, fatigue, skin that has turned slightly yellow, or darker than normal stool color (tarry colored bowel movements).
+        This is a blood test that checks the general health of your liver.  Your liver is a large organ in your abdomen that turns food into nutrients and energy.  You may need this test done if you have signs or symptoms such as urine that is very dark in color, abdominal discomfort, fatigue, skin that has turned slightly yellow, or darker than normal stool color (tarry colored bowel movements).
     </string>
 
     <string name="hcg_description">
-          (serum HCG)  This blood test is used to test if a woman is pregnant by testing the level of HCG hormone in the bloodstream.  Elevated levels of HCG increase in the first three months of pregnancy.   It also may be ordered if vaginal bleeding or cramping is present.  This test may also be done in a series to determine changes in the level of HCG in the bloodstream.
+        This blood test is used to test if a woman is pregnant by testing the level of HCG hormone in the bloodstream.  Elevated levels of HCG increase in the first three months of pregnancy.   It also may be ordered if vaginal bleeding or cramping is present.  This test may also be done in a series to determine changes in the level of HCG in the bloodstream.
     </string>
 
     <string name="tsh_description">
-         (thryoid stimulating hormone)  This is a blood test which is used to diagnose thyroid problems.  The thyroid is located near your throat and is responsible for hormones affect weight, moods, energy levels, insomnia, generalized weakness and fatigue as well as other symptoms.  Hyperthyroidism as well as hypothyroidism each have many signs and symptoms.
+        This is a blood test which is used to diagnose thyroid problems.  The thyroid is located near your throat and is responsible for hormones affect weight, moods, energy levels, insomnia, generalized weakness and fatigue as well as other symptoms.  Hyperthyroidism as well as hypothyroidism each have many signs and symptoms.
     </string>
 
     <string name="uric_acid_description">
-        (serum uric acid)  This blood test measures the level of uric acid in your bloodstream.  Uric acid increases when your kidneys can not properly rid it from your body through urinating.  Most commonly excessive uric acid is seen when patients have increasing pain in their joints or kidney stones.  In addition, symptoms of gout may be present, which includes joint swelling and redness.
+        This blood test measures the level of uric acid in your bloodstream.  Uric acid increases when your kidneys can not properly rid it from your body through urinating.  Most commonly excessive uric acid is seen when patients have increasing pain in their joints or kidney stones.  In addition, symptoms of gout may be present, which includes joint swelling and redness.
     </string>
 
     <string name="type_screen_description">
-        (blood typing)  This is a blood test most commonly used to ensure patients requiring a blood transfusion or possible blood transfusion receive the blood type that matches their own.  It also tests for antibodies in the blood that are present to ensure no transfusion reaction occurs during the transfusion process.
+        This is a blood test most commonly used to ensure patients requiring a blood transfusion or possible blood transfusion receive the blood type that matches their own.  It also tests for antibodies in the blood that are present to ensure no transfusion reaction occurs during the transfusion process.
     </string>
 
     <string name="urinalysis_description">
-         (Urine Screening)  This is a urine collection test that is used to diagnose urinary tract infections, kidney problems, diabetes, liver problems and other conditions.  This urine sample also tests the color, clarity, and pH of the urine.  The urinalysis is part of a regular health screen or most commonly in patient who have abdominal pain, burning when urinating or difficulty urinating or blood in their urine.
+        This is a urine collection test that is used to diagnose urinary tract infections, kidney problems, diabetes, liver problems and other conditions.  This urine sample also tests the color, clarity, and pH of the urine.  The urinalysis is part of a regular health screen or most commonly in patient who have abdominal pain, burning when urinating or difficulty urinating or blood in their urine.
     </string>
 
     <string name="abg_vbg_description">
-        (arterial blood gas, venous blood gas)  This is a blood test that is taken from either the vein or the artery usually in the arm or wrist.  It is used to evaluate how well a patient’s lungs are functioning.  Having excessive acid (acidosis) or base (alkalosis) can be extremely dangerous to a patient’s health.
+        This is a blood test that is taken from either the vein or the artery usually in the arm or wrist.  It is used to evaluate how well a patient’s lungs are functioning.  Having excessive acid (acidosis) or base (alkalosis) can be extremely dangerous to a patient’s health.
 
         These tests are commonly done when a person has difficulty breathing, has increasing fatigue, is disoriented, or has had excessive smoke inhalation.
     </string>
 
     <string name="ekg_description">
-        (electrocardiogram)  The most common reason to perform an EKG is to assess for signs of a heart attack when a person is having chest pain.  During this procedure, the technician will apply stickers to the patients chest, arms and legs.  The EKG machine is connected to these stickers and a picture of the electrical activity of the heart is taken.  This picture will be evaluated by the physician for heart enlargement, decreased oxygen flow to the heart, infections in the heart as well as imbalances in electrolytes such as potassium, magnesium and calcium.
+        The most common reason to perform an EKG is to assess for signs of a heart attack when a person is having chest pain.  During this procedure, the technician will apply stickers to the patients chest, arms and legs.  The EKG machine is connected to these stickers and a picture of the electrical activity of the heart is taken.  This picture will be evaluated by the physician for heart enlargement, decreased oxygen flow to the heart, infections in the heart as well as imbalances in electrolytes such as potassium, magnesium and calcium.
 
         These test are commonly done in the emergency department or in the doctors office as part of a general health exam.
     </string>
 
     <string name="iv_placement_description">
-        (intravenous catheter)  This procedure is performed by the nurse, medical assistant or physician by putting a small catheter in the vein of your arm.  There is a small amount of pain incurred when the needle enters the skin, but the needle is then retracted and only a plastic catheter tip remains in the vein.  This procedure can be used for obtaining blood samples as well as administration of medication, IV fluids and is used during some forms of imaging such as CT Scans.
+        This procedure is performed by the nurse, medical assistant or physician by putting a small catheter in the vein of your arm.  There is a small amount of pain incurred when the needle enters the skin, but the needle is then retracted and only a plastic catheter tip remains in the vein.  This procedure can be used for obtaining blood samples as well as administration of medication, IV fluids and is used during some forms of imaging such as CT Scans.
     </string>
 
     <string name="iv_therapy_description">
-        (intravenous therapy/hydration)  This therapy is often referred to as an “IV drip”.  During this process,  liquid is infused into the vein through an IV catheter.  This therapy can be used to correct electrolyte imbalances, rehydrate, give medications, or transfuse blood.
+        This therapy is often referred to as an “IV drip”.  During this process,  liquid is infused into the vein through an IV catheter.  This therapy can be used to correct electrolyte imbalances, rehydrate, give medications, or transfuse blood.
     </string>
 
     <string name="flu_screening_description">
-        (influenza test)  This test involves inserting a Q-tip shaped swab through your nose and into the cavity behind your nose called the nasopharynx.  The swab is rotated several times in the nasopharynx to collect a proper sample where the influenza is virus is detectable.  This test does not hurt and will not injury you, but it is slightly uncomfortable when the swab is inserted.
+        This test involves inserting a Q-tip shaped swab through your nose and into the cavity behind your nose called the nasopharynx.  The swab is rotated several times in the nasopharynx to collect a proper sample where the influenza is virus is detectable.  This test does not hurt and will not injury you, but it is slightly uncomfortable when the swab is inserted.
     </string>
 
     <string name="rapid_strep_screen_description">
-         (Strep Throat Test)  This test is performed by the healthcare provider by when a patient has a sore throat or swollen tonsils.  Bacteria from the throat and tonsils is collected using a swab put into the back of the mouth.
+         This test is performed by the healthcare provider by when a patient has a sore throat or swollen tonsils.  Bacteria from the throat and tonsils is collected using a swab put into the back of the mouth.
     </string>
 
     <string name="finger_glucose_check_description">
-        (blood sugar level)  This test is performed to evaluate the sugar level in a the blood.  After pricking the finger, a small drop of blood is tested using an blood glucose level machine.  This test may be performed to asses causes of blurred vision, increased urination, weight loss, increased thirst, confusion, or other diabetes.  The test results are usually available in less than 15 seconds.
+        This test is performed to evaluate the sugar level in a the blood.  After pricking the finger, a small drop of blood is tested using an blood glucose level machine.  This test may be performed to asses causes of blurred vision, increased urination, weight loss, increased thirst, confusion, or other diabetes.  The test results are usually available in less than 15 seconds.
     </string>
 
     <string name="catheterization_description">
-        (foley catheter, in/out cath)  During this procedure, a tube is inserted through the penis or urethra into the bladder.  This is commonly used when a patient is having difficulty urinating, has blood in their urine, is unaware when they are urinating, or when it’s important to monitor how much urine the body is producing.  There is a short period of discomfort when the catheter is inserted.  In some cases the catheter is left in the bladder for an extended time and in other instances, the catheter is placed to obtain urine and then immediately removed.
+        During this procedure, a tube is inserted through the penis or urethra into the bladder.  This is commonly used when a patient is having difficulty urinating, has blood in their urine, is unaware when they are urinating, or when it’s important to monitor how much urine the body is producing.  There is a short period of discomfort when the catheter is inserted.  In some cases the catheter is left in the bladder for an extended time and in other instances, the catheter is placed to obtain urine and then immediately removed.
     </string>
 
     <string name="pelvic_exam_description">
@@ -218,7 +223,7 @@
     </string>
 
     <string name="nebulizer_treatment_description">
-        (Breathing Treatment)  These treatments are given to people who are having a hard time breathing.  It is a liquid medicine that forced into a mist then inhaled into the lungs.  The patient puts the mouth piece of the device into their mouth and breathes in the medication to their lungs.  These are commonly used for patients with asthma or other breathing conditions.
+        These treatments are given to people who are having a hard time breathing.  It is a liquid medicine that forced into a mist then inhaled into the lungs.  The patient puts the mouth piece of the device into their mouth and breathes in the medication to their lungs.  These are commonly used for patients with asthma or other breathing conditions.
     </string>
 
     <string name="peak_flow_meter_description">
@@ -230,19 +235,19 @@
     </string>
 
     <string name="pain_medication_description">
-        (Narcotic, non-narcotic, NSAIDS, central analgesics, topical anesthetics)  There are a variety of pain medications that are given to patients.  Each medication is given by a healthcare provider with direction of a medical doctor.  It is important to ask the healthcare provider side effects of these medications as well as make them aware of any allergies you may have to these pain medications.
+        There are a variety of pain medications that are given to patients.  Each medication is given by a healthcare provider with direction of a medical doctor.  It is important to ask the healthcare provider side effects of these medications as well as make them aware of any allergies you may have to these pain medications.
     </string>
 
     <string name="nausea_medication_description">
-        (Antiemetics)  These medications are used to treat nausea and vomiting.  They are commonly used in the emergency department or after surgery.  They can be given orally or be given through a patient’s IV catheter in their vein.
+        These medications are used to treat nausea and vomiting.  They are commonly used in the emergency department or after surgery.  They can be given orally or be given through a patient’s IV catheter in their vein.
     </string>
 
     <string name="blood_transfusion_description">
-        (RBC &amp; FFP)  Blood products such a red blood cells or fresh frozen plasma are given during sudden blood loss from trauma, surgery, or in patients who have chronic low blood counts (anemia).  Prior to receiving blood through the IV catheter, a patient’s blood type will be identified to ensure a blood transfusion reaction does not occur.  Your physician will inform you of the risks and benefits of receiving blood transfusions.
+        Blood products such a red blood cells or fresh frozen plasma are given during sudden blood loss from trauma, surgery, or in patients who have chronic low blood counts (anemia).  Prior to receiving blood through the IV catheter, a patient’s blood type will be identified to ensure a blood transfusion reaction does not occur.  Your physician will inform you of the risks and benefits of receiving blood transfusions.
     </string>
 
     <string name="tetanus_shot_description">
-         (Tetanus)  Tetanus is a potentially fatal disease in the central nervous system.  The bacteria can enter into the body through a cut in the skin. It can take anywhere from 3-21 days to have symptoms of tetanus which include jaw stiffness (lockjaw), fast heart rate, sweating, stiffness in facial muscles, difficult swallowing and others.  Children and adults are given tetanus vaccines through intramuscular shots as well as booster shots.  Consult with your physician to get the most up to date information on your tetanus vaccination status.
+         Tetanus is a potentially fatal disease in the central nervous system.  The bacteria can enter into the body through a cut in the skin. It can take anywhere from 3-21 days to have symptoms of tetanus which include jaw stiffness (lockjaw), fast heart rate, sweating, stiffness in facial muscles, difficult swallowing and others.  Children and adults are given tetanus vaccines through intramuscular shots as well as booster shots.  Consult with your physician to get the most up to date information on your tetanus vaccination status.
     </string>
 
     <string name="x_ray_description">
@@ -250,31 +255,31 @@
     </string>
 
     <string name="ct_scan_description">
-        (Computed Tomography)  This type of scan produces images of different parts of the body including organs, muscles, fat, and bones.  This imaging is more detailed than an X-Ray and may involve the use of IV contrast which is a dye that goes into the IV catheter for a more detailed view of specific organ systems.  The CT scan does use radiation and you should make your physician aware of any kidney disease you have prior to a CT scan.
+        This type of scan produces images of different parts of the body including organs, muscles, fat, and bones.  This imaging is more detailed than an X-Ray and may involve the use of IV contrast which is a dye that goes into the IV catheter for a more detailed view of specific organ systems.  The CT scan does use radiation and you should make your physician aware of any kidney disease you have prior to a CT scan.
     </string>
 
     <string name="ultrasound_description">
-        (abdominal ultrasound, fetal ultrasound, trans-vaginal ultrasound)  This noninvasive procedures is most commonly used to asses the function of organs such as kidneys, arteries, breasts, or heart as well as fetal ultrasounds which check the status of a pregnancy.   This procedures is not painful, but can be uncomfortable if the area being imaged is of concern for pain.
+        This noninvasive procedures is most commonly used to asses the function of organs such as kidneys, arteries, breasts, or heart as well as fetal ultrasounds which check the status of a pregnancy.   This procedures is not painful, but can be uncomfortable if the area being imaged is of concern for pain.
     </string>
 
     <string name="mri_description">
-        (Magnetic Resonance Imaging)  This imaging uses magnet, radio waves and a computer to create the most detailed images of the body’s organs, bones, fat and tissue.  During this test, the patient lays flat on a table and is moved into a tube shaped scanner.  An MRI is used to further evaluate conditions in the body while not emitting any radiation to the patient.
+        This imaging uses magnet, radio waves and a computer to create the most detailed images of the body’s organs, bones, fat and tissue.  During this test, the patient lays flat on a table and is moved into a tube shaped scanner.  An MRI is used to further evaluate conditions in the body while not emitting any radiation to the patient.
     </string>
 
     <string name="echo_test_description">
-        (Echocardiogram)  This is a noninvasive procedure that evaluates the function of the heart and structures around the heart.  Similar to an ultrasound, a probe is put up against the chest and picture is created in real time of the heart on the computer screen. This painless procedure is used to diagnose diseases such as congenital heart diseases and defects, cardiomyopathy, congestive heart failure, aneurysms as well as infections around the heart such as Pericarditis.
+        This is a noninvasive procedure that evaluates the function of the heart and structures around the heart.  Similar to an ultrasound, a probe is put up against the chest and picture is created in real time of the heart on the computer screen. This painless procedure is used to diagnose diseases such as congenital heart diseases and defects, cardiomyopathy, congestive heart failure, aneurysms as well as infections around the heart such as Pericarditis.
     </string>
 
     <string name="stress_test_description">
-         (Treadmill Test)  This test is done by walking on a treadmill or riding a stationary bike while being evaluated by a healthcare professional.  Your heart rate, blood pressure and breathing is monitored.  This test is used if a doctor believes you may have adequate blood flow to your heart, abnormal heart rhythms, or lack of oxygen reaching your heart.
+         This test is done by walking on a treadmill or riding a stationary bike while being evaluated by a healthcare professional.  Your heart rate, blood pressure and breathing is monitored.  This test is used if a doctor believes you may have adequate blood flow to your heart, abnormal heart rhythms, or lack of oxygen reaching your heart.
     </string>
 
     <string name="oxygen_description" formatted="false">
-         (O2)  This supplemental oxygen is used to increase levels of oxygen in the body.  It can be administered through non rebreather (mask) or a nasal cannula (tubing that directs oxygen in the nose).  This supplemental air is 100% oxygen while the air we breathe all around us is 21% oxygen.
+         This supplemental oxygen is used to increase levels of oxygen in the body.  It can be administered through non rebreather (mask) or a nasal cannula (tubing that directs oxygen in the nose).  This supplemental air is 100% oxygen while the air we breathe all around us is 21% oxygen.
     </string>
 
     <string name="crp_description">
-        ( C-reactive protein)  This blood test indicates inflammation inside the body.  If there is inflammation inside the body, the level of this test will rise.
+        This blood test indicates inflammation inside the body.  If there is inflammation inside the body, the level of this test will rise.
     </string>
 
     <string name="ammonia_description">
@@ -282,7 +287,7 @@
     </string>
 
     <string name="lactic_acid_description">
-        (Lactate)  This blood test is ordered when a patient has signs or symptoms related to septic shock, heart attack, congestive heart failure, kidney failure or trauma.  Elevated levels of lactate in the body mean a disease or condition is causing the accumulation of lactate in the body.  Lactic is produced by the cells in the body when there is a lack of oxygen.  This test does not specifically indicate failure of a specific organ, but it does give indication of the severity of the disease or condition in the body.
+        This blood test is ordered when a patient has signs or symptoms related to septic shock, heart attack, congestive heart failure, kidney failure or trauma.  Elevated levels of lactate in the body mean a disease or condition is causing the accumulation of lactate in the body.  Lactic is produced by the cells in the body when there is a lack of oxygen.  This test does not specifically indicate failure of a specific organ, but it does give indication of the severity of the disease or condition in the body.
     </string>
 
     <string name="swallow_screen_description">
@@ -312,4 +317,42 @@
     <string name="general_surgery_description">
         Surgeons are doctors who perform invasive procedures to help treat or repair diseases or injuries inside the body.
     </string>
+
+    <string name="cbc_expanded">Complete Blood Count</string>
+    <string name="bmp_expanded">Basic Metabolic Panel or Electrolyte Panel</string>
+    <string name="inr_expanded">Standardized Prothrombin time</string>
+    <string name="cmp_expanded">Comprehensive Metabolic Panel</string>
+    <string name="lipase_expanded">Serum lipase</string>
+    <string name="esr_expanded">Erythrocyte Sedimentation Rate, Sed Rate</string>
+    <string name="troponin_expanded">Cardiac Troponin</string>
+    <string name="d_dimer_expanded">Fibrin Degradation Fragment</string>
+    <string name="stool_culture_expanded">stool sample</string>
+    <string name="lft_expanded">hepatic function test, liver function test</string>
+    <string name="hcg_expanded">serum HCG</string>
+    <string name="tsh_expanded">thryoid stimulating hormone</string>
+    <string name="uric_acid_expanded">serum uric acid</string>
+    <string name="type_screen_expanded">blood typing</string>
+    <string name="urinalysis_expanded">Urine Screening</string>
+    <string name="abg_vbg_expanded">arterial blood gas, venous blood gas</string>
+    <string name="ekg_expanded">electrocardiogram</string>
+    <string name="iv_placement_expanded">intravenous catheter</string>
+    <string name="iv_therapy_expanded">intravenous therapy/hydration</string>
+    <string name="flu_screening_expanded">influenza test</string>
+    <string name="rapid_strep_screen_expanded">Strep Throat Test</string>
+    <string name="finger_glucose_check_expanded">blood sugar level</string>
+    <string name="catheterization_expanded">foley catheter, in/out cath</string>
+    <string name="nebulizer_treatment_expanded">Breathing Treatment</string>
+    <string name="pain_medication_expanded">Narcotic, non-narcotic, NSAIDS, central analgesics, topical anesthetics</string>
+    <string name="nausea_medication_expanded">Antiemetics</string>
+    <string name="blood_transfusion_expanded">RBC &amp; FFP</string>
+    <string name="tetanus_shot_expanded">Tetanus</string>
+    <string name="ct_scan_expanded">Computed Tomography</string>
+    <string name="ultrasound_expanded">abdominal ultrasound, fetal ultrasound, trans-vaginal ultrasound</string>
+    <string name="mri_expanded">Magnetic Resonance Imaging</string>
+    <string name="echo_test_expanded">Echocardiogram</string>
+    <string name="stress_test_expanded">Treadmill Test</string>
+    <string name="oxygen_expanded">O2</string>
+    <string name="crp_expanded"> C-reactive protein</string>
+    <string name="lactic_acid_expanded">Lactate</string>
+
 </resources>

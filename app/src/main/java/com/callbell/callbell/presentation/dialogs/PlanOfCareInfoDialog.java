@@ -3,6 +3,7 @@ package com.callbell.callbell.presentation.dialogs;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import butterknife.InjectView;
 public class PlanOfCareInfoDialog extends DialogFragment {
 
     public static final String TITLE_KEY = "DIALOG_TITLE";
+    public static final String EXPANDED_KEY = "FULL_NAME_TEXT";
     public static final String BODY_KEY = "DIALOG_BODY";
 
     @InjectView(R.id.poc_info_body)
@@ -27,16 +29,31 @@ public class PlanOfCareInfoDialog extends DialogFragment {
     @InjectView(R.id.poc_info_title)
     TextView mTitleText;
 
+    @InjectView(R.id.poc_info_expanded_name)
+    TextView mExpandedNameText;
+
     @InjectView(R.id.poc_info_dismiss)
     Button dismissButton;
 
-    private View mCustomView;
     private String mTitle;
+    private String mExpandedName;
     private String mBody;
 
     public static PlanOfCareInfoDialog newInstance(String tit, String bod) {
         Bundle bundle = new Bundle();
         bundle.putString(TITLE_KEY, tit);
+        bundle.putString(BODY_KEY, bod);
+
+        PlanOfCareInfoDialog dialog = new PlanOfCareInfoDialog();
+        dialog.setArguments(bundle);
+
+        return dialog;
+    }
+
+    public static PlanOfCareInfoDialog newInstance(String tit, String expanded, String bod) {
+        Bundle bundle = new Bundle();
+        bundle.putString(TITLE_KEY, tit);
+        bundle.putString(EXPANDED_KEY, expanded);
         bundle.putString(BODY_KEY, bod);
 
         PlanOfCareInfoDialog dialog = new PlanOfCareInfoDialog();
@@ -51,6 +68,10 @@ public class PlanOfCareInfoDialog extends DialogFragment {
 
         mTitle = getArguments().getString(TITLE_KEY);
         mBody = getArguments().getString(BODY_KEY);
+
+        if (getArguments().containsKey(EXPANDED_KEY)) {
+            mExpandedName = getArguments().getString(EXPANDED_KEY);
+        }
     }
 
     @Override
@@ -62,7 +83,12 @@ public class PlanOfCareInfoDialog extends DialogFragment {
 
         ButterKnife.inject(this, dialog);
 
+        if (!TextUtils.isEmpty(mExpandedName)) {
+            mExpandedNameText.setVisibility(View.VISIBLE);
+        }
+
         mTitleText.setText(mTitle);
+        mExpandedNameText.setText(mExpandedName);
         mBodyText.setText(mBody);
 
         dismissButton.setOnClickListener(new View.OnClickListener() {

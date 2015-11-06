@@ -20,6 +20,7 @@ public class POCValues {
 
     public static Map<String, List<String>> pocMap;
     public static Map<String, String> testDescriptions;
+    public static Map<String, String> expandedNames;
     private Context mContext;
 
     public static String DEFAULT_CHOICE = "";
@@ -798,5 +799,37 @@ public class POCValues {
         testDescriptions.put(SOCIAL_WORK_CONSULT, mContext.getString(R.string.social_work_consult_description));
         testDescriptions.put(TSH, mContext.getString(R.string.tsh_description));
         testDescriptions.put(GENERAL_SURGERY, mContext.getString(R.string.general_surgery_description));
+
+
+        expandedNames = new LinkedHashMap<>();
+        expandedNames.put(CBC, mContext.getString(R.string.cbc_expanded));
+        expandedNames.put(LFT, mContext.getString(R.string.lft_expanded));
+        expandedNames.put(HCG, mContext.getString(R.string.hcg_expanded));
+        expandedNames.put(TSH, mContext.getString(R.string.tsh_expanded));
+        expandedNames.put(URIC_ACID, mContext.getString(R.string.uric_acid_expanded));
+        expandedNames.put(TYPE_SCREEN, mContext.getString(R.string.type_screen_expanded));
+        expandedNames.put(URINALYSIS, mContext.getString(R.string.urinalysis_expanded));
+//        expandedNames.put(ABG_VBG, mContext.getString(R.string.abg_vbg_expanded));
+        expandedNames.put(EKG, mContext.getString(R.string.ekg_expanded));
+        expandedNames.put(IV_PLACEMENT, mContext.getString(R.string.iv_placement_expanded));
+        expandedNames.put(IV_THERAPY, mContext.getString(R.string.iv_therapy_expanded));
+        expandedNames.put(FLU_SCREENING, mContext.getString(R.string.flu_screening_expanded));
+        expandedNames.put(SWALLOW_SCREEN, mContext.getString(R.string.rapid_strep_screen_expanded));
+        expandedNames.put(FINGER_STICK, mContext.getString(R.string.finger_glucose_check_expanded));
+        expandedNames.put(FOLEY_CATHETER, mContext.getString(R.string.catheterization_expanded));
+        expandedNames.put(NEBULIZER_TREATMENT, mContext.getString(R.string.nebulizer_treatment_expanded));
+        expandedNames.put(PAIN_MEDICATION, mContext.getString(R.string.pain_medication_expanded));
+        expandedNames.put(NAUSEA_MEDICATION, mContext.getString(R.string.nausea_medication_expanded));
+        expandedNames.put(BLOOD_TRANSFUSION, mContext.getString(R.string.blood_transfusion_expanded));
+        expandedNames.put(TETANUS_SHOT, mContext.getString(R.string.tetanus_shot_expanded));
+        expandedNames.put(CT_SCAN, mContext.getString(R.string.ct_scan_expanded));
+        expandedNames.put(ULTRASOUND, mContext.getString(R.string.ultrasound_expanded));
+        expandedNames.put(MRI, mContext.getString(R.string.mri_expanded));
+        expandedNames.put(ECHO, mContext.getString(R.string.echo_test_expanded));
+        expandedNames.put(STRESS_TEST, mContext.getString(R.string.stress_test_expanded));
+        expandedNames.put(OXYGEN, mContext.getString(R.string.oxygen_expanded));
+        expandedNames.put(CRP, mContext.getString(R.string.crp_expanded));
+        expandedNames.put(LACTIC_ACID, mContext.getString(R.string.lactic_acid_expanded));
+        expandedNames.put(BMP, mContext.getString(R.string.bmp_expanded));
     }
 }

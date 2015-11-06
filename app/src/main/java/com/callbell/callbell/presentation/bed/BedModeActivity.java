@@ -135,8 +135,12 @@ public class BedModeActivity
     }
 
     @Override
-    public void showInfoDialog(String tit, String bod) {
-        PlanOfCareInfoDialog.newInstance(tit, bod).show(getFragmentManager(), "INFO DIALOG");
+    public void showInfoDialog(String tit, String expandedName, String bod) {
+        if (expandedName == null) {
+            PlanOfCareInfoDialog.newInstance(tit, bod).show(getFragmentManager(), "INFO DIALOG");
+        } else {
+            PlanOfCareInfoDialog.newInstance(tit, expandedName, bod).show(getFragmentManager(), "INFO DIALOG");
+        }
     }
 
     @Override
