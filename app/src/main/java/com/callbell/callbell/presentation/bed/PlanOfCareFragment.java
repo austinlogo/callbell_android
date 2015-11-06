@@ -159,16 +159,7 @@ public class PlanOfCareFragment extends Fragment {
         actionListTestPatient.setItemsCanFocus(true);
 
 
-        // ======================================================================
-
-
-
-        //Inflate the Admin Medication Checkbox
-        List<String> prefsAdminMedicationList = prefs.allTestItems();
-
-        List<String> initialAdminMedicationValues = (!prefsAdminMedicationList.isEmpty() )
-                ? prefsAdminList
-                : new ArrayList<>(MedicationValues.medicationMap.keySet());
+        List<String> initialAdminMedicationValues =  new ArrayList<>(MedicationValues.medicationMap.keySet());
         actionListMedicationAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         actionArrayMedicationAdapter = new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminMedicationValues);
         actionListMedicationAdmin.setAdapter(actionArrayMedicationAdapter);
