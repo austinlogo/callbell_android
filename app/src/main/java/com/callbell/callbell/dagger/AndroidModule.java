@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 import com.callbell.callbell.presentation.bed.StaffFragment;
@@ -34,6 +35,7 @@ import javax.inject.Singleton;
         MessageRouting.class,
         PostRequestTask.class,
         POCValues.class,
+        MedicationValues.class,
         PostRequestWithCallbackTask.class,
         RegistrationIntentService.class,
 

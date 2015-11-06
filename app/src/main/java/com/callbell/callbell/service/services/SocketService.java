@@ -139,7 +139,8 @@ public class SocketService extends Service {
 
                 } else {
                     Log.e(TAG, "SERVER UNAVAILABLE");
-                    ThreadUtil.sleep(LOST_CONNECTION_PING_INTERVAL_IN_MS, Thread.currentThread());
+                    ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
+//                    ThreadUtil.sleep(LOST_CONNECTION_PING_INTERVAL_IN_MS, Thread.currentThread());
                 }
 
                 mSocket.emit("ping", name);

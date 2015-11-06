@@ -126,7 +126,6 @@ public class POCValues {
     public final String CHEST_PAIN;
     public final String GENERAL_SURGERY;
 
-    //TODO: array values should be constants defined staticly that way we can reference better track these things
     @Inject
     public POCValues(Context context) {
         pocMap = new LinkedHashMap<>();

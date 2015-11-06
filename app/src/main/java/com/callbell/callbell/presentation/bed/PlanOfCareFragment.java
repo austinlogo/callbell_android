@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
+import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 import com.callbell.callbell.util.PrefManager;
@@ -82,6 +83,9 @@ public class PlanOfCareFragment extends Fragment {
     @Inject
     POCValues pocValues;
 
+    @Inject
+    MedicationValues medValues;
+
     ArrayAdapter<String> autoCompleteOptions;
     PlanOfCareCheckBoxAdapter actionArrayTestAdapter;
     ArrayAdapter<String> patientPlanOfCareListTestAdapter;
@@ -128,7 +132,7 @@ public class PlanOfCareFragment extends Fragment {
 
     private void initLists() {
         //Inflate the spinner
-        List<String> spinnerArray = new ArrayList<>(pocValues.pocMap.keySet());
+        List<String> spinnerArray = new ArrayList<>(POCValues.pocMap.keySet());
         Collections.sort(spinnerArray);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
         chiefComplaintSpinner.setAdapter(adapter);
@@ -162,10 +166,9 @@ public class PlanOfCareFragment extends Fragment {
         //Inflate the Admin Medication Checkbox
         List<String> prefsAdminMedicationList = prefs.allTestItems();
 
-        //TODO: get new source of TEXT
         List<String> initialAdminMedicationValues = (!prefsAdminMedicationList.isEmpty() )
                 ? prefsAdminList
-                : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
+                : new ArrayList<>(MedicationValues.medicationMap.keySet());
         actionListMedicationAdmin.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         actionArrayMedicationAdapter = new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminMedicationValues);
         actionListMedicationAdmin.setAdapter(actionArrayMedicationAdapter);
@@ -207,6 +210,17 @@ public class PlanOfCareFragment extends Fragment {
                 String bodyText = POCValues.testDescriptions.get(itemText) != null
                         ? POCValues.testDescriptions.get(itemText)
                         : POCValues.testDescriptions.get(POCValues.DEFAULT_CHOICE);
+                mListener.showInfoDialog(itemText, bodyText);
+            }
+        });
+
+        actionListMedicationPatient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemText = ((TextView) view).getText().toString();
+                String bodyText = MedicationValues.medicationMap.get(itemText) != null
+                        ? MedicationValues.medicationMap.get(itemText)
+                        : MedicationValues.medicationMap.get(POCValues.DEFAULT_CHOICE); // Yes I do mean POCValues
                 mListener.showInfoDialog(itemText, bodyText);
             }
         });
