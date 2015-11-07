@@ -9,12 +9,16 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.Request;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
+import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
+
+import javax.inject.Inject;
 
 public class StationActivity
         extends BaseActivity
@@ -23,6 +27,9 @@ public class StationActivity
     public static final String TAG = StationActivity.class.getSimpleName();
 
     private BroadcastReceiver mBroadcastReceiver;
+
+    @Inject
+    PrefManager prefs;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -79,6 +86,8 @@ public class StationActivity
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+
+        SocketService.getInstance().unregisterDevice(prefs.getTabletName());
     }
 
     @Override
