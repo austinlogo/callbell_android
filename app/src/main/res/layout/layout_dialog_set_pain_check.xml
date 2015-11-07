@@ -19,27 +19,6 @@
             android:textSize="@dimen/title_size"
             android:textColor="@color/black"
             android:layout_alignParentLeft="true"
-            android:text="@string/enable_pain_questions"/>
-
-        <ToggleButton
-            android:id="@+id/dialog_set_pain_toggle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/black"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/title_size"
-            android:textColor="@color/black"
-            android:layout_alignParentLeft="true"
             android:text="@string/how_often"/>
 
         <EditText

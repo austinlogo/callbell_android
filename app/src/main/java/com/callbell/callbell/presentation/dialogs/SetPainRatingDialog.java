@@ -22,8 +22,6 @@ import butterknife.InjectView;
 public class SetPainRatingDialog extends DialogFragment {
 
     private static final String TAG = SetPainRatingDialog.class.getSimpleName();
-    @InjectView(R.id.dialog_set_pain_toggle)
-    ToggleButton toggleButton;
 
     @InjectView(R.id.dialog_set_pain_interval)
     EditText intervalValue;
@@ -48,10 +46,6 @@ public class SetPainRatingDialog extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            if (!toggleButton.isChecked()) {
-                dismiss();
-                return;
-            }
 
             Log.d(TAG, "Submitted new Pain Rating Task");
 

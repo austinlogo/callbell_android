@@ -9,5 +9,6 @@ import javax.inject.Singleton;
 @Singleton
 public class ServerEndpoints {
 
-    public static final String EMULATOR_LOCALHOST_SERVER_ENDPOINT = "http://10.0.0.17:3000";
+    public static final String EMULATOR_LOCALHOST_SERVER_ENDPOINT = "http://10.0.0.17:6000";
+    public static final String PROD_SERVER_ENDPOINT = "http://104.236.211.81:6000";
 }

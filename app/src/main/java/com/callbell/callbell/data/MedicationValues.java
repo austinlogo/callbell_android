@@ -146,13 +146,11 @@ public class MedicationValues {
         expandedNames.put(LASIX, mContext.getString(R.string.lasix_expanded));
         expandedNames.put(LOPRESSOR, mContext.getString(R.string.lopressor_expanded));
         expandedNames.put(LOVENOX, mContext.getString(R.string.lovenox_expanded));
-        expandedNames.put(MORPHINE, mContext.getString(R.string.morphine_expanded));
         expandedNames.put(MOTRIN, mContext.getString(R.string.motrin_expanded));
         expandedNames.put(NITROGLYCERIN, mContext.getString(R.string.nitroglycerin_expanded));
         expandedNames.put(PERCOCET, mContext.getString(R.string.percocet_expanded));
         expandedNames.put(PHENERGAN, mContext.getString(R.string.phenergan_expanded));
         expandedNames.put(PLAVIX, mContext.getString(R.string.plavix_expanded));
-        expandedNames.put(PREDNISONE, mContext.getString(R.string.prednisone_expanded));
         expandedNames.put(REGLAN, mContext.getString(R.string.reglan_expanded));
         expandedNames.put(ROCEPHIN, mContext.getString(R.string.rocephin_expanded));
         expandedNames.put(SOLU_MEDROL, mContext.getString(R.string.solu_medrol_expanded));

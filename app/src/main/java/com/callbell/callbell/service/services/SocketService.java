@@ -39,9 +39,8 @@ public class SocketService extends Service {
     public static SocketService mService;
 
     private static boolean pingSent = false;
+    private static int pingFailureCount = 0;
 
-    // If we lost contact with server, we'll need to re-register.
-    private static boolean registrationRequired = false;
 
     private static final String TAG = SocketService.class.getSimpleName();
     private final IBinder mBinder = new LocalBinder();
@@ -66,7 +65,8 @@ public class SocketService extends Service {
         mService = this;
 
         try {
-            mSocket = IO.socket(ServerEndpoints.EMULATOR_LOCALHOST_SERVER_ENDPOINT);
+//            mSocket = IO.socket(ServerEndpoints.EMULATOR_LOCALHOST_SERVER_ENDPOINT);
+            mSocket = IO.socket(ServerEndpoints.PROD_SERVER_ENDPOINT);
         } catch (URISyntaxException e) {
             Log.e(TAG, "Exception with Socket: " + e);
         }
@@ -135,10 +135,12 @@ public class SocketService extends Service {
 
                 if (!pingSent) {
                     pingSent = true;
+                    pingFailureCount = 0;
                     ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
 
                 } else {
                     Log.e(TAG, "SERVER UNAVAILABLE");
+                    pingFailureCount++;
                     ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
 //                    ThreadUtil.sleep(LOST_CONNECTION_PING_INTERVAL_IN_MS, Thread.currentThread());
                 }

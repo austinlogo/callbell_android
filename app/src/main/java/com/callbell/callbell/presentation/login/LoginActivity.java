@@ -48,15 +48,15 @@ public class LoginActivity
     @Inject
     MessageRouting mMessage;
 
-    private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket(ServerEndpoints.EMULATOR_LOCALHOST_SERVER_ENDPOINT);
-        } catch (Exception e) {
-            Log.e(TAG, "Error: " + e);
-
-        }
-    }
+//    private Socket mSocket;
+//    {
+//        try {
+//            mSocket = IO.socket(ServerEndpoints.PROD_SERVER_ENDPOINT);
+//        } catch (Exception e) {
+//            Log.e(TAG, "Error: " + e);
+//
+//        }
+//    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
