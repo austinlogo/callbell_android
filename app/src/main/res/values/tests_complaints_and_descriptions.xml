@@ -33,6 +33,8 @@
     <string name="pregnancy_problems">Pregnancy Problems</string>
     <string name="hcg">HCG</string>
     <string name="pelvic_exam">Pelvic Exam</string>
+    <string name="pelvic_cultures">Pelvic Cultures</string>
+    <string name="blood_cultures">Blood Cultures</string>
     <string name="obgyn_consult">OBGYN consult</string>
     <string name="rectal_bleeding">Rectal Bleeding</string>
     <string name="type_screen">Type &amp; Screen</string>
@@ -65,13 +67,13 @@
     <string name="vomiting_blood">Vomiting Blood</string>
     <string name="antacid_medication">Antacid Medication</string>
     <string name="gi_consult">GI Consult</string>
-    <string name="nausea_vomiting_diarrhea">Nausea/Vomiting/Diarrhea</string>
+    <string name="nausea_vomiting">Nausea/Vomiting</string>
     <string name="medical_evaluation_inr">Medical Evaluation INR</string>
     <string name="stool_culture">Stool Culture</string>
     <string name="lft">LFT’s</string>
     <string name="laceration">Laceration</string>
     <string name="tetanus_shot">Tetanus Shot</string>
-    <string name="stitches">Stitches</string>
+    <string name="stitches">Sutures</string>
     <string name="eye_injury">Eye Injury</string>
     <string name="eye_drops">Eye Drops</string>
     <string name="eye_irrigation">Eye Irrigation</string>
@@ -103,6 +105,30 @@
     <string name="chest_pain">Chest Pain</string>
     <string name="general_surgery">General Surgery</string>
     <string name="back">Back</string>
+    <string name="visual_exam">Visual Exam</string>
+    <string name="assault">Assault</string>
+    <string name="blood_sugar_problem">Blood Sugar Problem</string>
+    <string name="burn">Burn</string>
+    <string name="diarrhea">Diarrhea</string>
+    <string name="eye_problems">Eye problems</string>
+    <string name="fall">Fall</string>
+    <string name="fever">Fever</string>
+    <string name="ingestion">Ingestion</string>
+    <string name="pediatric_fever">Pediatric Fever</string>
+    <string name="psychiatric_behavioral">Psychiatric/Behavioral</string>
+    <string name="rapid_heart_rate">Rapid Heart Rate</string>
+    <string name="respiratory_failure">Respiratory Failure</string>
+    <string name="seizure">Seizure</string>
+    <string name="stroke_cva">Stroke/CVA</string>
+    <string name="trauma">Trauma</string>
+    <string name="unresponsive">Unresponsive</string>
+    <string name="urinary_tract_infection">Urinary Tract Infection</string>
+    <string name="vaginal_discharge">Vaginal Discharge</string>
+
+    <string name="valproic_acid">Valproic Acid</string>
+    <string name="opthalmologist_consult">Opthamologist Consult</string>
+    <string name="rapid_strep">Rapid Strep</string>
+    <string name="encourage_nutrition">Encourage Nutrition</string>
 
     //TEST DESCRIPTIONS
     <string name="medical_evaluation_description">
