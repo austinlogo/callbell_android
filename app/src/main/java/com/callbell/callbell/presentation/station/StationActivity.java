@@ -14,6 +14,7 @@ import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.Request;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
+import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
@@ -22,7 +23,7 @@ import javax.inject.Inject;
 
 public class StationActivity
         extends BaseActivity
-        implements StationFragment.StationActivityListener {
+        implements StationFragment.StationActivityListener, TitleBarFragment.TitleBarListener{
     StationFragment mStationFragment;
     public static final String TAG = StationActivity.class.getSimpleName();
 
@@ -30,6 +31,7 @@ public class StationActivity
 
     @Inject
     PrefManager prefs;
+    private TitleBarFragment mTitleBarFragment;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -43,10 +45,13 @@ public class StationActivity
 
         Log.d(TAG, "Started Station");
 
+        mTitleBarFragment = TitleBarFragment.newInstance();
         mStationFragment = StationFragment.newInstance();
+
 
         getFragmentManager()
                 .beginTransaction()
+                .add(R.id.fragment_login_title_container, mTitleBarFragment)
                 .add(R.id.fragment_login_container, mStationFragment)
                 .commit();
 
@@ -54,28 +59,36 @@ public class StationActivity
         filter.addAction(PrefManager.EVENT_STATES_RECEIVED);
         filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
         filter.addAction(PrefManager.EVENT_STATE_UPDATE);
+        filter.addAction(PrefManager.EVENT_SERVER_CONNECTION_CHANGED);
 
        mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
 
-            if (intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
-                MessageResponse response = new MessageResponse(intent.getExtras());
+                if (intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
+                    MessageResponse response = new MessageResponse(intent.getExtras());
 
-                Log.d(TAG, "OnReceiveCalled");
-                playContinualNotificationSound();
-                mStationFragment.updateListItemStatus(response);
-                Log.d(TAG, "STATE: " + response.state.toString());
-            } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
+                    Log.d(TAG, "OnReceiveCalled");
+                    playContinualNotificationSound();
+                    mStationFragment.updateListItemStatus(response);
+                    Log.d(TAG, "STATE: " + response.state.toString());
+                } else if (intent.getAction().equals(PrefManager.EVENT_STATES_RECEIVED)) {
 
-                mStationFragment.setListFromJSONString(intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
-            } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {
-                Log.d(TAG, "TABLET STATE UPDATED");
-                State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
+                    mStationFragment.setListFromJSONString(intent.getStringExtra(PrefManager.STATELIST_RESPONSE));
+                } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {
+                    Log.d(TAG, "TABLET STATE UPDATED");
+                    State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
 
-                mStationFragment.updateList(st);
-                Log.d(TAG, st.toString());
-            }
+                    mStationFragment.updateList(st);
+                    Log.d(TAG, st.toString());
+                } else if (PrefManager.EVENT_SERVER_CONNECTION_CHANGED.equals(intent.getAction())) {
+                    boolean isConnected = intent.getBooleanExtra(PrefManager.SERVER_CONNECTED, false);
+                    mTitleBarFragment.toggleServerconnectedView(isConnected);
+
+                    if (isConnected) {
+                        mStationFragment.getDeviceStates();
+                    }
+                }
             }
         };
 
@@ -93,6 +106,11 @@ public class StationActivity
     @Override
     public void stopSound() {
         notificationSound.pause();
+    }
+
+    @Override
+    public void clearValues() {
+        // NOOP
     }
 }
 

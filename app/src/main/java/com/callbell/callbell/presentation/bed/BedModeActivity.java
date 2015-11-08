@@ -9,7 +9,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -84,6 +83,7 @@ public class BedModeActivity
         IntentFilter filter = new IntentFilter();
         filter.addAction(PrefManager.EVENT_SU_MODE_CHANGE);
         filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
+        filter.addAction(PrefManager.EVENT_SERVER_CONNECTION_CHANGED);
 
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -93,6 +93,7 @@ public class BedModeActivity
                     MessageResponse response = new MessageResponse(intent.getExtras());
                     playSoundOnce();
                     Toast.makeText(getApplicationContext(), response.messageReason.name(), Toast.LENGTH_SHORT).show();
+
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
 
@@ -104,11 +105,14 @@ public class BedModeActivity
                         messageRouting.updateState();
                     }
                     mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
+
+                } else if (intent.getAction().equals(PrefManager.EVENT_SERVER_CONNECTION_CHANGED)) {
+                    mTitleBarFragment.toggleServerconnectedView(intent.getBooleanExtra(PrefManager.SERVER_CONNECTED, false));
                 }
             }
         };
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, filter);
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mBroadcastReceiver, filter);
     }
 
     @Override
@@ -124,14 +128,8 @@ public class BedModeActivity
 
     @Override
     public void onCallBellPressed(MessageReason reason) {
-
-        getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.GTALK_HEARTBEAT"));
-        getApplicationContext().sendBroadcast(new Intent("com.google.android.intent.action.MCS_HEARTBEAT"));
         Toast.makeText(this, R.string.message_sent, Toast.LENGTH_SHORT).show();
-
-        //Send GCM Message
         messageRouting.sendMessage(prefs.getStationName(), prefs.CATEGORY_CALL_BELL, reason);
-
     }
 
     @Override

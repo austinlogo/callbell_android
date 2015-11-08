@@ -22,9 +22,11 @@ public class State {
     public static final String CHIEF_COMPLAINT = "CHIEF_COMPLAINT_ID";
     public static final String PAIN_RATING = "PAIN_RATING_ID";
     public static final String REGISTRATION_ID = "REGISTRATION_ID";
+    public static final String CONNECTION_INDICATOR_ID = "CONNECTION_INDICATOR_ID";
     public static final String STATE_ID = "STATE_ID";
 
     private static final String TAG = State.class.getSimpleName();
+    private boolean isConnectedValue = true;
     private String hospital,
         group,
         location,
@@ -72,6 +74,7 @@ public class State {
         nurse = st.getNurse();
         chiefComplaint = st.getChiefComplaint();
         painRating = st.getPainRating();
+        isConnectedValue = st.isConnected();
 
     }
 
@@ -85,6 +88,7 @@ public class State {
         nurse = JSONUtil.getValueStringIfExists(object, NURSE);
         chiefComplaint = JSONUtil.getValueStringIfExists(object, CHIEF_COMPLAINT);
         painRating = JSONUtil.getValueIntIfExists(object, PAIN_RATING);
+        isConnectedValue = JSONUtil.getValueBooleanFromIntIfExists(object, CONNECTION_INDICATOR_ID);
     }
 
     public String getHospital() {
@@ -119,6 +123,9 @@ public class State {
         return (chiefComplaint != null) ? chiefComplaint : POCValues.DEFAULT_CHOICE;
     }
 
+    public boolean isConnected() {
+        return isConnectedValue;
+    }
 
     public void setHospital(String hos) {
         hospital = hos;

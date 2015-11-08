@@ -46,4 +46,5 @@
     <string name="poc_current_medications_title">Your Medications</string>
     <string name="clear">Clear Values</string>
     <string name="requested">requested</string>
+    <string name="server_disconnected">Disconnected from server. trying to reconnect</string>
 </resources>

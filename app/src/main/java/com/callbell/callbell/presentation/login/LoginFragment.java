@@ -185,41 +185,19 @@ public class LoginFragment extends Fragment {
 
         prefs.setState(thisState);
 
-//        check if this has the same info we have on the server
         if (LastState.equals(thisState) && !forceRegister) {
             Log.d(TAG, "Already Registered");
-        //Something has changed or it's a new tablet either way we should update the token on the server.
         } else {
-//            prefs.getPreferences().edit().putBoolean(prefs.REG_UPLOADED_KEY, false).apply();
-//            Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
 
             if (thisState.getMode().equals(prefs.STATION_MODE) ) {
                 thisState.setLocation("STATION");
                 prefs.setState(thisState);
             }
 
-//            Log.d(TAG, "starting Service: " + thisState.getMode());
-//            getActivity().startService(intent);
-
             mListener.register();
             return true;
         }
         return false;
-    }
-
-    private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, getActivity(),
-                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Log.i(TAG, "This device is not supported.");
-//                getActivity().finish();
-            }
-            return false;
-        }
-        return true;
     }
 
     private boolean hasStateChanged(String mod) {

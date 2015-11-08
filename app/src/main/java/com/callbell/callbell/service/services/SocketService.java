@@ -39,13 +39,16 @@ public class SocketService extends Service {
     public static SocketService mService;
 
     private static boolean pingSent = false;
-    private static int pingFailureCount = 0;
+    private static boolean isServerDisconnected = false;
 
 
     private static final String TAG = SocketService.class.getSimpleName();
     private final IBinder mBinder = new LocalBinder();
     public Socket mSocket;
+
     Thread mThread, mPingThread;
+    SocketListeners mThreadRunnable;
+    PingServer mPingThreadRunnable;
 
     public enum SocketOperation {
         REGISTER,
@@ -65,13 +68,13 @@ public class SocketService extends Service {
         mService = this;
 
         try {
-//            mSocket = IO.socket(ServerEndpoints.EMULATOR_LOCALHOST_SERVER_ENDPOINT);
-            mSocket = IO.socket(ServerEndpoints.PROD_SERVER_ENDPOINT);
+            mSocket = IO.socket(ServerEndpoints.SERVER_ENDPOINT_IN_USE);
         } catch (URISyntaxException e) {
             Log.e(TAG, "Exception with Socket: " + e);
         }
 
-        mThread = new Thread(new SocketListeners());
+        mThreadRunnable = new SocketListeners();
+        mThread = new Thread(mThreadRunnable);
         mThread.start();
 
         return START_STICKY;
@@ -94,6 +97,8 @@ public class SocketService extends Service {
 
         @Override
         public void run() {
+            Socket s = mSocket.connect();
+            Log.i(TAG, "Connecting to Server at " + ServerEndpoints.SERVER_ENDPOINT_IN_USE + ": "  + s.toString());
             mSocket.connect();
 
             mSocket.on("message", new Emitter.Listener() {
@@ -107,6 +112,10 @@ public class SocketService extends Service {
                 @Override
                 public void call(Object... args) {
                     pingSent = false;
+                    if (isServerDisconnected) {
+                        isServerDisconnected = false;
+                        sendServerConnectionChangedBroadcast(true);
+                    }
                 }
             });
 
@@ -123,29 +132,29 @@ public class SocketService extends Service {
 
     public class PingServer implements Runnable {
 
+        private volatile boolean running = true;
         String name;
 
         public PingServer(String tabletName) {
             name = tabletName;
         }
 
+        public void terminate() {
+            running = false;
+        }
+
         @Override
         public void run() {
-            while (true) {
+            while (running) {
 
                 if (!pingSent) {
                     pingSent = true;
-                    pingFailureCount = 0;
                     ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
 
                 } else {
-                    if (pingFailureCount >= 5) {
-                        Log.e(TAG, "SERVER UNAVAILABLE");
-                        pingFailureCount = 0;
-                    }
-
-                    pingFailureCount++;
-//                    ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
+                    Log.e(TAG, "SERVER UNAVAILABLE");
+                    isServerDisconnected = true;
+                    sendServerConnectionChangedBroadcast(false);
                     ThreadUtil.sleep(LOST_CONNECTION_PING_INTERVAL_IN_MS, Thread.currentThread());
                 }
 
@@ -156,15 +165,15 @@ public class SocketService extends Service {
     }
 
     public void registerDevice(RegisterRequest request) {
-
-        mPingThread = new Thread(new PingServer(request.getRegisterId()));
+        mPingThreadRunnable = new PingServer(request.getRegisterId());
+        mPingThread = new Thread(mPingThreadRunnable);
         startSocketEmitter(SocketOperation.REGISTER, request.toJSON().toString());
         mPingThread.start();
     }
 
     public void unregisterDevice(String name) {
         startSocketEmitter(SocketOperation.UNREGISTER, name);
-        mPingThread.interrupt();
+        mPingThreadRunnable.terminate();
         mThread.interrupt();
 
     }
@@ -233,5 +242,11 @@ public class SocketService extends Service {
             // Return this instance of LocalService so clients can call public methods
             return SocketService.this;
         }
+    }
+
+    private void sendServerConnectionChangedBroadcast(boolean isServerConnected) {
+        Intent i = new Intent(PrefManager.EVENT_SERVER_CONNECTION_CHANGED);
+        i.putExtra(PrefManager.SERVER_CONNECTED, isServerConnected);
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
     }
 }

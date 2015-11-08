@@ -85,11 +85,14 @@ public class StationFragment
         ButterKnife.inject(this, view);
         ((CallBellApplication) getActivity().getApplication()).inject(this);
 
-        messageRouting.getDeviceStates();
-
         initListeners();
+        getDeviceStates();
 
         return view;
+    }
+
+    public void getDeviceStates() {
+        messageRouting.getDeviceStates();
     }
 
     private void initListeners() {

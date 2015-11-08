@@ -56,7 +56,7 @@ public class PostRequestTask extends AsyncTask<Request, String, String> {
             Log.d(TAG, "Request: " + request.toString());
 
             //Setup connection
-            URL url = new URL(mServerEndpoints.PROD_SERVER_ENDPOINT + message.getOperation());
+            URL url = new URL(mServerEndpoints.SERVER_ENDPOINT_IN_USE + message.getOperation());
             HttpURLConnection httpRequest = (HttpURLConnection) url.openConnection();
 
             httpRequest.setDoInput(true);

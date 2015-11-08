@@ -65,4 +65,13 @@ public class JSONUtil {
         }
         return 0;
     }
+
+    public static boolean getValueBooleanFromIntIfExists(JSONObject obj, String key) {
+        try {
+            int value = obj.has(key) ? obj.getInt(key) : 0;
+            return value == 1;
+        } catch (JSONException e) {
+            return false;
+        }
+    }
 }

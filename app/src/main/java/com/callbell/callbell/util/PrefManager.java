@@ -49,6 +49,7 @@ public class PrefManager {
     public static final String EVENT_STATES_RECEIVED = "STATES RECEIVED";
     public static final String EVENT_STATE_UPDATE = "TABLET STATE UPDATED";
     public static final String EVENT_SU_MODE_CHANGE = "SU MODE CHANGE";
+    public static final String EVENT_SERVER_CONNECTION_CHANGED = "TITLE BAR VIEW TOGGLE";
 
     //MISC. VALUES
     public static final String DEFAULT_SU_PASSWORD = "2468";
@@ -57,7 +58,7 @@ public class PrefManager {
     public static final String CALL_BELL_MESSAGE_BODY = "message_body";
     public static final String CALL_BELL_MESSAGE_FROM = "message_from";
     public static final String CATEGORY_CALL_BELL_RESPONSE = "call_bell_response";
-
+    public static final String SERVER_CONNECTED = "SERVER DISCONNECTED";
 
 
     public static SharedPreferences prefs;

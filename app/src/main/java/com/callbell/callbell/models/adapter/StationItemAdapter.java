@@ -66,12 +66,17 @@ public class StationItemAdapter extends BaseAdapter {
         TextView nurseField = (TextView) convertView.findViewById(R.id.station_item_nurse);
         TextView chiefComplaintField = (TextView) convertView.findViewById(R.id.station_item_chief_complaint);
         TextView painRatingField = (TextView) convertView.findViewById(R.id.station_item_pain_rating);
+        View connectionIndicator = convertView.findViewById(R.id.station_item_state_indicator);
 
         locationField.setText(stateList.get(position).getLocation());
         physicianField.setText(stateList.get(position).getPhysician());
         nurseField.setText(stateList.get(position).getNurse());
         chiefComplaintField.setText(stateList.get(position).getChiefComplaint());
         painRatingField.setText(String.valueOf(stateList.get(position).getPainRating()));
+
+        connectionIndicator.setBackgroundColor(stateList.get(position).isConnected()
+                ? context.getResources().getColor(R.color.colorPrimary)
+                : context.getResources().getColor(R.color.red));
 
         if (stateListCallSettings.get(position) == MessageReason.PAIN) {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.pain_color));

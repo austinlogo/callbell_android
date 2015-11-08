@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
@@ -53,6 +55,12 @@ public class TitleBarFragment extends Fragment {
 
     @InjectView(R.id.fragment_title_bar_pain)
     Button mPainButton;
+
+    @InjectView(R.id.fragment_title_disconnected_layout)
+    LinearLayout mDisconnectedLayout;
+
+    @InjectView(R.id.fragment_title_default_layout)
+    RelativeLayout mDefaultLayout;
 
     private static final String TAG = TitleBarFragment.class.getSimpleName();
 
@@ -131,7 +139,7 @@ public class TitleBarFragment extends Fragment {
             mListener = ((TitleBarListener) getActivity());
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement StationActivityListener");
+                    + " must implement TitleBarListener");
         }
     }
 
@@ -155,8 +163,9 @@ public class TitleBarFragment extends Fragment {
         }
     }
 
-    public void setPainVisibility(int visibility) {
-        mPainButton.setVisibility(visibility);
+    public void toggleServerconnectedView(boolean isServerConnected) {
+        mDisconnectedLayout.setVisibility(!isServerConnected ? View.VISIBLE : View.GONE);
+        mDefaultLayout.setVisibility(!isServerConnected ? View.GONE : View.VISIBLE);
     }
 
 
