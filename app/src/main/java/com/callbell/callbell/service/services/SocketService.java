@@ -107,6 +107,16 @@ public class SocketService extends Service {
                 }
             });
 
+            mSocket.on(SocketOperation.DEVICE_MESSAGE.name(), new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d(TAG, "RECEIVED MESSAGE");
+                    JSONObject payload = JSONUtil.getJSONFromString(args[0].toString());
+                    handleIncomingMessages(payload);
+                }
+            });
+
+
             mSocket.on("pong", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
