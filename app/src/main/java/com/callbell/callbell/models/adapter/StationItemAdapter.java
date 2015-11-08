@@ -141,4 +141,12 @@ public class StationItemAdapter extends BaseAdapter {
     public MessageReason getReason(int position) {
         return stateListCallSettings.get(position);
     }
+
+    public void updateConnectedStatuses(List<String> connectedTablets) {
+        for (State state : stateList) {
+            state.setConnected(connectedTablets.contains(state.getTabletName()));
+        }
+
+        notifyDataSetChanged();
+    }
 }

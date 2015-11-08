@@ -97,8 +97,7 @@ public class SocketService extends Service {
 
         @Override
         public void run() {
-            Socket s = mSocket.connect();
-            Log.i(TAG, "Connecting to Server at " + ServerEndpoints.SERVER_ENDPOINT_IN_USE + ": "  + s.toString());
+
             mSocket.connect();
 
             mSocket.on("message", new Emitter.Listener() {
@@ -111,6 +110,13 @@ public class SocketService extends Service {
             mSocket.on("pong", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
+                    String payload = (String) args[0];
+
+                    if (payload != null && payload.length() > 0) {
+                        Intent i = new Intent(PrefManager.EVENT_TABLET_CONNECTIONS_RECEIVED);
+                        i.putExtra(PrefManager.PAYLOAD, payload);
+                        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+                    }
                     pingSent = false;
                     if (isServerDisconnected) {
                         isServerDisconnected = false;
@@ -119,14 +125,6 @@ public class SocketService extends Service {
                 }
             });
 
-            mSocket.on(SocketOperation.DEVICE_MESSAGE.name(), new Emitter.Listener() {
-                @Override
-                public void call(Object... args) {
-                    Log.d(TAG, "RECEIVED MESSAGE");
-                    JSONObject payload = JSONUtil.getJSONFromString(args[0].toString());
-                    handleIncomingMessages(payload);
-                }
-            });
         }
     }
 
@@ -154,11 +152,18 @@ public class SocketService extends Service {
                 } else {
                     Log.e(TAG, "SERVER UNAVAILABLE");
                     isServerDisconnected = true;
+
+//                    mSocket.disconnect();
+                    mSocket.connect();
+
                     sendServerConnectionChangedBroadcast(false);
                     ThreadUtil.sleep(LOST_CONNECTION_PING_INTERVAL_IN_MS, Thread.currentThread());
                 }
 
-                mSocket.emit("ping", name);
+                // if we terminate while sleeping we shouldn't call this loop.
+                if (running) {
+                    mSocket.emit("ping", name);
+                }
 
             }
         }

@@ -48,16 +48,6 @@ public class LoginActivity
     @Inject
     MessageRouting mMessage;
 
-//    private Socket mSocket;
-//    {
-//        try {
-//            mSocket = IO.socket(ServerEndpoints.PROD_SERVER_ENDPOINT);
-//        } catch (Exception e) {
-//            Log.e(TAG, "Error: " + e);
-//
-//        }
-//    }
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((CallBellApplication) getApplication()).inject(this);
@@ -66,17 +56,6 @@ public class LoginActivity
         mTitleBarFragment = TitleBarFragment.newInstance();
 
         startService(new Intent(getApplicationContext(), SocketService.class));
-//        Log.d(TAG, "Socket: " + mSocket.connect());
-//        Log.d(TAG, "Connected: " + mSocket.connected());
-//        mSocket.emit("add", prefs.location());
-//        mSocket.emit("ping", "3");
-//
-//        mSocket.on("message", new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//                Log.d(TAG, args[0].toString());
-//            }
-//        });o
 
         getFragmentManager()
                 .beginTransaction()
@@ -111,7 +90,7 @@ public class LoginActivity
     @Override
     public void register() {
         if (SocketService.mService != null) {
-            mMessage.register(prefs.getCurrentState(), prefs.getTabletName());
+            mMessage.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
 
         }
     }

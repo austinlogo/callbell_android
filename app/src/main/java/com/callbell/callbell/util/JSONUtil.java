@@ -29,6 +29,22 @@ public class JSONUtil {
         return null;
     }
 
+    public static List<String> getStringListFromJSONArrayString(String arrayString) {
+        List<String> list = new ArrayList<>();
+        try {
+            JSONArray array = new JSONArray(arrayString);
+
+            for (int index = 0; index < array.length(); index++) {
+                list.add( (String) array.get(index));
+            }
+
+        } catch(JSONException e) {
+
+        }
+
+        return list;
+    }
+
     public static List<State> getStateListFromJSONArray(JSONObject obj) {
         ArrayList<State> result = new ArrayList<>();
 

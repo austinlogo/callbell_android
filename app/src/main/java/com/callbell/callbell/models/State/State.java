@@ -192,4 +192,12 @@ public class State {
     public void setPainRating(int painRating) {
         this.painRating = painRating;
     }
+
+    public String getTabletName() {
+        return hospital + "_" + group + "_" + location;
+    }
+
+    public void setConnected(boolean connected) {
+        this.isConnectedValue = connected;
+    }
 }

@@ -37,7 +37,7 @@ public class PrefManager {
     //GLOBAL VALUES
     public static final String BED_MODE = "bed_mode";
     public static final String STATION_MODE = "station_mode";
-    public static final String STATION_SUFFIX = "_STATION";
+    public static final String STATION_SUFFIX = "STATION";
     public static final String GROUP_SUFFIX = "_GROUP";
 
     //CATEGORIES
@@ -50,6 +50,7 @@ public class PrefManager {
     public static final String EVENT_STATE_UPDATE = "TABLET STATE UPDATED";
     public static final String EVENT_SU_MODE_CHANGE = "SU MODE CHANGE";
     public static final String EVENT_SERVER_CONNECTION_CHANGED = "TITLE BAR VIEW TOGGLE";
+    public static final String EVENT_TABLET_CONNECTIONS_RECEIVED = "TABLET CONNECTIONS RECEIVED";
 
     //MISC. VALUES
     public static final String DEFAULT_SU_PASSWORD = "2468";
@@ -59,7 +60,7 @@ public class PrefManager {
     public static final String CALL_BELL_MESSAGE_FROM = "message_from";
     public static final String CATEGORY_CALL_BELL_RESPONSE = "call_bell_response";
     public static final String SERVER_CONNECTED = "SERVER DISCONNECTED";
-
+    public static final String PAYLOAD = "PAYLOAD";
 
     public static SharedPreferences prefs;
     public static State currentState;
@@ -277,13 +278,7 @@ public class PrefManager {
         return "STATION";
     }
 
-    public String getTabletName() {
-        return hospital() + "_" + group() + "_" + location();
-    }
-
     public String senderId() {
         return "434312104937";
     }
-
-
 }

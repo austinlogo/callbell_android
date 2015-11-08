@@ -19,6 +19,8 @@ import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 public class StationActivity
@@ -60,6 +62,7 @@ public class StationActivity
         filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
         filter.addAction(PrefManager.EVENT_STATE_UPDATE);
         filter.addAction(PrefManager.EVENT_SERVER_CONNECTION_CHANGED);
+        filter.addAction(PrefManager.EVENT_TABLET_CONNECTIONS_RECEIVED);
 
        mBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -88,6 +91,10 @@ public class StationActivity
                     if (isConnected) {
                         mStationFragment.getDeviceStates();
                     }
+                } else if (PrefManager.EVENT_TABLET_CONNECTIONS_RECEIVED.equals(intent.getAction())) {
+                    String payload = intent.getStringExtra(PrefManager.PAYLOAD);
+                    List<String> connectedTablets = JSONUtil.getStringListFromJSONArrayString(payload);
+                    mStationFragment.updateConnectionStatuses(connectedTablets);
                 }
             }
         };
@@ -99,8 +106,7 @@ public class StationActivity
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
-
-        SocketService.getInstance().unregisterDevice(prefs.getTabletName());
+        SocketService.getInstance().unregisterDevice(prefs.getCurrentState().getTabletName());
     }
 
     @Override

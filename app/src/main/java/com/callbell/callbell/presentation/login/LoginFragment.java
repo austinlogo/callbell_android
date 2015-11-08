@@ -1,17 +1,12 @@
 package com.callbell.callbell.presentation.login;
 
 import android.app.Activity;
-import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.os.Binder;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,37 +16,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import com.callbell.callbell.R;
 import com.callbell.callbell.models.State.State;
-import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
 import com.callbell.callbell.presentation.station.StationActivity;
-import com.callbell.callbell.service.RegistrationIntentService;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link LoginFragmentCallback} interface
- * to handle interaction events.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
     private static final String TAG = LoginFragment.class.getSimpleName();
     private LoginFragmentCallback mListener;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private State LastState;
+    private State lastState;
 
     @InjectView(R.id.login_id)
     EditText location_id;
@@ -101,27 +83,25 @@ public class LoginFragment extends Fragment {
 
         intiStateAndUI();
         setButtonsEnableStatus();
-        setSUpermissions(prefs.isSuperUser());
+        setSuperUserPermission(prefs.isSuperUser());
 
         bedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Clicked Bed");
 
-                if (register(prefs.BED_MODE)) {
-                    Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
-                    startActivity(newActivity);
-                }
+                register(prefs.BED_MODE);
+                Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
+                startActivity(newActivity);
             }
         });
 
         stationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (register(prefs.STATION_MODE)) {
-                    Intent newActivity = new Intent(getActivity().getApplicationContext(), StationActivity.class);
-                    startActivity(newActivity);
-                }
+                register(prefs.STATION_MODE);
+                Intent newActivity = new Intent(getActivity().getApplicationContext(), StationActivity.class);
+                startActivity(newActivity);
             }
         });
 
@@ -145,7 +125,7 @@ public class LoginFragment extends Fragment {
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                setSUpermissions(prefs.isSuperUser());
+                setSuperUserPermission(prefs.isSuperUser());
             }
         }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
 
@@ -170,70 +150,60 @@ public class LoginFragment extends Fragment {
         mListener = null;
     }
 
-    public boolean register(String mod) {
-        State thisState = new State(
-                hospital_id.getText().toString(),
-                group_id.getText().toString(),
-                location_id.getText().toString(),
-                mod,
-                prefs.physician(),
-                prefs.nurse(),
-                prefs.resident(),
-                prefs.chiefComplaint(),
-                prefs.painRating());
 
+    public void register(String mod) {
+        if (PrefManager.BED_MODE.equals(mod)) {
+            State thisState = new State(
+                    hospital_id.getText().toString(),
+                    group_id.getText().toString(),
+                    location_id.getText().toString(),
+                    mod,
+                    prefs.physician(),
+                    prefs.nurse(),
+                    prefs.resident(),
+                    prefs.chiefComplaint(),
+                    prefs.painRating());
+            prefs.setState(thisState);
 
-        prefs.setState(thisState);
-
-        if (LastState.equals(thisState) && !forceRegister) {
-            Log.d(TAG, "Already Registered");
         } else {
-
-            if (thisState.getMode().equals(prefs.STATION_MODE) ) {
-                thisState.setLocation("STATION");
-                prefs.setState(thisState);
-            }
-
-            mListener.register();
-            return true;
+            prefs.setState(new State(
+                    hospital_id.getText().toString(),
+                    group_id.getText().toString(),
+                    PrefManager.STATION_SUFFIX,
+                    mod,
+                    "",
+                    "",
+                    "",
+                    "",
+                    0)
+            );
         }
-        return false;
-    }
 
-    private boolean hasStateChanged(String mod) {
-        String mode = prefs.mode();
-        String hospital = prefs.hospital();
-        String location = prefs.location();
-
-        //check if this has the same info we have on the server
-        if (mode.length() > 0 && mode.equals(mod)
-                && hospital.length() > 0 && hospital.equals(hospital_id.getText().toString())
-                && location.length() > 0 && location.equals(location_id.getText().toString())) {
-
-            return false;
-        }
-        return true;
+        mListener.register();
     }
 
     private void intiStateAndUI() {
-        LastState = new State(prefs);
-        hospital_id.setText(LastState.getHospital());
-        group_id.setText(LastState.getGroup());
-        location_id.setText(LastState.getLocation().endsWith(PrefManager.STATION_SUFFIX) ? "" : LastState.getLocation());
+        lastState = new State(prefs);
+        hospital_id.setText(lastState.getHospital());
+        group_id.setText(lastState.getGroup());
+        location_id.setText(lastState.getLocation().endsWith(PrefManager.STATION_SUFFIX) ? "" : lastState.getLocation());
     }
 
-    private void setSUpermissions(boolean isSuperUser) {
+    private void setSuperUserPermission(boolean isSuperUser) {
         hospital_id.setEnabled(isSuperUser);
         group_id.setEnabled(isSuperUser);
         stationButton.setEnabled(isSuperUser);
     }
     
     private void setButtonsEnableStatus() {
-        boolean enableStation = group_id.getText().length() > 0
+        boolean enableStation = prefs.isSuperUser()
+                &&group_id.getText().length() > 0
                 && hospital_id.getText().length() > 0;
+
         boolean enableBed = location_id.getText().length() > 0
                 && hospital_id.getText().length() > 0
-                && group_id.getText().length() > 0;
+                && group_id.getText().length() > 0
+                && !location_id.getText().equals(PrefManager.STATION_SUFFIX);
 
         bedButton.setEnabled(enableBed);
         stationButton.setEnabled(enableStation);

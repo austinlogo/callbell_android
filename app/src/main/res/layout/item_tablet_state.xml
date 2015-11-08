@@ -6,7 +6,6 @@
 
     <View
         android:id="@+id/station_item_state_indicator"
-        android:visibility="gone"
         android:layout_width="@dimen/standard_padding"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary" />
