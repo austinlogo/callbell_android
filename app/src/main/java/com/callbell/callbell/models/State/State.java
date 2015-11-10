@@ -170,6 +170,7 @@ public class State {
         object.put(RESIDENT, resident);
         object.put(CHIEF_COMPLAINT, chiefComplaint);
         object.put(PAIN_RATING, painRating);
+        object.put(CONNECTION_INDICATOR_ID, isConnectedValue ? 1 : 0);
 
         return object;
     }
