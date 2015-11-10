@@ -39,7 +39,7 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     public void updateState() {
         Log.d(TAG, "Updating State");
         UpdateStateRequest usr = new UpdateStateRequest(prefs.getCurrentState(), prefs.getStationName());
-        SocketService.getInstance().sendMessage(usr);
+        SocketService.getInstance().updateStateAndSendMessage(usr);
 //        new PostRequestTask(context).execute(usr);
     }
 

@@ -38,7 +38,6 @@ public class SocketService extends Service {
     private static final long LOST_CONNECTION_PING_INTERVAL_IN_MS = 5000;
     public static SocketService mService;
 
-    private static boolean pingSent = false;
     private static boolean isServerDisconnected = false;
 
 
@@ -55,7 +54,8 @@ public class SocketService extends Service {
         UNREGISTER,
         RECEIVE,
         DEVICE_MESSAGE,
-        GET_DEVICE_STATES
+        SERVER_DISCONNECT,
+        UPDATE_STATE_AND_SEND_REQUEST
     }
 
     public static SocketService getInstance() {
@@ -116,6 +116,31 @@ public class SocketService extends Service {
                 }
             });
 
+            mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d(TAG, "CONNECTED TO SOCKET");
+                    sendServerConnectionChangedBroadcast(true);
+                }
+            });
+
+            mSocket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d(TAG, "CLIENT SOCKET DISCONNECT");
+                    sendServerConnectionChangedBroadcast(false);
+                }
+            });
+
+            mSocket.on(SocketOperation.SERVER_DISCONNECT.name(), new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d(TAG, "SERVER SOCKET DISCONNECTED");
+                    mSocket.disconnect();
+                    sendServerConnectionChangedBroadcast(false);
+                }
+            });
+
 
             mSocket.on("pong", new Emitter.Listener() {
                 @Override
@@ -126,11 +151,6 @@ public class SocketService extends Service {
                         Intent i = new Intent(PrefManager.EVENT_TABLET_CONNECTIONS_RECEIVED);
                         i.putExtra(PrefManager.PAYLOAD, payload);
                         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
-                    }
-                    pingSent = false;
-                    if (isServerDisconnected) {
-                        isServerDisconnected = false;
-                        sendServerConnectionChangedBroadcast(true);
                     }
                 }
             });
@@ -155,22 +175,28 @@ public class SocketService extends Service {
         public void run() {
             while (running) {
 
-                if (!pingSent) {
-                    pingSent = true;
-                    ThreadUtil.sleep(DEFAULT_PING_INTERVAL_IN_MS, Thread.currentThread());
+                long sleepLength = 0;
 
+                if (mSocket.connected() && isServerDisconnected) {
+                    isServerDisconnected = false;
+                    sendServerConnectionChangedBroadcast(true);
+                    sleepLength = DEFAULT_PING_INTERVAL_IN_MS;
+                } else if (mSocket.connected()) {
+                    sleepLength = DEFAULT_PING_INTERVAL_IN_MS;
                 } else {
-                    Log.e(TAG, "SERVER UNAVAILABLE");
-                    isServerDisconnected = true;
 
-//                    mSocket.disconnect();
+                    Log.e(TAG, "SERVER UNAVAILABLE");
+                    Log.d(TAG, "Connection Status " + mSocket.connected());
+
+                    isServerDisconnected = true;
                     mSocket.connect();
 
-                    sendServerConnectionChangedBroadcast(false);
-                    ThreadUtil.sleep(LOST_CONNECTION_PING_INTERVAL_IN_MS, Thread.currentThread());
+                    sleepLength = LOST_CONNECTION_PING_INTERVAL_IN_MS;
                 }
 
-                // if we terminate while sleeping we shouldn't call this loop.
+                ThreadUtil.sleep(sleepLength, Thread.currentThread());
+
+                // if we terminate while sleeping we shouldn't call.
                 if (running) {
                     mSocket.emit("ping", name);
                 }
@@ -195,6 +221,10 @@ public class SocketService extends Service {
 
     public void sendMessage(Request request) {
         startSocketEmitter(SocketOperation.RECEIVE, request.toJSON().toString());
+    }
+
+    public void updateStateAndSendMessage(Request request) {
+        startSocketEmitter(SocketOperation.UPDATE_STATE_AND_SEND_REQUEST, request.toJSON().toString());
     }
 
 //    public void getDeviceState(Request request) {
