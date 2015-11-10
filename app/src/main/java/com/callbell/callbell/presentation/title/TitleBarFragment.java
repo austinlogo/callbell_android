@@ -147,6 +147,7 @@ public class TitleBarFragment extends Fragment {
 
         mAdminButton.setText(isSuperUser ? R.string.user_mode : R.string.admin_mode);
         mClearButton.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        mPainButton.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
     }
 
     public void adminSettings() {
