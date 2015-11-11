@@ -9,8 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.callbell.callbell.models.request.RegisterRequest;
+import com.callbell.callbell.models.State.State;
+import com.callbell.callbell.models.request.RegistrationRequest;
 import com.callbell.callbell.models.request.Request;
+import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.service.ServerEndpoints;
 import com.callbell.callbell.util.BundleUtil;
 import com.callbell.callbell.util.JSONUtil;
@@ -55,6 +57,7 @@ public class SocketService extends Service {
         RECEIVE,
         DEVICE_MESSAGE,
         SERVER_DISCONNECT,
+        CONNECTION_UPDATE,
         UPDATE_STATE_AND_SEND_REQUEST
     }
 
@@ -132,6 +135,13 @@ public class SocketService extends Service {
                 }
             });
 
+            mSocket.on(SocketOperation.CONNECTION_UPDATE.name(), new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    handleUpdate( (String) args[0]);
+                }
+            });
+
             mSocket.on(SocketOperation.SERVER_DISCONNECT.name(), new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
@@ -205,15 +215,15 @@ public class SocketService extends Service {
         }
     }
 
-    public void registerDevice(RegisterRequest request) {
-        mPingThreadRunnable = new PingServer(request.getRegisterId());
+    public void registerDevice(State state) {
+        mPingThreadRunnable = new PingServer(state.getTabletName());
         mPingThread = new Thread(mPingThreadRunnable);
-        startSocketEmitter(SocketOperation.REGISTER, request.toJSON().toString());
+        startSocketEmitter(SocketOperation.REGISTER, state.toJson().toString());
         mPingThread.start();
     }
 
-    public void unregisterDevice(String name) {
-        startSocketEmitter(SocketOperation.UNREGISTER, name);
+    public void unregisterDevice(State state) {
+        startSocketEmitter(SocketOperation.UNREGISTER, state.toJson().toString());
         mPingThreadRunnable.terminate();
         mThread.interrupt();
 
@@ -234,6 +244,18 @@ public class SocketService extends Service {
     public void startSocketEmitter(SocketOperation operation, String payload) {
         Log.d(TAG, "PAYLOAD: " + payload);
         new Thread(new SocketEmitter(operation, payload)).start();
+    }
+
+    private void handleUpdate(String string) {
+
+        if (string == null) {
+            Log.e(TAG, "handle Update parameter was null");
+            return;
+        }
+
+        Intent i = new Intent(ConnectionStatusUpdateResponse.INTENT_ACTION);
+        i.putExtra(ConnectionStatusUpdateResponse.INTENT_EXTRA_JSON_STRING, string);
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
     }
 
     public void handleIncomingMessages(JSONObject object) {

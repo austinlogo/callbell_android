@@ -8,13 +8,12 @@ import android.util.Log;
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.GetStatesRequest;
-import com.callbell.callbell.models.request.RegisterRequest;
+import com.callbell.callbell.models.request.RegistrationRequest;
 import com.callbell.callbell.models.request.UpdateStateRequest;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.service.tasks.PostRequestWithCallbackTask;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.models.request.CallBellRequest;
-import com.callbell.callbell.service.tasks.PostRequestTask;
 
 import javax.inject.Inject;
 
@@ -53,8 +52,8 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     }
 
     public void register(State st, String registrationId) {
-        RegisterRequest request = new RegisterRequest(st, registrationId);
-        SocketService.getInstance().registerDevice(request);
+        RegistrationRequest request = new RegistrationRequest(st, registrationId);
+        SocketService.getInstance().registerDevice(st);
     }
 
     @Override

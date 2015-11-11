@@ -118,7 +118,7 @@ public class BedModeActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SocketService.getInstance().unregisterDevice(prefs.getCurrentState().getTabletName());
+        SocketService.getInstance().unregisterDevice(prefs.getCurrentState());
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
 
         if (mPainRatingAsyncTask != null) {

@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.util.PrefManager;
-import com.callbell.callbell.models.request.RegisterRequest;
+import com.callbell.callbell.models.request.RegistrationRequest;
 import com.callbell.callbell.service.tasks.PostRequestTask;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
@@ -60,7 +60,7 @@ public class RegistrationIntentService extends IntentService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        RegisterRequest msg = new RegisterRequest(prefs.getCurrentState(), token);
+        RegistrationRequest msg = new RegistrationRequest(prefs.getCurrentState(), token);
         new PostRequestTask(getApplication()).execute(msg);
     }
 }

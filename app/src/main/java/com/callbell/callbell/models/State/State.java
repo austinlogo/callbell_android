@@ -1,5 +1,7 @@
 package com.callbell.callbell.models.State;
 
+import android.util.Log;
+
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
@@ -23,6 +25,8 @@ public class State {
     public static final String PAIN_RATING = "PAIN_RATING_ID";
     public static final String REGISTRATION_ID = "REGISTRATION_ID";
     public static final String CONNECTION_INDICATOR_ID = "CONNECTION_INDICATOR_ID";
+    public static final String TABLET_NAME_ID = "TABLE_NAME_ID";
+    public static final String STATION_TABLET_NAME_ID = "STATION_TABLET_NAME_ID";
     public static final String STATE_ID = "STATE_ID";
 
     private static final String TAG = State.class.getSimpleName();
@@ -159,20 +163,27 @@ public class State {
                 && this.location.equals(other.getLocation());
     }
 
-    public JSONObject toJson() throws JSONException {
+    public JSONObject toJson() {
         JSONObject object = new JSONObject();
 
-        object.put(HOSPITAL_ID, hospital);
-        object.put(GROUP_ID, group);
-        object.put(LOCATION_ID, location);
-        object.put(PHYSICIAN, physician);
-        object.put(NURSE, nurse);
-        object.put(RESIDENT, resident);
-        object.put(CHIEF_COMPLAINT, chiefComplaint);
-        object.put(PAIN_RATING, painRating);
-        object.put(CONNECTION_INDICATOR_ID, isConnectedValue ? 1 : 0);
+        try {
+            object.put(HOSPITAL_ID, hospital);
+            object.put(GROUP_ID, group);
+            object.put(LOCATION_ID, location);
+            object.put(PHYSICIAN, physician);
+            object.put(NURSE, nurse);
+            object.put(RESIDENT, resident);
+            object.put(CHIEF_COMPLAINT, chiefComplaint);
+            object.put(PAIN_RATING, painRating);
+            object.put(TABLET_NAME_ID, getTabletName());
+            object.put(STATION_TABLET_NAME_ID, getStationTabletName());
+            object.put(CONNECTION_INDICATOR_ID, isConnectedValue ? 1 : 0);
 
-        return object;
+            return object;
+        } catch (JSONException e) {
+            Log.e(TAG, "Unable to make State a JSON: " + e);
+            return new JSONObject();
+        }
     }
 
     public String toString() {
@@ -183,6 +194,7 @@ public class State {
         sb.append(LOCATION_ID + ": " + location);
         sb.append(CHIEF_COMPLAINT + ": " + chiefComplaint);
         sb.append(PAIN_RATING + ": " + painRating);
+
         return sb.toString();
     }
 
@@ -196,6 +208,10 @@ public class State {
 
     public String getTabletName() {
         return hospital + "_" + group + "_" + location;
+    }
+
+    public String getStationTabletName() {
+        return hospital + "_" + group + "_" + PrefManager.STATION_SUFFIX;
     }
 
     public void setConnected(boolean connected) {

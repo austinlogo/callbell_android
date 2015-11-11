@@ -90,4 +90,13 @@ public class JSONUtil {
             return false;
         }
     }
+
+    public static boolean getValueBooleanValueIfExists(JSONObject obj, String key) {
+        try {
+            return obj.has(key) && obj.getBoolean(key);
+        } catch (JSONException e) {
+            Log.e(TAG, "JSONException getting Boolean Value: " + e);
+            return false;
+        }
+    }
 }

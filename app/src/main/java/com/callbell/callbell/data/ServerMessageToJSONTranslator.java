@@ -3,7 +3,7 @@ package com.callbell.callbell.data;
 
 import android.util.Log;
 
-import com.callbell.callbell.models.request.RegisterRequest;
+import com.callbell.callbell.models.request.RegistrationRequest;
 import com.callbell.callbell.models.request.CallBellRequest;
 
 import org.json.JSONException;
@@ -33,7 +33,7 @@ public class ServerMessageToJSONTranslator {
         return null;
     }
 
-    public JSONObject RegisterRequestToJSON(RegisterRequest message) {
+    public JSONObject RegisterRequestToJSON(RegistrationRequest message) {
         try {
             JSONObject jsonObject = new JSONObject();
 

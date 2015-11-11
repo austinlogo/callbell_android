@@ -12,6 +12,7 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.Request;
+import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
@@ -63,6 +64,7 @@ public class StationActivity
         filter.addAction(PrefManager.EVENT_STATE_UPDATE);
         filter.addAction(PrefManager.EVENT_SERVER_CONNECTION_CHANGED);
         filter.addAction(PrefManager.EVENT_TABLET_CONNECTIONS_RECEIVED);
+        filter.addAction(ConnectionStatusUpdateResponse.INTENT_ACTION);
 
        mBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -95,6 +97,10 @@ public class StationActivity
                     String payload = intent.getStringExtra(PrefManager.PAYLOAD);
                     List<String> connectedTablets = JSONUtil.getStringListFromJSONArrayString(payload);
                     mStationFragment.updateConnectionStatuses(connectedTablets);
+                } else if (ConnectionStatusUpdateResponse.INTENT_ACTION.equals(intent.getAction())) {
+                    String payload = intent.getStringExtra(ConnectionStatusUpdateResponse.INTENT_EXTRA_JSON_STRING);
+                    ConnectionStatusUpdateResponse response = new ConnectionStatusUpdateResponse(JSONUtil.getJSONFromString(payload));
+                    mStationFragment.updateConnectionStatuses(response);
                 }
             }
         };
@@ -106,7 +112,7 @@ public class StationActivity
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
-        SocketService.getInstance().unregisterDevice(prefs.getCurrentState().getTabletName());
+        SocketService.getInstance().unregisterDevice(prefs.getCurrentState());
     }
 
     @Override

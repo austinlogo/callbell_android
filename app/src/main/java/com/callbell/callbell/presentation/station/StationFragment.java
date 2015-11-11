@@ -17,6 +17,7 @@ import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.adapter.StationItemAdapter;
+import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.util.JSONUtil;
@@ -169,6 +170,10 @@ public class StationFragment
 
     public void updateConnectionStatuses(List<String> connectedTablets) {
         adapter.updateConnectedStatuses(connectedTablets);
+    }
+
+    public void updateConnectionStatuses(ConnectionStatusUpdateResponse response) {
+        adapter.updateConnectedStatus(response.getTabletName(), response.getConnectionStatus());
     }
 
     /**

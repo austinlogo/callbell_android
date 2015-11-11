@@ -149,4 +149,15 @@ public class StationItemAdapter extends BaseAdapter {
 
         notifyDataSetChanged();
     }
+
+    public void updateConnectedStatus(String tabletName, boolean connectedStatus) {
+        for (State state : stateList) {
+            if (state.getTabletName().equals(tabletName)) {
+                state.setConnected(connectedStatus);
+
+                notifyDataSetChanged();
+                return;
+            }
+        }
+    }
 }
