@@ -20,6 +20,7 @@
     <string name="acknowledge">Acknowledge</string>
     <string name="dismiss">Dismiss</string>
     <string name="staff_physician">Your Resident Doctor is</string>
+    <string name="staff_nurse_practitioner">Your Nurse Practitioner is</string>
     <string name="staff_nurse">Your Nurse is</string>
     <string name="staff_resident">Your Resident is</string>
     <string name="admin_mode">Go to Admin Mode</string>
@@ -51,7 +52,7 @@
     <string name="enable_pain_questions">Enable pain Questionaire</string>
     <string name="how_often">How Often (in Minutes)?</string>
     <string name="poc_current_tests_title">Your Plan of Care</string>
-    <string name="poc_current_medications_title">Medications given</string>
+    <string name="poc_current_medications_title">Medications Given</string>
     <string name="clear">Clear Values</string>
     <string name="requested">requested</string>
     <string name="server_disconnected">Disconnected from server. trying to reconnect</string>

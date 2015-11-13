@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
@@ -41,6 +42,9 @@ public class StaffFragment extends Fragment {
 
     @InjectView(R.id.staff_nurse_field)
     EditText nurseField;
+
+    @InjectView(R.id.staff_physician_title)
+    TextView physicianTitle;
 
     @InjectView(R.id.staff_physician_box)
     LinearLayout physicianBox;
@@ -81,8 +85,23 @@ public class StaffFragment extends Fragment {
 
         setStaffValues(false);
         setSuperUserPermissions(prefs.isSuperUser());
+        setListeners();
 
         return view;
+    }
+
+    private void setListeners() {
+        physicianTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView view = (TextView) v;
+                if (view.getText().equals(getText(R.string.staff_physician))) {
+                    view.setText(R.string.staff_nurse_practitioner);
+                } else {
+                    view.setText(R.string.staff_physician);
+                }
+            }
+        });
     }
 
     private void setStaffValues(boolean isSuperUser) {

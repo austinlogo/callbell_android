@@ -17,9 +17,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:id="@+id/staff_physician_title"
             android:textSize="@dimen/small_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:text="@string/staff_physician"/>
         <EditText
             style="@style/Bea_Theme.EditText"
