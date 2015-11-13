@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="@dimen/standard_padding"
+    style="@style/Bea_Theme.Activity"
     tools:context="com.callbell.callbell.presentation.bed.PlanOfCareFragment">
 
     <LinearLayout

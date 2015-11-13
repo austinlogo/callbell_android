@@ -51,7 +51,7 @@
 
         <Button
             android:id="@+id/dialog_station_acknowledge"
-            style="@style/Bea_Theme.NoMarginButton"
+            style="@style/Bea_Theme.TitleBarButton"
             android:text="@string/acknowledge"
             android:textColor="@color/black"
             android:background="@android:color/transparent"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/dialog_station_omw"
-            style="@style/Bea_Theme.NoMarginButton"
+            style="@style/Bea_Theme.TitleBarButton"
             android:text="@string/on_my_way"
             android:textColor="@color/black"
             android:background="@android:color/transparent"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/dialog_station_wait"
-            style="@style/Bea_Theme.NoMarginButton"
+            style="@style/Bea_Theme.TitleBarButton"
             android:text="@string/wait"
             android:textColor="@color/black"
             android:background="@android:color/transparent"

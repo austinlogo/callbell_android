@@ -80,7 +80,7 @@ public class StaffFragment extends Fragment {
         defaultTextBackgroundResident = residentField.getBackground();
 
         setStaffValues(false);
-        enableSuperUserAccess(prefs.isSuperUser());
+        setSuperUserPermissions(prefs.isSuperUser());
 
         return view;
     }
@@ -100,7 +100,7 @@ public class StaffFragment extends Fragment {
     }
 
 
-    public void enableSuperUserAccess(boolean setSuperUserStatus) {
+    public void setSuperUserPermissions(boolean setSuperUserStatus) {
 
 //        before disabling set staff information)
         if (!setSuperUserStatus) {

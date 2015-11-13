@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:padding="@dimen/small_padding"
-
+    android:paddingBottom="@dimen/small_padding"
+    style="@style/Bea_Theme.Activity"
     android:layout_height="wrap_content">
 
 
@@ -38,22 +38,17 @@
             android:layout_height="wrap_content"
             android:padding="9dp"
             android:gravity="center_vertical"
-            android:background="@color/colorPrimary"
+            android:background="@color/transparent"
             android:layout_alignParentLeft="true">
 
             <TextView
                 android:id="@+id/fragment_title_bar_bed_number"
+                android:background="@color/transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/small_text"
                 android:paddingRight="@dimen/standard_padding" />
-            <TextView
-                android:id="@+id/fragment_title_bar_date"
-                android:layout_width="wrap_content"
-                android:textSize="@dimen/small_text"
-                android:gravity="center_vertical"
-                android:layout_height="match_parent" />
 
         </LinearLayout>
 
@@ -64,28 +59,30 @@
             android:layout_height="wrap_content">
 
             <Button
-                style="@style/Bea_Theme.NoMarginButton"
-                android:layout_alignParentRight="true"
-                android:id="@+id/fragment_title_mode_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/admin_mode"/>
-
-            <Button
-                style="@style/Bea_Theme.NoMarginButton"
+                style="@style/Bea_Theme.TitleBarButton"
                 android:id="@+id/fragment_title_bar_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/clear"/>
 
             <Button
-                style="@style/Bea_Theme.NoMarginButton"
+                style="@style/Bea_Theme.TitleBarButton"
                 android:id="@+id/fragment_title_bar_pain"
                 android:layout_alignParentRight="true"
                 android:text="@string/pain_header"
                 android:layout_width="wrap_content"
                 android:visibility="gone"
                 android:layout_height="match_parent" />
+
+            <ImageButton
+                style="@style/Bea_Theme.TitleBarButton"
+                android:layout_alignParentRight="true"
+                android:id="@+id/fragment_title_mode_button"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:padding="@dimen/standard_padding"
+                android:src="@drawable/pencil"
+                android:scaleType="fitXY"/>
 
         </LinearLayout>
     </RelativeLayout>

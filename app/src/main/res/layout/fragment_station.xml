@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Bea_Theme.Activity"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,22 +17,7 @@
             android:text="@string/bed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
-
-        <TextView
-            android:id="@+id/station_item_physician_title"
-            android:text="@string/staff_physician"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
-
-        <TextView
-            android:id="@+id/station_item_nurse_title"
-            android:text="@string/staff_nurse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/standard_padding"
             android:layout_weight="1"
             />
 
@@ -40,6 +26,25 @@
             android:text="@string/nurse_chief_complaint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/standard_padding"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/station_item_physician_title"
+            android:text="@string/physician"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/standard_padding"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/station_item_nurse_title"
+            android:text="@string/nurse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/standard_padding"
             android:layout_weight="1"
             />
 
@@ -48,6 +53,7 @@
             android:text="@string/pain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/standard_padding"
             android:layout_weight="1"
             />
     </LinearLayout>

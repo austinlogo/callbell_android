@@ -110,6 +110,10 @@ public class DisplayItemList extends LinearLayout {
         adminAdapter.resetList(key);
     }
 
+    public int getShownItemCount() {
+        return adminList.getCheckedItemCount();
+    }
+
     public void setCheckedItems(List<Integer> shownItems) {
         for (int i = 0; i < adminList.getCount(); i++) {
             adminList.setItemChecked(i, shownItems.contains(i));
@@ -164,7 +168,8 @@ public class DisplayItemList extends LinearLayout {
     }
 
     public void clear() {
-        adminAdapter.clear();
+        setCheckedItems(new ArrayList<Integer>());
+        patientAdapter.clear();
     }
 
     public void resetList(String key) {

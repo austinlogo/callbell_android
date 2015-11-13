@@ -19,6 +19,14 @@
         />
 
     <TextView
+        android:id="@+id/station_item_chief_complaint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_margin"
+        android:layout_weight="1"
+        />
+
+    <TextView
         android:id="@+id/station_item_physician"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,13 +42,7 @@
         android:layout_weight="1"
         />
 
-    <TextView
-        android:id="@+id/station_item_chief_complaint"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/item_margin"
-        android:layout_weight="1"
-        />
+
 
     <TextView
         android:id="@+id/station_item_pain_rating"

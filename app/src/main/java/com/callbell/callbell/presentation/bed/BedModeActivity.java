@@ -9,6 +9,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -26,6 +28,7 @@ import com.callbell.callbell.util.PrefManager;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class BedModeActivity
         extends BaseActivity
@@ -42,12 +45,16 @@ public class BedModeActivity
     @Inject
     PrefManager prefs;
 
+    @InjectView(R.id.bed_mode_CallBellsFragment_container)
+    FrameLayout mCallBellContainer;
+
     private BroadcastReceiver mBroadcastReceiver;
     private StaffFragment mStaffFragment;
     private CallBellsFragment mCallBellsFragment;
     private PlanOfCareFragment mPlanOfCareFragment;
     private PainRatingAsyncTask mPainRatingAsyncTask;
     private TitleBarFragment mTitleBarFragment;
+    private boolean superUserPermissions;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,13 +71,14 @@ public class BedModeActivity
         Log.d(TAG, "BedModeActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_mode);
+
         ButterKnife.inject(this);
         ((CallBellApplication) getApplication()).inject(this);
 
         mStaffFragment = StaffFragment.newInstance();
         mCallBellsFragment = CallBellsFragment.newInstance();
         mPlanOfCareFragment = PlanOfCareFragment.newInstance();
-        mTitleBarFragment = TitleBarFragment.newInstance(true);
+        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.BED_MODE_ACTIVITY);
 
         getFragmentManager()
                 .beginTransaction()
@@ -79,6 +87,8 @@ public class BedModeActivity
                 .add(R.id.bed_mode_plan_of_care_fragment_container, mPlanOfCareFragment, "Plan of Care")
                 .add(R.id.bed_mode_CallBellsFragment_container, mCallBellsFragment, "Call Bells")
                 .commit();
+
+        setSuperUserPermissions(prefs.isSuperUser());
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(PrefManager.EVENT_SU_MODE_CHANGE);
@@ -97,14 +107,15 @@ public class BedModeActivity
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
 
-                    mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
+                    mStaffFragment.setSuperUserPermissions(prefs.isSuperUser());
                     mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
-                    mTitleBarFragment.setSuperUserSettings(prefs.isSuperUser());
+                    mTitleBarFragment.setSuperUserPermissions(prefs.isSuperUser());
+                    setSuperUserPermissions(prefs.isSuperUser());
 
                     if (!prefs.isSuperUser()) {
                         messageRouting.updateState();
                     }
-                    mStaffFragment.enableSuperUserAccess(prefs.isSuperUser());
+                    mStaffFragment.setSuperUserPermissions(prefs.isSuperUser());
 
                 } else if (intent.getAction().equals(PrefManager.EVENT_SERVER_CONNECTION_CHANGED)) {
                     mTitleBarFragment.toggleServerconnectedView(intent.getBooleanExtra(PrefManager.SERVER_CONNECTED, false));
@@ -149,5 +160,9 @@ public class BedModeActivity
 
         mStaffFragment.clearValues();
         mPlanOfCareFragment.clearValues();
+    }
+
+    public void setSuperUserPermissions(boolean isSuperUser) {
+        mCallBellContainer.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
     }
 }

@@ -209,6 +209,12 @@ public class LoginFragment extends Fragment {
         stationButton.setEnabled(enableStation);
     }
 
+    public void clearValues() {
+        hospital_id.setText( (hospital_id.isEnabled()) ? "" : hospital_id.getText());
+        group_id.setText( (group_id.isEnabled()) ? "" : group_id.getText());
+        location_id.setText( (location_id.isEnabled()) ? "" : location_id.getText());
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

@@ -48,13 +48,13 @@ public class StationActivity
 
         Log.d(TAG, "Started Station");
 
-        mTitleBarFragment = TitleBarFragment.newInstance();
+        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.STATION_MODE_ACTIVITY);
         mStationFragment = StationFragment.newInstance();
 
 
         getFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_login_title_container, mTitleBarFragment)
+//                .add(R.id.fragment_login_title_container, mTitleBarFragment)
                 .add(R.id.fragment_login_container, mStationFragment)
                 .commit();
 

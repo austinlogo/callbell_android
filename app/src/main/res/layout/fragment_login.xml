@@ -26,17 +26,19 @@
             android:id="@+id/group_id"
             style="@style/Bea_Theme.EditText"
             android:hint="@string/group_name"
+            android:inputType="textCapCharacters"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <EditText
-        android:id="@+id/login_id"
-        style="@style/Bea_Theme.EditText"
-        android:hint="@string/location_hint"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content" />
+            android:id="@+id/login_id"
+            style="@style/Bea_Theme.EditText"
+            android:hint="@string/location_hint"
+            android:inputType="textCapCharacters"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
     <LinearLayout

@@ -1,29 +1,20 @@
 package com.callbell.callbell.presentation.login;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
-import com.callbell.callbell.service.ServerEndpoints;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.PrefManager;
-import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-
-import java.net.URISyntaxException;
 
 
 import javax.inject.Inject;
@@ -53,7 +44,7 @@ public class LoginActivity
         ((CallBellApplication) getApplication()).inject(this);
 
         mLoginFragment = LoginFragment.newInstance();
-        mTitleBarFragment = TitleBarFragment.newInstance();
+        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.LOGIN_MODE_ACTIVITY);
 
         startService(new Intent(getApplicationContext(), SocketService.class));
 
@@ -72,19 +63,16 @@ public class LoginActivity
             public void onReceive(Context context, Intent intent) {
 
                 if (PrefManager.EVENT_SU_MODE_CHANGE.equals(intent.getAction())) {
-                    mTitleBarFragment.setSuperUserSettings(prefs.isSuperUser());
+                    mTitleBarFragment.setSuperUserPermissions(prefs.isSuperUser());
                 }
             }
         };
-
-
-
         LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, filter);
     }
 
     @Override
     public void clearValues() {
-        // NOOP
+        mLoginFragment.clearValues();
     }
 
     @Override

@@ -9,6 +9,8 @@
     <color name="black_overlay">#66000000</color>
     <color name="red">#F00</color>
     <color name="charcoal">#272828</color>
+    <color name="coal">#171818</color>
+    <color name="navy">#001dd9</color>
 
     <color name="colorPrimaryDisabled">#3327ae60</color>
     <color name="white_overlay">#55FFFFFF</color>
@@ -19,6 +21,8 @@
     <color name="blanket_color">#9c4ddc</color>
     <color name="food_color">#d97532</color>
     <color name="help_color">#2ac200</color>
+    <color name="transparent">#00ffffff</color>
+
 
     "
 </resources>

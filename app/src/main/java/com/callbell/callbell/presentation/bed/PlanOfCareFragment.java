@@ -110,7 +110,7 @@ public class PlanOfCareFragment extends Fragment {
         //Inflate the spinner
         List<String> spinnerArray = new ArrayList<>(POCValues.pocMap.keySet());
         Collections.sort(spinnerArray);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, spinnerArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.item_simple_spinner, spinnerArray);
         chiefComplaintSpinner.setAdapter(adapter);
         Log.d(TAG, "Current Selection: " + prefs.getCurrentState().getChiefComplaint());
         chiefComplaintSpinner.setSelection(adapter.getPosition(prefs.getCurrentState().getChiefComplaint()), false);
@@ -243,13 +243,16 @@ public class PlanOfCareFragment extends Fragment {
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         chiefComplaintSpinner.setEnabled(isSuperUser);
         chiefComplaintSpinner.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        mPlanOfCareTests.setVisibility((!isSuperUser && mPlanOfCareTests.getShownItemCount() == 0) ? View.GONE : View.VISIBLE);
+        mPlanOfCareMedications.setVisibility( (!isSuperUser && mPlanOfCareMedications.getShownItemCount() == 0 ) ? View.GONE : View.VISIBLE);
     }
 
     public void clearValues() {
         prefs.setShownTestItems(new ArrayList<Integer>());
         prefs.setShownMedicationItems(new ArrayList<Integer>());
         mPlanOfCareTests.clear();
-        mPlanOfCareTests.setCheckedItems(prefs.shownTestItems());
+        mPlanOfCareMedications.clear();
+//        mPlanOfCareTests.setCheckedItems(prefs.shownTestItems());
     }
 
     //Spinner Listener

@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:minWidth="500dp"
     android:padding="@dimen/standard_padding"
     style="@style/Bea_Theme.DialogView">
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/layout_dialog_set_pain_15"
+        style="@style/Bea_Theme.Button"
+        android:text="15"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/title_size"
-            android:textColor="@color/black"
-            android:layout_alignParentLeft="true"
-            android:text="@string/how_often"/>
-
-        <EditText
-            android:id="@+id/dialog_set_pain_interval"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/paragraph"
-            android:layout_alignParentRight="true"
-            android:inputType="number"
-            android:textColor="@color/black"/>
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
 
     <Button
-        android:id="@+id/dialog_set_pain_submit"
+        android:id="@+id/layout_dialog_set_pain_30"
+        style="@style/Bea_Theme.Button"
+        android:text="30"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/submit"
-        style="@style/Bea_Theme.Button"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/layout_dialog_set_pain_60"
+        style="@style/Bea_Theme.Button"
+        android:text="60"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
 </LinearLayout>

@@ -23,11 +23,14 @@ public class SetPainRatingDialog extends DialogFragment {
 
     private static final String TAG = SetPainRatingDialog.class.getSimpleName();
 
-    @InjectView(R.id.dialog_set_pain_interval)
-    EditText intervalValue;
+    @InjectView (R.id.layout_dialog_set_pain_15)
+    Button mPainSetting15;
 
-    @InjectView(R.id.dialog_set_pain_submit)
-    Button submit;
+    @InjectView (R.id.layout_dialog_set_pain_30)
+    Button mPainSetting30;
+
+    @InjectView (R.id.layout_dialog_set_pain_60)
+    Button mPainSetting60;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,7 +40,9 @@ public class SetPainRatingDialog extends DialogFragment {
 
         ButterKnife.inject(this, dialog);
 
-        submit.setOnClickListener(new SubmitListener());
+        mPainSetting15.setOnClickListener(new SubmitListener());
+        mPainSetting30.setOnClickListener(new SubmitListener());
+        mPainSetting60.setOnClickListener(new SubmitListener());
 
         return dialog;
     }
@@ -47,10 +52,12 @@ public class SetPainRatingDialog extends DialogFragment {
         @Override
         public void onClick(View v) {
 
+            Button btn = (Button) v;
+
             Log.d(TAG, "Submitted new Pain Rating Task");
 
             PainRatingAsyncTask mTask = new PainRatingAsyncTask(getActivity());
-            mTask.execute(Integer.valueOf(intervalValue.getText().toString()));
+            mTask.execute(Integer.valueOf(btn.getText().toString()));
 
             dismiss();
         }

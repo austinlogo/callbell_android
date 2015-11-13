@@ -29,6 +29,12 @@
                 android:layout_height="wrap_content">
             </FrameLayout>
 
+            <TableRow
+                android:id="@+id/staff_fragment_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/scrollbar" />
+
             <FrameLayout
                 android:id="@+id/bed_mode_plan_of_care_fragment_container"
                 android:layout_width="match_parent"

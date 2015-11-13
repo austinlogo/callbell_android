@@ -63,9 +63,18 @@
         <item name="android:paddingLeft">@dimen/standard_padding</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="Bea_Theme.TitleBarButton">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:paddingRight">@dimen/standard_padding</item>
+        <item name="android:paddingLeft">@dimen/standard_padding</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     
     <style name="Bea_Theme.EditText" parent="Widget.AppCompat.EditText">
-        <!--<item name="android:textColor">@drawable/edittext_text_color</item>-->
+        <item name="android:textColor">@drawable/bea_theme_edittext_text_color</item>
         <item name="android:textSize">@dimen/paragraph</item>
         <item name="android:singleLine">true</item>
     </style>
@@ -77,7 +86,7 @@
     </style>
 
     <style name="Bea_Theme.Call_Bell">
-        <item name="android:background">@drawable/bea_theme_call_bell_fragment_background</item>
+        <item name="android:background">@color/coal</item>
         <!--<item name="android:padding">@dimen/standard_padding</item>-->
     </style>
 

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,9 +23,6 @@ import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
 import com.callbell.callbell.util.PrefManager;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -35,17 +33,20 @@ import butterknife.InjectView;
  */
 public class TitleBarFragment extends Fragment {
 
-    private static final String PAIN_VISIBILITY = "PAIN_VISIBILITY";
+    public static final int BED_MODE_ACTIVITY = 0x0;
+    public static final int STATION_MODE_ACTIVITY = 0x1;
+    public static final int LOGIN_MODE_ACTIVITY = 0x2;
+
+    private static final String ACTIVITY = "ACTIVITY";
+    private int mActivityValue = -1;
+
     private TitleBarListener mListener;
 
     @Inject
     PrefManager prefs;
 
     @InjectView(R.id.fragment_title_mode_button)
-    Button mAdminButton;
-
-    @InjectView(R.id.fragment_title_bar_date)
-    TextView mDateTextView;
+    ImageButton mAdminButton;
 
     @InjectView(R.id.fragment_title_bar_bed_number)
     TextView mBedNumber;
@@ -65,13 +66,9 @@ public class TitleBarFragment extends Fragment {
     private static final String TAG = TitleBarFragment.class.getSimpleName();
 
 
-    public static TitleBarFragment newInstance() {
-        return newInstance(false);
-    }
-
-    public static TitleBarFragment newInstance(boolean painVisibility) {
+    public static TitleBarFragment newInstance(int fragmentValue) {
         Bundle bundle = new Bundle();
-        bundle.putBoolean(PAIN_VISIBILITY, painVisibility);
+        bundle.putInt(ACTIVITY, fragmentValue);
         TitleBarFragment fragment = new TitleBarFragment();
         fragment.setArguments(bundle);
 
@@ -89,16 +86,36 @@ public class TitleBarFragment extends Fragment {
         ButterKnife.inject(this, view);
 
         //Set Values
-        mDateTextView.setText(DateFormat.getDateInstance().format(new Date()));
-        mBedNumber.setText(getText(R.string.bed) + ": " + prefs.getCurrentState().getLocation());
-        mPainButton.setVisibility(bundle.getBoolean(PAIN_VISIBILITY) ? View.VISIBLE : View.GONE);
+        mBedNumber.setText(String.format(
+                "%s %s #%s",
+                prefs.getCurrentState().getGroup(),
+                getText(R.string.bed),
+                prefs.getCurrentState().getLocation()));
 
+        mActivityValue = bundle.getInt(ACTIVITY);
 
+        setUI();
         initListeners();
 
-        setSuperUserSettings(prefs.isSuperUser());
+        setSuperUserPermissions(prefs.isSuperUser());
         
         return view;
+    }
+
+    private void setUI() {
+
+        switch (mActivityValue) {
+            case BED_MODE_ACTIVITY:
+                break;
+            case STATION_MODE_ACTIVITY:
+                mClearButton.setVisibility(View.GONE);
+                mPainButton.setVisibility(View.GONE);
+                break;
+            case LOGIN_MODE_ACTIVITY:
+                mClearButton.setVisibility(View.VISIBLE);
+                mPainButton.setVisibility(View.GONE);
+        }
+
     }
 
     public void initListeners() {
@@ -143,11 +160,16 @@ public class TitleBarFragment extends Fragment {
         }
     }
 
-    public void setSuperUserSettings(boolean isSuperUser) {
+    public void setSuperUserPermissions(boolean isSuperUser) {
 
-        mAdminButton.setText(isSuperUser ? R.string.user_mode : R.string.admin_mode);
+        mDefaultLayout.setBackgroundColor(isSuperUser
+                ? getActivity().getApplicationContext().getResources().getColor(R.color.navy)
+                : getActivity().getApplicationContext().getResources().getColor(R.color.colorPrimary));
+        mAdminButton.setImageResource(isSuperUser ? R.drawable.save : R.drawable.pencil);
         mClearButton.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         mPainButton.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+
+        setUI();
     }
 
     public void adminSettings() {
@@ -159,14 +181,15 @@ public class TitleBarFragment extends Fragment {
             prefs.setSuperUser(false);
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(i);
-            mAdminButton.setText(R.string.admin_mode);
+            mAdminButton.setImageResource(R.drawable.save);
             prefs.setState(prefs.getCurrentState());
         }
     }
 
     public void toggleServerconnectedView(boolean isServerConnected) {
-        mDisconnectedLayout.setVisibility(!isServerConnected ? View.VISIBLE : View.GONE);
-        mDefaultLayout.setVisibility(!isServerConnected ? View.GONE : View.VISIBLE);
+        // TODO: We need proper handling of this
+//        mDisconnectedLayout.setVisibility(!isServerConnected ? View.VISIBLE : View.GONE);
+//        mDefaultLayout.setVisibility(!isServerConnected ? View.GONE : View.VISIBLE);
     }
 
 
