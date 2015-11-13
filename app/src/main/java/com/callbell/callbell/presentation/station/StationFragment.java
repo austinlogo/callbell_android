@@ -173,7 +173,9 @@ public class StationFragment
     }
 
     public void updateConnectionStatuses(ConnectionStatusUpdateResponse response) {
-        adapter.updateConnectedStatus(response.getTabletName(), response.getConnectionStatus());
+        if (adapter != null) {
+            adapter.updateConnectedStatus(response.getTabletName(), response.getConnectionStatus());
+        }
     }
 
     /**
