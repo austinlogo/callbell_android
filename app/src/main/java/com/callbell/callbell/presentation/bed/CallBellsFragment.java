@@ -4,9 +4,11 @@ package com.callbell.callbell.presentation.bed;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.callbell.callbell.R;
@@ -17,7 +19,11 @@ import butterknife.InjectView;
 
 
 public class CallBellsFragment extends Fragment {
+    private static String  ORIENTATION_KEY = "ORIENTATION_KEY";
     private OnFragmentInteractionListener mActivityListener;
+
+    @InjectView(R.id.call_button_layout)
+    LinearLayout mCallButtonLayout;
 
     @InjectView(R.id.call_button_restroom)
     RelativeLayout mButtonRestroom;
@@ -34,21 +40,26 @@ public class CallBellsFragment extends Fragment {
     @InjectView(R.id.call_button_help)
     RelativeLayout mButtonHelp;
 
-    public static CallBellsFragment newInstance() {
+    private int mOrientation = -1;
 
+    public static CallBellsFragment newInstance() {
         CallBellsFragment fragment = new CallBellsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ORIENTATION_KEY, LinearLayout.VERTICAL);
+        fragment.setArguments(bundle);
 
         return fragment;
     }
 
     public CallBellsFragment() {
-        // NOOP: Required empty public constructor
+        // NOOP: Required empty public constructormCallBellsFragment.toggleOrientation(LinearLayout.VERTICAL);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mOrientation = LinearLayout.VERTICAL;
     }
 
     @Override
@@ -63,6 +74,12 @@ public class CallBellsFragment extends Fragment {
         mButtonBlanket.setOnClickListener(new CallBellListener());
         mButtonPain.setOnClickListener(new CallBellListener());
         mButtonHelp.setOnClickListener(new CallBellListener());
+
+        if (mOrientation == -1) {
+            mOrientation = getArguments().getInt(ORIENTATION_KEY);
+        }
+
+        toggleOrientation(mOrientation);
 
         return view;
     }
@@ -82,6 +99,12 @@ public class CallBellsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mActivityListener = null;
+    }
+
+    public void toggleOrientation(int requestedOrientation) {
+        mOrientation = requestedOrientation;
+        mCallButtonLayout.setOrientation(requestedOrientation);
+        Log.d("AFL", "ORIENTATION: " + (mCallButtonLayout.getOrientation() == LinearLayout.VERTICAL ? "VERTICAL" : "HORIZONTAL"));
     }
 
     /**

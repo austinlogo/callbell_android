@@ -74,6 +74,15 @@
                 android:visibility="gone"
                 android:layout_height="match_parent" />
 
+            <Button
+                style="@style/Bea_Theme.TitleBarButton"
+                android:id="@+id/fragment_title_bar_simple"
+                android:layout_alignParentRight="true"
+                android:text="@string/simple_layout"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="match_parent" />
+
             <ImageButton
                 style="@style/Bea_Theme.TitleBarButton"
                 android:layout_alignParentRight="true"

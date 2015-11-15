@@ -1,5 +1,6 @@
 package com.callbell.callbell.presentation.bed;
 
+import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -54,7 +56,7 @@ public class BedModeActivity
     private PlanOfCareFragment mPlanOfCareFragment;
     private PainRatingAsyncTask mPainRatingAsyncTask;
     private TitleBarFragment mTitleBarFragment;
-    private boolean superUserPermissions;
+    private boolean mSimpleMode = false;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,7 +164,45 @@ public class BedModeActivity
         mPlanOfCareFragment.clearValues();
     }
 
+    @Override
+    public void toggleSimpleMode() {
+        mSimpleMode = !mSimpleMode;
+
+        mCallBellContainer.setVisibility(mSimpleMode ? View.GONE : View.VISIBLE);
+        FragmentManager fm = getFragmentManager();
+
+        if (mSimpleMode) {
+            fm.beginTransaction()
+                    .remove(mCallBellsFragment)
+                    .commit();
+
+            fm.executePendingTransactions();
+
+            fm.beginTransaction()
+                    .replace(R.id.bed_mode_plan_of_care_fragment_container, mCallBellsFragment)
+                    .commit();
+            fm.executePendingTransactions();
+
+            mCallBellsFragment.toggleOrientation(LinearLayout.HORIZONTAL);
+        } else {
+            fm.beginTransaction()
+                    .replace(R.id.bed_mode_plan_of_care_fragment_container, mPlanOfCareFragment)
+                    .commit();
+
+            fm.executePendingTransactions();
+            setSuperUserPermissions(true);
+
+            fm.beginTransaction()
+                    .add(R.id.bed_mode_CallBellsFragment_container, mCallBellsFragment)
+                    .commit();
+
+            fm.executePendingTransactions();
+
+            mCallBellsFragment.toggleOrientation(LinearLayout.VERTICAL);
+        }
+    }
+
     public void setSuperUserPermissions(boolean isSuperUser) {
-        mCallBellContainer.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        mCallBellContainer.setVisibility(isSuperUser || mSimpleMode ? View.GONE : View.VISIBLE);
     }
 }

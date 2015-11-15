@@ -54,6 +54,9 @@ public class TitleBarFragment extends Fragment {
     @InjectView(R.id.fragment_title_bar_clear)
     Button mClearButton;
 
+    @InjectView(R.id.fragment_title_bar_simple)
+    Button mSimpleToggle;
+
     @InjectView(R.id.fragment_title_bar_pain)
     Button mPainButton;
 
@@ -146,6 +149,13 @@ public class TitleBarFragment extends Fragment {
             }
         });
 
+        mSimpleToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.toggleSimpleMode();
+            }
+        });
+
     }
 
     @Override
@@ -162,12 +172,15 @@ public class TitleBarFragment extends Fragment {
 
     public void setSuperUserPermissions(boolean isSuperUser) {
 
+        int showForSuperUserOnly = isSuperUser ? View.VISIBLE : View.GONE;
+
         mDefaultLayout.setBackgroundColor(isSuperUser
                 ? getActivity().getApplicationContext().getResources().getColor(R.color.navy)
                 : getActivity().getApplicationContext().getResources().getColor(R.color.colorPrimary));
         mAdminButton.setImageResource(isSuperUser ? R.drawable.save : R.drawable.pencil);
-        mClearButton.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-        mPainButton.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        mClearButton.setVisibility(showForSuperUserOnly);
+        mPainButton.setVisibility(showForSuperUserOnly);
+        mSimpleToggle.setVisibility(showForSuperUserOnly);
 
         setUI();
     }
@@ -195,5 +208,6 @@ public class TitleBarFragment extends Fragment {
 
     public interface TitleBarListener {
         void clearValues();
+        void toggleSimpleMode();
     }
 }

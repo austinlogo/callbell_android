@@ -58,5 +58,6 @@
     <string name="server_disconnected">Disconnected from server. trying to reconnect</string>
     <string name="physician">Doctor</string>
     <string name="nurse">Nurse</string>
+    <string name="simple_layout">Simple</string>
 
 </resources>

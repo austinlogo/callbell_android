@@ -76,6 +76,11 @@ public class LoginActivity
     }
 
     @Override
+    public void toggleSimpleMode() {
+        // NOOP
+    }
+
+    @Override
     public void register() {
         if (SocketService.mService != null) {
             mMessage.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());

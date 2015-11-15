@@ -124,6 +124,11 @@ public class StationActivity
     public void clearValues() {
         // NOOP
     }
+
+    @Override
+    public void toggleSimpleMode() {
+        // NOOP
+    }
 }
 
 
