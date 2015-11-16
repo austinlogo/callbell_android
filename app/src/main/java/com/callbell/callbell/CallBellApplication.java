@@ -1,6 +1,7 @@
 package com.callbell.callbell;
 
 import android.app.Application;
+import android.view.WindowManager;
 
 import com.callbell.callbell.dagger.AndroidModule;
 import com.callbell.callbell.data.MedicationValues;
@@ -20,6 +21,8 @@ public class CallBellApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
 
         new POCValues(this);
         new MedicationValues(this);

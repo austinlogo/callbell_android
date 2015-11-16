@@ -4,77 +4,179 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="500dp"
-    android:padding="@dimen/standard_padding"
     style="@style/Bea_Theme.DialogView">
 
     <TextView
+        style="@style/Bea_Theme.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:gravity="center"
         android:padding="@dimen/standard_padding"
         android:text="@string/pain_header" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/faces"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:text="@string/no_pain"
-            android:layout_weight="1"
+        <LinearLayout
+            android:id="@+id/layout_pain_rating_pain_0"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="@string/little_pain"
+            android:layout_height="match_parent"
+            android:background="@drawable/pain_button_pressed"
+            android:clickable="true"
+            android:orientation="vertical"
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="@string/more_pain"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="@string/lot_pain"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="@string/whole_lot_pain"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="@string/worst_pain"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_gravity="center"
+            android:padding="@dimen/standard_padding">
 
-    <TextView
-        android:id="@+id/dialog_pain_rating_value"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/title_size"
-        android:layout_height="wrap_content" />
-    <SeekBar
-        android:id="@+id/dialog_pain_seekbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/standard_padding"
-        android:max="10"/>
-    <Button
-        style="@style/Bea_Theme.Button"
-        android:id="@+id/dialog_pain_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/submit"/>
+            <ImageView
+                android:id="@+id/layout_pain_rating_image_face_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_0"/>
+
+            <TextView
+                android:text="@string/pain_text_0"
+                android:textSize="@dimen/paragraph"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/standard_padding"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pain_rating_pain_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pain_button_pressed"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="@dimen/standard_padding">
+
+            <ImageView
+                android:id="@+id/layout_pain_rating_image_face_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_2"/>
+
+            <TextView
+                android:text="@string/pain_text_2"
+                android:textSize="@dimen/paragraph"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/standard_padding"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pain_rating_pain_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pain_button_pressed"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="@dimen/standard_padding">
+
+            <ImageView
+                android:id="@+id/layout_pain_rating_image_face_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_4"/>
+
+            <TextView
+                android:text="@string/pain_text_4"
+                android:textSize="@dimen/paragraph"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/standard_padding"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pain_rating_pain_6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pain_button_pressed"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="@dimen/standard_padding">
+
+            <ImageView
+                android:id="@+id/layout_pain_rating_image_face_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_6"/>
+
+            <TextView
+                android:text="@string/pain_text_6"
+                android:textSize="@dimen/paragraph"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/standard_padding"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pain_rating_pain_8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pain_button_pressed"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="@dimen/standard_padding">
+
+            <ImageView
+                android:id="@+id/layout_pain_rating_image_face_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_8"/>
+
+            <TextView
+                android:text="@string/pain_text_8"
+                android:textSize="@dimen/paragraph"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/standard_padding"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pain_rating_pain_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pain_button_pressed"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="@dimen/standard_padding">
+
+            <ImageView
+                android:id="@+id/layout_pain_rating_image_face_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_10"/>
+
+            <TextView
+                android:text="@string/pain_text_10"
+                android:textSize="@dimen/paragraph"
+                android:textColor="@color/black"
+                android:paddingTop="@dimen/standard_padding"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 </LinearLayout>

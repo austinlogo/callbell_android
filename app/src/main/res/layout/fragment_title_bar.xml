@@ -78,20 +78,17 @@
                 style="@style/Bea_Theme.TitleBarButton"
                 android:id="@+id/fragment_title_bar_simple"
                 android:layout_alignParentRight="true"
-                android:text="@string/simple_layout"
                 android:layout_width="wrap_content"
+                android:text="@string/simple_layout"
                 android:visibility="gone"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
             <ImageButton
-                style="@style/Bea_Theme.TitleBarButton"
+                style="@style/Bea_Theme.TitleBarImageButton"
                 android:layout_alignParentRight="true"
                 android:id="@+id/fragment_title_mode_button"
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:padding="@dimen/standard_padding"
                 android:src="@drawable/pencil"
-                android:scaleType="fitXY"/>
+                />
 
         </LinearLayout>
     </RelativeLayout>

@@ -16,18 +16,17 @@
 
         <ListView android:id="@+id/layout_display_item_list_admin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:scrollbarThumbVertical="@drawable/scrollbar"
-            android:fadeScrollbars="false"
-            android:scrollbarAlwaysDrawVerticalTrack="true"/>
+            android:fadeScrollbars="false"/>
 
         <ListView android:id="@+id/layout_display_item_patient"
             android:visibility="gone"
             android:color="@color/white"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
             android:fadeScrollbars="false"
             android:scrollbarThumbVertical="@drawable/scrollbar"
+            android:scrollbarTrackVertical="@color/white_overlay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 

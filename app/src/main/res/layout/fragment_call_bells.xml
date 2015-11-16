@@ -9,12 +9,14 @@
         android:id="@+id/call_button_restroom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="@drawable/background_button_default"
         android:orientation="vertical"
         android:layout_weight="1">
         <ImageView
             android:id="@+id/call_button_restroom_image"
             android:src="@drawable/call_bell_restroom"
-            android:background="@null"
+            android:background="@color/transparent"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -38,7 +40,8 @@
         android:id="@+id/call_button_blanket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:clickable="true"
+        android:background="@drawable/background_button_default"
         android:layout_weight="1">
         <ImageView
             android:id="@+id/call_button_blanket_image"
@@ -66,7 +69,8 @@
         android:id="@+id/call_button_pain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:clickable="true"
+        android:background="@drawable/background_button_default"
         android:layout_weight="1">
         <ImageView
             android:id="@+id/call_button_pain_image"
@@ -93,7 +97,8 @@
         android:id="@+id/call_button_food_water"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:clickable="true"
+        android:background="@drawable/background_button_default"
         android:layout_weight="1">
         <ImageView
             android:id="@+id/call_button_food_image"
@@ -120,7 +125,8 @@
         android:id="@+id/call_button_help"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:clickable="true"
+        android:background="@drawable/background_button_default"
         android:layout_weight="1">
         <ImageView
             android:id="@+id/call_button_help_image"

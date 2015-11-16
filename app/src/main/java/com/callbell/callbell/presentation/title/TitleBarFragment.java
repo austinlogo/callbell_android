@@ -28,9 +28,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by austin on 10/27/15.
- */
 public class TitleBarFragment extends Fragment {
 
     public static final int BED_MODE_ACTIVITY = 0x0;
@@ -152,6 +149,12 @@ public class TitleBarFragment extends Fragment {
         mSimpleToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mSimpleToggle.getText().toString().equals(getString(R.string.normal_layout))) {
+                    mSimpleToggle.setText(getString(R.string.simple_layout));
+                } else {
+                    mSimpleToggle.setText(getString(R.string.normal_layout));
+                }
+
                 mListener.toggleSimpleMode();
             }
         });

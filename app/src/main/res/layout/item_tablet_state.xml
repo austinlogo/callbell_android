@@ -12,43 +12,40 @@
 
     <TextView
         android:id="@+id/station_item_bed_location"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/small_column"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/item_margin"
-        android:layout_weight="1"
+        android:paddingLeft="@dimen/standard_padding"
         />
 
     <TextView
         android:id="@+id/station_item_chief_complaint"
+        android:text="@string/nurse_chief_complaint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/item_margin"
-        android:layout_weight="1"
+        android:layout_weight="6"
         />
 
     <TextView
         android:id="@+id/station_item_physician"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/item_margin"
-        android:layout_weight="1"
+        android:layout_weight="7"
         />
 
     <TextView
         android:id="@+id/station_item_nurse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/item_margin"
-        android:layout_weight="1"
+        android:paddingLeft="@dimen/small_padding"
+        android:layout_weight="7"
         />
-
-
 
     <TextView
         android:id="@+id/station_item_pain_rating"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/small_column"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/item_margin"
-        android:layout_weight="1"
+        android:paddingRight="@dimen/standard_padding"
+        android:gravity="right"
         />
 </LinearLayout>

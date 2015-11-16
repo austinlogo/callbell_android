@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -34,14 +35,23 @@ public class PainRatingDialog
     @Inject
     MessageRouting messageRouting;
 
-    @InjectView(R.id.dialog_pain_rating_value)
-    TextView painRatingValueText;
+    @InjectView(R.id.layout_pain_rating_pain_0)
+    LinearLayout mPainRating0;
 
-    @InjectView(R.id.dialog_pain_seekbar)
-    SeekBar mPainSeekbar;
+    @InjectView(R.id.layout_pain_rating_pain_2)
+    LinearLayout mPainRating2;
 
-    @InjectView(R.id.dialog_pain_submit)
-    Button mPainSubmitButton;
+    @InjectView(R.id.layout_pain_rating_pain_4)
+    LinearLayout mPainRating4;
+
+    @InjectView(R.id.layout_pain_rating_pain_6)
+    LinearLayout mPainRating6;
+
+    @InjectView(R.id.layout_pain_rating_pain_8)
+    LinearLayout mPainRating8;
+
+    @InjectView(R.id.layout_pain_rating_pain_10)
+    LinearLayout mPainRating10;
 
     private DialogDismissedCallback mCallback;
 
@@ -61,43 +71,48 @@ public class PainRatingDialog
         ButterKnife.inject(this, dialog);
         ((CallBellApplication) getActivity().getApplication()).inject(this);
 
-        mPainSeekbar.setOnSeekBarChangeListener(new SeekbarTracker());
-        mPainSubmitButton.setOnClickListener(new SubmitClicked());
+        ClickPainRating clickListener = new ClickPainRating();
 
-        int progress = prefs.getCurrentState().getPainRating();
-        painRatingValueText.setText(String.valueOf(progress));
-        mPainSeekbar.setProgress(progress);
+        mPainRating0.setOnClickListener(clickListener);
+        mPainRating2.setOnClickListener(clickListener);
+        mPainRating4.setOnClickListener(clickListener);
+        mPainRating6.setOnClickListener(clickListener);
+        mPainRating8.setOnClickListener(clickListener);
+        mPainRating10.setOnClickListener(clickListener);
 
         return dialog;
     }
 
-    public class SubmitClicked implements View.OnClickListener {
+    public class ClickPainRating implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            prefs.setPainRating(mPainSeekbar.getProgress());
+            switch(v.getId()) {
+                case R.id.layout_pain_rating_pain_0:
+                    prefs.setPainRating(0);
+                    break;
+                case R.id.layout_pain_rating_pain_2:
+                    prefs.setPainRating(2);
+                    break;
+                case R.id.layout_pain_rating_pain_4:
+                    prefs.setPainRating(4);
+                    break;
+                case R.id.layout_pain_rating_pain_6:
+                    prefs.setPainRating(6);
+                    break;
+                case R.id.layout_pain_rating_pain_8:
+                    prefs.setPainRating(8);
+                    break;
+                case R.id.layout_pain_rating_pain_10:
+                    prefs.setPainRating(10);
+                    break;
+            }
+
             messageRouting.updateState();
             dismiss();
         }
     }
 
-    public class SeekbarTracker implements SeekBar.OnSeekBarChangeListener {
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            painRatingValueText.setText(String.valueOf(progress));
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-            // NOOP
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            // NOOP
-        }
-    }
 
     public interface DialogDismissedCallback {
         void onDialogDismissed();

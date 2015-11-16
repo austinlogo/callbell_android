@@ -19,10 +19,10 @@
     <string name="call_bell_alarm_title">Someone\'s Calling</string>
     <string name="acknowledge">Acknowledge</string>
     <string name="dismiss">Dismiss</string>
-    <string name="staff_physician">Your Resident Doctor is</string>
+    <string name="staff_physician">Your Doctor is</string>
     <string name="staff_nurse_practitioner">Your Nurse Practitioner is</string>
     <string name="staff_nurse">Your Nurse is</string>
-    <string name="staff_resident">Your Resident is</string>
+    <string name="staff_resident">Your Resident Doctor is</string>
     <string name="admin_mode">Go to Admin Mode</string>
     <string name="su_enter_alarm_title">Enter Admin Password</string>
     <string name="user_mode">Go to User Mode</string>
@@ -39,13 +39,13 @@
     <string name="call_received">Call Received</string>
     <string name="message_sent">Message Sent</string>
 
-    <string name="pain_header">Rate your Pain</string>
-    <string name="no_pain">No Pain</string>
-    <string name="little_pain" >A Little Pain</string>
-    <string name="more_pain" >A Little More Pain</string>
-    <string name="lot_pain" >Even More Pain</string>
-    <string name="whole_lot_pain" >A whole lot of Pain</string>
-    <string name="worst_pain" >Worst Pain</string>
+    <string name="pain_header">Tap to Rate Your Pain</string>
+    <string name="pain_text_0">No Pain</string>
+    <string name="pain_text_2" >A Little Pain</string>
+    <string name="pain_text_4" >A Little More Pain</string>
+    <string name="pain_text_6" >Even More Pain</string>
+    <string name="pain_text_8" >A whole lot of Pain</string>
+    <string name="pain_text_10" >Worst Pain</string>
 
     <string name="timer">Timer</string>
     <string name="submit">Submit</string>
@@ -59,5 +59,6 @@
     <string name="physician">Doctor</string>
     <string name="nurse">Nurse</string>
     <string name="simple_layout">Simple</string>
+    <string name="normal_layout">normal</string>
 
 </resources>

@@ -27,6 +27,8 @@ public class State {
     public static final String CONNECTION_INDICATOR_ID = "CONNECTION_INDICATOR_ID";
     public static final String TABLET_NAME_ID = "TABLE_NAME_ID";
     public static final String STATION_TABLET_NAME_ID = "STATION_TABLET_NAME_ID";
+    public static final String SHOWN_TESTS_ID = "SHOWN_TESTS_ID";
+    public static final String SHOWN_MEDICATIONS_ID = "SHOWN_MEDICATIONS_ID";
     public static final String STATE_ID = "STATE_ID";
 
     private static final String TAG = State.class.getSimpleName();

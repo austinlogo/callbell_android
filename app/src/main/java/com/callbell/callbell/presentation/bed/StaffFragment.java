@@ -94,6 +94,10 @@ public class StaffFragment extends Fragment {
         physicianTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!prefs.isSuperUser()) {
+                    return;
+                }
+
                 TextView view = (TextView) v;
                 if (view.getText().equals(getText(R.string.staff_physician))) {
                     view.setText(R.string.staff_nurse_practitioner);
