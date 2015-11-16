@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.callbell.callbell.R;
 
+import java.math.MathContext;
 import java.util.LinkedHashMap;
 
 import javax.inject.Inject;
@@ -53,6 +54,34 @@ public class MedicationValues {
     public final String ZOFRAN;
     public final String ZOSYN;
 
+    public static String ALBUTEROL;
+    public static String GI_COCKTAIL;
+    public static String ADENOSINE;
+    public static String AMOXICILLIN;
+    public static String AMBIEN;
+    public static String ATENOLOL;
+    public static String AUGMENTIN;
+    public static String BACTRIM;
+    public static String CLINDAMYCIN;
+    public static String COUMADIN;
+    public static String COMPAZINE;
+    public static String DILANTIN;
+    public static String DILTIAZEM;
+    public static String DOPAMINE;
+    public static String EPINEPHRINE;
+    public static String FENTANYL;
+    public static String FLAGYL;
+    public static String FLOMAX;
+    public static String KEFLEX;
+    public static String LEVAQUIN;
+    public static String LINSIOPRIL;
+    public static String NARCAN;
+    public static String OXYCDONE;
+    public static String OXYBUTYNIN;
+    public static String SPIRONOLACTONE;
+    public static String VERSED;
+    public static String XANAX;
+
 
     @Inject
     public MedicationValues(Context ctx) {
@@ -95,6 +124,34 @@ public class MedicationValues {
         ZOFRAN = mContext.getString(R.string.zofran);
         ZOSYN = mContext.getString(R.string.zosyn);
 
+        ALBUTEROL = mContext.getString(R.string.albuterol);
+        GI_COCKTAIL = mContext.getString(R.string.gi_cocktail);
+        ADENOSINE = mContext.getString(R.string.adenosine);
+        AMOXICILLIN = mContext.getString(R.string.amoxicillin);
+        AMBIEN = mContext.getString(R.string.ambien);
+        ATENOLOL = mContext.getString(R.string.atenolol);
+        AUGMENTIN = mContext.getString(R.string.augmentin);
+        BACTRIM = mContext.getString(R.string.bactrim);
+        CLINDAMYCIN = mContext.getString(R.string.clindamycin);
+        COUMADIN = mContext.getString(R.string.coumadin);
+        COMPAZINE = mContext.getString(R.string.compazine);
+        DILANTIN = mContext.getString(R.string.dilantin);
+        DILTIAZEM = mContext.getString(R.string.diltiazem);
+        DOPAMINE = mContext.getString(R.string.dopamine);
+        EPINEPHRINE = mContext.getString(R.string.epinephrine);
+        FENTANYL = mContext.getString(R.string.fentanyl);
+        FLAGYL = mContext.getString(R.string.flagyl);
+        FLOMAX = mContext.getString(R.string.flomax);
+        KEFLEX = mContext.getString(R.string.keflex);
+        LEVAQUIN = mContext.getString(R.string.levaquin);
+        LINSIOPRIL = mContext.getString(R.string.linsiopril);
+        NARCAN = mContext.getString(R.string.narcan);
+        OXYCDONE = mContext.getString(R.string.oxycdone);
+        OXYBUTYNIN = mContext.getString(R.string.oxybutynin);
+        SPIRONOLACTONE = mContext.getString(R.string.spironolactone);
+        VERSED = mContext.getString(R.string.versed);
+        XANAX = mContext.getString(R.string.xanax);
+
         medicationMap.put(ANCEF, mContext.getString(R.string.ancef_description));
         medicationMap.put(ASPIRIN, mContext.getString(R.string.aspirin_description));
         medicationMap.put(ATIVAN, mContext.getString(R.string.ativan_description));
@@ -129,6 +186,33 @@ public class MedicationValues {
         medicationMap.put(ZITHROMAX, mContext.getString(R.string.zithromax_description));
         medicationMap.put(ZOFRAN, mContext.getString(R.string.zofran_description));
         medicationMap.put(ZOSYN, mContext.getString(R.string.zosyn_description));
+        medicationMap.put(ADENOSINE, mContext.getString(R.string.adenosine_description));
+        medicationMap.put(AMOXICILLIN, mContext.getString(R.string.amoxicillin_description));
+        medicationMap.put(AMBIEN, mContext.getString(R.string.ambien_description));
+        medicationMap.put(ATENOLOL, mContext.getString(R.string.atenolol_description));
+        medicationMap.put(AUGMENTIN, mContext.getString(R.string.augmentin_description));
+        medicationMap.put(BACTRIM, mContext.getString(R.string.bactrim_description));
+        medicationMap.put(CLINDAMYCIN, mContext.getString(R.string.clindamycin_description));
+        medicationMap.put(COUMADIN, mContext.getString(R.string.coumadin_description));
+        medicationMap.put(COMPAZINE, mContext.getString(R.string.compazine_description));
+        medicationMap.put(DILANTIN, mContext.getString(R.string.dilantin_description));
+        medicationMap.put(DILTIAZEM, mContext.getString(R.string.diltiazem_description));
+        medicationMap.put(DOPAMINE, mContext.getString(R.string.dopamine_description));
+        medicationMap.put(EPINEPHRINE, mContext.getString(R.string.epinephrine_description));
+        medicationMap.put(FENTANYL, mContext.getString(R.string.fentanyl_description));
+        medicationMap.put(FLAGYL, mContext.getString(R.string.flagyl_description));
+        medicationMap.put(FLOMAX, mContext.getString(R.string.flomax_description));
+        medicationMap.put(KEFLEX, mContext.getString(R.string.keflex_description));
+        medicationMap.put(LEVAQUIN, mContext.getString(R.string.levaquin_description));
+        medicationMap.put(LINSIOPRIL, mContext.getString(R.string.linsiopril_description));
+        medicationMap.put(NARCAN, mContext.getString(R.string.narcan_description));
+        medicationMap.put(OXYCDONE, mContext.getString(R.string.oxycdone_description));
+        medicationMap.put(OXYBUTYNIN, mContext.getString(R.string.oxybutynin_description));
+        medicationMap.put(SPIRONOLACTONE, mContext.getString(R.string.spironolactone_description));
+        medicationMap.put(VERSED, mContext.getString(R.string.versed_description));
+        medicationMap.put(XANAX, mContext.getString(R.string.xanax_description));
+        medicationMap.put(ALBUTEROL, mContext.getString(R.string.albuterol));
+        medicationMap.put(GI_COCKTAIL, mContext.getString(R.string.gi_cocktail));
 
         expandedNames.put(ANCEF, mContext.getString(R.string.ancef_expanded));
         expandedNames.put(ASPIRIN, mContext.getString(R.string.aspirin_expanded));
@@ -162,5 +246,30 @@ public class MedicationValues {
         expandedNames.put(ZITHROMAX, mContext.getString(R.string.zithromax_expanded));
         expandedNames.put(ZOFRAN, mContext.getString(R.string.zofran_expanded));
         expandedNames.put(ZOSYN, mContext.getString(R.string.zosyn_expanded));
+        expandedNames.put(ADENOSINE, mContext.getString(R.string.adenosine_expanded));
+        expandedNames.put(AMOXICILLIN, mContext.getString(R.string.amoxicillin_expanded));
+        expandedNames.put(AMBIEN, mContext.getString(R.string.ambien_expanded));
+        expandedNames.put(ATENOLOL, mContext.getString(R.string.atenolol_expanded));
+        expandedNames.put(AUGMENTIN, mContext.getString(R.string.augmentin_expanded));
+        expandedNames.put(BACTRIM, mContext.getString(R.string.bactrim_expanded));
+        expandedNames.put(CLINDAMYCIN, mContext.getString(R.string.clindamycin_expanded));
+        expandedNames.put(COUMADIN, mContext.getString(R.string.coumadin_expanded));
+        expandedNames.put(COMPAZINE, mContext.getString(R.string.compazine_expanded));
+        expandedNames.put(DILANTIN, mContext.getString(R.string.dilantin_expanded));
+        expandedNames.put(DILTIAZEM, mContext.getString(R.string.diltiazem_expanded));
+        expandedNames.put(DOPAMINE, mContext.getString(R.string.dopamine_expanded));
+        expandedNames.put(EPINEPHRINE, mContext.getString(R.string.epinephrine_expanded));
+        expandedNames.put(FENTANYL, mContext.getString(R.string.fentanyl_expanded));
+        expandedNames.put(FLAGYL, mContext.getString(R.string.flagyl_expanded));
+        expandedNames.put(FLOMAX, mContext.getString(R.string.flomax_expanded));
+        expandedNames.put(KEFLEX, mContext.getString(R.string.keflex_expanded));
+        expandedNames.put(LEVAQUIN, mContext.getString(R.string.levaquin_expanded));
+        expandedNames.put(LINSIOPRIL, mContext.getString(R.string.linsiopril_expanded));
+        expandedNames.put(NARCAN, mContext.getString(R.string.narcan_expanded));
+        expandedNames.put(OXYCDONE, mContext.getString(R.string.oxycdone_expanded));
+        expandedNames.put(OXYBUTYNIN, mContext.getString(R.string.oxybutynin_expanded));
+        expandedNames.put(SPIRONOLACTONE, mContext.getString(R.string.spironolactone_expanded));
+        expandedNames.put(VERSED, mContext.getString(R.string.versed_expanded));
+        expandedNames.put(XANAX, mContext.getString(R.string.xanax_expanded));
     }
 }

@@ -35,7 +35,36 @@
     <string name="zofran">Zofran</string>
     <string name="zosyn">Zosyn</string>
 
+    <string name="adenosine">Adenosine</string>
+    <string name="amoxicillin">Amoxicillin</string>
+    <string name="ambien">Ambien</string>
+    <string name="atenolol">Atenolol</string>
+    <string name="augmentin">Augmentin</string>
+    <string name="bactrim">Bactrim</string>
+    <string name="clindamycin">Clindamycin</string>
+    <string name="coumadin">Coumadin</string>
+    <string name="compazine">Compazine</string>
+    <string name="dilantin">Dilantin</string>
+    <string name="diltiazem">Diltiazem</string>
+    <string name="dopamine">Dopamine</string>
+    <string name="epinephrine">Epinephrine</string>
+    <string name="fentanyl">Fentanyl</string>
+    <string name="flagyl">Flagyl</string>
+    <string name="flomax">Flomax</string>
+    <string name="keflex">Keflex</string>
+    <string name="levaquin">Levaquin</string>
+    <string name="linsiopril">Linsiopril</string>
+    <string name="narcan">Narcan</string>
+    <string name="oxycdone">Oxycdone</string>
+    <string name="oxybutynin">Oxybutynin</string>
+    <string name="spironolactone">Spironolactone</string>
+    <string name="versed">Versed</string>
+    <string name="xanax">Xanax</string>
+    <string name="albuterol">Albuterol</string>
+    <string name="gi_cocktail">GI Cocktail</string>
 
+    <string name="albuterol_description">A bronchodilator that helps increase flow of air into the airways while it relaxes the muscles in the lungs.</string>
+    <string name="gi_cocktail_description">A group of medications usually to help treat symptoms of discomfort occurring in the gastric system.  This is usually given to patients who are experiencing heartburn or acid reflux.</string>
     <string name="ancef_description">A cephalosporin antibiotic.  It is used to treat bacterial infections.  It may also used before or during surgery to prevent infection.  </string>
     <string name="aspirin_description">Used to treat pain, fevers, and reduce inflammation.  It also has secondary uses such as preventing heart attacks, strokes and chest pains if prescribed by a doctor.</string>
     <string name="ativan_description">A benzodiazepine used to treat anxiety disorders.  It may also be used for nausea, migraines and seizures.  </string>
@@ -71,6 +100,34 @@
     <string name="zofran_description">Used to prevent or treat nausea and vomiting.</string>
     <string name="zosyn_description">Combination antibiotic used to fight against bacertia in the body.  It is commonly used for urinary tract infections, joint infections, skin infections, pneumonia as well as infections in the stomach.  It is not uncommon to receive Zosyn in conjunction with other antibiotics.</string>
 
+
+    <string name="adenosine_description"> is an anti arrhythmic drug used to treat irregular heartbeats, slowing the rate of the heart and converting it to a normal rhythm.   </string>
+    <string name="amoxicillin_description"> is a penicillin antibiotic used to treat bacertia in the body.  It is primarily used for tonsilitis, bronchitis, pneumonia, gonorrhea and infections of the ear, nose, skin and urinary infections. </string>
+    <string name="ambien_description"> is a medication in the drug class of sedatives.  It’s used to help people with insomnia.  </string>
+    <string name="atenolol_description"> is a medication in the group of drugs called Beta Blockers.  These medications affect the heart and circulation of the blood.  It is used to treat high blood pressure, chest pain and reduce the chances of a heart attack.  </string>
+    <string name="augmentin_description"> is an antibiotic used to treat bacteria within the body.  It’s in the penicillin group of drugs.  It’s commonly used for sinusitis, pneumonia, urinary infections and bronchitis. </string>
+    <string name="bactrim_description"> is an antibiotic used to treat different types of bacertia in the body.  It’s commonly used for urinary infections, bronchitis, diarrhea, or ear infections. </string>
+    <string name="clindamycin_description">  is an antibiotic that is used to treat bacterial infections in the body </string>
+    <string name="coumadin_description"> is an anticoagulant, also known as a blood thinner.  It is used to prevent strokes, blood clots, and prevent heart attacks.  If you’re taking coumadin, you will often need to have your blood checked to make sure your INR (blood test) is within a therapeutic range.  </string>
+    <string name="compazine_description"> is a medication used for a wide range of symptoms.  It can be used to treat anxiety, nausea and vomiting as well as psychotic disorders and migraine headaches.  </string>
+    <string name="dilantin_description"> is an anticonvulsant drug.  It’s used to slow impulses in the brain that can cause seizures.  </string>
+    <string name="diltiazem_description"> is a calcium channel blocker medication.  It is used to treat high blood pressure, chest pain and abnormal heart rhythms such as atrial fibrillation.  </string>
+    <string name="dopamine_description"> is drug which helps improve the pumping strength of the heart which creates better blood flow throughout the body.  It is used to treat low blood pressure during a heart attack, kidney failure, heart failure, or other conditions. </string>
+    <string name="epinephrine_description"> is a medication used to treat low blood pressure, wheezing, and serious allergic reactions.  It may be used in the emergency setting by medical professionals or by those with serious allergies to insect bites, stings, or foods (epi pen)</string>
+    <string name="fentanyl_description"> is an narcotic medication primarily used to treat pain.    </string>
+    <string name="flagyl_description"> is an antibiotic used to fight against bacteria in the body.  </string>
+    <string name="flomax_description"> is an alpha-blocker medication that helps make it easier to urinate.  It does so by helping to relax the muscles in the bladder and the prostate.  It’s frequently used in cases of kidney stones or enlarged prostates. </string>
+    <string name="keflex_description"> is in the group of drugs called cephalosporins.  It is an antibiotic used to treat bacterial infections in the body.  A physician may prescribe Reflex to treat skin infections, urinary tract infections, as well as respiratory infections and others.  </string>
+    <string name="levaquin_description"> is an antibiotic in the group of drugs called Floroquinolones.  They are used to fight against bacterial infections in the body.  Frequently this drug is used to treat bronchitis, pneumonia, kidney infections, or during early treatment of sepsis.  </string>
+    <string name="linsiopril_description"> is a medication in the class of drugs called Ace Inhibitors.  This medication is primarily used to treat high blood pressure.  </string>
+    <string name="narcan_description"> is a medication used to reverse the effects of opioid medication.  It is most frequently used when a person been given or used too much of an opioid medication and is exhibiting the effects of opioid overdose such as altered mental status, decreased breathing pattern, or drowsiness.  </string>
+    <string name="oxycdone_description"> is opioid class medication used to treat pain.  </string>
+    <string name="oxybutynin_description"> is most commonly used for bladder and urinary tract spasms.  It will help treat overactive bladder, incontinence and frequent urination.  </string>
+    <string name="spironolactone_description"> is commonly known as a “water pill”.  It’s different from other “water pills” in that is does not rid the body of potassium.  It is commonly used to treat congestive heart failure or excessive edema (water retention most commonly seen in the lower legs).</string>
+    <string name="versed_description"> is a benzodiazepine used for mild sedation during medical procedures.  </string>
+    <string name="xanax_description"> is a benzodiazepine used to treat anxiety, depression and panic disorders.</string>
+
+
     <string name="ancef_expanded">cefazolin</string>
     <string name="aspirin_expanded">acetylsalicylic acid</string>
     <string name="ativan_expanded">lorazepam</string>
@@ -103,4 +160,32 @@
     <string name="zithromax_expanded">PID</string>
     <string name="zofran_expanded">ondansetron</string>
     <string name="zosyn_expanded">piperacillin &amp; tazobactam</string>
+
+
+    <string name="adenosine_expanded">Adenocard</string>
+    <string name="amoxicillin_expanded">amoxil</string>
+    <string name="ambien_expanded">zolpidem</string>
+    <string name="atenolol_expanded">Tenormin</string>
+    <string name="augmentin_expanded">amoxicillin &amp; clavulanate potassium</string>
+    <string name="bactrim_expanded">sulfamethoxazole &amp; trimethoprim</string>
+    <string name="clindamycin_expanded">Cleocin HCl</string>
+    <string name="coumadin_expanded">warfarin</string>
+    <string name="compazine_expanded">prochlorperazine</string>
+    <string name="dilantin_expanded">phenytoin</string>
+    <string name="diltiazem_expanded">Cardizem</string>
+    <string name="dopamine_expanded">Intropin</string>
+    <string name="epinephrine_expanded">Adrenalin</string>
+    <string name="fentanyl_expanded">Sublimaze</string>
+    <string name="flagyl_expanded">metronidazole</string>
+    <string name="flomax_expanded">Flomax</string>
+    <string name="keflex_expanded">cephalexin</string>
+    <string name="levaquin_expanded">Levofloxacin</string>
+    <string name="linsiopril_expanded">Prinivil</string>
+    <string name="narcan_expanded">Naloxone</string>
+    <string name="oxycdone_expanded">Oxycontin</string>
+    <string name="oxybutynin_expanded">Ditropan XL</string>
+    <string name="spironolactone_expanded">Aldactone</string>
+    <string name="versed_expanded">Midazolam</string>
+    <string name="xanax_expanded">Alprazolam</string>
+
 </resources>
