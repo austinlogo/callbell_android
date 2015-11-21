@@ -184,8 +184,6 @@ public class BedModeActivity
                     .replace(R.id.bed_mode_plan_of_care_fragment_container, mCallBellsFragment)
                     .commit();
             fm.executePendingTransactions();
-
-            mCallBellsFragment.toggleOrientation(LinearLayout.HORIZONTAL);
         } else {
             fm.beginTransaction()
                     .replace(R.id.bed_mode_plan_of_care_fragment_container, mPlanOfCareFragment)
@@ -199,9 +197,9 @@ public class BedModeActivity
                     .commit();
 
             fm.executePendingTransactions();
-
-            mCallBellsFragment.toggleOrientation(LinearLayout.VERTICAL);
         }
+
+        mCallBellsFragment.toggleMode(mSimpleMode);
     }
 
     public void setSuperUserPermissions(boolean isSuperUser) {

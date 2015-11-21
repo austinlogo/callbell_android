@@ -18,11 +18,11 @@
     <color name="white_overlay">#55FFFFFF</color>
 
 
-    <color name="pain_color">#FF5555</color>
-    <color name="restroom_color">#cb00aeff</color>
-    <color name="blanket_color">#9c4ddc</color>
-    <color name="food_color">#d97532</color>
-    <color name="help_color">#2ac200</color>
+    <color name="pain_color">#e54b3b</color>
+    <color name="restroom_color">#3597d3</color>
+    <color name="blanket_color">#965ba5</color>
+    <color name="food_color">#e77e24</color>
+    <color name="help_color">#49ba6f</color>
     <color name="transparent">#00ffffff</color>
 
 

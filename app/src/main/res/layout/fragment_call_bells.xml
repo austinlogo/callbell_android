@@ -145,6 +145,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:layout_alignParentBottom="true"
+
             android:textSize="@dimen/small_text"
             android:text="@string/help"/>
     </RelativeLayout>

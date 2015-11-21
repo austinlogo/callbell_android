@@ -52,7 +52,7 @@ public class CallBellsFragment extends Fragment {
     }
 
     public CallBellsFragment() {
-        // NOOP: Required empty public constructormCallBellsFragment.toggleOrientation(LinearLayout.VERTICAL);
+        // NOOP: Required empty public constructormCallBellsFragment.toggleMode(LinearLayout.VERTICAL);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class CallBellsFragment extends Fragment {
             mOrientation = getArguments().getInt(ORIENTATION_KEY);
         }
 
-        toggleOrientation(mOrientation);
+        toggleMode(mOrientation == LinearLayout.HORIZONTAL);
 
         return view;
     }
@@ -101,10 +101,27 @@ public class CallBellsFragment extends Fragment {
         mActivityListener = null;
     }
 
-    public void toggleOrientation(int requestedOrientation) {
+    public void toggleMode(boolean mSimpleMode) {
+        int requestedOrientation = mSimpleMode ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL;
         mOrientation = requestedOrientation;
         mCallButtonLayout.setOrientation(requestedOrientation);
-        Log.d("AFL", "ORIENTATION: " + (mCallButtonLayout.getOrientation() == LinearLayout.VERTICAL ? "VERTICAL" : "HORIZONTAL"));
+
+
+        mButtonBlanket.setBackgroundColor(mSimpleMode
+                ? getResources().getColor(R.color.blanket_color)
+                : getResources().getColor(R.color.transparent));
+        mButtonPain.setBackgroundColor(mSimpleMode
+                ? getResources().getColor(R.color.pain_color)
+                : getResources().getColor(R.color.transparent));
+        mButtonHelp.setBackgroundColor(mSimpleMode
+                ? getResources().getColor(R.color.help_color)
+                : getResources().getColor(R.color.transparent));
+        mButtonFoodWater.setBackgroundColor(mSimpleMode
+                ? getResources().getColor(R.color.food_color)
+                : getResources().getColor(R.color.transparent));
+        mButtonRestroom.setBackgroundColor(mSimpleMode
+                ? getResources().getColor(R.color.restroom_color)
+                : getResources().getColor(R.color.transparent));
     }
 
     /**
