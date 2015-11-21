@@ -106,22 +106,20 @@ public class CallBellsFragment extends Fragment {
         mOrientation = requestedOrientation;
         mCallButtonLayout.setOrientation(requestedOrientation);
 
+        if (mSimpleMode) {
+            mButtonBlanket.setBackgroundColor(getResources().getColor(R.color.blanket_color));
+            mButtonRestroom.setBackgroundColor(getResources().getColor(R.color.restroom_color));
+            mButtonFoodWater.setBackgroundColor(getResources().getColor(R.color.food_color));
+            mButtonHelp.setBackgroundColor(getResources().getColor(R.color.help_color));
+            mButtonPain.setBackgroundColor(getResources().getColor(R.color.pain_color));
+        } else {
+            mButtonBlanket.setBackground(getResources().getDrawable(R.drawable.background_button_default));
+            mButtonRestroom.setBackground(getResources().getDrawable(R.drawable.background_button_default));
+            mButtonFoodWater.setBackground(getResources().getDrawable(R.drawable.background_button_default));
+            mButtonHelp.setBackground(getResources().getDrawable(R.drawable.background_button_default));
+            mButtonPain.setBackground(getResources().getDrawable(R.drawable.background_button_default));
+        }
 
-        mButtonBlanket.setBackgroundColor(mSimpleMode
-                ? getResources().getColor(R.color.blanket_color)
-                : getResources().getColor(R.color.transparent));
-        mButtonPain.setBackgroundColor(mSimpleMode
-                ? getResources().getColor(R.color.pain_color)
-                : getResources().getColor(R.color.transparent));
-        mButtonHelp.setBackgroundColor(mSimpleMode
-                ? getResources().getColor(R.color.help_color)
-                : getResources().getColor(R.color.transparent));
-        mButtonFoodWater.setBackgroundColor(mSimpleMode
-                ? getResources().getColor(R.color.food_color)
-                : getResources().getColor(R.color.transparent));
-        mButtonRestroom.setBackgroundColor(mSimpleMode
-                ? getResources().getColor(R.color.restroom_color)
-                : getResources().getColor(R.color.transparent));
     }
 
     /**
