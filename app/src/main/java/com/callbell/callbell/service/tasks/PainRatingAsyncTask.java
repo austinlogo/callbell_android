@@ -1,9 +1,11 @@
 package com.callbell.callbell.service.tasks;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.callbell.callbell.R;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 
 /**
@@ -17,6 +19,7 @@ public class PainRatingAsyncTask
     private long mIntervalInMilliseconds;
     private Activity activity;
     private Thread mThread;
+    private MediaPlayer notificationSound;
 
     public PainRatingAsyncTask(Activity act) {
         activity = act;
@@ -27,6 +30,10 @@ public class PainRatingAsyncTask
         super.onPostExecute(aVoid);
 
         Log.d(TAG, "onPostExecute");
+
+        notificationSound = MediaPlayer.create(activity, R.raw.notification);
+        notificationSound.setLooping(false);
+        notificationSound.start();
 
         PainRatingDialog dialog = new PainRatingDialog();
         dialog.show(activity.getFragmentManager(), "TASK TIMER");
