@@ -24,6 +24,7 @@ import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
+import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
 import com.callbell.callbell.util.PrefManager;
@@ -106,7 +107,7 @@ public class BedModeActivity
                 if(intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
                     MessageResponse response = new MessageResponse(intent.getExtras());
                     playSoundOnce();
-                    Toast.makeText(getApplicationContext(), response.messageReason.name(), Toast.LENGTH_SHORT).show();
+                    BeaToast.makeText(getApplicationContext(), response.messageReason.name(), Toast.LENGTH_SHORT).show();
 
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
@@ -143,7 +144,7 @@ public class BedModeActivity
 
     @Override
     public void onCallBellPressed(MessageReason reason) {
-        Toast.makeText(this, R.string.message_sent, Toast.LENGTH_SHORT).show();
+        BeaToast.makeText(this, R.string.message_sent, Toast.LENGTH_LONG).show();
         messageRouting.sendMessage(prefs.getStationName(), prefs.CATEGORY_CALL_BELL, reason);
     }
 

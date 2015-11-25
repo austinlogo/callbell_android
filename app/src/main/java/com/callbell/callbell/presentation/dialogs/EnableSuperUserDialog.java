@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.callbell.callbell.R;
 import com.callbell.callbell.CallBellApplication;
+import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -86,7 +87,7 @@ public class EnableSuperUserDialog extends DialogFragment {
             LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(i);
             dismiss();
         } else {
-            Toast.makeText(getActivity(), R.string.incorrect_password, Toast.LENGTH_SHORT).show();
+            BeaToast.makeText(getActivity(), R.string.incorrect_password, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -26,6 +26,7 @@ import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 import com.callbell.callbell.presentation.bed.view.DisplayItemList;
+import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
@@ -194,7 +195,7 @@ public class PlanOfCareFragment extends Fragment {
     public void submitOtherTestItem() {
         String item = otherEditText.getText().toString();
         if (item.isEmpty()) {
-            Toast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
+            BeaToast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
             return;
         } else if (mPlanOfCareTests.contains(item)) {
             int index = mPlanOfCareTests.getPosition(item);
