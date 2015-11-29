@@ -1,5 +1,6 @@
 package com.callbell.callbell.presentation.bed.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 
 import java.util.ArrayList;
@@ -36,6 +38,13 @@ public class DisplayItemList extends LinearLayout {
 
     PlanOfCareCheckBoxAdapter adminAdapter;
     ArrayAdapter<String> patientAdapter;
+
+    public static PlanOfCareCheckBoxAdapter getAdminAdapter(Activity context, List<String> allItems, String selectedChiefComplaint) {
+        List<String> initialAdminValues = (!allItems.isEmpty() )
+                ? allItems
+                : new ArrayList<>(POCValues.pocMap.get(selectedChiefComplaint));
+        return new PlanOfCareCheckBoxAdapter(context, R.layout.item_multi_check, initialAdminValues);
+    }
 
     public DisplayItemList(Context context) {
         super(context);

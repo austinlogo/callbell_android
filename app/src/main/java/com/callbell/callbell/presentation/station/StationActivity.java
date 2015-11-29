@@ -16,6 +16,7 @@ import com.callbell.callbell.models.request.Request;
 import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
+import com.callbell.callbell.presentation.remoteUpdate.RemoteUpdateActivity;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.JSONUtil;
@@ -30,6 +31,7 @@ public class StationActivity
         implements StationFragment.StationActivityListener, TitleBarFragment.TitleBarListener{
     StationFragment mStationFragment;
     public static final String TAG = StationActivity.class.getSimpleName();
+    public static final int STATION_ACTIVITY_REQUEST = 100;
 
     private BroadcastReceiver mBroadcastReceiver;
 
@@ -120,6 +122,23 @@ public class StationActivity
     @Override
     public void stopSound() {
         notificationSound.pause();
+    }
+
+    @Override
+    public void startRemoteUpdateActivity(Intent i) {
+        startActivityForResult(i, STATION_ACTIVITY_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode) {
+            case RemoteUpdateActivity.REMOTE_UPDATE_ACTIVITY_FINISH_RESULT:
+                State st = new State(data.getStringExtra(State.STATE_ID));
+                mStationFragment.updateList(st);
+                break;
+        }
     }
 
     @Override

@@ -140,6 +140,12 @@ public class PrefManager {
         sp.putInt(State.PAIN_RATING, newState.getPainRating());
         sp.apply();
 
+        setShownTestItems(newState.getShownTests());
+        setShownMedicationItems(newState.getShownMedications());
+
+        setAllActionTestItems(newState.getAllTests());
+        setAllActionMedicationItems(newState.getAllMedications());
+
         Log.d(TAG, "RES2: " + resident());
 
         currentState = new State(newState);
@@ -194,13 +200,15 @@ public class PrefManager {
     }
 
     public void setShownTestItems(List<Integer> sa) {
+        currentState.setShownTests(sa);
         shownTestItems = sa;
         setIntList(sa, SHOWN_TESTS_KEY);
     }
 
-    public void setShownMedicationItems(List<Integer> medItems) {
-        shownMedicationItems = medItems;
-        setIntList(medItems, SHOWN_MEDICATIONS_KEY);
+    public void setShownMedicationItems(List<Integer> meds) {
+        currentState.setShownMedications(meds);
+        shownMedicationItems = meds;
+        setIntList(meds, SHOWN_MEDICATIONS_KEY);
     }
 
     public void setIntList(List<Integer> list, String key) {
@@ -253,6 +261,11 @@ public class PrefManager {
     }
 
     public void setAllActionTestItems(List<String> actionList) {
+        if (actionList != null) {
+            allTestItems = actionList;
+        } else {
+            allTestItems = new ArrayList<>();
+        }
         allTestItems = actionList;
 
         SharedPreferences.Editor sp = prefs.edit();
@@ -260,10 +273,18 @@ public class PrefManager {
     }
 
     public void setAllActionMedicationItems(List<String> actionList) {
-        allMedicationItems = actionList;
+        if (actionList == null) {
+            allMedicationItems = new ArrayList<>();
+        } else {
+            allMedicationItems = actionList;
+        }
 
         SharedPreferences.Editor sp = prefs.edit();
-        sp.putStringSet(ALL_MEDICATION_ITEMS_KEY, new HashSet<>(actionList)).commit();
+        sp.putStringSet(ALL_MEDICATION_ITEMS_KEY, new HashSet<>(allMedicationItems)).commit();
+    }
+
+    public List<String> getAllMedicationItems() {
+        return allMedicationItems;
     }
 
     public void uploadedToken(boolean bool) {
@@ -280,5 +301,14 @@ public class PrefManager {
 
     public String senderId() {
         return "434312104937";
+    }
+
+    public void setPOC(State st) {
+        currentState.setChiefComplaint(st.getChiefComplaint());
+        currentState.setAllMedications(st.getAllMedications());
+        currentState.setAllTests(st.getAllTests());
+        currentState.setShownMedications(st.getShownMedications());
+        currentState.setShownTests(st.getShownTests());
+        setState(currentState);
     }
 }

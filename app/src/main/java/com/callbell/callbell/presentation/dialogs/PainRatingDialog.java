@@ -108,7 +108,7 @@ public class PainRatingDialog
                     break;
             }
 
-            messageRouting.updateState();
+            messageRouting.updateState(prefs.getCurrentState(), prefs.getStationName());
             dismiss();
         }
     }

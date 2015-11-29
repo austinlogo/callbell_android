@@ -10,7 +10,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.callbell.callbell.models.State.State;
-import com.callbell.callbell.models.request.RegistrationRequest;
 import com.callbell.callbell.models.request.Request;
 import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.service.ServerEndpoints;
@@ -218,12 +217,12 @@ public class SocketService extends Service {
     public void registerDevice(State state) {
         mPingThreadRunnable = new PingServer(state.getTabletName());
         mPingThread = new Thread(mPingThreadRunnable);
-        startSocketEmitter(SocketOperation.REGISTER, state.toJson().toString());
+        startSocketEmitter(SocketOperation.REGISTER, state.toJSON().toString());
         mPingThread.start();
     }
 
     public void unregisterDevice(State state) {
-        startSocketEmitter(SocketOperation.UNREGISTER, state.toJson().toString());
+        startSocketEmitter(SocketOperation.UNREGISTER, state.toJSON().toString());
         mPingThreadRunnable.terminate();
         mThread.interrupt();
 

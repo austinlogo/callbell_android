@@ -2,6 +2,7 @@ package com.callbell.callbell.presentation.station;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -20,8 +21,12 @@ import com.callbell.callbell.models.adapter.StationItemAdapter;
 import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
+import com.callbell.callbell.presentation.dialogs.RemoteUpdateDialogFragment;
+import com.callbell.callbell.presentation.remoteUpdate.RemoteUpdateActivity;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
+
+import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -105,6 +110,10 @@ public class StationFragment
                 mListener.stopSound();
 
                 if (reason == MessageReason.QUIET) {
+                    Intent i = new Intent(getActivity(), RemoteUpdateActivity.class);
+                    i.putExtra(State.STATE_ID, adapter.getItem(position).toJSON().toString());
+
+                    mListener.startRemoteUpdateActivity(i);
                     return;
                 }
 
@@ -190,6 +199,7 @@ public class StationFragment
      */
     public interface StationActivityListener {
         void stopSound();
+        void startRemoteUpdateActivity(Intent i);
     }
 
 }

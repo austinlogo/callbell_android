@@ -3,7 +3,6 @@ package com.callbell.callbell.models.request;
 import android.util.Log;
 
 import com.callbell.callbell.models.State.State;
-import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +28,7 @@ public class GetStatesRequest extends Request {
     public JSONObject toJSON() {
         JSONObject result = new JSONObject();
         try {
-            result.put(State.STATE_ID, mState.toJson());
+            result.put(State.STATE_ID, mState.toJSON());
         } catch (JSONException e) {
             Log.e(TAG, "Error creating JSON object: " + e);
         }

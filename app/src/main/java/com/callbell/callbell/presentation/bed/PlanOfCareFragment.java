@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +23,11 @@ import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 import com.callbell.callbell.presentation.bed.view.DisplayItemList;
 import com.callbell.callbell.presentation.toast.BeaToast;
+import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
@@ -71,11 +72,17 @@ public class PlanOfCareFragment extends Fragment {
     @Inject
     PrefManager prefs;
 
+    private State mState;
+
     ArrayAdapter<String> autoCompleteOptions;
+    private boolean overrideNextChiefComplaintSpinnerUpdate = false;
 
     // TODO: Rename and change types of parameters
-    public static PlanOfCareFragment newInstance() {
+    public static PlanOfCareFragment newInstance(State st) {
         PlanOfCareFragment fragment = new PlanOfCareFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(State.STATE_ID, st.toJSON().toString());
+        fragment.setArguments(bundle);
 
         return fragment;
     }
@@ -91,6 +98,7 @@ public class PlanOfCareFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mState = new State(JSONUtil.getJSONFromString(getArguments().getString(State.STATE_ID)));
     }
 
     @Override
@@ -113,23 +121,30 @@ public class PlanOfCareFragment extends Fragment {
         Collections.sort(spinnerArray);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.item_simple_spinner, spinnerArray);
         chiefComplaintSpinner.setAdapter(adapter);
-        Log.d(TAG, "Current Selection: " + prefs.getCurrentState().getChiefComplaint());
-        chiefComplaintSpinner.setSelection(adapter.getPosition(prefs.getCurrentState().getChiefComplaint()), false);
+        Log.d(TAG, "Current Selection: " + mState.getChiefComplaint());
+        chiefComplaintSpinner.setSelection(adapter.getPosition(mState.getChiefComplaint()), false);
 
         //Inflate the Test List
         mPlanOfCareTests.setTitle(R.string.poc_current_tests_title);
-        List<String> prefsAdminList = prefs.allTestItems();
-        List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
-                ? prefsAdminList
-                : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
-        mPlanOfCareTests.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminValues));
-        mPlanOfCareTests.setCheckedItems(prefs.shownTestItems());
+        mPlanOfCareTests.setAdminAdapter(DisplayItemList.getAdminAdapter(getActivity(),
+                mState.getAllTests(),
+                chiefComplaintSpinner.getSelectedItem().toString()));
+//        List<String> prefsAdminList = prefs.allTestItems();
+//        List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
+//                ? prefsAdminList
+//                : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
+//        mPlanOfCareTests.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminValues));
+        mPlanOfCareTests.setCheckedItems(mState.getShownTests());
 
         //Inflate the Medication List
-        List<String> initialAdminMedicationValues =  new ArrayList<>(MedicationValues.medicationMap.keySet());
+        List<String> savedMeds = mState.getAllMedications();
+        List<String> initialAdminMedicationValues = (savedMeds != null && savedMeds.size() > 0)
+                ? savedMeds
+                : new ArrayList<>(MedicationValues.medicationMap.keySet());
+
         mPlanOfCareMedications.setTitle(R.string.poc_current_medications_title);
         mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminMedicationValues));
-        mPlanOfCareMedications.setCheckedItems(prefs.shownMedicationItems());
+        mPlanOfCareMedications.setCheckedItems(mState.getShownMedications());
 
         //Set AutoComplete options
         String[] str = POCValues.testDescriptions.keySet().toArray(new String[0]);
@@ -230,13 +245,27 @@ public class PlanOfCareFragment extends Fragment {
         mListener = null;
     }
 
+    private void saveValues() {
+        mState.setShownMedications(mPlanOfCareMedications.updatePatientList());
+
+//        prefs.setShownTestItems();
+//        prefs.setAllActionTestItems(mPlanOfCareTests.getActionList());
+
+        mState.setShownTests(mPlanOfCareTests.updatePatientList());
+//        prefs.setShownMedicationItems();
+//        prefs.setAllActionMedicationItems(mPlanOfCareMedications.getActionList());
+
+//        mListener.saveListItems(mPlanOfCareTests.getActionList(), mPlanOfCareMedications.getActionList());
+
+        mState.setAllTests(mPlanOfCareTests.getActionList());
+        mState.setAllMedications(mPlanOfCareMedications.getActionList());
+    }
+
     public void setSuperUserPermissions(boolean isSuperUser) {
 
-        prefs.setShownTestItems(mPlanOfCareTests.updatePatientList());
-        prefs.setAllActionTestItems(mPlanOfCareTests.getActionList());
+        saveValues();
 
-        prefs.setShownMedicationItems(mPlanOfCareMedications.updatePatientList());
-        prefs.setAllActionMedicationItems(mPlanOfCareMedications.getActionList());
+        mListener.savePOCState(mState);
 
         //Setting UI Values
         mPlanOfCareTests.setDisplayMode(isSuperUser);
@@ -249,11 +278,27 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     public void clearValues() {
-        prefs.setShownTestItems(new ArrayList<Integer>());
-        prefs.setShownMedicationItems(new ArrayList<Integer>());
+        mState.setShownMedications(new ArrayList<Integer>());
+        mState.setShownTests(new ArrayList<Integer>());
+
+//        prefs.setShownTestItems(new ArrayList<Integer>());
+//        prefs.setShownMedicationItems(new ArrayList<Integer>());
         mPlanOfCareTests.clear();
         mPlanOfCareMedications.clear();
 //        mPlanOfCareTests.setCheckedItems(prefs.shownTestItems());
+    }
+
+    public void updateState(State st) {
+        mState = st;
+        initLists();
+        overrideNextChiefComplaintSpinnerUpdate = true;
+        setSuperUserPermissions(prefs.isSuperUser());
+    }
+
+    public State getState() {
+
+        saveValues();
+        return mState;
     }
 
     //Spinner Listener
@@ -261,12 +306,19 @@ public class PlanOfCareFragment extends Fragment {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            if (overrideNextChiefComplaintSpinnerUpdate) {
+                overrideNextChiefComplaintSpinnerUpdate = false;
+                return;
+            }
+
             String selectedComplaint = parent.getSelectedItem().toString();
 
-            prefs.getCurrentState().setChiefComplaint(selectedComplaint);
+
+            mState.setChiefComplaint(selectedComplaint);
             mPlanOfCareTests.resetList(selectedComplaint);
-            prefs.setShownTestItems(null);
-            mPlanOfCareTests.setCheckedItems(prefs.shownTestItems());
+            mState.setShownTests(new ArrayList<Integer>());
+            mPlanOfCareTests.setCheckedItems(mState.getShownTests());
         }
 
         @Override
@@ -277,6 +329,7 @@ public class PlanOfCareFragment extends Fragment {
 
     public interface PlanOfCareInteraction {
         void showInfoDialog(String tit, String expandedName, String bod);
+        void savePOCState(State st);
     }
 
     public class SubmitOtherTextListener implements TextView.OnEditorActionListener {

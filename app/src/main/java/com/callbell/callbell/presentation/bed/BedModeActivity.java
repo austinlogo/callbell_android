@@ -20,6 +20,7 @@ import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.models.State.MessageReason;
+import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
@@ -27,7 +28,10 @@ import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
+import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -39,7 +43,8 @@ public class BedModeActivity
         implements
                 CallBellsFragment.OnFragmentInteractionListener,
                 PlanOfCareFragment.PlanOfCareInteraction,
-                TitleBarFragment.TitleBarListener {
+                TitleBarFragment.TitleBarListener,
+                StaffFragment.StaffFragmentListener {
 
     private static final String TAG = BedModeActivity.class.getSimpleName();
 
@@ -56,7 +61,6 @@ public class BedModeActivity
     private StaffFragment mStaffFragment;
     private CallBellsFragment mCallBellsFragment;
     private PlanOfCareFragment mPlanOfCareFragment;
-    private PainRatingAsyncTask mPainRatingAsyncTask;
     private TitleBarFragment mTitleBarFragment;
     private boolean mSimpleMode = false;
 
@@ -80,9 +84,9 @@ public class BedModeActivity
         ButterKnife.inject(this);
         ((CallBellApplication) getApplication()).inject(this);
 
-        mStaffFragment = StaffFragment.newInstance();
+        mStaffFragment = StaffFragment.newInstance(prefs.getCurrentState());
         mCallBellsFragment = CallBellsFragment.newInstance();
-        mPlanOfCareFragment = PlanOfCareFragment.newInstance();
+        mPlanOfCareFragment = PlanOfCareFragment.newInstance(prefs.getCurrentState());
         mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.BED_MODE_ACTIVITY);
 
         getFragmentManager()
@@ -99,6 +103,7 @@ public class BedModeActivity
         filter.addAction(PrefManager.EVENT_SU_MODE_CHANGE);
         filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
         filter.addAction(PrefManager.EVENT_SERVER_CONNECTION_CHANGED);
+        filter.addAction(PrefManager.EVENT_STATE_UPDATE);
 
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -112,18 +117,25 @@ public class BedModeActivity
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
 
-                    mStaffFragment.setSuperUserPermissions(prefs.isSuperUser());
                     mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
+                    mStaffFragment.setSuperUserPermissions(prefs.isSuperUser());
                     mTitleBarFragment.setSuperUserPermissions(prefs.isSuperUser());
                     setSuperUserPermissions(prefs.isSuperUser());
 
                     if (!prefs.isSuperUser()) {
-                        messageRouting.updateState();
+                        messageRouting.updateState(prefs.getCurrentState(), prefs.getStationName());
                     }
                     mStaffFragment.setSuperUserPermissions(prefs.isSuperUser());
 
                 } else if (intent.getAction().equals(PrefManager.EVENT_SERVER_CONNECTION_CHANGED)) {
                     mTitleBarFragment.toggleServerconnectedView(intent.getBooleanExtra(PrefManager.SERVER_CONNECTED, false));
+                } else if (PrefManager.EVENT_STATE_UPDATE.equals(intent.getAction())) {
+                    Log.d(TAG, "TABLET STATE UPDATED");
+                    State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
+
+                    mStaffFragment.updateState(st);
+                    mPlanOfCareFragment.updateState(st);
+                    Log.d(TAG, st.toString());
                 }
             }
         };
@@ -131,15 +143,14 @@ public class BedModeActivity
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mBroadcastReceiver, filter);
     }
 
+    ////////// ACTIVITY ////////////////////////////////////////////////////////////////////////////
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         SocketService.getInstance().unregisterDevice(prefs.getCurrentState());
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
 
-        if (mPainRatingAsyncTask != null) {
-            mPainRatingAsyncTask.interrupt();
-        }
     }
 
     @Override
@@ -149,6 +160,13 @@ public class BedModeActivity
     }
 
     @Override
+    public void saveStaffState(State st) {
+        prefs.setStaff(st.getPhysician(), st.getResident(), st.getNurse());
+    }
+
+    ////////// POCFragment//////////////////////////////////////////////////////////////////////////
+
+    @Override
     public void showInfoDialog(String tit, String expandedName, String bod) {
         if (expandedName == null) {
             PlanOfCareInfoDialog.newInstance(tit, bod).show(getFragmentManager(), "INFO DIALOG");
@@ -156,6 +174,13 @@ public class BedModeActivity
             PlanOfCareInfoDialog.newInstance(tit, expandedName, bod).show(getFragmentManager(), "INFO DIALOG");
         }
     }
+
+    @Override
+    public void savePOCState(State st) {
+        prefs.setPOC(st);
+    }
+
+    ////////// TITLE BAR FRAGMENT //////////////////////////////////////////////////////////////////
 
     @Override
     public void clearValues() {

@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
-import com.callbell.callbell.util.PrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +52,7 @@ public class CallBellRequest extends Request {
         try {
             jsonObject = new JSONObject();
 
-            jsonObject.put(State.STATE_ID, mState.toJson());
+            jsonObject.put(State.STATE_ID, mState.toJSON());
             jsonObject.put(TO_KEY, getTo());
             jsonObject.put(CATEGORY_KEY, category);
             jsonObject.put(PAYLOAD_KEY, message);

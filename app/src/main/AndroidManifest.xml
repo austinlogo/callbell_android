@@ -56,6 +56,13 @@
             android:exported="false" >
         </service>
 
+        <activity android:name=".presentation.remoteUpdate.RemoteUpdateActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+
         <activity
             android:name=".presentation.login.LoginActivity"
             android:screenOrientation="landscape"

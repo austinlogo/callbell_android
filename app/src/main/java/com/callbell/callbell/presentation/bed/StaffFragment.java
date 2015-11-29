@@ -1,6 +1,7 @@
 package com.callbell.callbell.presentation.bed;
 
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
+import com.callbell.callbell.models.State.State;
+import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -26,6 +29,7 @@ import butterknife.InjectView;
  */
 public class StaffFragment extends Fragment {
 
+    private StaffFragmentListener mListener;
 
     private static final String TAG = StaffFragment.class.getSimpleName();
     @Inject
@@ -59,9 +63,13 @@ public class StaffFragment extends Fragment {
     private Drawable defaultTextBackgroundNurse;
     private Drawable defaultTextBackgroundResident;
 
-    public static StaffFragment newInstance() {
+    private State mState;
+
+    public static StaffFragment newInstance(State st) {
         StaffFragment fragment = new StaffFragment();
-//        fragment.setArguments(bundle);
+        Bundle bundle = new Bundle();
+        bundle.putString(State.STATE_ID, st.toJSON().toString());
+        fragment.setArguments(bundle);
 
         return fragment;
     }
@@ -83,11 +91,32 @@ public class StaffFragment extends Fragment {
         defaultTextBackgroundNurse = nurseField.getBackground();
         defaultTextBackgroundResident = residentField.getBackground();
 
+        mState = new State(JSONUtil.getJSONFromString(getArguments().getString(State.STATE_ID)));
+
         setStaffValues(false);
         setSuperUserPermissions(prefs.isSuperUser());
         setListeners();
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Log.d(TAG, "onAttach called");
+        try {
+            mListener = (StaffFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement StationActivityListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(TAG, "onDetach called");
+        mListener = null;
     }
 
     private void setListeners() {
@@ -110,16 +139,31 @@ public class StaffFragment extends Fragment {
 
     private void setStaffValues(boolean isSuperUser) {
 
-        Log.d(TAG, "SEtting staff values");
-        Log.d(TAG, prefs.physician());
-        Log.d(TAG, prefs.resident());
-        Log.d(TAG,prefs.nurse());
-
-        physicianField.setText(prefs.physician());
-        nurseField.setText(prefs.nurse());
-        residentField.setText(prefs.resident());
+        physicianField.setText(mState.getPhysician());
+        nurseField.setText(mState.getNurse());
+        residentField.setText(mState.getResident());
 
         setStaffVisibility(isSuperUser);
+    }
+
+    public State getState() {
+        saveStaff();
+
+        return mState;
+    }
+
+    public void updateState(State st) {
+        mState = st;
+        setStaffValues(prefs.isSuperUser());
+    }
+
+    private void saveStaff() {
+        mState.setStaff(
+                physicianField.getText().toString(),
+                residentField.getText().toString(),
+                nurseField.getText().toString());
+
+        mListener.saveStaffState(mState);
     }
 
 
@@ -128,10 +172,7 @@ public class StaffFragment extends Fragment {
 //        before disabling set staff information)
         if (!setSuperUserStatus) {
             Log.d(TAG, "Disabling SU mode");
-            prefs.setStaff(
-                    physicianField.getText().toString(),
-                    residentField.getText().toString(),
-                    nurseField.getText().toString());
+            saveStaff();
         }
 
         //setFocusUnderline
@@ -147,9 +188,6 @@ public class StaffFragment extends Fragment {
         residentField.setEnabled(setSuperUserStatus);
 
         //TestsTitle
-
-
-
         prefs.setSuperUser(setSuperUserStatus);
     }
 
@@ -163,6 +201,10 @@ public class StaffFragment extends Fragment {
         physicianField.setText("");
         residentField.setText("");
         nurseField.setText("");
-        prefs.setStaff("", "", "");
+        mState.setStaff("", "", "");
+    }
+
+    public interface StaffFragmentListener {
+        void saveStaffState(State st);
     }
 }

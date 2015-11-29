@@ -11,6 +11,8 @@ import com.callbell.callbell.presentation.bed.StaffFragment;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
+import com.callbell.callbell.presentation.dialogs.RemoteUpdateDialogFragment;
+import com.callbell.callbell.presentation.remoteUpdate.RemoteUpdateActivity;
 import com.callbell.callbell.presentation.station.StationActivity;
 import com.callbell.callbell.presentation.station.StationFragment;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
@@ -43,6 +45,7 @@ import javax.inject.Singleton;
         BedModeActivity.class,
         LoginActivity.class,
         StationActivity.class,
+        RemoteUpdateActivity.class,
 
         //Fragment
         LoginFragment.class,
@@ -55,6 +58,7 @@ import javax.inject.Singleton;
         EnableSuperUserDialog.class,
         CallBellDialog.class,
         PainRatingDialog.class,
+        RemoteUpdateDialogFragment.class,
 
         //Service
         SocketService.class

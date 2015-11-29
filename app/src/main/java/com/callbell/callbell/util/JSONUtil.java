@@ -99,4 +99,84 @@ public class JSONUtil {
             return false;
         }
     }
+
+    public static JSONArray integerListToJSONArray(List<Integer> shownTests) {
+        if (shownTests == null) {
+            return new JSONArray();
+        }
+
+        JSONArray array = new JSONArray();
+
+        for (Integer i : shownTests) {
+            array.put(i);
+        }
+
+        return array;
+    }
+
+    public static JSONArray stringListToJSONArray(List<String> allMedications) {
+        if (allMedications == null) {
+            return new JSONArray();
+        }
+
+        JSONArray array = new JSONArray();
+
+        for (String i : allMedications) {
+            array.put(i);
+        }
+
+        return array;
+    }
+
+    public static List<Integer> JSONArrayToIntegerList(JSONArray array) {
+        List<Integer> intArray = new ArrayList<>();
+
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                intArray.add( (Integer) array.get(i));
+            }
+        } catch (JSONException e) {
+            Log.e(TAG, "JSON exception attempting to convert JSONArray to List<Integer>");
+            return new ArrayList<>();
+        }
+
+        return intArray;
+    }
+
+    private static List<String> JSONArrayToStringList(JSONArray array) {
+        List<String> intArray = new ArrayList<>();
+
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                intArray.add( (String) array.get(i));
+            }
+        } catch (JSONException e) {
+            Log.e(TAG, "JSON exception attempting to convert JSONArray to List<Integer>");
+            return new ArrayList<>();
+        }
+
+        return intArray;
+    }
+
+    public static List<Integer> getvalueListIfExists(JSONObject object, String key) {
+        JSONArray array;
+
+        try {
+            array = object.has(key) ? new JSONArray(object.getString(key)) : new JSONArray();
+            return JSONArrayToIntegerList(array);
+        } catch (JSONException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    public static List<String> getValueStringListIfExists(JSONObject object, String key) {
+        JSONArray array;
+
+        try {
+            array = object.has(key) ? new JSONArray(object.getString(key)) : new JSONArray();
+            return JSONArrayToStringList(array);
+        } catch (JSONException e) {
+            return new ArrayList<>();
+        }
+    }
 }

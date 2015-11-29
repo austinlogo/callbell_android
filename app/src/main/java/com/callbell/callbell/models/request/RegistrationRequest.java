@@ -58,7 +58,7 @@ public class RegistrationRequest extends Request {
         try {
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put(State.STATE_ID, mState.toJson());
+            jsonObject.put(State.STATE_ID, mState.toJSON());
 
             return jsonObject;
         } catch (JSONException e) {

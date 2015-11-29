@@ -9,6 +9,8 @@ import com.callbell.callbell.util.PrefManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by austin on 10/9/15.
  */
@@ -29,6 +31,8 @@ public class State {
     public static final String STATION_TABLET_NAME_ID = "STATION_TABLET_NAME_ID";
     public static final String SHOWN_TESTS_ID = "SHOWN_TESTS_ID";
     public static final String SHOWN_MEDICATIONS_ID = "SHOWN_MEDICATIONS_ID";
+    public static final String ALL_TESTS_ID = "ALL_TESTS_ID";
+    public static final String ALL_MEDICATIONS_ID = "ALL_MEDICATIONS_ID";
     public static final String STATE_ID = "STATE_ID";
 
     private static final String TAG = State.class.getSimpleName();
@@ -44,6 +48,12 @@ public class State {
 
     private int painRating;
 
+    private List<Integer> shownTests,
+            shownMedications;
+
+    private List<String> allTests,
+            allMedications;
+
     private String[] shownActions;
 
     public State(PrefManager prefs) {
@@ -58,7 +68,21 @@ public class State {
         painRating = prefs.painRating();
     }
 
-    public State(String hos, String grp, String loc, String mod, String doc, String nurs, String res, String cc, int pr) {
+    public State(
+            String hos,
+            String grp,
+            String loc,
+            String mod,
+            String doc,
+            String nurs,
+            String res,
+            String cc,
+            List<Integer> tests,
+            List<Integer> meds,
+            List<String> at,
+            List<String> am,
+            int pr) {
+
         hospital = hos;
         group = grp;
         location = loc;
@@ -67,6 +91,10 @@ public class State {
         nurse = nurs;
         resident = res;
         chiefComplaint = cc;
+        shownTests = tests;
+        shownMedications = meds;
+        allTests = at;
+        allMedications = am;
         painRating = pr;
     }
 
@@ -80,8 +108,11 @@ public class State {
         nurse = st.getNurse();
         chiefComplaint = st.getChiefComplaint();
         painRating = st.getPainRating();
+        shownTests = st.getShownTests();
+        shownMedications = st.getShownMedications();
+        allTests = st.getAllTests();
+        allMedications = st.getAllMedications();
         isConnectedValue = st.isConnected();
-
     }
 
     public State(JSONObject object) {
@@ -94,7 +125,15 @@ public class State {
         nurse = JSONUtil.getValueStringIfExists(object, NURSE);
         chiefComplaint = JSONUtil.getValueStringIfExists(object, CHIEF_COMPLAINT);
         painRating = JSONUtil.getValueIntIfExists(object, PAIN_RATING);
+        shownTests = JSONUtil.getvalueListIfExists(object, SHOWN_TESTS_ID);
+        shownMedications = JSONUtil.getvalueListIfExists(object, SHOWN_MEDICATIONS_ID);
+        allTests = JSONUtil.getValueStringListIfExists(object, ALL_TESTS_ID);
+        allMedications = JSONUtil.getValueStringListIfExists(object, ALL_MEDICATIONS_ID);
         isConnectedValue = JSONUtil.getValueBooleanFromIntIfExists(object, CONNECTION_INDICATOR_ID);
+    }
+
+    public State(String stringExtra) {
+        this(JSONUtil.getJSONFromString(stringExtra));
     }
 
     public String getHospital() {
@@ -111,6 +150,14 @@ public class State {
 
     public String getMode() {
         return mode;
+    }
+
+    public List<Integer> getShownTests() {
+        return shownTests;
+    }
+
+    public List<Integer> getShownMedications() {
+        return shownMedications;
     }
 
     public String getPhysician() {
@@ -133,22 +180,6 @@ public class State {
         return isConnectedValue;
     }
 
-    public void setHospital(String hos) {
-        hospital = hos;
-    }
-
-    public void setLocation(String loc) {
-        location = loc;
-    }
-
-    public void setGroup(String grp) {
-        group = grp;
-    }
-
-    public void setMode(String mod) {
-        mode = mod;
-    }
-
     public void setChiefComplaint(String cc) {
         chiefComplaint = cc;
     }
@@ -159,13 +190,21 @@ public class State {
         nurse = nurs;
     }
 
+    public void setShownTests(List<Integer> tests) {
+        shownTests = tests;
+    }
+
+    public void setShownMedications(List<Integer> meds) {
+        shownMedications = meds;
+    }
+
     public boolean equals(State other) {
         return this.hospital.equals(other.getHospital())
                 && this.group.equals(other.getGroup())
                 && this.location.equals(other.getLocation());
     }
 
-    public JSONObject toJson() {
+    public JSONObject toJSON() {
         JSONObject object = new JSONObject();
 
         try {
@@ -179,6 +218,10 @@ public class State {
             object.put(PAIN_RATING, painRating);
             object.put(TABLET_NAME_ID, getTabletName());
             object.put(STATION_TABLET_NAME_ID, getStationTabletName());
+            object.put(SHOWN_TESTS_ID, JSONUtil.integerListToJSONArray(shownTests));
+            object.put(SHOWN_MEDICATIONS_ID, JSONUtil.integerListToJSONArray(shownMedications));
+            object.put(ALL_TESTS_ID, JSONUtil.stringListToJSONArray(allTests));
+            object.put(ALL_MEDICATIONS_ID, JSONUtil.stringListToJSONArray(allMedications));
             object.put(CONNECTION_INDICATOR_ID, isConnectedValue ? 1 : 0);
 
             return object;
@@ -190,12 +233,12 @@ public class State {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(HOSPITAL_ID + ": " + hospital);
-        sb.append(GROUP_ID + ": " + group);
-        sb.append(PHYSICIAN + ": " + physician);
-        sb.append(LOCATION_ID + ": " + location);
-        sb.append(CHIEF_COMPLAINT + ": " + chiefComplaint);
-        sb.append(PAIN_RATING + ": " + painRating);
+        sb.append(HOSPITAL_ID + ": " + hospital + ", ");
+        sb.append(GROUP_ID + ": " + group + ", ");
+        sb.append(PHYSICIAN + ": " + physician + ", ");
+        sb.append(LOCATION_ID + ": " + location + ", ");
+        sb.append(CHIEF_COMPLAINT + ": " + chiefComplaint + ", ");
+        sb.append(PAIN_RATING + ": " + painRating + ", ");
 
         return sb.toString();
     }
@@ -218,5 +261,21 @@ public class State {
 
     public void setConnected(boolean connected) {
         this.isConnectedValue = connected;
+    }
+
+    public void setAllMedications(List<String> allMeds) {
+        allMedications = allMeds;
+    }
+
+    public void setAllTests(List<String> at) {
+        allTests = at;
+    }
+
+    public List<String> getAllMedications() {
+        return allMedications;
+    }
+
+    public List<String> getAllTests() {
+        return allTests;
     }
 }

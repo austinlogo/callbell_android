@@ -32,7 +32,7 @@ public class UpdateStateRequest extends Request {
         JSONObject result = new JSONObject();
 
         try {
-            result.put(State.STATE_ID, mState.toJson());
+            result.put(State.STATE_ID, mState.toJSON());
             result.put(Request.CATEGORY_KEY, PrefManager.CATEGORY_TABLET_STATE_UPDATE);
             result.put(TO_KEY, to_id);
         } catch (JSONException e) {

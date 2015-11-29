@@ -24,6 +24,8 @@ import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
 import com.callbell.callbell.presentation.station.StationActivity;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -162,11 +164,16 @@ public class LoginFragment extends Fragment {
                     prefs.nurse(),
                     prefs.resident(),
                     prefs.chiefComplaint(),
+                    prefs.shownTestItems(),
+                    prefs.shownMedicationItems(),
+                    prefs.allTestItems(),
+                    prefs.getAllMedicationItems(),
                     prefs.painRating());
             prefs.setState(thisState);
 
         } else {
-            prefs.setState(new State(
+            prefs.setState(
+                new State(
                     hospital_id.getText().toString(),
                     group_id.getText().toString(),
                     PrefManager.STATION_SUFFIX,
@@ -175,7 +182,12 @@ public class LoginFragment extends Fragment {
                     "",
                     "",
                     "",
-                    0)
+                    new ArrayList<Integer>(),
+                    new ArrayList<Integer>(),
+                    new ArrayList<String>(),
+                    new ArrayList<String>(),
+                    0
+                )
             );
         }
 
