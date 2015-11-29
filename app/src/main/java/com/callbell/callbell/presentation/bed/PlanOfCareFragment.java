@@ -273,8 +273,12 @@ public class PlanOfCareFragment extends Fragment {
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         chiefComplaintSpinner.setEnabled(isSuperUser);
         chiefComplaintSpinner.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-        mPlanOfCareTests.setVisibility((!isSuperUser && mPlanOfCareTests.getShownItemCount() == 0) ? View.GONE : View.VISIBLE);
-        mPlanOfCareMedications.setVisibility( (!isSuperUser && mPlanOfCareMedications.getShownItemCount() == 0 ) ? View.GONE : View.VISIBLE);
+
+        Log.d(TAG, "AFL " + mState.getShownTests().size());
+
+        mPlanOfCareTests.setVisibility((!isSuperUser && mState.getShownTests().size() == 0) ? View.GONE : View.VISIBLE);
+        Log.d(TAG, "AFL " + mPlanOfCareTests.getShownItemCount());
+        mPlanOfCareMedications.setVisibility( (!isSuperUser && mState.getShownMedications().size() == 0 ) ? View.GONE : View.VISIBLE);
     }
 
     public void clearValues() {
