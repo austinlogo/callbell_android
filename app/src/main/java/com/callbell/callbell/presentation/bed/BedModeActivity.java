@@ -112,7 +112,7 @@ public class BedModeActivity
                 if(intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
                     MessageResponse response = new MessageResponse(intent.getExtras());
                     playSoundOnce();
-                    BeaToast.makeText(getApplicationContext(), response.messageReason.name(), Toast.LENGTH_SHORT).show();
+                    BeaToast.makeText(getApplicationContext(), response.messageReason, Toast.LENGTH_SHORT).show();
 
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
@@ -135,7 +135,8 @@ public class BedModeActivity
 
                     mStaffFragment.updateState(st);
                     mPlanOfCareFragment.updateState(st);
-                    Log.d(TAG, st.toString());
+                    playSoundOnce();
+                    BeaToast.makeText(context, R.string.new_info, BeaToast.LENGTH_LONG).show();
                 }
             }
         };

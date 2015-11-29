@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.models.State.MessageReason;
 
 /**
  * Created by austin on 11/24/15.
@@ -31,6 +32,23 @@ public class BeaToast extends Toast {
         toast.setView(layout);
 
         return toast;
+    }
+
+    public static BeaToast makeText(Context context, MessageReason reason, int length) {
+        int resId = -1;
+
+        switch (reason) {
+            case ON_MY_WAY:
+                resId = R.string.on_my_way;
+                break;
+            case WAIT:
+                resId = R.string.wait;
+                break;
+            default:
+                resId = R.string.acknowledge;
+        }
+
+        return makeText(context, resId, length);
     }
 
     public BeaToast(Context context) {

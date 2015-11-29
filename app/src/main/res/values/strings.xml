@@ -60,5 +60,6 @@
     <string name="nurse">Nurse</string>
     <string name="simple_layout">Simple</string>
     <string name="normal_layout">normal</string>
+    <string name="new_info">New Information Received</string>
 
 </resources>
