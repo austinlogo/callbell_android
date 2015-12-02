@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.callbell.callbell"
         minSdkVersion 17
-        targetSdkVersion 23
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -23,11 +23,11 @@ android {
     }
 }
 
-
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile "org.robolectric:robolectric:3.0"
     compile files('libs/dagger-1.2.2.jar')
     compile files('libs/javax.inject.jar')
     compile files('libs/dagger-compiler-1.2.2.jar')

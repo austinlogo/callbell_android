@@ -3,6 +3,7 @@
 /.idea/workspace.xml
 /.idea/libraries
 .idea/
+app/app.iml
 CallBell.iml
 /build
 /captures
