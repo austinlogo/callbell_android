@@ -14,6 +14,8 @@ import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 public class PainRatingAsyncTask
         extends AsyncTask<Integer, Integer, Void> {
 
+    public static PainRatingAsyncTask mRunningTask = null;
+
     private static final String TAG = PainRatingAsyncTask.class.getSimpleName();
     private int mIntervalInMinutes;
     private long mIntervalInMilliseconds;
@@ -43,16 +45,25 @@ public class PainRatingAsyncTask
     protected Void doInBackground(Integer... params) {
         if (params.length == 0) {
             return null;
+        } else if (mRunningTask != null) {
+            mRunningTask.interrupt();
         }
 
         mIntervalInMinutes = params[0];
+
+        if (mIntervalInMinutes == 0) {
+            return null;
+        }
+
         mIntervalInMilliseconds = mIntervalInMinutes * 60 * 1000;
         Log.d(TAG, "Pain Rating Started: " + mIntervalInMinutes + " minutes");
 
         try {
+            mRunningTask = this;
             mThread = Thread.currentThread();
             Thread.sleep(mIntervalInMilliseconds);
         } catch (InterruptedException e) {
+            mRunningTask = null;
             Log.e(TAG, "Thread interrupted: " + e);
         }
 
@@ -66,5 +77,7 @@ public class PainRatingAsyncTask
             mThread.interrupt();
         } else
             Log.d(TAG, "Thread null");
+
+        mRunningTask = null;
     }
 }

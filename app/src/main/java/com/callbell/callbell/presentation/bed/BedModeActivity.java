@@ -117,7 +117,10 @@ public class BedModeActivity
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
                     Log.d(TAG, "Admin Mode Altered: " + prefs.isSuperUser());
 
-                    mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
+                    if (mPlanOfCareFragment.isAdded()) {
+                        mPlanOfCareFragment.setSuperUserPermissions(prefs.isSuperUser());
+                    }
+
                     mStaffFragment.setSuperUserPermissions(prefs.isSuperUser());
                     mTitleBarFragment.setSuperUserPermissions(prefs.isSuperUser());
                     setSuperUserPermissions(prefs.isSuperUser());

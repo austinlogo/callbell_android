@@ -39,7 +39,7 @@
     <string name="call_received">Call Received</string>
     <string name="message_sent">Message Sent</string>
 
-    <string name="pain_header">Tap to Rate Your Pain</string>
+    <string name="pain_header">Pain Timer</string>
     <string name="pain_text_0">No Pain</string>
     <string name="pain_text_2" >A Little Pain</string>
     <string name="pain_text_4" >A Little More Pain</string>
@@ -61,5 +61,6 @@
     <string name="simple_layout">Simple</string>
     <string name="normal_layout">normal</string>
     <string name="new_info">New Information Received</string>
+    <string name="now">Now</string>
 
 </resources>

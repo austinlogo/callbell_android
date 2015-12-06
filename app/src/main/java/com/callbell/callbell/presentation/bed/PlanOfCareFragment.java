@@ -294,6 +294,7 @@ public class PlanOfCareFragment extends Fragment {
 
     public void updateState(State st) {
         mState = st;
+        mListener.savePOCState(mState);
         initLists();
         overrideNextChiefComplaintSpinnerUpdate = true;
         setSuperUserPermissions(prefs.isSuperUser());
