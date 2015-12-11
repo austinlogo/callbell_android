@@ -33,9 +33,11 @@ public class State {
     public static final String SHOWN_MEDICATIONS_ID = "SHOWN_MEDICATIONS_ID";
     public static final String ALL_TESTS_ID = "ALL_TESTS_ID";
     public static final String ALL_MEDICATIONS_ID = "ALL_MEDICATIONS_ID";
+    public static final String ACCEPTABLE_PAIN_ID = "ACCEPTABLE_PAIN_ID";
     public static final String STATE_ID = "STATE_ID";
 
     private static final String TAG = State.class.getSimpleName();
+    public static final int MAX_PAIN = 10;
     private boolean isConnectedValue = true;
     private String hospital,
         group,
@@ -46,7 +48,8 @@ public class State {
         resident,
         chiefComplaint;
 
-    private int painRating;
+    private int painRating,
+            acceptablePain;
 
     private List<Integer> shownTests,
             shownMedications;
@@ -65,6 +68,7 @@ public class State {
         nurse = prefs.nurse();
         resident = prefs.resident();
         chiefComplaint = prefs.chiefComplaint();
+        acceptablePain = prefs.acceptablePain();
         painRating = prefs.painRating();
     }
 
@@ -81,6 +85,7 @@ public class State {
             List<Integer> meds,
             List<String> at,
             List<String> am,
+            int ap,
             int pr) {
 
         hospital = hos;
@@ -95,6 +100,7 @@ public class State {
         shownMedications = meds;
         allTests = at;
         allMedications = am;
+        acceptablePain = ap;
         painRating = pr;
     }
 
@@ -112,6 +118,7 @@ public class State {
         shownMedications = st.getShownMedications();
         allTests = st.getAllTests();
         allMedications = st.getAllMedications();
+        acceptablePain = st.getAcceptablePain();
         isConnectedValue = st.isConnected();
     }
 
@@ -129,6 +136,7 @@ public class State {
         shownMedications = JSONUtil.getvalueListIfExists(object, SHOWN_MEDICATIONS_ID);
         allTests = JSONUtil.getValueStringListIfExists(object, ALL_TESTS_ID);
         allMedications = JSONUtil.getValueStringListIfExists(object, ALL_MEDICATIONS_ID);
+        acceptablePain = JSONUtil.getValueIntIfExists(object, ACCEPTABLE_PAIN_ID);
         isConnectedValue = JSONUtil.getValueBooleanFromIntIfExists(object, CONNECTION_INDICATOR_ID);
     }
 
@@ -223,6 +231,7 @@ public class State {
             object.put(ALL_TESTS_ID, JSONUtil.stringListToJSONArray(allTests));
             object.put(ALL_MEDICATIONS_ID, JSONUtil.stringListToJSONArray(allMedications));
             object.put(CONNECTION_INDICATOR_ID, isConnectedValue ? 1 : 0);
+            object.put(ACCEPTABLE_PAIN_ID, acceptablePain);
 
             return object;
         } catch (JSONException e) {
@@ -277,5 +286,13 @@ public class State {
 
     public List<String> getAllTests() {
         return allTests;
+    }
+
+    public void setAcceptablePain(int ap) {
+        acceptablePain = ap;
+    }
+
+    public int getAcceptablePain() {
+        return acceptablePain;
     }
 }

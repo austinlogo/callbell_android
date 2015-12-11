@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,6 +54,12 @@ public class PlanOfCareFragment extends Fragment {
 
     @InjectView (R.id.fragment_poc_main_complaint_spinner)
     Spinner chiefComplaintSpinner;
+
+    @InjectView(R.id.fragment_poc_tests_or_title_container)
+    LinearLayout mPOCSpinnerAndAcceptablePainContainer;
+
+    @InjectView(R.id.fragment_poc_acceptable_pain_value)
+    EditText mAcceptablePainText;
 
     @InjectView(R.id.fragment_poc_tests)
     DisplayItemList mPlanOfCareTests;
@@ -108,14 +115,14 @@ public class PlanOfCareFragment extends Fragment {
         ButterKnife.inject(this, view);
         ((CallBellApplication) getActivity().getApplication()).inject(this);
 
-        initLists();
+        initListsAndValues();
         initListeners();
         setSuperUserPermissions(prefs.isSuperUser());
 
         return view;
     }
 
-    private void initLists() {
+    private void initListsAndValues() {
         //Inflate the spinner
         List<String> spinnerArray = new ArrayList<>(POCValues.pocMap.keySet());
         Collections.sort(spinnerArray);
@@ -158,6 +165,8 @@ public class PlanOfCareFragment extends Fragment {
         chiefComplaintSpinner.setEnabled(isSuperUser);
         mPlanOfCareTests.setDisplayMode(isSuperUser);
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+
+        mAcceptablePainText.setText(String.format("%d", mState.getAcceptablePain()));
     }
 
     private void initListeners() {
@@ -247,18 +256,21 @@ public class PlanOfCareFragment extends Fragment {
 
     private void saveValues() {
         mState.setShownMedications(mPlanOfCareMedications.updatePatientList());
-
-//        prefs.setShownTestItems();
-//        prefs.setAllActionTestItems(mPlanOfCareTests.getActionList());
-
         mState.setShownTests(mPlanOfCareTests.updatePatientList());
-//        prefs.setShownMedicationItems();
-//        prefs.setAllActionMedicationItems(mPlanOfCareMedications.getActionList());
-
-//        mListener.saveListItems(mPlanOfCareTests.getActionList(), mPlanOfCareMedications.getActionList());
-
         mState.setAllTests(mPlanOfCareTests.getActionList());
         mState.setAllMedications(mPlanOfCareMedications.getActionList());
+
+        try {
+            int acceptablePain = Integer.parseInt(mAcceptablePainText.getText().toString());
+            if (acceptablePain > State.MAX_PAIN) {
+                acceptablePain = State.MAX_PAIN;
+            }
+
+            mState.setAcceptablePain(acceptablePain);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, e.getMessage());
+            mState.setAcceptablePain(0);
+        }
     }
 
     public void setSuperUserPermissions(boolean isSuperUser) {
@@ -272,7 +284,7 @@ public class PlanOfCareFragment extends Fragment {
         mPlanOfCareMedications.setDisplayMode(isSuperUser);
         otherLayout.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
         chiefComplaintSpinner.setEnabled(isSuperUser);
-        chiefComplaintSpinner.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        mPOCSpinnerAndAcceptablePainContainer.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
 
         Log.d(TAG, "AFL " + mState.getShownTests().size());
 
@@ -295,7 +307,7 @@ public class PlanOfCareFragment extends Fragment {
     public void updateState(State st) {
         mState = st;
         mListener.savePOCState(mState);
-        initLists();
+        initListsAndValues();
         overrideNextChiefComplaintSpinnerUpdate = true;
         setSuperUserPermissions(prefs.isSuperUser());
     }

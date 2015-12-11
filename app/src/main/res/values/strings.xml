@@ -62,5 +62,6 @@
     <string name="normal_layout">normal</string>
     <string name="new_info">New Information Received</string>
     <string name="now">Now</string>
+    <string name="acceptable_pain">Acceptable Pain</string>
 
 </resources>

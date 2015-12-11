@@ -98,6 +98,7 @@ public class LoginActivity
     public void register() {
         if (SocketService.mService != null) {
             mMessage.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
+            mMessage.retrieveState(prefs.getCurrentState());
 
         }
     }

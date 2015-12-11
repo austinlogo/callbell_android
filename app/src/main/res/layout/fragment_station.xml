@@ -50,6 +50,11 @@
             android:layout_weight="7"
             />
 
+        <View
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:background="@color/transparent"/>
+
         <TextView
             android:id="@+id/station_item_pain_rating_title"
             android:text="@string/pain"

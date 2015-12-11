@@ -9,5 +9,6 @@ public enum MessageReason {
     HELP,
     ON_MY_WAY,
     WAIT,
+    RATE_PAIN,
     ACKNOWLEDGED
 }

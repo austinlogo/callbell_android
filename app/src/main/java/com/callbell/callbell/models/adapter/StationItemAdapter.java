@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
+import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +29,15 @@ public class StationItemAdapter extends BaseAdapter {
     private List<State> stateList;
     private List<MessageReason> stateListCallSettings;
     private static LayoutInflater mInflater = null;
+    private MessageRouting mMessageRouting;
 
-    public StationItemAdapter(Context cxt, List<State> sl) {
+    public StationItemAdapter(Context cxt, List<State> sl, MessageRouting routing) {
 
         context = cxt;
         stateList = sl;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         stateListCallSettings = new ArrayList<>();
+        mMessageRouting = routing;
 
         for (int i = 0; i < sl.size();i++) {
             stateListCallSettings.add(MessageReason.QUIET);
@@ -55,7 +60,7 @@ public class StationItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_tablet_state, null);
@@ -66,6 +71,7 @@ public class StationItemAdapter extends BaseAdapter {
         TextView nurseField = (TextView) convertView.findViewById(R.id.station_item_nurse);
         TextView chiefComplaintField = (TextView) convertView.findViewById(R.id.station_item_chief_complaint);
         TextView painRatingField = (TextView) convertView.findViewById(R.id.station_item_pain_rating);
+        ImageButton painRatingButton = (ImageButton) convertView.findViewById(R.id.station_item_image_button);
         View connectionIndicator = convertView.findViewById(R.id.station_item_state_indicator);
 
         locationField.setText(stateList.get(position).getLocation());
@@ -91,6 +97,15 @@ public class StationItemAdapter extends BaseAdapter {
         } else {
             convertView.setBackgroundColor(0);
         }
+
+        painRatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMessageRouting.sendMessage(stateList.get(position).getLocation(), PrefManager.CATEGORY_RATE_PAIN, MessageReason.RATE_PAIN);
+            }
+        });
+
+        painRatingButton.setFocusable(false);
 
         return convertView;
     }

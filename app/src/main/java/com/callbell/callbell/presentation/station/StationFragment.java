@@ -156,6 +156,10 @@ public class StationFragment
 
     public void updateList(State st) {
         adapter.updateItem(st);
+
+        if (st.getPainRating() > st.getAcceptablePain()) {
+            adapter.updateItem(st, MessageReason.PAIN);
+        }
     }
 
 
@@ -169,12 +173,16 @@ public class StationFragment
             sl = new ArrayList<>();
         }
 
-        adapter = new StationItemAdapter(getActivity(), sl);
+        adapter = new StationItemAdapter(getActivity(), sl, messageRouting);
         stationStateList.setAdapter(adapter);
     }
 
     public void updateListItemStatus(MessageResponse response) {
         adapter.updateItem(response.state, response.messageReason);
+    }
+
+    public void updateListItemStatus(State st, MessageReason messageReason) {
+        adapter.updateItem(st, messageReason);
     }
 
     public void updateConnectionStatuses(List<String> connectedTablets) {

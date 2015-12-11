@@ -2,6 +2,7 @@ package com.callbell.callbell.service.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.EmbossMaskFilter;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -11,6 +12,7 @@ import android.util.Log;
 
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.Request;
+import com.callbell.callbell.models.request.RetrieveStateRequest;
 import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.service.ServerEndpoints;
 import com.callbell.callbell.util.BundleUtil;
@@ -58,6 +60,7 @@ public class SocketService extends Service {
         SERVER_DISCONNECT,
         CONNECTION_UPDATE,
         GET_DEVICE_STATES,
+        RETRIEVE_STATE,
         UPDATE_STATE_AND_SEND_REQUEST
     }
 
@@ -159,6 +162,13 @@ public class SocketService extends Service {
                 }
             });
 
+            mSocket.on(SocketOperation.RETRIEVE_STATE.name(), new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d(TAG, args[0].toString());
+                }
+            });
+
 
             mSocket.on("pong", new Emitter.Listener() {
                 @Override
@@ -249,6 +259,10 @@ public class SocketService extends Service {
         startSocketEmitter(SocketOperation.GET_DEVICE_STATES, request.toJSON().toString());
     }
 
+    public void retrieveState(RetrieveStateRequest request) {
+        startSocketEmitter(SocketOperation.RETRIEVE_STATE, request.toJSON().toString());
+    }
+
     public void startSocketEmitter(SocketOperation operation, String payload) {
         Log.d(TAG, "PAYLOAD: " + payload);
         new Thread(new SocketEmitter(operation, payload)).start();
@@ -297,6 +311,9 @@ public class SocketService extends Service {
             Intent i = new Intent(PrefManager.EVENT_STATE_UPDATE);
             i.putExtras(bundle);
 
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+        } else if (PrefManager.CATEGORY_RATE_PAIN.equals(category)) {
+            Intent i = new Intent(PrefManager.EVENT_RATE_PAIN);
             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
         }
     }

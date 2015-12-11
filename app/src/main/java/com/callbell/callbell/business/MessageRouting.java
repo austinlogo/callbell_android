@@ -9,6 +9,7 @@ import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.GetStatesRequest;
 import com.callbell.callbell.models.request.RegistrationRequest;
+import com.callbell.callbell.models.request.RetrieveStateRequest;
 import com.callbell.callbell.models.request.UpdateStateRequest;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.service.tasks.PostRequestWithCallbackTask;
@@ -49,6 +50,11 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
 //        SocketService.getInstance().getDeviceState(request);
 //        PostRequestWithCallbackTask task = new PostRequestWithCallbackTask(context, PrefManager.EVENT_STATES_RECEIVED, this);
 //        task.execute(request);
+    }
+
+    public void retrieveState(State st) {
+        RetrieveStateRequest request = new RetrieveStateRequest(st);
+        SocketService.getInstance().retrieveState(request);
     }
 
     public void register(State st, String registrationId) {

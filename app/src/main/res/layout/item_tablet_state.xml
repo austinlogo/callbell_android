@@ -15,6 +15,7 @@
         android:layout_width="@dimen/small_column"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/item_margin"
+        android:gravity="center_vertical"
         android:paddingLeft="@dimen/standard_padding"
         />
 
@@ -24,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="6"
+        android:gravity="center_vertical"
         />
 
     <TextView
@@ -31,21 +33,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="7"
+        android:gravity="center_vertical"
         />
 
     <TextView
         android:id="@+id/station_item_nurse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_vertical"
         android:paddingLeft="@dimen/small_padding"
         android:layout_weight="7"
         />
+
+    <ImageButton
+        android:id="@+id/station_item_image_button"
+        style="@style/Bea_Theme.TitleBarImageButton"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:padding="@dimen/small_padding"
+        android:src="@drawable/face_pain"
+        android:scaleType="fitCenter"/>
 
     <TextView
         android:id="@+id/station_item_pain_rating"
         android:layout_width="@dimen/small_column"
         android:layout_height="match_parent"
         android:paddingRight="@dimen/standard_padding"
-        android:gravity="right"
+        android:gravity="center"
         />
 </LinearLayout>

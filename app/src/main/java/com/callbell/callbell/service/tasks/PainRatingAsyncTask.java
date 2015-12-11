@@ -45,8 +45,6 @@ public class PainRatingAsyncTask
     protected Void doInBackground(Integer... params) {
         if (params.length == 0) {
             return null;
-        } else if (mRunningTask != null) {
-            mRunningTask.interrupt();
         }
 
         mIntervalInMinutes = params[0];
@@ -69,6 +67,15 @@ public class PainRatingAsyncTask
 
 
         return null;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        if (mRunningTask != null) {
+            mRunningTask.interrupt();
+        }
     }
 
     public void interrupt() {

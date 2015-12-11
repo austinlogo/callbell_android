@@ -9,14 +9,6 @@
     style="@style/Bea_Theme.DialogView">
 
     <Button
-        android:id="@+id/layout_dialog_set_pain_now"
-        style="@style/Bea_Theme.Button"
-        android:text="@string/now"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
-
-    <Button
         android:id="@+id/layout_dialog_set_pain_15"
         style="@style/Bea_Theme.Button"
         android:text="15"

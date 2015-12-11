@@ -168,6 +168,7 @@ public class LoginFragment extends Fragment {
                     prefs.shownMedicationItems(),
                     prefs.allTestItems(),
                     prefs.getAllMedicationItems(),
+                    0,
                     prefs.painRating());
             prefs.setState(thisState);
 
@@ -186,6 +187,7 @@ public class LoginFragment extends Fragment {
                     new ArrayList<Integer>(),
                     new ArrayList<String>(),
                     new ArrayList<String>(),
+                    0,
                     0
                 )
             );

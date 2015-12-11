@@ -23,9 +23,6 @@ public class SetPainRatingDialog extends DialogFragment {
 
     private static final String TAG = SetPainRatingDialog.class.getSimpleName();
 
-    @InjectView (R.id.layout_dialog_set_pain_now)
-    Button mPainSettingNow;
-
     @InjectView (R.id.layout_dialog_set_pain_15)
     Button mPainSetting15;
 
@@ -43,7 +40,6 @@ public class SetPainRatingDialog extends DialogFragment {
 
         ButterKnife.inject(this, dialog);
 
-        mPainSettingNow.setOnClickListener(new SubmitListener());
         mPainSetting15.setOnClickListener(new SubmitListener());
         mPainSetting30.setOnClickListener(new SubmitListener());
         mPainSetting60.setOnClickListener(new SubmitListener());
@@ -58,11 +54,8 @@ public class SetPainRatingDialog extends DialogFragment {
             int interval;
             Button btn = (Button) v;
 
-            if (btn.getText().equals(mPainSettingNow.getText())) {
-                interval = 0;
-            } else {
-                interval = Integer.valueOf(btn.getText().toString());
-            }
+            interval = Integer.valueOf(btn.getText().toString());
+
 
             Log.d(TAG, "Submitted new Pain Rating Task");
 

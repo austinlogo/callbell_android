@@ -42,6 +42,7 @@ public class PrefManager {
 
     //CATEGORIES
     public static final String CATEGORY_CALL_BELL = "call_bell";
+    public static final String CATEGORY_RATE_PAIN = "rate_pain";
     public static final String CATEGORY_TABLET_STATE_UPDATE = "tablet_state";
 
     //EVENTS
@@ -51,6 +52,7 @@ public class PrefManager {
     public static final String EVENT_SU_MODE_CHANGE = "SU MODE CHANGE";
     public static final String EVENT_SERVER_CONNECTION_CHANGED = "TITLE BAR VIEW TOGGLE";
     public static final String EVENT_TABLET_CONNECTIONS_RECEIVED = "TABLET CONNECTIONS RECEIVED";
+    public static final String EVENT_RATE_PAIN = "EVENT_RATE_PAIN";
 
     //MISC. VALUES
     public static final String DEFAULT_SU_PASSWORD = "2468";
@@ -61,6 +63,7 @@ public class PrefManager {
     public static final String CATEGORY_CALL_BELL_RESPONSE = "call_bell_response";
     public static final String SERVER_CONNECTED = "SERVER DISCONNECTED";
     public static final String PAYLOAD = "PAYLOAD";
+
 
     public static SharedPreferences prefs;
     public static State currentState;
@@ -310,5 +313,14 @@ public class PrefManager {
         currentState.setShownMedications(st.getShownMedications());
         currentState.setShownTests(st.getShownTests());
         setState(currentState);
+    }
+
+    public void setAcceptablePain(int acceptablePain) {
+        currentState.setAcceptablePain(acceptablePain);
+        prefs.edit().putInt(State.ACCEPTABLE_PAIN_ID, acceptablePain).apply();
+    }
+
+    public int acceptablePain() {
+        return prefs.getInt(State.ACCEPTABLE_PAIN_ID, 0);
     }
 }

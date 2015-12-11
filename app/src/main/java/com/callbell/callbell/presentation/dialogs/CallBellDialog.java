@@ -34,12 +34,6 @@ public class CallBellDialog extends DialogFragment {
     @InjectView(R.id.dialog_station_acknowledge)
     Button acknowledgeButton;
 
-    @InjectView(R.id.dialog_station_wait)
-    Button waitButton;
-
-    @InjectView(R.id.dialog_station_omw)
-    Button onMyWayButton;
-
     @InjectView(R.id.dialog_station_title)
     TextView titleText;
 
@@ -108,8 +102,6 @@ public class CallBellDialog extends DialogFragment {
         image.setImageResource(mImage);
 
         acknowledgeButton.setOnClickListener(new DialogButtonOnClickListener());
-        waitButton.setOnClickListener(new DialogButtonOnClickListener());
-        onMyWayButton.setOnClickListener(new DialogButtonOnClickListener());
 
         return dialog;
     }
@@ -124,12 +116,6 @@ public class CallBellDialog extends DialogFragment {
             switch(v.getId()) {
                 case R.id.dialog_station_acknowledge:
                     reason = MessageReason.ACKNOWLEDGED;
-                    break;
-                case R.id.dialog_station_omw:
-                    reason = MessageReason.ON_MY_WAY;
-                    break;
-                case R.id.dialog_station_wait:
-                    reason = MessageReason.WAIT;
                     break;
             }
 

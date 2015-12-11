@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.BaseActivity;
+import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.presentation.toast.BeaToast;
@@ -104,6 +106,7 @@ public class BedModeActivity
         filter.addAction(PrefManager.EVENT_MESSAGE_RECEIVED);
         filter.addAction(PrefManager.EVENT_SERVER_CONNECTION_CHANGED);
         filter.addAction(PrefManager.EVENT_STATE_UPDATE);
+        filter.addAction(PrefManager.EVENT_RATE_PAIN);
 
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -140,6 +143,11 @@ public class BedModeActivity
                     mPlanOfCareFragment.updateState(st);
                     playSoundOnce();
                     BeaToast.makeText(context, R.string.new_info, BeaToast.LENGTH_LONG).show();
+                } else if (PrefManager.EVENT_RATE_PAIN.equals(intent.getAction())) {
+                    playSoundOnce();
+
+                    PainRatingDialog dialog = new PainRatingDialog();
+                    dialog.show(getFragmentManager(), "PAIN RATING DIALOG");
                 }
             }
         };
@@ -182,6 +190,8 @@ public class BedModeActivity
     @Override
     public void savePOCState(State st) {
         prefs.setPOC(st);
+        prefs.setAcceptablePain(st.getAcceptablePain());
+
     }
 
     ////////// TITLE BAR FRAGMENT //////////////////////////////////////////////////////////////////
