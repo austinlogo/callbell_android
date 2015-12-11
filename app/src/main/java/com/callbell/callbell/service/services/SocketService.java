@@ -57,6 +57,7 @@ public class SocketService extends Service {
         DEVICE_MESSAGE,
         SERVER_DISCONNECT,
         CONNECTION_UPDATE,
+        GET_DEVICE_STATES,
         UPDATE_STATE_AND_SEND_REQUEST
     }
 
@@ -137,7 +138,7 @@ public class SocketService extends Service {
             mSocket.on(SocketOperation.CONNECTION_UPDATE.name(), new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    handleUpdate( (String) args[0]);
+                    handleUpdate((String) args[0]);
                 }
             });
 
@@ -147,6 +148,14 @@ public class SocketService extends Service {
                     Log.d(TAG, "SERVER SOCKET DISCONNECTED");
                     mSocket.disconnect();
                     sendServerConnectionChangedBroadcast(false);
+                }
+            });
+
+            mSocket.on(SocketOperation.GET_DEVICE_STATES.name(), new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    Log.d(TAG, "GET_DEVICE_STATES RECEIVED");
+                    handleDeviceStatesUpdate(args[0].toString());
                 }
             });
 
@@ -236,9 +245,9 @@ public class SocketService extends Service {
         startSocketEmitter(SocketOperation.UPDATE_STATE_AND_SEND_REQUEST, request.toJSON().toString());
     }
 
-//    public void getDeviceState(Request request) {
-//        startSocketEmitter(SocketOperation.GET_DEVICE_STATES, request.toJSON().toString());
-//    }
+    public void getDeviceState(Request request) {
+        startSocketEmitter(SocketOperation.GET_DEVICE_STATES, request.toJSON().toString());
+    }
 
     public void startSocketEmitter(SocketOperation operation, String payload) {
         Log.d(TAG, "PAYLOAD: " + payload);
@@ -254,6 +263,12 @@ public class SocketService extends Service {
 
         Intent i = new Intent(ConnectionStatusUpdateResponse.INTENT_ACTION);
         i.putExtra(ConnectionStatusUpdateResponse.INTENT_EXTRA_JSON_STRING, string);
+        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
+    }
+
+    private void handleDeviceStatesUpdate(String response) {
+        Intent i = new Intent(PrefManager.EVENT_STATES_RECEIVED);
+        i.putExtra(PrefManager.STATELIST_RESPONSE, response);
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
     }
 

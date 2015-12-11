@@ -178,6 +178,11 @@ public class StationFragment
     }
 
     public void updateConnectionStatuses(List<String> connectedTablets) {
+
+        if (adapter == null) {
+
+        }
+
         adapter.updateConnectedStatuses(connectedTablets);
     }
 
