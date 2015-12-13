@@ -208,19 +208,19 @@ public class PrefManager {
     }
 
     public List<Integer> doneMedicationItems() {
-        return mDoneTestItems == null ? new ArrayList<Integer>() : mDoneTestItems;
+        return mDoneMedications == null ? new ArrayList<Integer>() : mDoneMedications;
     }
 
 
     private void setPendingTestItems(List<Integer> sa) {
         currentState.setPendingTests(sa);
         pendingTestItems = sa;
-        setIntList(sa, SHOWN_TESTS_KEY);
+        setIntList(sa, State.PENDING_TESTS_ID);
     }
 
     public void setPendingMedicationItems(List<Integer> medItems) {
         pendingMedicationItems = medItems;
-        setIntList(medItems, SHOWN_MEDICATIONS_KEY);
+        setIntList(medItems, State.PENDING_MEDICATIONS_ID);
     }
 
     private void setDoneTestItems(List<Integer> doneTestItems) {
@@ -331,6 +331,8 @@ public class PrefManager {
         currentState.setAllTests(st.getAllTests());
         currentState.setPendingMedications(st.getPendingMedications());
         currentState.setPendingTests(st.getPendingTests());
+        currentState.setDoneTests(st.getDoneTests());
+        currentState.setDoneMedications(st.getDoneMedications());
         setState(currentState);
     }
 
