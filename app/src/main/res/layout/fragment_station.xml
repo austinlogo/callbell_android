@@ -59,7 +59,7 @@
             android:id="@+id/station_item_pain_rating_title"
             android:text="@string/pain"
             android:layout_width="@dimen/small_column"
-            android:gravity="right"
+            android:gravity="left"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/standard_padding"
             android:paddingRight="@dimen/small_padding"/>

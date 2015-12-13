@@ -58,7 +58,7 @@
         android:id="@+id/station_item_pain_rating"
         android:layout_width="@dimen/small_column"
         android:layout_height="match_parent"
-        android:paddingRight="@dimen/standard_padding"
-        android:gravity="center"
+        android:paddingLeft="@dimen/standard_padding"
+        android:gravity="left"
         />
 </LinearLayout>
