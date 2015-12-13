@@ -69,19 +69,22 @@ public class PrefManager {
     public static State currentState;
     public static boolean isSuperUser;
 
-    private static List<Integer> shownTestItems;
+    private static List<Integer> pendingTestItems;
     private static List<String> allTestItems;
 
-    private static List<Integer> shownMedicationItems;
+    private static List<Integer> pendingMedicationItems;
     private static List<String> allMedicationItems;
+
+    private List<Integer> mDoneTestItems;
+    private List<Integer> mDoneMedications;
 
     @Inject
     public PrefManager(Context c) {
         prefs = PreferenceManager.getDefaultSharedPreferences(c);
         currentState = new State(this);
         isSuperUser = false;
-        shownTestItems = getIntListFromPrefs(SHOWN_TESTS_KEY);
-        shownMedicationItems = getIntListFromPrefs(SHOWN_MEDICATIONS_KEY);
+        pendingTestItems = getIntListFromPrefs(SHOWN_TESTS_KEY);
+        pendingMedicationItems = getIntListFromPrefs(SHOWN_MEDICATIONS_KEY);
 
     }
 
@@ -143,8 +146,10 @@ public class PrefManager {
         sp.putInt(State.PAIN_RATING, newState.getPainRating());
         sp.apply();
 
-        setShownTestItems(newState.getShownTests());
-        setShownMedicationItems(newState.getShownMedications());
+        setPendingTestItems(newState.getPendingTests());
+        setPendingMedicationItems(newState.getPendingMedications());
+        setDoneTestItems(newState.getDoneTests());
+        setDoneMedications(newState.getDoneMedications());
 
         setAllActionTestItems(newState.getAllTests());
         setAllActionMedicationItems(newState.getAllMedications());
@@ -190,39 +195,42 @@ public class PrefManager {
         return allTestItems;
     }
 
-    public List<Integer> shownTestItems() {
-
-        return shownTestItems == null ? new ArrayList<Integer>() : shownTestItems;
-
+    public List<Integer> pendingTestItems() {
+        return pendingTestItems == null ? new ArrayList<Integer>() : pendingTestItems;
     }
 
-    public List<Integer> shownMedicationItems() {
+    public List<Integer> pendingMedicationItems() {
+        return pendingMedicationItems == null ? new ArrayList<Integer>() : pendingMedicationItems;
+    }
 
-        return shownMedicationItems == null ? new ArrayList<Integer>() : shownMedicationItems;
+    public List<Integer> doneTestItems() {
+        return mDoneTestItems == null ? new ArrayList<Integer>() : mDoneTestItems;
+    }
 
+    public List<Integer> doneMedicationItems() {
+        return mDoneTestItems == null ? new ArrayList<Integer>() : mDoneTestItems;
     }
 
 
-    public void setShownTestItems(List<Integer> sa) {
-        currentState.setShownTests(sa);
-        shownTestItems = sa;
+    private void setPendingTestItems(List<Integer> sa) {
+        currentState.setPendingTests(sa);
+        pendingTestItems = sa;
         setIntList(sa, SHOWN_TESTS_KEY);
-    }
-
-    public void setPendingTestItems(List<Integer> sa) {
-        shownTestItems = sa;
-        setIntList(sa, SHOWN_TESTS_KEY);
-    }
-
-    public void setShownMedicationItems(List<Integer> meds) {
-        currentState.setShownMedications(meds);
-        shownMedicationItems = meds;
-        setIntList(meds, SHOWN_MEDICATIONS_KEY);
     }
 
     public void setPendingMedicationItems(List<Integer> medItems) {
-        shownMedicationItems = medItems;
+        pendingMedicationItems = medItems;
         setIntList(medItems, SHOWN_MEDICATIONS_KEY);
+    }
+
+    private void setDoneTestItems(List<Integer> doneTestItems) {
+        mDoneTestItems = doneTestItems;
+        setIntList(doneTestItems, State.DONE_TESTS_ID);
+    }
+
+    private void setDoneMedications(List<Integer> doneMedications) {
+        mDoneMedications = doneMedications;
+        setIntList(doneMedications, State.DONE_MEDICATIONS_ID);
     }
 
     public void setIntList(List<Integer> list, String key) {
@@ -247,7 +255,7 @@ public class PrefManager {
     private List<Integer> getIntListFromPrefs(String key) {
         try {
             String arrayString = prefs.getString(key, "");
-            Log.d(TAG, "shownTestItems-checkedValuePostions: " + arrayString);
+            Log.d(TAG, "pendingTestItems-checkedValuePostions: " + arrayString);
 
             if (arrayString.isEmpty()) {
                 return new ArrayList<Integer>();
@@ -321,8 +329,8 @@ public class PrefManager {
         currentState.setChiefComplaint(st.getChiefComplaint());
         currentState.setAllMedications(st.getAllMedications());
         currentState.setAllTests(st.getAllTests());
-        currentState.setShownMedications(st.getShownMedications());
-        currentState.setShownTests(st.getShownTests());
+        currentState.setPendingMedications(st.getPendingMedications());
+        currentState.setPendingTests(st.getPendingTests());
         setState(currentState);
     }
 

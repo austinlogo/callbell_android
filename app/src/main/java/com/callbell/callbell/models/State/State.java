@@ -29,8 +29,10 @@ public class State {
     public static final String CONNECTION_INDICATOR_ID = "CONNECTION_INDICATOR_ID";
     public static final String TABLET_NAME_ID = "TABLE_NAME_ID";
     public static final String STATION_TABLET_NAME_ID = "STATION_TABLET_NAME_ID";
-    public static final String SHOWN_TESTS_ID = "SHOWN_TESTS_ID";
-    public static final String SHOWN_MEDICATIONS_ID = "SHOWN_MEDICATIONS_ID";
+    public static final String PENDING_TESTS_ID = "PENDING_TESTS_ID";
+    public static final String PENDING_MEDICATIONS_ID = "PENDING_MEDICATIONS_ID";
+    public static final String DONE_TESTS_ID = "DONE_TESTS_ID";
+    public static final String DONE_MEDICATIONS_ID = "DONE_MEDICATIONS_ID";
     public static final String ALL_TESTS_ID = "ALL_TESTS_ID";
     public static final String ALL_MEDICATIONS_ID = "ALL_MEDICATIONS_ID";
     public static final String ACCEPTABLE_PAIN_ID = "ACCEPTABLE_PAIN_ID";
@@ -51,8 +53,10 @@ public class State {
     private int painRating,
             acceptablePain;
 
-    private List<Integer> shownTests,
-            shownMedications;
+    private List<Integer> pendingTests,
+            pendingMedications,
+            doneTests,
+            doneMedications;
 
     private List<String> allTests,
             allMedications;
@@ -83,6 +87,8 @@ public class State {
             String cc,
             List<Integer> tests,
             List<Integer> meds,
+            List<Integer> dt,
+            List<Integer> dm,
             List<String> at,
             List<String> am,
             int ap,
@@ -96,8 +102,10 @@ public class State {
         nurse = nurs;
         resident = res;
         chiefComplaint = cc;
-        shownTests = tests;
-        shownMedications = meds;
+        pendingTests = tests;
+        pendingMedications = meds;
+        doneTests = dt;
+        doneMedications = dm;
         allTests = at;
         allMedications = am;
         acceptablePain = ap;
@@ -114,8 +122,10 @@ public class State {
         nurse = st.getNurse();
         chiefComplaint = st.getChiefComplaint();
         painRating = st.getPainRating();
-        shownTests = st.getShownTests();
-        shownMedications = st.getShownMedications();
+        pendingTests = st.getPendingTests();
+        pendingMedications = st.getPendingMedications();
+        doneTests = st.getDoneTests();
+        doneMedications = st.getDoneMedications();
         allTests = st.getAllTests();
         allMedications = st.getAllMedications();
         acceptablePain = st.getAcceptablePain();
@@ -132,8 +142,10 @@ public class State {
         nurse = JSONUtil.getValueStringIfExists(object, NURSE);
         chiefComplaint = JSONUtil.getValueStringIfExists(object, CHIEF_COMPLAINT);
         painRating = JSONUtil.getValueIntIfExists(object, PAIN_RATING);
-        shownTests = JSONUtil.getvalueListIfExists(object, SHOWN_TESTS_ID);
-        shownMedications = JSONUtil.getvalueListIfExists(object, SHOWN_MEDICATIONS_ID);
+        pendingTests = JSONUtil.getvalueListIfExists(object, PENDING_TESTS_ID);
+        pendingMedications = JSONUtil.getvalueListIfExists(object, PENDING_MEDICATIONS_ID);
+        doneTests = JSONUtil.getvalueListIfExists(object, DONE_TESTS_ID);
+        doneMedications = JSONUtil.getvalueListIfExists(object, DONE_MEDICATIONS_ID);
         allTests = JSONUtil.getValueStringListIfExists(object, ALL_TESTS_ID);
         allMedications = JSONUtil.getValueStringListIfExists(object, ALL_MEDICATIONS_ID);
         acceptablePain = JSONUtil.getValueIntIfExists(object, ACCEPTABLE_PAIN_ID);
@@ -160,12 +172,12 @@ public class State {
         return mode;
     }
 
-    public List<Integer> getShownTests() {
-        return shownTests;
+    public List<Integer> getPendingTests() {
+        return pendingTests;
     }
 
-    public List<Integer> getShownMedications() {
-        return shownMedications;
+    public List<Integer> getPendingMedications() {
+        return pendingMedications;
     }
 
     public String getPhysician() {
@@ -198,12 +210,20 @@ public class State {
         nurse = nurs;
     }
 
-    public void setShownTests(List<Integer> tests) {
-        shownTests = tests;
+    public void setPendingTests(List<Integer> tests) {
+        pendingTests = tests;
     }
 
-    public void setShownMedications(List<Integer> meds) {
-        shownMedications = meds;
+    public void setPendingMedications(List<Integer> meds) {
+        pendingMedications = meds;
+    }
+
+    public void setDoneTests(List<Integer> tests) {
+        doneTests = tests;
+    }
+
+    public void setDoneMedications(List<Integer> meds) {
+        doneMedications = meds;
     }
 
     public boolean equals(State other) {
@@ -226,8 +246,10 @@ public class State {
             object.put(PAIN_RATING, painRating);
             object.put(TABLET_NAME_ID, getTabletName());
             object.put(STATION_TABLET_NAME_ID, getStationTabletName());
-            object.put(SHOWN_TESTS_ID, JSONUtil.integerListToJSONArray(shownTests));
-            object.put(SHOWN_MEDICATIONS_ID, JSONUtil.integerListToJSONArray(shownMedications));
+            object.put(PENDING_TESTS_ID, JSONUtil.integerListToJSONArray(pendingTests));
+            object.put(PENDING_MEDICATIONS_ID, JSONUtil.integerListToJSONArray(pendingMedications));
+            object.put(DONE_TESTS_ID, JSONUtil.integerListToJSONArray(doneTests));
+            object.put(DONE_MEDICATIONS_ID, JSONUtil.integerListToJSONArray(doneMedications));
             object.put(ALL_TESTS_ID, JSONUtil.stringListToJSONArray(allTests));
             object.put(ALL_MEDICATIONS_ID, JSONUtil.stringListToJSONArray(allMedications));
             object.put(CONNECTION_INDICATOR_ID, isConnectedValue ? 1 : 0);
@@ -294,5 +316,13 @@ public class State {
 
     public int getAcceptablePain() {
         return acceptablePain;
+    }
+
+    public List<Integer> getDoneTests() {
+        return doneTests;
+    }
+
+    public List<Integer> getDoneMedications() {
+        return doneMedications;
     }
 }

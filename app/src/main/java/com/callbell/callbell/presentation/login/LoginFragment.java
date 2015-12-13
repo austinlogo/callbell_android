@@ -164,8 +164,10 @@ public class LoginFragment extends Fragment {
                     prefs.nurse(),
                     prefs.resident(),
                     prefs.chiefComplaint(),
-                    prefs.shownTestItems(),
-                    prefs.shownMedicationItems(),
+                    prefs.pendingTestItems(),
+                    prefs.pendingMedicationItems(),
+                    prefs.doneTestItems(),
+                    prefs.doneMedicationItems(),
                     prefs.allTestItems(),
                     prefs.getAllMedicationItems(),
                     0,
@@ -175,20 +177,22 @@ public class LoginFragment extends Fragment {
         } else {
             prefs.setState(
                 new State(
-                    hospital_id.getText().toString(),
-                    group_id.getText().toString(),
-                    PrefManager.STATION_SUFFIX,
-                    mod,
-                    "",
-                    "",
-                    "",
-                    "",
-                    new ArrayList<Integer>(),
-                    new ArrayList<Integer>(),
-                    new ArrayList<String>(),
-                    new ArrayList<String>(),
-                    0,
-                    0
+                        hospital_id.getText().toString(),
+                        group_id.getText().toString(),
+                        PrefManager.STATION_SUFFIX,
+                        mod,
+                        "",
+                        "",
+                        "",
+                        "",
+                        new ArrayList<Integer>(),
+                        new ArrayList<Integer>(),
+                        new ArrayList<Integer>(),
+                        new ArrayList<Integer>(),
+                        new ArrayList<String>(),
+                        new ArrayList<String>(),
+                        0,
+                        0
                 )
             );
         }

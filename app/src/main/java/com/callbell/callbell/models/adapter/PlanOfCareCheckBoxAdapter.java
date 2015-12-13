@@ -54,13 +54,17 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
     public View getView(int position, View convertView, ViewGroup parent) {
         TernaryListItem view =  (TernaryListItem) convertView;
 
-        while (!isSuperUser && mPendingItems.contains(position++));
-
         if (view == null) {
             view = new TernaryListItem(getContext());
         }
 
-        getCount();
+        if (mDoneItems.contains(position)) {
+            view.setState(TernaryListItem.TernaryItemState.DONE);
+        } else if (mPendingItems.contains(position)) {
+            view.setState(TernaryListItem.TernaryItemState.PENDING);
+        } else {
+            view.setState(TernaryListItem.TernaryItemState.NOT_SELECTED);
+        }
 
         view.setText(mItems.get(position));
 
@@ -101,6 +105,14 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
     }
 
+    public void setPendingItems(List<Integer> pi) {
+        mPendingItems = new HashSet<>(pi);
+    }
+
+    public void setDoneItems(List<Integer> di) {
+        mDoneItems = new HashSet<>(di);
+    }
+
     public void setPendingItem(int position, boolean pending) {
         if (pending) {
             mPendingItems.add(position);
@@ -131,7 +143,7 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
         return mPendingItems;
     }
 
-    public Set<Integer> getmDoneItems() {
+    public Set<Integer> getDoneItems() {
         return mDoneItems;
     }
 

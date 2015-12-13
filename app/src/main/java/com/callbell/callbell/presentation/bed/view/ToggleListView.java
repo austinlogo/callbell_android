@@ -120,7 +120,7 @@ public class ToggleListView extends LinearLayout {
 
      public void updatePatientList() {
 
-         List<String> shownItems = constructPatientList(adminAdapter.getPendingItems(), adminAdapter.getmDoneItems());
+         List<String> shownItems = constructPatientList(adminAdapter.getPendingItems(), adminAdapter.getDoneItems());
          int pendingItemsCount = adminAdapter.getPendingItemsSize();
 
          if (patientAdapter == null) {
@@ -146,10 +146,9 @@ public class ToggleListView extends LinearLayout {
         return adminList.getCheckedItemCount();
     }
 
-    public void setCheckedItems(List<Integer> shownItems) {
-        for (int i = 0; i < adminList.getCount(); i++) {
-            adminList.setItemChecked(i, shownItems.contains(i));
-        }
+    public void setCheckedItems(List<Integer> pending, List<Integer> done) {
+        adminAdapter.setPendingItems(pending);
+        adminAdapter.setDoneItems(done);
 
         updatePatientList();
     }
@@ -159,6 +158,13 @@ public class ToggleListView extends LinearLayout {
     public List<Integer> getPendingIndexes() {
         List<Integer> list = new ArrayList<>();
         list.addAll(adminAdapter.getPendingItems());
+
+        return list;
+    }
+
+    public List<Integer> getDoneIndexes() {
+        List<Integer> list = new ArrayList<>();
+        list.addAll(adminAdapter.getDoneItems());
 
         return list;
     }

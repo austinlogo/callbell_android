@@ -2,8 +2,8 @@ package com.callbell.callbell.presentation.bed;
 
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -26,10 +26,10 @@ import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
+import com.callbell.callbell.presentation.bed.view.ToggleListView;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.presentation.view.TernaryListItem;
 import com.callbell.callbell.util.JSONUtil;
-import com.callbell.callbell.presentation.bed.view.ToggleListView;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
@@ -138,12 +138,8 @@ public class PlanOfCareFragment extends Fragment {
         mPlanOfCareTests.setAdminAdapter(ToggleListView.getAdminAdapter(getActivity(),
                 mState.getAllTests(),
                 chiefComplaintSpinner.getSelectedItem().toString()));
-//        List<String> prefsAdminList = prefs.allTestItems();
-//        List<String> initialAdminValues = (!prefsAdminList.isEmpty() )
-//                ? prefsAdminList
-//                : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
-//        mPlanOfCareTests.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminValues));
-        mPlanOfCareTests.setCheckedItems(mState.getShownTests());
+
+        mPlanOfCareTests.setCheckedItems(mState.getPendingTests(), mState.getDoneTests());
 
         //Inflate the Medication List
         List<String> savedMeds = mState.getAllMedications();
@@ -153,7 +149,7 @@ public class PlanOfCareFragment extends Fragment {
 
         mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_state_test, initialAdminMedicationValues));
         mPlanOfCareMedications.setTitle(R.string.poc_current_medications_title);
-        mPlanOfCareMedications.setCheckedItems(mState.getShownMedications());
+        mPlanOfCareMedications.setCheckedItems(mState.getPendingMedications(), mState.getDoneMedications());
 
 
 
@@ -262,8 +258,10 @@ public class PlanOfCareFragment extends Fragment {
         mPlanOfCareMedications.updatePatientList();
         mPlanOfCareTests.updatePatientList();
 
-        mState.setShownMedications(mPlanOfCareMedications.getPendingIndexes());
-        mState.setShownTests(mPlanOfCareTests.getPendingIndexes());
+        mState.setPendingMedications(mPlanOfCareMedications.getPendingIndexes());
+        mState.setPendingTests(mPlanOfCareTests.getPendingIndexes());
+        mState.setDoneTests(mPlanOfCareTests.getDoneIndexes());
+        mState.setDoneMedications(mPlanOfCareMedications.getDoneIndexes());
         mState.setAllTests(mPlanOfCareTests.getActionList());
         mState.setAllMedications(mPlanOfCareMedications.getActionList());
 
@@ -293,16 +291,16 @@ public class PlanOfCareFragment extends Fragment {
         chiefComplaintSpinner.setEnabled(isSuperUser);
         mPOCSpinnerAndAcceptablePainContainer.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
 
-        Log.d(TAG, "AFL " + mState.getShownTests().size());
+        Log.d(TAG, "AFL " + mState.getPendingTests().size());
 
-        mPlanOfCareTests.setVisibility((!isSuperUser && mState.getShownTests().size() == 0) ? View.GONE : View.VISIBLE);
+        mPlanOfCareTests.setVisibility((!isSuperUser && mState.getPendingTests().size() == 0) ? View.GONE : View.VISIBLE);
         Log.d(TAG, "AFL " + mPlanOfCareTests.getShownItemCount());
-        mPlanOfCareMedications.setVisibility( (!isSuperUser && mState.getShownMedications().size() == 0 ) ? View.GONE : View.VISIBLE);
+        mPlanOfCareMedications.setVisibility( (!isSuperUser && mState.getPendingMedications().size() == 0 ) ? View.GONE : View.VISIBLE);
     }
 
     public void clearValues() {
-        mState.setShownMedications(new ArrayList<Integer>());
-        mState.setShownTests(new ArrayList<Integer>());
+        mState.setPendingMedications(new ArrayList<Integer>());
+        mState.setPendingTests(new ArrayList<Integer>());
 
         mPlanOfCareTests.clear();
         mPlanOfCareMedications.clear();
@@ -339,8 +337,9 @@ public class PlanOfCareFragment extends Fragment {
             mState.setChiefComplaint(selectedComplaint);
             mPlanOfCareTests.resetList(selectedComplaint);
 
-            mState.setShownTests(new ArrayList<Integer>());
-            mPlanOfCareTests.setCheckedItems(mState.getShownTests());
+            mState.setPendingTests(new ArrayList<Integer>());
+            mState.setDoneTests(new ArrayList<Integer>());
+            mPlanOfCareTests.setCheckedItems(mState.getPendingTests(), mState.getDoneTests());
 
         }
 
