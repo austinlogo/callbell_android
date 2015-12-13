@@ -26,9 +26,9 @@ import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
-import com.callbell.callbell.presentation.bed.view.DisplayItemList;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.util.JSONUtil;
+import com.callbell.callbell.presentation.bed.view.ToggleListView;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
@@ -62,10 +62,10 @@ public class PlanOfCareFragment extends Fragment {
     EditText mAcceptablePainText;
 
     @InjectView(R.id.fragment_poc_tests)
-    DisplayItemList mPlanOfCareTests;
+    ToggleListView mPlanOfCareTests;
 
     @InjectView(R.id.fragment_poc_medications)
-    DisplayItemList mPlanOfCareMedications;
+    ToggleListView mPlanOfCareMedications;
 
     @InjectView(R.id.other_layout)
     LinearLayout otherLayout;
@@ -133,7 +133,8 @@ public class PlanOfCareFragment extends Fragment {
 
         //Inflate the Test List
         mPlanOfCareTests.setTitle(R.string.poc_current_tests_title);
-        mPlanOfCareTests.setAdminAdapter(DisplayItemList.getAdminAdapter(getActivity(),
+
+        mPlanOfCareTests.setAdminAdapter(ToggleListView.getAdminAdapter(getActivity(),
                 mState.getAllTests(),
                 chiefComplaintSpinner.getSelectedItem().toString()));
 //        List<String> prefsAdminList = prefs.allTestItems();
@@ -150,8 +151,9 @@ public class PlanOfCareFragment extends Fragment {
                 : new ArrayList<>(MedicationValues.medicationMap.keySet());
 
         mPlanOfCareMedications.setTitle(R.string.poc_current_medications_title);
-        mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_multi_check, initialAdminMedicationValues));
         mPlanOfCareMedications.setCheckedItems(mState.getShownMedications());
+        mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_state_test, initialAdminMedicationValues));
+
 
         //Set AutoComplete options
         String[] str = POCValues.testDescriptions.keySet().toArray(new String[0]);
@@ -186,7 +188,6 @@ public class PlanOfCareFragment extends Fragment {
                         : null;
 
                 mListener.showInfoDialog(itemText, expandedName, bodyText);
-
             }
         });
 
@@ -255,8 +256,12 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     private void saveValues() {
-        mState.setShownMedications(mPlanOfCareMedications.updatePatientList());
-        mState.setShownTests(mPlanOfCareTests.updatePatientList());
+
+        mPlanOfCareMedications.updatePatientList();
+        mPlanOfCareTests.updatePatientList();
+
+        mState.setShownMedications(mPlanOfCareMedications.getCheckedIndexes());
+        mState.setShownTests(mPlanOfCareTests.getCheckedIndexes());
         mState.setAllTests(mPlanOfCareTests.getActionList());
         mState.setAllMedications(mPlanOfCareMedications.getActionList());
 
@@ -297,11 +302,8 @@ public class PlanOfCareFragment extends Fragment {
         mState.setShownMedications(new ArrayList<Integer>());
         mState.setShownTests(new ArrayList<Integer>());
 
-//        prefs.setShownTestItems(new ArrayList<Integer>());
-//        prefs.setShownMedicationItems(new ArrayList<Integer>());
         mPlanOfCareTests.clear();
         mPlanOfCareMedications.clear();
-//        mPlanOfCareTests.setCheckedItems(prefs.shownTestItems());
     }
 
     public void updateState(State st) {
@@ -334,8 +336,10 @@ public class PlanOfCareFragment extends Fragment {
 
             mState.setChiefComplaint(selectedComplaint);
             mPlanOfCareTests.resetList(selectedComplaint);
+
             mState.setShownTests(new ArrayList<Integer>());
             mPlanOfCareTests.setCheckedItems(mState.getShownTests());
+
         }
 
         @Override

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.models.State.State;
-import com.callbell.callbell.presentation.bed.view.DisplayItemList;
+import com.callbell.callbell.presentation.bed.view.ToggleListView;
 import com.callbell.callbell.util.JSONUtil;
 
 import butterknife.ButterKnife;
@@ -52,10 +52,10 @@ public class RemoteUpdateDialogFragment extends DialogFragment {
     Spinner chiefComplaintSpinner;
 
     @InjectView(R.id.fragment_poc_tests)
-    DisplayItemList mPlanOfCareTests;
+    ToggleListView mPlanOfCareTests;
 
     @InjectView(R.id.fragment_poc_medications)
-    DisplayItemList mPlanOfCareMedications;
+    ToggleListView mPlanOfCareMedications;
 
     @InjectView(R.id.other_layout)
     LinearLayout otherLayout;

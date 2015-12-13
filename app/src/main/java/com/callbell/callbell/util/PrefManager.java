@@ -202,8 +202,14 @@ public class PrefManager {
 
     }
 
+
     public void setShownTestItems(List<Integer> sa) {
         currentState.setShownTests(sa);
+        shownTestItems = sa;
+        setIntList(sa, SHOWN_TESTS_KEY);
+    }
+
+    public void setPendingTestItems(List<Integer> sa) {
         shownTestItems = sa;
         setIntList(sa, SHOWN_TESTS_KEY);
     }
@@ -212,6 +218,11 @@ public class PrefManager {
         currentState.setShownMedications(meds);
         shownMedicationItems = meds;
         setIntList(meds, SHOWN_MEDICATIONS_KEY);
+    }
+
+    public void setPendingMedicationItems(List<Integer> medItems) {
+        shownMedicationItems = medItems;
+        setIntList(medItems, SHOWN_MEDICATIONS_KEY);
     }
 
     public void setIntList(List<Integer> list, String key) {
@@ -229,7 +240,7 @@ public class PrefManager {
             array.put(i);
         }
 
-        Log.d(TAG, "setShownTestItems-Array: " + array.toString());
+        Log.d(TAG, "setPendingTestItems-Array: " + array.toString());
         sp.putString(key, array.toString()).apply();
     }
 

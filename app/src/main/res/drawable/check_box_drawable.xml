@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.callbell.callbell">
+    <item custom:state_pending="false" android:drawable="@color/transparent" />
+    <item custom:state_done="false" android:drawable="@drawable/unchecked_checkbox" />
+    <item custom:state_done="true" android:drawable="@drawable/checked_checkbox" />
+</selector>

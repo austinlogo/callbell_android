@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.callbell.callbell.R;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
+import com.callbell.callbell.presentation.view.TernaryListItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * Created by austin on 11/5/15.
+ * Compound view of Admin and Patient Lists
  */
-public class DisplayItemList extends LinearLayout {
+public class ToggleListView extends LinearLayout {
 
-    private static final String TAG = DisplayItemList.class.getSimpleName();
+    private static final String TAG = ToggleListView.class.getSimpleName();
 
     @InjectView(R.id.layout_display_title)
     TextView mTitle;
@@ -46,17 +48,17 @@ public class DisplayItemList extends LinearLayout {
         return new PlanOfCareCheckBoxAdapter(context, R.layout.item_multi_check, initialAdminValues);
     }
 
-    public DisplayItemList(Context context) {
+    public ToggleListView(Context context) {
         super(context);
     }
 
-    public DisplayItemList(Context context, AttributeSet attrs) {
+    public ToggleListView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         init();
     }
 
-    public DisplayItemList(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ToggleListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init();
@@ -67,6 +69,17 @@ public class DisplayItemList extends LinearLayout {
         ButterKnife.inject(this);
 
         adminList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        adminList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TernaryListItem item = (TernaryListItem) view;
+                item.moveToNextState();
+
+                adminAdapter.setDoneItems(position, item.isDone());
+                adminAdapter.setPendingItems(position, item.isPending());
+            }
+        });
     }
 
     public void setTitle(int titleId) {
@@ -76,13 +89,15 @@ public class DisplayItemList extends LinearLayout {
     public void setDisplayMode(boolean isSuperUser) {
 //        boolean isSuperUser = mode == DisplayMode.ADMIN;
 
-        adminList.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-        patientList.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        adminAdapter.setSuperUser(isSuperUser);
+//        adminList.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+//        patientList.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
     }
 
     public void setAdminAdapter(PlanOfCareCheckBoxAdapter adapter) {
         adminAdapter = adapter;
         adminList.setAdapter(adminAdapter);
+
     }
 
     public void setPatientListAdapter(ArrayAdapter<String> adapter) {
@@ -101,7 +116,7 @@ public class DisplayItemList extends LinearLayout {
     public List<String> getActionList() {
         return adminAdapter.getList();
     }
-    public List<Integer> updatePatientList() {
+    public void updatePatientList() {
         List<Integer> checkedIndexes = getCheckedIndexes();
         List<String> shownItems = filterSelectedChoices(checkedIndexes, adminAdapter);
 
@@ -112,11 +127,7 @@ public class DisplayItemList extends LinearLayout {
             patientAdapter.addAll(shownItems);
             patientList.setAdapter(patientAdapter);
         }
-        return checkedIndexes;
-    }
-
-    public void updateAdminList(String key) {
-        adminAdapter.resetList(key);
+        return;
     }
 
     public int getShownItemCount() {
@@ -125,13 +136,13 @@ public class DisplayItemList extends LinearLayout {
 
     public void setCheckedItems(List<Integer> shownItems) {
         for (int i = 0; i < adminList.getCount(); i++) {
-            adminList.setItemChecked(i, shownItems.contains(i));
+//            adminList.setItemChecked();
         }
 
         updatePatientList();
     }
 
-    private List<Integer> getCheckedIndexes() {
+    public List<Integer> getCheckedIndexes() {
         SparseBooleanArray checked = adminList.getCheckedItemPositions();
 
         List<Integer> checkedArray = new ArrayList<>();
