@@ -27,6 +27,7 @@ import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 import com.callbell.callbell.presentation.toast.BeaToast;
+import com.callbell.callbell.presentation.view.TernaryListItem;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.presentation.bed.view.ToggleListView;
 import com.callbell.callbell.util.PrefManager;
@@ -150,9 +151,10 @@ public class PlanOfCareFragment extends Fragment {
                 ? savedMeds
                 : new ArrayList<>(MedicationValues.medicationMap.keySet());
 
+        mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_state_test, initialAdminMedicationValues));
         mPlanOfCareMedications.setTitle(R.string.poc_current_medications_title);
         mPlanOfCareMedications.setCheckedItems(mState.getShownMedications());
-        mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_state_test, initialAdminMedicationValues));
+
 
 
         //Set AutoComplete options
@@ -178,7 +180,7 @@ public class PlanOfCareFragment extends Fragment {
         mPlanOfCareTests.getPatientListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemText = ((TextView) view).getText().toString();
+                String itemText = ((TernaryListItem) view).getText();
                 String bodyText = POCValues.testDescriptions.get(itemText) != null
                         ? POCValues.testDescriptions.get(itemText)
                         : POCValues.testDescriptions.get(POCValues.DEFAULT_CHOICE);
@@ -194,7 +196,7 @@ public class PlanOfCareFragment extends Fragment {
         mPlanOfCareMedications.getPatientListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemText = ((TextView) view).getText().toString();
+                String itemText = ((TernaryListItem) view).getText().toString();
                 String bodyText = MedicationValues.medicationMap.get(itemText) != null
                         ? MedicationValues.medicationMap.get(itemText)
                         : MedicationValues.medicationMap.get(POCValues.DEFAULT_CHOICE); // Yes I do mean POCValues
@@ -260,8 +262,8 @@ public class PlanOfCareFragment extends Fragment {
         mPlanOfCareMedications.updatePatientList();
         mPlanOfCareTests.updatePatientList();
 
-        mState.setShownMedications(mPlanOfCareMedications.getCheckedIndexes());
-        mState.setShownTests(mPlanOfCareTests.getCheckedIndexes());
+        mState.setShownMedications(mPlanOfCareMedications.getPendingIndexes());
+        mState.setShownTests(mPlanOfCareTests.getPendingIndexes());
         mState.setAllTests(mPlanOfCareTests.getActionList());
         mState.setAllMedications(mPlanOfCareMedications.getActionList());
 

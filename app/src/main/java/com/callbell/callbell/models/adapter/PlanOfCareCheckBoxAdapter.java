@@ -21,11 +21,14 @@ import java.util.Set;
  */
 public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
+    private List<String> mItems;
     private Set<Integer> mPendingItems, mDoneItems;
     private boolean isSuperUser;
 
     public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects) {
         super(context, resource, objects);
+
+        mItems = objects;
 
         isSuperUser = false;
         mPendingItems = new HashSet<>();
@@ -42,12 +45,9 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
     }
 
     @Override
-    public int getCount() {
-        if (isSuperUser) {
-            return super.getCount() - mPendingItems.size();
-        } else {
-            return super.getCount();
-        }
+    public void add(String object) {
+        super.add(object);
+        mItems.add(object);
     }
 
     @Override
@@ -60,7 +60,9 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
             view = new TernaryListItem(getContext());
         }
 
-        view.setText(getItem(position));
+        getCount();
+
+        view.setText(mItems.get(position));
 
         return view;
     }
@@ -91,26 +93,46 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
     }
 
-    public void setPendingItems(int position, boolean pending) {
+    public void resetSelectedItems() {
+        mPendingItems = new HashSet<>();
+        mDoneItems = new HashSet<>();
+
+        notifyDataSetChanged();
+
+    }
+
+    public void setPendingItem(int position, boolean pending) {
         if (pending) {
             mPendingItems.add(position);
         } else {
             mPendingItems.remove(position);
         }
+
+        notifyDataSetChanged();
     }
 
-    public void setDoneItems(int position, boolean done) {
+    public void setDoneItem(int position, boolean done) {
         if (done) {
             mDoneItems.add(position);
         } else {
             mDoneItems.remove(position);
         }
+
+        notifyDataSetChanged();
     }
 
     public void setSuperUser(boolean isu) {
         isSuperUser = isu;
 
         notifyDataSetChanged();
+    }
+
+    public Set<Integer> getPendingItems() {
+        return mPendingItems;
+    }
+
+    public Set<Integer> getmDoneItems() {
+        return mDoneItems;
     }
 
 //    public List<Integer> getPendingItems() {
@@ -153,5 +175,9 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
             e.printStackTrace();
             return null;
         }
+    }
+
+    public int getPendingItemsSize() {
+        return mPendingItems.size();
     }
 }

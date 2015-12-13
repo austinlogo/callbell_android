@@ -3,10 +3,8 @@ package com.callbell.callbell.presentation.bed.view;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,10 +12,13 @@ import android.widget.TextView;
 import com.callbell.callbell.R;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
+import com.callbell.callbell.models.adapter.PlanOfCareListViewAdapter;
 import com.callbell.callbell.presentation.view.TernaryListItem;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,13 +40,13 @@ public class ToggleListView extends LinearLayout {
     ListView patientList;
 
     PlanOfCareCheckBoxAdapter adminAdapter;
-    ArrayAdapter<String> patientAdapter;
+    PlanOfCareListViewAdapter patientAdapter;
 
     public static PlanOfCareCheckBoxAdapter getAdminAdapter(Activity context, List<String> allItems, String selectedChiefComplaint) {
         List<String> initialAdminValues = (!allItems.isEmpty() )
                 ? allItems
                 : new ArrayList<>(POCValues.pocMap.get(selectedChiefComplaint));
-        return new PlanOfCareCheckBoxAdapter(context, R.layout.item_multi_check, initialAdminValues);
+        return new PlanOfCareCheckBoxAdapter(context, R.layout.item_state_test, initialAdminValues);
     }
 
     public ToggleListView(Context context) {
@@ -76,8 +77,8 @@ public class ToggleListView extends LinearLayout {
                 TernaryListItem item = (TernaryListItem) view;
                 item.moveToNextState();
 
-                adminAdapter.setDoneItems(position, item.isDone());
-                adminAdapter.setPendingItems(position, item.isPending());
+                adminAdapter.setDoneItem(position, item.isDone());
+                adminAdapter.setPendingItem(position, item.isPending());
             }
         });
     }
@@ -90,8 +91,8 @@ public class ToggleListView extends LinearLayout {
 //        boolean isSuperUser = mode == DisplayMode.ADMIN;
 
         adminAdapter.setSuperUser(isSuperUser);
-//        adminList.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
-//        patientList.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
+        adminList.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
+        patientList.setVisibility(isSuperUser ? View.GONE : View.VISIBLE);
     }
 
     public void setAdminAdapter(PlanOfCareCheckBoxAdapter adapter) {
@@ -100,7 +101,7 @@ public class ToggleListView extends LinearLayout {
 
     }
 
-    public void setPatientListAdapter(ArrayAdapter<String> adapter) {
+    public void setPatientListAdapter(PlanOfCareListViewAdapter adapter) {
         patientAdapter = adapter;
         patientList.setAdapter(patientAdapter);
     }
@@ -116,18 +117,29 @@ public class ToggleListView extends LinearLayout {
     public List<String> getActionList() {
         return adminAdapter.getList();
     }
-    public void updatePatientList() {
-        List<Integer> checkedIndexes = getCheckedIndexes();
-        List<String> shownItems = filterSelectedChoices(checkedIndexes, adminAdapter);
 
-        if (patientAdapter == null) {
-            setPatientListAdapter (new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, shownItems));
-        } else {
-            patientAdapter.clear();
-            patientAdapter.addAll(shownItems);
-            patientList.setAdapter(patientAdapter);
-        }
-        return;
+     public void updatePatientList() {
+
+         List<String> shownItems = constructPatientList(adminAdapter.getPendingItems(), adminAdapter.getmDoneItems());
+         int pendingItemsCount = adminAdapter.getPendingItemsSize();
+
+         if (patientAdapter == null) {
+            setPatientListAdapter (new PlanOfCareListViewAdapter(getContext(), R.layout.item_state_test, shownItems, pendingItemsCount));
+         } else {
+             patientAdapter.clear();
+             patientAdapter.addAll(shownItems);
+             patientAdapter.setPendingItemCount(pendingItemsCount);
+             patientList.setAdapter(patientAdapter);
+         }
+         return;
+    }
+
+    private List<String> constructPatientList(Set<Integer> pendingItems, Set<Integer> doneItems) {
+
+        List<String> result = filterSelectedChoices(pendingItems, adminAdapter);
+        result.addAll (filterSelectedChoices(doneItems, adminAdapter));
+
+        return result;
     }
 
     public int getShownItemCount() {
@@ -136,26 +148,22 @@ public class ToggleListView extends LinearLayout {
 
     public void setCheckedItems(List<Integer> shownItems) {
         for (int i = 0; i < adminList.getCount(); i++) {
-//            adminList.setItemChecked();
+            adminList.setItemChecked(i, shownItems.contains(i));
         }
 
         updatePatientList();
     }
 
-    public List<Integer> getCheckedIndexes() {
-        SparseBooleanArray checked = adminList.getCheckedItemPositions();
 
-        List<Integer> checkedArray = new ArrayList<>();
-        for (int index = 0; index < adminList.getAdapter().getCount(); index++) {
-            if (checked.get(index)) {
-                checkedArray.add(index);
-            }
-        }
+    //TODO: reimplement this
+    public List<Integer> getPendingIndexes() {
+        List<Integer> list = new ArrayList<>();
+        list.addAll(adminAdapter.getPendingItems());
 
-        return checkedArray;
+        return list;
     }
 
-    private List<String> filterSelectedChoices(List<Integer> shownItems, PlanOfCareCheckBoxAdapter adapter) {
+    private List<String> filterSelectedChoices(Collection<Integer> shownItems, PlanOfCareCheckBoxAdapter adapter) {
         ArrayList<String> selectedActions = new ArrayList<>(shownItems.size());
 
         for (int i : shownItems) {
@@ -188,7 +196,7 @@ public class ToggleListView extends LinearLayout {
     }
 
     public void clear() {
-        setCheckedItems(new ArrayList<Integer>());
+        adminAdapter.resetSelectedItems();
         patientAdapter.clear();
     }
 

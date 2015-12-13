@@ -16,6 +16,12 @@ import com.callbell.callbell.R;
 public class TernaryListItem extends RelativeLayout {
 
 
+    public enum TernaryItemState {
+        NOT_SELECTED,
+        PENDING,
+        DONE
+    }
+
     private static final String TAG = TernaryListItem.class.getSimpleName();
 
     private static final int[] STATE_SELECTED_KEYS= {
@@ -44,6 +50,10 @@ public class TernaryListItem extends RelativeLayout {
     public TernaryListItem(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         init();
+    }
+
+    public String getText() {
+        return mText.getText().toString();
     }
 
     private void init() {
@@ -75,11 +85,31 @@ public class TernaryListItem extends RelativeLayout {
     }
 
     public boolean isPending() {
-        return mIsPending;
+        return mIsPending && !mIsDone;
     }
 
     public boolean isDone() {
-        return mIsDone;
+        return mIsDone && mIsPending;
+    }
+
+    public void setState(TernaryItemState tis) {
+
+        switch (tis) {
+            case NOT_SELECTED:
+                mIsPending = false;
+                mIsDone = false;
+                break;
+            case PENDING:
+                mIsPending = true;
+                mIsDone = false;
+                break;
+            case DONE:
+                mIsPending = true;
+                mIsDone = true;
+                break;
+        }
+
+        setUI();
     }
 
     public void moveToNextState() {
@@ -93,12 +123,14 @@ public class TernaryListItem extends RelativeLayout {
             mIsPending = false;
         }
 
-        refreshDrawableState();
-
-        mImage.setColorFilter(mText.getCurrentTextColor());
-        Log.d(TAG, "Color: " + mText.getCurrentHintTextColor());
+        setUI();
 
         return;
+    }
+
+    private void setUI() {
+        refreshDrawableState();
+        mImage.setColorFilter(mText.getCurrentTextColor());
     }
 
 
