@@ -23,14 +23,20 @@ public class SetPainRatingDialog extends DialogFragment {
 
     private static final String TAG = SetPainRatingDialog.class.getSimpleName();
 
+    @InjectView (R.id.layout_dialog_set_pain_5)
+    Button mPainSetting5;
+
+    @InjectView (R.id.layout_dialog_set_pain_10)
+    Button mPainSetting10;
+
     @InjectView (R.id.layout_dialog_set_pain_15)
     Button mPainSetting15;
 
+    @InjectView (R.id.layout_dialog_set_pain_20)
+    Button mPainSetting20;
+
     @InjectView (R.id.layout_dialog_set_pain_30)
     Button mPainSetting30;
-
-    @InjectView (R.id.layout_dialog_set_pain_60)
-    Button mPainSetting60;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -40,9 +46,11 @@ public class SetPainRatingDialog extends DialogFragment {
 
         ButterKnife.inject(this, dialog);
 
+        mPainSetting5.setOnClickListener(new SubmitListener());
+        mPainSetting10.setOnClickListener(new SubmitListener());
         mPainSetting15.setOnClickListener(new SubmitListener());
+        mPainSetting20.setOnClickListener(new SubmitListener());
         mPainSetting30.setOnClickListener(new SubmitListener());
-        mPainSetting60.setOnClickListener(new SubmitListener());
 
         return dialog;
     }
