@@ -274,6 +274,14 @@ public class State {
         return sb.toString();
     }
 
+    public boolean isTestListEmpty() {
+        return pendingTests.isEmpty() && doneTests.isEmpty();
+    }
+
+    public boolean isMedicationListEmpty() {
+        return pendingMedications.isEmpty() && doneMedications.isEmpty();
+    }
+
     public int getPainRating() {
         return painRating;
     }

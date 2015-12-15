@@ -293,9 +293,9 @@ public class PlanOfCareFragment extends Fragment {
 
         Log.d(TAG, "AFL " + mState.getPendingTests().size());
 
-        mPlanOfCareTests.setVisibility((!isSuperUser && mState.getPendingTests().size() == 0) ? View.GONE : View.VISIBLE);
+        mPlanOfCareTests.setVisibility((!isSuperUser && mState.isTestListEmpty()) ? View.GONE : View.VISIBLE);
         Log.d(TAG, "AFL " + mPlanOfCareTests.getShownItemCount());
-        mPlanOfCareMedications.setVisibility( (!isSuperUser && mState.getPendingMedications().size() == 0 ) ? View.GONE : View.VISIBLE);
+        mPlanOfCareMedications.setVisibility( (!isSuperUser && mState.isMedicationListEmpty() ) ? View.GONE : View.VISIBLE);
     }
 
     public void clearValues() {
