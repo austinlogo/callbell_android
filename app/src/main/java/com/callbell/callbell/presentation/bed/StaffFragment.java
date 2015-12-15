@@ -130,6 +130,8 @@ public class StaffFragment extends Fragment {
                 TextView view = (TextView) v;
                 if (view.getText().equals(getText(R.string.staff_physician))) {
                     view.setText(R.string.staff_nurse_practitioner);
+                } else if (view.getText().equals(getString(R.string.staff_nurse_practitioner))) {
+                    view.setText(R.string.staff_physician_assistant);
                 } else {
                     view.setText(R.string.staff_physician);
                 }

@@ -105,7 +105,7 @@
     <string name="chest_pain">Chest Pain</string>
     <string name="general_surgery">General Surgery Consult</string>
     <string name="back">Back</string>
-    <string name="visual_exam">Visual Exam</string>
+    <string name="visual_exam">Visual Acuity Exam</string>
     <string name="assault">Assault</string>
     <string name="blood_sugar_problem">Blood Sugar Problem</string>
     <string name="burn">Burn</string>
@@ -128,14 +128,15 @@
     <string name="opthalmologist_consult">Opthamologist Consult</string>
     <string name="rapid_strep">Rapid Strep</string>
     <string name="encourage_nutrition">Encourage Nutrition</string>
+    <string name="orthopedics_consult">Orthopedics Consult</string>
 
     //TEST DESCRIPTIONS
     <string name="medical_evaluation_description">
-        This examination is done by a physician or qualified medical provider.  The patient is evaluated for signs or symptoms of diseases, injury or illness.  Providers will focus their examination on any pre existing medication conditions as well as new problems the patient may be experiencing.
+        This is the first test done by a doctor or nurse.  A series of tests will be done to check the body for abnormalities.  The doctor or nurse will ask about medications taken and try to figure out why you are not feeling well.
     </string>
 
     <string name="cbc_description">
-         This is a blood test is used to assess your overall health.  It’s commonly performed during an exam by a health provider and checks for infection, decreased blood counts, and other diseases.
+         This is a blood test is used to assess your overall health.  It\'s performed during an exam by a doctor or nurse to check for infection, low blood values, and other diseases.
     </string>
 
     <string name="valproic_acid_description">
@@ -143,23 +144,23 @@
     </string>
 
     <string name="blood_cultures_description">
-        Blood cultures are usually done in sets of 2.   Blood is drawn from two different veins to check for infections in the blood.  These samples are then sent to the laboratory for testing, eventually resulting in negative or positive blood cultures.  These tests do not produce results in less than 24 hours.
+        Blood is drawn from two different veins to check an infection in the blood.  The blood is then sent to the laboratory for testing.  The negative or positive results will not be available the same day, as it takes time for the bacteria in the blood to grow.
     </string>
 
     <string name="obgyn_consult_description">
-        A physician who diagnoses and treats the reproductive system of women.  Additionally, they care for women throughout their pregnancy and during child birth.
+        An OBGYN is a doctor that helps young and older women.  They treat diseases in a woman\'s reproductive system and also deliver babies.
     </string>
 
     <string name="pelvic_cultures_description">
-         Pelvic Exam Cultures are used to test for any type of bacteria that may be causing urinary tract infections or pain in the abdomen or vaginal area.
+         This procedure is done by a doctor or nurse practitioner.  They perform a exam through the vagina to check for bleeding, infection, or reasons a woman has pain.
     </string>
 
     <string name="bmp_description">
-        This is a blood test used to assess the overall health of your kidneys (creatinine and BUN), blood sugar levels (glucose), as well as electrolytes in your body such as potassium (K), Sodium (Na), and Calcium (Ca).
+        This blood test is used to assess overall health.  It tests the kidneys, the blood sugar and important electrolytes in the body.
     </string>
 
     <string name="antibiotics_description">
-        An antibiotic is a medication that destroys bacteria in the body.  This medication is used to fight off small infections such as skin infections as well as large infections such as urinary infections or pneumonia.
+        This medicine kills bacteria in the body.  Doctors give this medicine to patients who have infections like pneumonia or urine infections.
     </string>
 
     <string name="obgyn_description">
@@ -167,7 +168,7 @@
     </string>
 
     <string name="inr_description">
-          This blood test provides information on how fast the blood is clotting.  Patients taking blood thinners monitor their INR values with their physicians assistance to keep the values within a specified range.
+          This blood test provides information on how fast a patient\'s blood clots.  If a patient is taking a blood thinner, the doctor will check this blood test to make sure the medicine is the right dosage.
     </string>
 
     <string name="stitches_description">
@@ -175,23 +176,23 @@
     </string>
 
     <string name="bnp_description">
-        This blood test helps to determine if a patient has heart failure.  It is most commonly used to monitor the degree of heart failure with patients who have CHF (congestive heart failure disease).
+        This blood test is done to see if a patient\'s heart is working correctly.  It is usually tested when a patient has gained weight, has swollen legs, a hard time breathing or has congestive heart failure.
     </string>
 
     <string name="visual_exam_description">
-        These are a series of tests that your healthcare provider will perform to assess a patient\'s eyes.  A visual acuity test includes reading progressively small letters or numbers from a pre defined distance.  The provider may also shine light in the eye to look for abnormalities.
+        A visual acuity test is done to see how well a patient can see.  It is always done when a patient has an eye injury or is having trouble seeing.  The patient will stand 20 feet from a piece of paper (Snellen Chart) with letters on it.  The patient reads the smallest letters they can to get a visual acuity score.
     </string>
 
     <string name="acetaminophen_level_description">
-        This blood test determines the level of acetaminophen in the blood stream.  Acetaminophen is also known as tylenol and is found in a variety of other pain medications.
+        This blood test measures how much Acetaminophen is in the blood. This drug is also known as Tylenol.  It is commonly used for pain relief, but is dangerous if a patient takes too much.
     </string>
 
     <string name="aspirin_level_description">
-        This blood tests determines the level of aspirin in the blood.  Aspirin is used for pain relief but also can become dangerous if high levels exist in the body.
+        This blood test measures how much aspirin is in the blood.  Aspirin has many benefits for pain relief and heart conditions but is also dangerous if a patient takes too much.
     </string>
 
     <string name="rapid_strep_description">
-        The rapid strep test involved taking a swab sample of from the back of the throat using a q-tip shaped swab.  It is used to test for group A streptococci which is another name for the more commonly used Strep Throat.
+        A rapid strep test tests for a bacteria in the back of the throat.  This bacteria commonly causes a sore throat, fever and overall body aches.
     </string>
 
     <string name="eye_drops_description">
@@ -199,60 +200,59 @@
     </string>
 
     <string name="cmp_description">
-        This blood test is routinely performed as part of your physical exam by your physician in evaluating overall health.  It includes 10+ tests that asses your body’s electrolyte balance as well as test for kidney disease, liver disease and diabetes.
+        This blood test is used to assess overall health.  It performs over 10 tests that check kidneys, blood sugar, electrolytes and the liver.
     </string>
 
     <string name="lipase_description">
-        This blood test measures an enzyme produced by your pancreas which is called lipase.  Elevated levels of lipase suggest pancreatitis or inflammation of your pancreas.  Signs and symptoms of pancreatitis may include abdominal pain, nausea, vomiting and fever.
+        This blood test checks the body for high levels of lipase.  High amounts of lipase may indicate that a patient has pancreatitis or swelling of the pancreas.  Most often patients will also have pain in their abdomen, have a fever and feel nauseated.
     </string>
 
     <string name="esr_description">
-        This blood test is performed to evaluate for a disease process inside your body.  Healthcare providers may use this to test for inflammation, pain, swelling or even arthritis.  It is not specific to a certain disease process, it only tells the healthcare provider if you may have a an active disease process.
+        This blood test checks for diseases within the body.  Doctors use this test to check for inflammation, swelling, pain or arthritis.  It doesn\'t tell the doctor exactly what disease is there, but does confirm there is something abnormal in the body.
     </string>
 
     <string name="d_dimer_description">
-          This blood test is used to check the body for possible blood clots.  D-Dimer is released by the body when a blood clot is formed.  If a DVT (deep vein thrombosis) or a PE (pulmonary embolism) is suspected, the physician may order a D-Dimer test.
+          This blood test is done when the doctor thinks a patient may have a blood clot in their body.  These clots most commonly form in the legs, arms or in the lungs.  Clots can cause the patient\'s arms or legs to be painful or chest pain and trouble breathing if the clot is in the lung.
     </string>
 
     <string name="troponin_description">
-        This blood test checks for enzymes released from the heart when damage may have been done to the heart from a disease process or during a heart attack.  Chest pain, abnormal EKG, or chronic/acute heart failure are possible indications for a troponin blood test.
+        This blood test checks for any signals that there was damage done to a patient\'s heart.  This damage may have been from a heart attack or another heart condition.  It\'s common to draw a troponin blood test when a patient has chest pain or trouble breathing properly.
     </string>
 
     <string name="inpatient_consult_description">
-        This consultation is when the emergency room doctor speaks with the physician who takes care of patients on the inpatient floors of the hospital.  It\'s commonly done when a patient is going to be admitted to the hospital.
+        The ER doctor speaks with admitting doctors.  Admitting doctors will do more testing and observe patients who are staying in the hospital.
     </string>
 
     <string name="monitor_description">
-        Patients are connected to a vital sign monitoring machine which monitors heart rate and rhythm (HR), oxygen levels in the blood (SP02), respiratory rate (RR) and blood pressure (BP).
+        A computer screen in the room monitors a patient\'s heart and lungs.  It records how fast their heart beats, how fast they breathes, their oxygen level and their blood pressure.
     </string>
 
     <string name="finger_stick_description">
-        This test is used to evaluate the blood sugar level in the blood.  A lancet is used to prick the finger and a small drop of blood is tested.
+        This test is used to check the blood sugar level in the blood.  The doctor or nurse pricks the patient\'s finger and tests a small drop of blood.
     </string>
 
     <string name="amylase_description">
-        This blood test is used to diagnose or manage pancreatitis, appendicitis, eating disorders or infections. Elevated amylase levels are commonly associated with acute pancreatitis, swelling in your abdomen, ulcers, intestine blockages, sudden gallbladder swelling, alcohol use and other acute problems.
+        This blood test checks for an infection in the patient\'s abdomen.  It may be done if a patient is getting stomach aches, drinks a lot of alcohol, or is having trouble eating and drinking.
     </string>
 
     <string name="gi_consult_description">
-        GI doctors treat disorders of the gastrointestinal tract which includes primarily the stomach, intestines and colon.
+        These are doctors who specialize in caring for a patient\'s digestive tract.  This includes the esophagus, stomach, small intestine, large intestine, and biliary system (liver, pancreas, gallbladder, ad bile ducts).
     </string>
 
     <string name="stool_culture_description">
-         This test is a collection of your stool.  It is used to test for sources of digestive tract infections.  Symptoms which may require stool cultures include diarrhea, severe abdominal pain, or blood in stool.
+         This test is a collection of stool.  Diarrhea, severe abdominal pain, or blood in the stool would be common reasons for this test to be performed.
     </string>
 
-
     <string name="lft_description">
-        This blood test checks the overall health of the liver.  The liver is a large organ that turns food into nutrients and energy.  Dark urine, abdominal pain, fatigue, yellow skin color, or dark colored stools are all possible indications for this blood test.
+        This blood test checks the overall health of the liver.  The liver is a large organ that turns food into energy.  Dark urine, abdominal pain, being tired, or yellow skin are all reasons this test may be done.
     </string>
 
     <string name="hcg_description">
-        This blood test is used to test if a woman is pregnant by testing the level of HCG hormone in the bloodstream.  Elevated levels of HCG increase in the first three months of pregnancy.   It also may be ordered if vaginal bleeding or cramping is present.  This test may also be done in a series to determine changes in the level of HCG in the bloodstream.
+        This blood test is used to determine if a woman is pregnant by testing the level of HCG hormone in the blood.  HCG levels go up in the first 3 months of pregnancy.  The test may also be done if a woman has vaginal bleeding or cramping.
     </string>
 
     <string name="tsh_description">
-        This is a blood test which is used to diagnose thyroid problems.  The thyroid is located near your throat and is responsible for hormones affect weight, moods, energy levels, insomnia, generalized weakness and fatigue as well as other symptoms.  Hyperthyroidism as well as hypothyroidism each have many signs and symptoms.
+        This blood test checks for problems with your thyroid.  A thyroid is a glad in your throat.  If there are problems with your thyroid, you may be gaining or losing weight, have mood swings, or be more tired than normal.  Under-active thyroid and over-active thyroid each have different symptoms.
     </string>
 
     <string name="uric_acid_description">
@@ -260,11 +260,14 @@
     </string>
 
     <string name="type_screen_description">
-        This is a blood test most commonly used to ensure patients requiring a blood transfusion or possible blood transfusion receive the blood type that matches their own.  It also tests for antibodies in the blood that are present to ensure no transfusion reaction occurs during the transfusion process.
+        This blood test is done if the doctor thinks a patient has lost blood or is going to have surgery.  This test identifies what blood type the patient is.  If the patient does need a blood transfusion, the doctor will then know what type of blood to give the patient.
+        <br />
+        <br />
+        Blood types:  O positive, O negative, A positive, A negative, B positive, B negative, AB positive, AB negative
     </string>
 
     <string name="urinalysis_description">
-        This test is a collection of a patient\'s urine which is used to diagnose infections, kidney problems, diabetes and/or liver disease.  This test is part of a regular health examination but more specifically with patients experiencing abdominal pain, burning while urinating or blood in the urine.
+        This is a test that looks for infections or blood in the urine.  It is usually done when a patient has a hard time urinating, it burns to urinate, or during a physical.
     </string>
 
     <string name="abg_vbg_description">
@@ -274,11 +277,11 @@
     </string>
 
     <string name="ekg_description">
-        An EKG creates a wave form-like picture of the electrical activity of the heart as it beats.  12 stickers are applied to the patient\'s chest, legs and arms and connected to wires on the EKG machine.  The image will be evaluated by the health providers for signs of decreased oxygen flow, abnormal heart rhythms, or electrolyte imbalances such as potassium.  These tests are commonly performed in the emergency department or family doctor office.
+        12 stickers are put onto the arms, legs and chest.  The stickers are connected to a computer that draws a picture of electricity in the heart.  The doctor looks at the picture to determine if there is anything abnormal with the body or with the heart.  This test is often done in the emergency department or the doctors office.
     </string>
 
     <string name="iv_placement_description">
-        Definition for IV Placement:  A small catheter will be inserted into the vein, usually in the arm.  There is a small needle that helps the catheter into the skin but then needle is then removed, leaving only a small plastic catheter in the vein for infusions of medicine, IV fluid, or blood.
+        During IV Placement, a small needle is put into the patients arm. It is uncomfortable at first, but will be taken out immediately.  A small plastic catheter will remain in the arm to test the patient\'s blood or give them medicine.
     </string>
 
     <string name="iv_therapy_description">
@@ -286,15 +289,15 @@
     </string>
 
     <string name="iv_fluid_description">
-        IV fluid is given through a catheter in the vein to patients who need hydration.  In very mild cases of dehydration, patients can drink fluid to rehydrate, but in more severe cases, patients will receive fluid through an IV catheter.
+        IV fluid goes into the IV catheter in the patient\'s vein.  IV fluid is given to help patients who are dehydrated or have been vomiting.  It contains many nutrients that are important to the body.
     </string>
 
     <string name="flu_screening_description">
-        This test involves inserting a Q-tip shaped swab through your nose and into the cavity behind your nose called the nasopharynx.  The swab is rotated several times in the nasopharynx to collect a proper sample where the influenza is virus is detectable.  This test does not hurt and will not injury you, but it is slightly uncomfortable when the swab is inserted.
+        This test is used to diagnose the flu (influenza).  A doctor or nurse will puts a Q-tip shaped swab into the back of the nose to check for the influenza.  The test does not hurt, but is uncomfortable and may tickle the back of the nose or make the patient cough.
     </string>
 
     <string name="blood_gas_description">
-        This test is a measurement of how much oxygen and carbon dioxide are in the blood stream.  This blood is taken using a needle from the artery or a vein.
+        This test determines how well the patient is breathing in the air around them.  To perform this test, a small needle put into the patient\'s arm and a blood sample is drawn from the artery or vein.
     </string>
 
     <string name="finger_glucose_check_description">
@@ -302,35 +305,35 @@
     </string>
 
     <string name="catheterization_description">
-        During this procedure, a tube is inserted through the penis or urethra into the bladder.  This is commonly used when a patient is having difficulty urinating, has blood in their urine, is unaware when they are urinating, or when it’s important to monitor how much urine the body is producing.  There is a short period of discomfort when the catheter is inserted.  In some cases the catheter is left in the bladder for an extended time and in other instances, the catheter is placed to obtain urine and then immediately removed.
+        During this procedure, a tube is inserted into the bladder through the penis or vagina.  This tube helps patients urinate if they are very sick or are not able to urinate.  After the tube is in place, it is normal for patients to feel a little discomfort.  Urine automatically drains through this tube into a bag hooked to the side of the bed.
     </string>
 
     <string name="pelvic_exam_description">
-        During this examination, a healthcare provider will commonly insert a speculum into the vagina and examine the vulva (external genital), cervix (opening from vagina to uterus), uterus (the womb), fallopian tubes (tubes that carry eggs to the uterus), bladder (holds urine), and the rectum (area that connects the colon to the anus).
+        Swab samples are taken during a vaginal exam.  These are called cultures.   They are sent to the laboratory to be tested for bacteria that cause infection, pain, or bleeding.  Most commonly, the pain is found in a woman\'s vagina or abdomen.
     </string>
 
     <string name="nebulizer_treatment_description">
-        Breathing treatments given to patients who are experiencing difficulty breathing.  This medicine is in liquid form but turned into a mist which is inhaled into the lungs.  These treatments are commonly used for patients with asthma or other breathing conditions.
+        Breathing treatments are given through a device that turns medicine into a mist.  Patients put the device in their mouth and breathe the medicine into their lungs.  This medicine will help to open airways in the lungs making it easier to breathe.  It is often used in patients with asthma or COPD (cardio obstructive pulmonary disease).
     </string>
 
     <string name="peak_flow_meter_description">
-        This is a device that is used to measure the amount of air that flows out of a person’s lungs when they breathe.  It is most commonly used to assess the status of a patient with asthma.  Low readings compared to a patient’s normal reading may mean the lungs are not performing as they should be.
+        After taking a deep breath, a patient blows into the end of the peak flow meter device as hard as they can.  This number is used to tell the doctor how well the patient\'s lungs are working.
     </string>
 
     <string name="eye_irrigation_description">
-        If a chemical gets into a patients eye, commonly the eye is irrigated with a sterile water solution.  This can be done over a sink using an emergency eye wash system or using a Morgan Lens which covers the cornea and allows for continuous flow of solution to give relief from chemical or thermal burns as well as foreign materials that are not embedded in the eye.
+        If any dirt or chemicals get into a patient\'s eyes, the eyes needs to be cleaned.  Patients can clean their eyes using the eye wash station in the hospital or use a special tool called a Morgan Lens.  It is important to try to wash out the dirt or chemicals as soon as possible.  This helps to stop any serious long term damage to the eye.
     </string>
 
     <string name="pain_medication_description">
-        There are a variety of pain medications that are given to patients.  Each medication is given by a healthcare provider with direction of a medical doctor.  It is important to ask the healthcare provider side effects of these medications as well as make them aware of any allergies you may have to these pain medications.
+        There are many different types of pain medication.  Each medication is given for different types and location of pain.  The different types of pain medication are: Narcotics, Non-Narcotics, Non Steroidal Anti-Inflammatory Drugs (NSAIDs), and creams that go on the skin.
     </string>
 
     <string name="nausea_medication_description">
-        These medications are used to treat nausea and vomiting.  They are commonly used in the emergency department or after surgery.  They can be given orally or be given through a patient’s IV catheter in their vein.
+        Nausea medications are given to patients who have been throwing up or feel sick to their stomach.  They are commonly used in the emergency department or after surgery.  They can be given in pill form or through an IV catheter.
     </string>
 
     <string name="blood_transfusion_description">
-        Blood products such a red blood cells or fresh frozen plasma are given during sudden blood loss from trauma, surgery, or in patients who have chronic low blood counts (anemia).  Prior to receiving blood through the IV catheter, a patient’s blood type will be identified to ensure a blood transfusion reaction does not occur.  Your physician will inform you of the risks and benefits of receiving blood transfusions.
+        Extra blood is given to patients who have had sudden blood loss.  This may have been from an accident or some type of unknown bleeding.  The blood will be given through the IV in the patient\'s arm or another catheter such as a PICC line or a port.  A doctor will speak with the patient before receiving any blood and answer any questions at that time.
     </string>
 
     <string name="tetanus_shot_description">
@@ -338,31 +341,31 @@
     </string>
 
     <string name="x_ray_description">
-        This type of imaging uses small levels of radiation to show images of organs, bones, and other parts of the body to diagnose infections such as pneumonia, fractures, intestinal blockages, excessive fluid around the heart, and many other medical problems.  X-rays are commonly used in emergency departments as well as part of a physical exams.
+        An X-ray is a picture taken of certain parts of a patient\'s body.  These pictures help the doctor see broken bones, infections, or other problems in the body.  These are usually done in the emergency department or doctors office.
     </string>
 
     <string name="ct_scan_description">
-        This scan produces imagines of the body including organs, muscles, fat and bones.  It is a much more detailed picture than an x-ray and is used frequently for headaches, abdominal pain or chest pain.
+        A CT Scan takes detailed pictures of the body.  It looks at organs, muscles, fat and bones.  It is more detailed than an X-Ray and is often used for patients with headaches, abdominal pain or chest pain.
     </string>
 
     <string name="ultrasound_description">
-        This test is commonly used to assess function the kidneys, arteries, breasts or the heart.  It can also be used to evaluate the fetus during pregnancy.  This type of medical imaging is usually painless.
+        This painless test is used to show the doctor pictures of a patient\'s organs or blood flow in the body.  It can take detailed pictures of the heart beating, the kidneys, breasts, or look for blood clots in the legs, arms, veins or arteries.  It may also be used to show pictures of a baby during pregnancy.
     </string>
 
     <string name="mri_description">
-        This imaging uses magnet, radio waves and a computer to create the most detailed images of the body’s organs, bones, fat and tissue.  During this test, the patient lays flat on a table and is moved into a tube shaped scanner.  An MRI is used to further evaluate conditions in the body while not emitting any radiation to the patient.
+        An MRI machine takes a picture of the body using magnets and radio waves.  It is one of the most detailed test that can be done to see every detail of organs, bones, fat or tissue. During this test, patients lay flat on their back on a table.  The table slides in and out of a donut shaped machine.  The machine does make a lot of noise, but it is not painful.  The test usually takes between 30 minutes and 1 hour.
     </string>
 
     <string name="echo_test_description">
-        This is a noninvasive procedure that evaluates the function of the heart and structures around the heart.  Similar to an ultrasound, a probe is put up against the chest and picture is created in real time of the heart on the computer screen. This painless procedure is used to diagnose diseases such as congenital heart diseases and defects, cardiomyopathy, congestive heart failure, aneurysms as well as infections around the heart such as pericarditis.
+        This painless procedure is similar to an ultrasound and checks how well the heart is working.  Jelly is put onto the chest and a probe is put against the skin to take pictures of the heart as it beats. This can be used to help diagnose heart conditions or defects.
     </string>
 
     <string name="stress_test_description">
-         This test is done by walking on a treadmill or riding a stationary bike while being evaluated by a healthcare professional.  Your heart rate, blood pressure and breathing is monitored.  This test is used if a doctor believes you may have adequate blood flow to your heart, abnormal heart rhythms, or lack of oxygen reaching your heart.
+         This test is done while walking on a treadmill or riding on a stationary bike.  A doctor or nurse will monitor the patient\'s heart speed, breathing speed and blood pressure during the test.  This test is done to check for abnormal heart beats and to make sure the heart is getting enough blood and oxygen.
     </string>
 
     <string name="oxygen_description" formatted="false">
-         This supplemental oxygen is used to increase levels of oxygen in the body.  It can be administered through non rebreather (mask) or a nasal cannula (tubing that directs oxygen in the nose).  This supplemental air is 100% oxygen while the air we breathe all around us is 21% oxygen.
+         Patients are given extra oxygen through a mask (non-rebreather) or tubes in their nose (nasal cannula) to help with breathing.  This extra oxygen will help to raise the oxygen level in the blood, making patients to feel better.
     </string>
 
     <string name="crp_description">
@@ -370,11 +373,11 @@
     </string>
 
     <string name="ammonia_description">
-        This blood test is used to evaluate patients with undiagnosed or known liver disease that are experiencing confusion or have become severely ill.
+        This blood test is used to test patients who may be confused or extremely sick.  It is commonly elevated in patients with liver problems.
     </string>
 
     <string name="lactic_acid_description">
-        This blood test is used to evaluate signs of septic shock, heart attack, congestive heart failure, kidney failure or trauma.  This test does not specifically indicate failure of a specific organ, but it does indicate the severity of a disease or condition.
+        This blood test is done on patients that a doctor thinks may be very sick.  It tests for large infections in the body and may also be used after an injury or to see if a patient\'s is getting better.
     </string>
 
     <string name="swallow_screen_description">
@@ -382,44 +385,54 @@
     </string>
 
     <string name="neurosurgery_consult_description">
-        A doctor that treats diseases and conditions in a surgical or non surgical means effecting the brain, spinal cord, nerves and nervous system.
+        These doctors treat diseases or injuries in the brain or spinal cord.  They do this by doing surgery or using medication.
     </string>
 
     <string name="neurology_consult_description">
-        Neurologists are doctors who are trained in treating disorders and diseases of the brain and nervous system, nerves, muscles and spinal cord.
+        These are doctors who treat problems with the brain.  They also specialize in treating the nervous system, muscles and spinal cord.
     </string>
 
     <string name="urology_consult_description">
-        Urologists are doctors who specialize in the treatment and care of the female and male urinary tract as well as the male reproductive organs.
+        These are doctors who specialize in caring for male reproductive organs (ex. penis and testicles).  They also treat problems in the urinary tracts of men and women.
     </string>
 
     <string name="social_work_consult_description">
-        Social workers are professionals who help to improve the overall care as well as life of patients within the hospital.  They can be beneficial in helping with finding appropriate care after leaving the hospital, providing resources helping with addiction, helping to organize family care and many other aspects of patient care.
+        Social Workers help patients in many different ways.  They help with finding safe living areas for elderly or children.  They also have resources for patients fighting addiction or patients who need assistance once they leave the hospital.
     </string>
 
     <string name="cardiology_consult_description">
-        A cardiologist is a doctor who has been trained to treat and care for problems with the heart, arteries and veins.
+        A cardiologist is a doctor who specializes in caring for the heart.   They use medicine and also do more in depth tests and procedures.
     </string>
 
     <string name="general_surgery_description">
-        Surgeons are doctors who perform invasive procedures to help treat or repair diseases or injuries inside the body.
+        These are a group of doctors called surgeons.  They help treat or fix diseases inside of the body by doing surgery or using medicines.
     </string>
 
     <string name="repeat_troponin_description">
         Drawn at 3 hour or 6 hour intervals, this blood test is a second test which checks for an increase in protein released from the heart, possibly from a heart attack or other heart condition.
     </string>
 
+    <string name="ophthalmologist_consult_description">
+        These are doctors who specialize in eyes.  They treat infections, diseases and injuries that occur to the eyes as well as perform eye surgery.
+    </string>
+
+    <string name="orthopedics_consult_description">
+        These are doctors who treat broken bones by doing surgery or by putting on casts or splints.  They also replace joints such a knees or hips.
+    </string>
+
     <string name="cbc_expanded">Complete Blood Count</string>
     <string name="bmp_expanded">Basic Metabolic Panel or Electrolyte Panel</string>
-    <string name="inr_expanded">Standardized Prothrombin time</string>
+    <string name="bnp_expanded">B-type Natriuretic Peptide</string>
+    <string name="inr_expanded">Internal Normalized Ratio</string>
     <string name="cmp_expanded">Comprehensive Metabolic Panel</string>
     <string name="lipase_expanded">Serum lipase</string>
-    <string name="esr_expanded">Erythrocyte Sedimentation Rate, Sed Rate</string>
+    <string name="esr_expanded">Erythrocyte Sedimentation Rate</string>
+    <string name="echo_expanded">echocardiogram</string>
     <string name="troponin_expanded">Cardiac Troponin</string>
     <string name="d_dimer_expanded">Fibrin Degradation Fragment</string>
     <string name="stool_culture_expanded">stool sample</string>
-    <string name="lft_expanded">hepatic function test, liver function test</string>
-    <string name="hcg_expanded">serum HCG</string>
+    <string name="lft_expanded">liver function test</string>
+    <string name="hcg_expanded">Human chorionic gonadotropin</string>
     <string name="tsh_expanded">thryoid stimulating hormone</string>
     <string name="uric_acid_expanded">serum uric acid</string>
     <string name="type_screen_expanded">blood typing</string>
@@ -446,5 +459,6 @@
     <string name="obgyn_consult_expanded">Obstetrics and Gynecology</string>
     <string name="crp_expanded"> C-reactive protein</string>
     <string name="lactic_acid_expanded">Lactate</string>
+    <string name="monitor_expanded">Heart Monitor</string>
 
 </resources>

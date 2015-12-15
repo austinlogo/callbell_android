@@ -63,5 +63,6 @@
     <string name="new_info">New Information Received</string>
     <string name="now">Now</string>
     <string name="acceptable_pain">Acceptable Pain</string>
+    <string name="staff_physician_assistant">Your Physician Assistant is</string>
 
 </resources>

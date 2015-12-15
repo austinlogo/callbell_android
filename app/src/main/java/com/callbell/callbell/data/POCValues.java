@@ -1196,17 +1196,26 @@ public class POCValues {
 
         expandedNames = new LinkedHashMap<>();
         expandedNames.put(CBC, mContext.getString(R.string.cbc_expanded));
+        expandedNames.put(BMP, mContext.getString(R.string.bmp_expanded));
+        expandedNames.put(BNP, mContext.getString(R.string.bnp_expanded));
+        expandedNames.put(INR, mContext.getString(R.string.inr_expanded));
+        expandedNames.put(CMP, mContext.getString(R.string.cmp_expanded));
+        expandedNames.put(LIPASE, mContext.getString(R.string.lipase_expanded));
+        expandedNames.put(ESR, mContext.getString(R.string.esr_expanded));
+        expandedNames.put(ECHO, mContext.getString(R.string.echo_expanded));
+        expandedNames.put(TROPONIN, mContext.getString(R.string.troponin_expanded));
+        expandedNames.put(D_DIMER, mContext.getString(R.string.d_dimer_expanded));
+        expandedNames.put(STOOL_CULTURE, mContext.getString(R.string.stool_culture_expanded));
         expandedNames.put(LFT, mContext.getString(R.string.lft_expanded));
         expandedNames.put(HCG, mContext.getString(R.string.hcg_expanded));
         expandedNames.put(TSH, mContext.getString(R.string.tsh_expanded));
         expandedNames.put(URIC_ACID, mContext.getString(R.string.uric_acid_expanded));
         expandedNames.put(TYPE_SCREEN, mContext.getString(R.string.type_screen_expanded));
         expandedNames.put(URINALYSIS, mContext.getString(R.string.urinalysis_expanded));
-        expandedNames.put(OBGYN_CONSULT, mContext.getString(R.string.obgyn_consult_expanded));
         expandedNames.put(EKG, mContext.getString(R.string.ekg_expanded));
         expandedNames.put(IV_PLACEMENT, mContext.getString(R.string.iv_placement_expanded));
         expandedNames.put(FLU_SCREENING, mContext.getString(R.string.flu_screening_expanded));
-        expandedNames.put(SWALLOW_SCREEN, mContext.getString(R.string.rapid_strep_expanded));
+        expandedNames.put(RAPID_STREP, mContext.getString(R.string.rapid_strep_expanded));
         expandedNames.put(FINGER_STICK, mContext.getString(R.string.finger_glucose_check_expanded));
         expandedNames.put(FOLEY_CATHETER, mContext.getString(R.string.catheterization_expanded));
         expandedNames.put(NEBULIZER_TREATMENT, mContext.getString(R.string.nebulizer_treatment_expanded));
@@ -1220,8 +1229,9 @@ public class POCValues {
         expandedNames.put(ECHO, mContext.getString(R.string.echo_test_expanded));
         expandedNames.put(STRESS_TEST, mContext.getString(R.string.stress_test_expanded));
         expandedNames.put(OXYGEN, mContext.getString(R.string.oxygen_expanded));
+        expandedNames.put(OBGYN_CONSULT, mContext.getString(R.string.obgyn_consult_expanded));
         expandedNames.put(CRP, mContext.getString(R.string.crp_expanded));
         expandedNames.put(LACTIC_ACID, mContext.getString(R.string.lactic_acid_expanded));
-        expandedNames.put(BMP, mContext.getString(R.string.bmp_expanded));
+        expandedNames.put(MONITOR, mContext.getString(R.string.monitor_expanded));
     }
 }

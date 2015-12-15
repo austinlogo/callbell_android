@@ -6,6 +6,8 @@ import com.callbell.callbell.R;
 
 import java.math.MathContext;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.inject.Inject;
 
@@ -16,8 +18,8 @@ public class MedicationValues {
 
     private Context mContext;
 
-    public static LinkedHashMap<String, String> medicationMap;
-    public static LinkedHashMap<String, String> expandedNames;
+    public static Map<String, String> medicationMap;
+    public static Map<String, String> expandedNames;
 
     public final String ANCEF;
     public final String ASPIRIN;
@@ -86,7 +88,7 @@ public class MedicationValues {
     @Inject
     public MedicationValues(Context ctx) {
         mContext = ctx;
-        medicationMap = new LinkedHashMap<>();
+        medicationMap = new TreeMap<>();
         expandedNames = new LinkedHashMap<>();
 
         ANCEF = mContext.getString(R.string.ancef);
