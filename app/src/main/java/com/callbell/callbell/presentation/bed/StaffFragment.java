@@ -35,9 +35,6 @@ public class StaffFragment extends Fragment {
     @Inject
     PrefManager prefs;
 
-    @InjectView(R.id.staff_fragment_layout)
-    LinearLayout layout;
-
     @InjectView(R.id.staff_physician_field)
     EditText physicianField;
 

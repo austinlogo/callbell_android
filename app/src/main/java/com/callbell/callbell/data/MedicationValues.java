@@ -213,7 +213,7 @@ public class MedicationValues {
         medicationMap.put(SPIRONOLACTONE, mContext.getString(R.string.spironolactone_description));
         medicationMap.put(VERSED, mContext.getString(R.string.versed_description));
         medicationMap.put(XANAX, mContext.getString(R.string.xanax_description));
-        medicationMap.put(ALBUTEROL, mContext.getString(R.string.albuterol));
+        medicationMap.put(ALBUTEROL, mContext.getString(R.string.albuterol_description));
         medicationMap.put(GI_COCKTAIL, mContext.getString(R.string.gi_cocktail));
 
         expandedNames.put(ANCEF, mContext.getString(R.string.ancef_expanded));

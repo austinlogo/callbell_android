@@ -147,7 +147,7 @@ public class PlanOfCareFragment extends Fragment {
                 ? savedMeds
                 : new ArrayList<>(MedicationValues.medicationMap.keySet());
 
-        mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_state_test, initialAdminMedicationValues));
+        mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_ternary_checkbox, initialAdminMedicationValues));
         mPlanOfCareMedications.setTitle(R.string.poc_current_medications_title);
         mPlanOfCareMedications.setCheckedItems(mState.getPendingMedications(), mState.getDoneMedications());
 

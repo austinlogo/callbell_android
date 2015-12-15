@@ -2,7 +2,6 @@ package com.callbell.callbell.presentation.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -57,7 +56,7 @@ public class TernaryListItem extends RelativeLayout {
     }
 
     private void init() {
-        View v = inflate(getContext(), R.layout.item_poc_list_item, this);
+        View v = inflate(getContext(), R.layout.view_ternary_checkbox, this);
         mText = (TextView) v.findViewById(R.id.item_poc_list_item_text);
         mImage = (ImageView) v.findViewById(R.id.item_poc_list_item_img);
 

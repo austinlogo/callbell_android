@@ -46,7 +46,7 @@ public class ToggleListView extends LinearLayout {
         List<String> initialAdminValues = (!allItems.isEmpty() )
                 ? allItems
                 : new ArrayList<>(POCValues.pocMap.get(selectedChiefComplaint));
-        return new PlanOfCareCheckBoxAdapter(context, R.layout.item_state_test, initialAdminValues);
+        return new PlanOfCareCheckBoxAdapter(context, R.layout.item_ternary_checkbox, initialAdminValues);
     }
 
     public ToggleListView(Context context) {
@@ -124,7 +124,7 @@ public class ToggleListView extends LinearLayout {
          int pendingItemsCount = adminAdapter.getPendingItemsSize();
 
          if (patientAdapter == null) {
-            setPatientListAdapter (new PlanOfCareListViewAdapter(getContext(), R.layout.item_state_test, shownItems, pendingItemsCount));
+            setPatientListAdapter (new PlanOfCareListViewAdapter(getContext(), R.layout.item_ternary_checkbox, shownItems, pendingItemsCount));
          } else {
              patientAdapter.clear();
              patientAdapter.addAll(shownItems);
