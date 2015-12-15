@@ -4,7 +4,6 @@ package com.callbell.callbell.presentation.bed;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,12 +111,24 @@ public class CallBellsFragment extends Fragment {
             mButtonFoodWater.setBackgroundColor(getResources().getColor(R.color.food_color));
             mButtonHelp.setBackgroundColor(getResources().getColor(R.color.help_color));
             mButtonPain.setBackgroundColor(getResources().getColor(R.color.pain_color));
+
+            mButtonBlanket.setPadding(0, 0, 0, (int) getResources().getDimension(R.dimen.heavy_margin));
+            mButtonRestroom.setPadding(0,0,0, (int) getResources().getDimension(R.dimen.heavy_margin));
+            mButtonFoodWater.setPadding(0,0,0, (int) getResources().getDimension(R.dimen.heavy_margin));
+            mButtonHelp.setPadding(0,0,0, (int) getResources().getDimension(R.dimen.heavy_margin));
+            mButtonPain.setPadding(0,0,0, (int) getResources().getDimension(R.dimen.heavy_margin));
         } else {
             mButtonBlanket.setBackground(getResources().getDrawable(R.drawable.background_button_default));
             mButtonRestroom.setBackground(getResources().getDrawable(R.drawable.background_button_default));
             mButtonFoodWater.setBackground(getResources().getDrawable(R.drawable.background_button_default));
             mButtonHelp.setBackground(getResources().getDrawable(R.drawable.background_button_default));
             mButtonPain.setBackground(getResources().getDrawable(R.drawable.background_button_default));
+
+            mButtonBlanket.setPadding(0, 0, 0, 0);
+            mButtonRestroom.setPadding(0,0,0,0);
+            mButtonFoodWater.setPadding(0,0,0,0);
+            mButtonHelp.setPadding(0,0,0,0);
+            mButtonPain.setPadding(0,0,0,0);
         }
 
     }

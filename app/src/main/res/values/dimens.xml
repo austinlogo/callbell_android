@@ -17,5 +17,6 @@
     <dimen name="title_size">16pt</dimen>
     <dimen name="icon_edge_length">50dp</dimen>
     <dimen name="small_column">100dp</dimen>
+    <dimen name="heavy_margin">200dp</dimen>
 
 </resources>
