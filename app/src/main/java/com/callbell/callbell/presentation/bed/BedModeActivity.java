@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.data.EducationMetricLogger;
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.response.MessageResponse;
@@ -162,6 +163,8 @@ public class BedModeActivity
         super.onDestroy();
         SocketService.getInstance().unregisterDevice(prefs.getCurrentState());
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+
+        messageRouting.uploadEducationMetrics(prefs.getCurrentState(), EducationMetricLogger.getInstance().getEducationMetricList());
 
     }
 

@@ -13,6 +13,7 @@ import android.util.Log;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.request.Request;
 import com.callbell.callbell.models.request.RetrieveStateRequest;
+import com.callbell.callbell.models.request.UploadEducationMetricsRequest;
 import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.service.ServerEndpoints;
 import com.callbell.callbell.util.BundleUtil;
@@ -61,6 +62,7 @@ public class SocketService extends Service {
         CONNECTION_UPDATE,
         GET_DEVICE_STATES,
         RETRIEVE_STATE,
+        UPLOAD_EDUCATION_METRICS,
         UPDATE_STATE_AND_SEND_REQUEST
     }
 
@@ -261,6 +263,10 @@ public class SocketService extends Service {
 
     public void retrieveState(RetrieveStateRequest request) {
         startSocketEmitter(SocketOperation.RETRIEVE_STATE, request.toJSON().toString());
+    }
+
+    public void uploadEducationMetrics(UploadEducationMetricsRequest request) {
+        startSocketEmitter(SocketOperation.UPLOAD_EDUCATION_METRICS, request.toJSON().toString());
     }
 
     public void startSocketEmitter(SocketOperation operation, String payload) {

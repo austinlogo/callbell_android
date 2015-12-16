@@ -2,6 +2,7 @@ package com.callbell.callbell.util;
 
 import android.util.Log;
 
+import com.callbell.callbell.models.State.EducationMetric;
 import com.callbell.callbell.models.State.State;
 
 import org.json.JSONArray;
@@ -178,5 +179,30 @@ public class JSONUtil {
         } catch (JSONException e) {
             return new ArrayList<>();
         }
+    }
+
+    public static JSONArray EducationMetricListToJSONArray(List<EducationMetric> list) {
+        JSONArray array = new JSONArray();
+
+        for (EducationMetric metric : list) {
+            array.put(EducationMetricToJSONObject(metric));
+        }
+        return array;
+    }
+
+    private static JSONObject EducationMetricToJSONObject(EducationMetric metric) {
+        JSONObject object = new JSONObject();
+
+        try {
+            object.put(EducationMetric.EDUCATION_METRIC_TITLE, metric.getTitle());
+            object.put(EducationMetric.EDUCATION_METRIC_DATE, metric.getDate());
+            object.put(EducationMetric.EDUCATION_METRIC_ELAPSED_TIME, metric.getElapsedTime());
+
+            return object;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return new JSONObject();
     }
 }

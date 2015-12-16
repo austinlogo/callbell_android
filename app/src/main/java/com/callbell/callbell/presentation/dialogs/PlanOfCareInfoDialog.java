@@ -4,12 +4,18 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.data.EducationMetricLogger;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -35,6 +41,7 @@ public class PlanOfCareInfoDialog extends DialogFragment {
     @InjectView(R.id.poc_info_dismiss)
     Button dismissButton;
 
+    private Date timeOpen;
     private String mTitle;
     private String mExpandedName;
     private String mBody;
@@ -48,6 +55,16 @@ public class PlanOfCareInfoDialog extends DialogFragment {
         dialog.setArguments(bundle);
 
         return dialog;
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+
+        EducationMetricLogger.getInstance().add(
+                mTitle,
+                timeOpen.getTime(),
+                new Date().getTime() - timeOpen.getTime());
     }
 
     public static PlanOfCareInfoDialog newInstance(String tit, String expanded, String bod) {
@@ -68,6 +85,8 @@ public class PlanOfCareInfoDialog extends DialogFragment {
 
         mTitle = getArguments().getString(TITLE_KEY);
         mBody = getArguments().getString(BODY_KEY);
+
+        timeOpen = new Date();
 
         if (getArguments().containsKey(EXPANDED_KEY)) {
             mExpandedName = getArguments().getString(EXPANDED_KEY);
