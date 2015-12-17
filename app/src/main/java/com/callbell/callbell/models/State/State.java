@@ -9,6 +9,7 @@ import com.callbell.callbell.util.PrefManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +63,27 @@ public class State {
             allMedications;
 
     private String[] shownActions;
+
+    public static State newBlankInstance(String hospital, String group, String location, String mod) {
+        return new State(
+                hospital,
+                group,
+                location,
+                mod,
+                "",
+                "",
+                "",
+                "",
+                new ArrayList<Integer>(),
+                new ArrayList<Integer>(),
+                new ArrayList<Integer>(),
+                new ArrayList<Integer>(),
+                new ArrayList<String>(),
+                new ArrayList<String>(),
+                0,
+                0
+        );
+    }
 
     public State(PrefManager prefs) {
         hospital = prefs.hospital();

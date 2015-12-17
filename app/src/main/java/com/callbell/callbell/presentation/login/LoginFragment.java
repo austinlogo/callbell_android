@@ -172,28 +172,24 @@ public class LoginFragment extends Fragment {
                     prefs.getAllMedicationItems(),
                     0,
                     prefs.painRating());
-            prefs.setState(thisState);
 
-        } else {
-            prefs.setState(
-                new State(
+            if (thisState.equals(prefs.getCurrentState())) {
+                prefs.setState(thisState);
+            } else {
+                prefs.setState(State.newBlankInstance(
                         hospital_id.getText().toString(),
                         group_id.getText().toString(),
-                        PrefManager.STATION_SUFFIX,
-                        mod,
-                        "",
-                        "",
-                        "",
-                        "",
-                        new ArrayList<Integer>(),
-                        new ArrayList<Integer>(),
-                        new ArrayList<Integer>(),
-                        new ArrayList<Integer>(),
-                        new ArrayList<String>(),
-                        new ArrayList<String>(),
-                        0,
-                        0
-                )
+                        location_id.getText().toString(),
+                        mod
+                ));
+            }
+
+        } else {
+            prefs.setState(State.newBlankInstance(
+                            hospital_id.getText().toString(),
+                            group_id.getText().toString(),
+                    PrefManager.STATION_SUFFIX,
+                    mod)
             );
         }
 
