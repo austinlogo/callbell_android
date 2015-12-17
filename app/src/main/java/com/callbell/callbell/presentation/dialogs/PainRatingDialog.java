@@ -35,25 +35,42 @@ public class PainRatingDialog
     @Inject
     MessageRouting messageRouting;
 
-    @InjectView(R.id.layout_pain_rating_pain_0)
-    LinearLayout mPainRating0;
+    @InjectView(R.id.layout_pain_rating_0)
+    Button mPainRating0;
 
-    @InjectView(R.id.layout_pain_rating_pain_2)
-    LinearLayout mPainRating2;
+    @InjectView(R.id.layout_pain_rating_1)
+    Button mPainRating1;
 
-    @InjectView(R.id.layout_pain_rating_pain_4)
-    LinearLayout mPainRating4;
+    @InjectView(R.id.layout_pain_rating_2)
+    Button mPainRating2;
 
-    @InjectView(R.id.layout_pain_rating_pain_6)
-    LinearLayout mPainRating6;
+    @InjectView(R.id.layout_pain_rating_3)
+    Button mPainRating3;
 
-    @InjectView(R.id.layout_pain_rating_pain_8)
-    LinearLayout mPainRating8;
+    @InjectView(R.id.layout_pain_rating_4)
+    Button mPainRating4;
 
-    @InjectView(R.id.layout_pain_rating_pain_10)
-    LinearLayout mPainRating10;
+    @InjectView(R.id.layout_pain_rating_5)
+    Button mPainRating5;
+
+    @InjectView(R.id.layout_pain_rating_6)
+    Button mPainRating6;
+
+    @InjectView(R.id.layout_pain_rating_7)
+    Button mPainRating7;
+
+    @InjectView(R.id.layout_pain_rating_8)
+    Button mPainRating8;
+
+    @InjectView(R.id.layout_pain_rating_9)
+    Button mPainRating9;
+
+    @InjectView(R.id.layout_pain_rating_10)
+    Button mPainRating10;
+
 
     private DialogDismissedCallback mCallback;
+    private int selectedChoice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,11 +91,20 @@ public class PainRatingDialog
         ClickPainRating clickListener = new ClickPainRating();
 
         mPainRating0.setOnClickListener(clickListener);
+        mPainRating1.setOnClickListener(clickListener);
         mPainRating2.setOnClickListener(clickListener);
+        mPainRating3.setOnClickListener(clickListener);
         mPainRating4.setOnClickListener(clickListener);
+        mPainRating5.setOnClickListener(clickListener);
         mPainRating6.setOnClickListener(clickListener);
+        mPainRating7.setOnClickListener(clickListener);
         mPainRating8.setOnClickListener(clickListener);
+        mPainRating9.setOnClickListener(clickListener);
         mPainRating10.setOnClickListener(clickListener);
+
+        setSelectedChoice(prefs.painRating());
+
+
 
         return dialog;
     }
@@ -87,32 +113,56 @@ public class PainRatingDialog
 
         @Override
         public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.layout_pain_rating_pain_0:
-                    prefs.setPainRating(0);
-                    break;
-                case R.id.layout_pain_rating_pain_2:
-                    prefs.setPainRating(2);
-                    break;
-                case R.id.layout_pain_rating_pain_4:
-                    prefs.setPainRating(4);
-                    break;
-                case R.id.layout_pain_rating_pain_6:
-                    prefs.setPainRating(6);
-                    break;
-                case R.id.layout_pain_rating_pain_8:
-                    prefs.setPainRating(8);
-                    break;
-                case R.id.layout_pain_rating_pain_10:
-                    prefs.setPainRating(10);
-                    break;
-            }
+            // Get pain rating from the Button's text.
+            Button btn = (Button) v;
+            String str = btn.getText().toString();
+            prefs.setPainRating(Integer.parseInt(str));
 
             messageRouting.updateState(prefs.getCurrentState(), prefs.getStationName());
             dismiss();
         }
     }
 
+    public void setSelectedChoice(int selectedChoice) {
+
+        switch (selectedChoice) {
+            case 0:
+                mPainRating0.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 1:
+                mPainRating1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 2:
+                mPainRating2.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 3:
+                mPainRating3.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 4:
+                mPainRating4.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 5:
+                mPainRating5.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 6:
+                mPainRating6.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 7:
+                mPainRating7.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 8:
+                mPainRating8.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 9:
+                mPainRating9.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 10:
+                mPainRating10.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                break;
+
+
+        }
+    }
 
     public interface DialogDismissedCallback {
         void onDialogDismissed();

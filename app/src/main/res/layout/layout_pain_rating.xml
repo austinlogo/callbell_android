@@ -23,7 +23,6 @@
             android:id="@+id/layout_pain_rating_pain_0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pain_button_pressed"
             android:clickable="true"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -50,7 +49,6 @@
             android:id="@+id/layout_pain_rating_pain_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pain_button_pressed"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -76,7 +74,6 @@
             android:id="@+id/layout_pain_rating_pain_4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pain_button_pressed"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -102,7 +99,6 @@
             android:id="@+id/layout_pain_rating_pain_6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pain_button_pressed"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -128,7 +124,6 @@
             android:id="@+id/layout_pain_rating_pain_8"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pain_button_pressed"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -154,7 +149,6 @@
             android:id="@+id/layout_pain_rating_pain_10"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pain_button_pressed"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -175,6 +169,106 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+    </LinearLayout>
+
+    <TableRow
+        android:id="@+id/staff_fragment_divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_0"
+            android:textColor="@color/black"
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_1"
+            android:textColor="@color/black"
+            android:text="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_2"
+            android:textColor="@color/black"
+            android:text="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_3"
+            android:textColor="@color/black"
+            android:text="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_4"
+            android:textColor="@color/black"
+            android:text="4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_5"
+            android:textColor="@color/black"
+            android:text="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_6"
+            android:textColor="@color/black"
+            android:text="6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_7"
+            android:textColor="@color/black"
+            android:text="7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_8"
+            android:textColor="@color/black"
+            android:text="8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_9"
+            android:textColor="@color/black"
+            android:text="9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="@style/Bea_Theme.PainButton"
+            android:id="@+id/layout_pain_rating_10"
+            android:textColor="@color/black"
+            android:text="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
 
 

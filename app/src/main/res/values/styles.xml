@@ -1,38 +1,5 @@
 <resources>
 
-    <!-- BaA application theme. -->
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
-        <!--<item name="android:background">@color/colorPrimary</item>-->
-        <!--&lt;!&ndash;<item name="android:actionBarStyle">@style/Bea_Theme.ActionBar</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:alertDialogStyle">@style/BeaDialog</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:buttonStyle">@drawable/beabutton_background</item>&ndash;&gt;-->
-    <!--</style>-->
-    <!--<style name="AppTheme.NoActionBar">-->
-        <!--<item name="windowActionBar">false</item>-->
-        <!--<item name="windowNoTitle">true</item>-->
-    <!--</style>-->
-    <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
-    <!--<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
-
-    <!--<style name="FullscreenTheme" parent="AppTheme">-->
-        <!--<item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>-->
-        <!--<item name="android:windowActionBarOverlay">true</item>-->
-        <!--<item name="android:windowBackground">@null</item>-->
-        <!--<item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>-->
-        <!--<item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>-->
-    <!--</style>-->
-
-    <!--<style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">-->
-        <!--<item name="android:background">@color/black_overlay</item>-->
-        <!--<item name="android:textColor">#FF0000</item>-->
-    <!--</style>-->
-
-    <!-- ####################################################################################### -->
-
     <style name="Bea_Theme" parent="@style/Theme.AppCompat.NoActionBar">
         <!--<item name="background">@color/silver</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -63,6 +30,18 @@
         <item name="android:paddingLeft">@dimen/standard_padding</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="Bea_Theme.PainButton">
+        <item name="android:background">@drawable/pain_button_pressed</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">@dimen/standard_padding</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/title_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 
     <style name="Bea_Theme.TitleBarButton">
         <item name="android:background">@drawable/background_button_default</item>
