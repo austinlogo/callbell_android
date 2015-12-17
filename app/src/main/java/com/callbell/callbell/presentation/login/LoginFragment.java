@@ -155,7 +155,7 @@ public class LoginFragment extends Fragment {
 
     public void register(String mod) {
         if (PrefManager.BED_MODE.equals(mod)) {
-            State thisState = new State(
+           State thisState = new State(
                     hospital_id.getText().toString(),
                     group_id.getText().toString(),
                     location_id.getText().toString(),

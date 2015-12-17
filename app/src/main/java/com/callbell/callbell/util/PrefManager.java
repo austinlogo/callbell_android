@@ -83,8 +83,10 @@ public class PrefManager {
         prefs = PreferenceManager.getDefaultSharedPreferences(c);
         currentState = new State(this);
         isSuperUser = false;
-        pendingTestItems = getIntListFromPrefs(SHOWN_TESTS_KEY);
-        pendingMedicationItems = getIntListFromPrefs(SHOWN_MEDICATIONS_KEY);
+        pendingTestItems = getIntListFromPrefs(State.PENDING_TESTS_ID);
+        pendingMedicationItems = getIntListFromPrefs(State.PENDING_MEDICATIONS_ID);
+        mDoneTestItems = getIntListFromPrefs(State.DONE_TESTS_ID);
+        mDoneMedications = getIntListFromPrefs(State.DONE_MEDICATIONS_ID);
 
     }
 
@@ -213,12 +215,11 @@ public class PrefManager {
 
 
     private void setPendingTestItems(List<Integer> sa) {
-        currentState.setPendingTests(sa);
         pendingTestItems = sa;
         setIntList(sa, State.PENDING_TESTS_ID);
     }
 
-    public void setPendingMedicationItems(List<Integer> medItems) {
+    private void setPendingMedicationItems(List<Integer> medItems) {
         pendingMedicationItems = medItems;
         setIntList(medItems, State.PENDING_MEDICATIONS_ID);
     }

@@ -198,7 +198,7 @@ public class TitleBarFragment extends Fragment {
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(i);
             mAdminButton.setImageResource(R.drawable.save);
-            prefs.setState(prefs.getCurrentState());
+//            prefs.setState(prefs.getCurrentState());
         }
     }
 

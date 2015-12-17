@@ -55,10 +55,19 @@
 
         <Button
             style="@style/Bea_Theme.NoMarginButton"
+            android:id="@+id/other_cancel"
+            android:text="@string/other_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_padding"/>
+
+        <Button
+            style="@style/Bea_Theme.NoMarginButton"
             android:id="@+id/other_submit"
             android:text="@string/add"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_padding"/>
 
         <AutoCompleteTextView
             android:id="@+id/other_edittext"
@@ -90,29 +99,6 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content" />
 
-       <!--<LinearLayout-->
-           <!--android:id="@+id/lists_medication_container"-->
-           <!--android:orientation="vertical"-->
-           <!--android:layout_weight="1"-->
-           <!--android:layout_width="match_parent"-->
-           <!--android:layout_height="wrap_content">-->
-
-           <!--<ListView android:id="@+id/action_list_medication_admin"-->
-               <!--android:layout_width="match_parent"-->
-               <!--android:layout_height="wrap_content"-->
-               <!--android:scrollbarThumbVertical="@drawable/scrollbar"-->
-               <!--android:fadeScrollbars="false"-->
-               <!--android:scrollbarAlwaysDrawVerticalTrack="true"/>-->
-
-           <!--<ListView android:id="@+id/action_list_medication_patient"-->
-               <!--android:visibility="gone"-->
-               <!--android:color="@color/white"-->
-               <!--android:scrollbarAlwaysDrawVerticalTrack="true"-->
-               <!--android:fadeScrollbars="false"-->
-               <!--android:scrollbarThumbVertical="@drawable/scrollbar"-->
-               <!--android:layout_width="match_parent"-->
-               <!--android:layout_height="wrap_content" />-->
-       <!--</LinearLayout>-->
    </LinearLayout>
 
 

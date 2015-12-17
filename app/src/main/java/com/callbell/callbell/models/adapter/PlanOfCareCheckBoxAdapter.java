@@ -21,14 +21,11 @@ import java.util.Set;
  */
 public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
-    private List<String> mItems;
     private Set<Integer> mPendingItems, mDoneItems;
     private boolean isSuperUser;
 
     public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects) {
         super(context, resource, objects);
-
-        mItems = objects;
 
         isSuperUser = false;
         mPendingItems = new HashSet<>();
@@ -47,7 +44,7 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
     @Override
     public void add(String object) {
         super.add(object);
-        mItems.add(object);
+//        mItems.add(object);
     }
 
     @Override
@@ -66,7 +63,7 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
             view.setState(TernaryListItem.TernaryItemState.NOT_SELECTED);
         }
 
-        view.setText(mItems.get(position));
+        view.setText(getItem(position));
 
         return view;
     }

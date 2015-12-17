@@ -209,4 +209,8 @@ public class ToggleListView extends LinearLayout {
     public void resetList(String key) {
         adminAdapter.resetList(key);
     }
+
+    public void setPendingItem(int index, boolean pending) {
+        adminAdapter.setPendingItem(index, pending);
+    }
 }

@@ -3,6 +3,7 @@ package com.callbell.callbell.presentation.bed;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -73,6 +75,10 @@ public class PlanOfCareFragment extends Fragment {
 
     @InjectView(R.id.other_submit)
     Button submitOther;
+
+    @InjectView(R.id.other_cancel)
+    Button otherCancel;
+
 
     @InjectView(R.id.other_edittext)
     AutoCompleteTextView otherEditText;
@@ -212,6 +218,17 @@ public class PlanOfCareFragment extends Fragment {
             }
         });
 
+        otherCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+        });
+
         otherEditText.setOnEditorActionListener(new SubmitOtherTextListener());
     }
 
@@ -223,14 +240,15 @@ public class PlanOfCareFragment extends Fragment {
         } else if (mPlanOfCareTests.contains(item)) {
             int index = mPlanOfCareTests.getPosition(item);
 
-            mPlanOfCareTests.getAdminListView().setItemChecked(index, true);
+
+            mPlanOfCareTests.setPendingItem(index, true);
             otherEditText.setText("");
             return;
         }
 
         String action = otherEditText.getText().toString();
         mPlanOfCareTests.add(action);
-        mPlanOfCareTests.getAdminListView().setItemChecked(mPlanOfCareTests.getCount() - 1, true);
+        mPlanOfCareTests.setPendingItem(mPlanOfCareTests.getCount() - 1, true);
         otherEditText.setText("");
     }
 
