@@ -166,7 +166,7 @@ public class PrefManager {
         prefs.edit().putInt(State.PAIN_RATING, rating).apply();
     }
 
-    public State getCurrentState() {
+    public static State getCurrentState() {
         return currentState;
     }
 

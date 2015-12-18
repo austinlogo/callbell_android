@@ -9,28 +9,32 @@ import java.util.List;
  */
 public class EducationMetric {
 
+    public static String EDUCATION_METRIC_ID = "EDUCATION_METRIC_ID";
     public static String EDUCATION_METRIC_TITLE = "EDUCATION_METRIC_TITLE";
     public static String EDUCATION_METRIC_DATE = "EDUCATION_METRIC_DATE";
     public static String EDUCATION_METRIC_ELAPSED_TIME = "EDUCATION_METRIC_ELAPSED_TIME";
 
     private static List<EducationMetric> educationmetricList;
     private String title;
-    private long date;
+    private Date date;
     private long elapsedTime;
+    private java.text.SimpleDateFormat sdf;
 
-    public EducationMetric(String tit, long dt, long elapsed) {
+    public EducationMetric(String tit, Date dt, long elapsed) {
 
         title = tit;
         date = dt;
         elapsedTime = elapsed;
+
+        sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
     public String getTitle() {
         return title;
     }
 
-    public long getDate() {
-        return date;
+    public String getDate() {
+        return sdf.format(date);
     }
 
     public long getElapsedTime() {

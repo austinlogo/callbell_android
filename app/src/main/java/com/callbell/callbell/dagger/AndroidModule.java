@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.data.EducationMetricLogger;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
@@ -60,6 +61,7 @@ import javax.inject.Singleton;
         PainRatingDialog.class,
         RemoteUpdateDialogFragment.class,
 
+        EducationMetricLogger.class,
         //Service
         SocketService.class
 }

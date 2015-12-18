@@ -205,7 +205,7 @@ public class SocketService extends Service {
         public void run() {
             while (running) {
 
-                long sleepLength = 0;
+                long sleepLength;
 
                 if (mSocket.connected() && isServerDisconnected) {
                     isServerDisconnected = false;

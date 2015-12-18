@@ -63,7 +63,7 @@ public class PlanOfCareInfoDialog extends DialogFragment {
 
         EducationMetricLogger.getInstance().add(
                 mTitle,
-                timeOpen.getTime(),
+                timeOpen,
                 new Date().getTime() - timeOpen.getTime());
     }
 

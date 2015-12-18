@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.callbell.callbell.data.EducationMetricLogger;
 import com.callbell.callbell.models.State.EducationMetric;
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
@@ -66,6 +67,12 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
         SocketService.getInstance().registerDevice(st);
     }
 
+    public void uploadEducationMetrics(State st, List<EducationMetric> educationMetricList) {
+        UploadEducationMetricsRequest request = new UploadEducationMetricsRequest(st, educationMetricList);
+        SocketService.getInstance().uploadEducationMetrics(request);
+        EducationMetricLogger.getInstance().getEducationMetricList().clear();
+    }
+
     @Override
     public void onTaskCompleted(String intentAction, String response) {
 
@@ -78,8 +85,4 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     }
 
 
-    public void uploadEducationMetrics(State st, List<EducationMetric> educationMetricList) {
-        UploadEducationMetricsRequest request = new UploadEducationMetricsRequest(st, educationMetricList);
-        SocketService.getInstance().uploadEducationMetrics(request);
-    }
 }
