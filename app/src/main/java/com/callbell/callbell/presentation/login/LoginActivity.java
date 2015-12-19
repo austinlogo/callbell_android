@@ -48,15 +48,6 @@ public class LoginActivity
         super.onCreate(savedInstanceState);
         ((CallBellApplication) getApplication()).inject(this);
 
-        JSONArray array;
-
-        try {
-            array = new JSONArray("['hello', 'me', 'git you']");
-            Log.d(TAG, array.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         mLoginFragment = LoginFragment.newInstance();
         mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.LOGIN_MODE_ACTIVITY);
 

@@ -164,6 +164,7 @@ public class TitleBarFragment extends Fragment {
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
+        Log.d(TAG, "onAttachCalled");
 
         try {
             mListener = ((TitleBarListener) getActivity());
@@ -176,7 +177,7 @@ public class TitleBarFragment extends Fragment {
     public void setSuperUserPermissions(boolean isSuperUser) {
 
         int showForSuperUserOnly = isSuperUser ? View.VISIBLE : View.GONE;
-
+        Log.d(TAG, "setSuperUser Permissions: Activity is " + (getActivity() == null) );
         mDefaultLayout.setBackgroundColor(isSuperUser
                 ? getActivity().getApplicationContext().getResources().getColor(R.color.navy)
                 : getActivity().getApplicationContext().getResources().getColor(R.color.colorPrimary));
