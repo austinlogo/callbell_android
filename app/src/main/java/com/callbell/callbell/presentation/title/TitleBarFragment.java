@@ -179,8 +179,8 @@ public class TitleBarFragment extends Fragment {
         int showForSuperUserOnly = isSuperUser ? View.VISIBLE : View.GONE;
         Log.d(TAG, "setSuperUser Permissions: Activity is " + (getActivity() == null) );
         mDefaultLayout.setBackgroundColor(isSuperUser
-                ? getActivity().getApplicationContext().getResources().getColor(R.color.navy)
-                : getActivity().getApplicationContext().getResources().getColor(R.color.colorPrimary));
+                ? getResources().getColor(R.color.navy)
+                : getResources().getColor(R.color.colorPrimary));
         mAdminButton.setImageResource(isSuperUser ? R.drawable.save : R.drawable.pencil);
         mClearButton.setVisibility(showForSuperUserOnly);
         mPainButton.setVisibility(showForSuperUserOnly);
