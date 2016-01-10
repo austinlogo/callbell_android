@@ -12,6 +12,7 @@ import com.callbell.callbell.presentation.bed.StaffFragment;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
+import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.presentation.dialogs.RemoteUpdateDialogFragment;
 import com.callbell.callbell.presentation.remoteUpdate.RemoteUpdateActivity;
 import com.callbell.callbell.presentation.station.StationActivity;
@@ -47,6 +48,7 @@ import javax.inject.Singleton;
         LoginActivity.class,
         StationActivity.class,
         RemoteUpdateActivity.class,
+        PlanOfCareInfoDialog.class,
 
         //Fragment
         LoginFragment.class,

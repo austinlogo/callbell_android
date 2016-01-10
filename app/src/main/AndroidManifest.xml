@@ -94,6 +94,14 @@
             android:screenOrientation="landscape"
             android:configChanges="orientation">
         </activity>
+
+        <activity
+            android:name=".presentation.dialogs.PlanOfCareInfoDialog"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation"
+            android:theme="@style/Bea_Theme.AlertDialog">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/poc_info_layout"
+    style="@style/Bea_Theme.AlertDialog"
     android:orientation="vertical"
     android:background="@color/silver"
-
-    style="@style/Bea_Theme.AlertDialog"
-    android:layout_width="match_parent"
+    android:layout_width="700dip"
     android:layout_height="wrap_content"
-    android:minWidth="500dp"
     android:scaleType="fitCenter"
     android:adjustViewBounds="true">
 
-    <TextView
-        style="@style/Bea_Theme.Title"
-        android:padding="@dimen/standard_padding"
-        android:id="@+id/poc_info_title"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/white"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/poc_info_title"
+            android:layout_alignParentLeft="true"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_size"
+            android:padding="@dimen/standard_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/poc_info_dismiss"
+            android:text="@string/back"
+            android:textSize="@dimen/title_size"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/standard_padding"
+            android:background="@drawable/background_button_default"
+            android:layout_weight="6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/poc_info_expanded_name"
@@ -28,6 +47,12 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <VideoView
+        android:id="@+id/poc_info_video"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="300dip"/>
 
     <TextView
         android:id="@+id/poc_info_body"
@@ -44,14 +69,6 @@
         android:padding="@dimen/standard_padding"
         android:layout_weight="6">
 
-        <Button
-            android:id="@+id/poc_info_dismiss"
-            android:text="@string/back"
-            android:textColor="@color/black"
-            android:background="@android:color/transparent"
-            android:layout_weight="6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 

@@ -183,11 +183,17 @@ public class BedModeActivity
 
     @Override
     public void showInfoDialog(String tit, String expandedName, String bod) {
+        Intent i;
+
         if (expandedName == null) {
-            PlanOfCareInfoDialog.newInstance(tit, bod).show(getFragmentManager(), "INFO DIALOG");
+            i = new Intent(this, PlanOfCareInfoDialog.class);
+            i.putExtras(PlanOfCareInfoDialog.newInstance(tit, bod));
         } else {
-            PlanOfCareInfoDialog.newInstance(tit, expandedName, bod).show(getFragmentManager(), "INFO DIALOG");
+            i = new Intent(this, PlanOfCareInfoDialog.class);
+            i.putExtras(PlanOfCareInfoDialog.newInstance(tit, expandedName, bod));
         }
+
+        startActivity(i);
     }
 
     @Override
