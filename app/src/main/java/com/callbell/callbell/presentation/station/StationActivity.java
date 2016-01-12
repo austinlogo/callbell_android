@@ -93,10 +93,8 @@ public class StationActivity
                 } else if (PrefManager.EVENT_SERVER_CONNECTION_CHANGED.equals(intent.getAction())) {
                     boolean isConnected = intent.getBooleanExtra(PrefManager.SERVER_CONNECTED, false);
                     mTitleBarFragment.toggleServerconnectedView(isConnected);
+                    mStationFragment.getDeviceStates();
 
-                    if (isConnected) {
-                        mStationFragment.getDeviceStates();
-                    }
                 } else if (PrefManager.EVENT_TABLET_CONNECTIONS_RECEIVED.equals(intent.getAction())) {
                     String payload = intent.getStringExtra(PrefManager.PAYLOAD);
                     List<String> connectedTablets = JSONUtil.getStringListFromJSONArrayString(payload);
