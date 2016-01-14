@@ -249,7 +249,6 @@ public class PrefManager {
             array.put(i);
         }
 
-        Log.d(TAG, "setPendingTestItems-Array: " + array.toString());
         sp.putString(key, array.toString()).apply();
     }
 

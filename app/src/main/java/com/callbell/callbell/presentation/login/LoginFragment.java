@@ -94,6 +94,7 @@ public class LoginFragment extends Fragment {
 
                 register(prefs.BED_MODE);
                 Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
+                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(newActivity);
             }
         });
@@ -103,6 +104,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 register(prefs.STATION_MODE);
                 Intent newActivity = new Intent(getActivity().getApplicationContext(), StationActivity.class);
+                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(newActivity);
             }
         });
@@ -155,7 +157,8 @@ public class LoginFragment extends Fragment {
 
     public void register(String mod) {
         if (PrefManager.BED_MODE.equals(mod)) {
-           State thisState = new State(
+
+            State thisState = new State(
                     hospital_id.getText().toString(),
                     group_id.getText().toString(),
                     location_id.getText().toString(),
@@ -182,12 +185,13 @@ public class LoginFragment extends Fragment {
                         location_id.getText().toString(),
                         mod
                 ));
+                prefs.setPainRating(0);
             }
 
         } else {
             prefs.setState(State.newBlankInstance(
-                            hospital_id.getText().toString(),
-                            group_id.getText().toString(),
+                    hospital_id.getText().toString(),
+                    group_id.getText().toString(),
                     PrefManager.STATION_SUFFIX,
                     mod)
             );
