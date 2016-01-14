@@ -104,7 +104,7 @@
     <string name="atenolol_description"> A medication in the group of drugs called Beta Blockers.  These medications affect the heart and circulation of the blood.  It is used to treat high blood pressure, chest pain and reduce the chance of heart attacks.  </string>
     <string name="augmentin_description"> An antibiotic used to treat bacteria within the body. Augmentin is frequently used to treat sinus, lung and urine infections. </string>
     <string name="bactrim_description"> An antibiotic used to treat bacteria infections in the body.  Bactrim is often used to treat diarrhea, urine, lung and ear infections. </string>
-    <string name="clindamycin_description">  An antibiotic that is used to treat bacterial infections in the body.  It's commonly used to treat dental problems or infections in the mouth or throat.  </string>
+    <string name="clindamycin_description">  An antibiotic that is used to treat bacterial infections in the body.  It\'s commonly used to treat dental problems or infections in the mouth or throat.  </string>
     <string name="coumadin_description"> An anticoagulant, also known as a blood thinner.  It is used to prevent strokes, blood clots, and prevent heart attacks.  If a patient is taking coumadin, they will have regularly scheduled blood tests to make sure the INR (blood test) is within a predefined range.     </string>
     <string name="compazine_description"> An anti-psychotic and nausea medication.  Compazine is used to treat anxiety.  It can also be used for nausea, vomiting and psychiatric problems.  </string>
     <string name="dilantin_description"> An anticonvulsant medication.  It’s used to slow the activity in the brain to decrease the chances of seizures.   </string>
