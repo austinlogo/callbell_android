@@ -5,11 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -47,16 +43,14 @@ public class BaseActivity extends AppCompatActivity {
 
     protected Menu mOptionsMenu;
 
-    public static MediaPlayer notificationSound;
+    public MediaPlayer notificationSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (notificationSound == null) {
-            notificationSound = MediaPlayer.create(getApplicationContext(), R.raw.notification);
-            notificationSound.setLooping(true);
-        }
+        notificationSound = MediaPlayer.create(getApplicationContext(), R.raw.notification);
+        notificationSound.setLooping(true);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.base_layout);
