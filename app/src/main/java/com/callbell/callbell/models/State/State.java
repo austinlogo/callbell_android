@@ -284,6 +284,10 @@ public class State {
         }
     }
 
+    public boolean isInPain() {
+        return acceptablePain < painRating;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(HOSPITAL_ID + ": " + hospital + ", ");

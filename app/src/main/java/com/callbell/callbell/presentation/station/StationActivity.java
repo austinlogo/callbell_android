@@ -88,6 +88,10 @@ public class StationActivity
                     Log.d(TAG, "TABLET STATE UPDATED");
                     State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
 
+                    if (st.isInPain()) {
+                        playContinualNotificationSound();
+                    }
+
                     mStationFragment.updateList(st);
                     Log.d(TAG, st.toString());
                 } else if (PrefManager.EVENT_SERVER_CONNECTION_CHANGED.equals(intent.getAction())) {

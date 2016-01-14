@@ -173,7 +173,8 @@ public class LoginFragment extends Fragment {
                     prefs.doneMedicationItems(),
                     prefs.allTestItems(),
                     prefs.getAllMedicationItems(),
-                    0,
+                    // TODO: Set some standards for this
+                    10,
                     prefs.painRating());
 
             if (thisState.equals(prefs.getCurrentState())) {
