@@ -246,6 +246,8 @@ public class PlanOfCareFragment extends Fragment {
             return;
         }
 
+        int index = mPlanOfCareTests.getCount() - 1;
+
         String action = otherEditText.getText().toString();
         mPlanOfCareTests.add(action);
         mPlanOfCareTests.setPendingItem(mPlanOfCareTests.getCount() - 1, true);
@@ -325,10 +327,11 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     public void updateState(State st) {
+        overrideNextChiefComplaintSpinnerUpdate = true;
         mState = st;
+
         mListener.savePOCState(mState);
         initListsAndValues();
-        overrideNextChiefComplaintSpinnerUpdate = true;
         setSuperUserPermissions(prefs.isSuperUser());
     }
 
