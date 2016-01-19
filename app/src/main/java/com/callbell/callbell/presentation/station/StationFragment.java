@@ -107,7 +107,6 @@ public class StationFragment
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "LIst item clicked: " + position);
                 MessageReason reason = adapter.getReason(position);
-                mListener.stopSound();
 
                 if (reason == MessageReason.QUIET) {
                     Intent i = new Intent(getActivity(), RemoteUpdateActivity.class);
@@ -121,6 +120,10 @@ public class StationFragment
                 CallBellDialog dialog = CallBellDialog.newInstance(st, reason);
 
                 adapter.updateItem(position, MessageReason.QUIET);
+
+                if (adapter.isPriorityListEmpty()) {
+                    mListener.stopSound();
+                }
 
                 dialog.show(getFragmentManager(), "Call Bell Dialog");
             }

@@ -14,4 +14,4 @@ public class ServerEndpoints {
 
     public static final String SERVER_ENDPOINT_IN_USE = PROD_SERVER_ENDPOINT;
 //    public static final String SERVER_ENDPOINT_IN_USE = EMULATOR_LOCALHOST_SERVER_ENDPOINT;
- }
+}

@@ -60,6 +60,13 @@
 
             <Button
                 style="@style/Bea_Theme.TitleBarButton"
+                android:id="@+id/fragment_title_bar_lang"
+                android:text="@string/english_language_abbrevation"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <Button
+                style="@style/Bea_Theme.TitleBarButton"
                 android:id="@+id/fragment_title_bar_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

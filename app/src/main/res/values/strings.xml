@@ -65,5 +65,6 @@
     <string name="acceptable_pain">Acceptable Pain</string>
     <string name="staff_physician_assistant">Your Physician Assistant is</string>
     <string name="other_cancel">Cancel</string>
+    <string name="english_language_abbrevation">en</string>
 
 </resources>

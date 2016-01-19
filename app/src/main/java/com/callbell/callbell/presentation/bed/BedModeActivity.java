@@ -251,6 +251,13 @@ public class BedModeActivity
         mCallBellsFragment.toggleMode(mSimpleMode);
     }
 
+    @Override
+    public void refresh() {
+        super.refresh();
+        Intent i = new Intent(this, BedModeActivity.class);
+        startActivity(i);
+    }
+
     public void setSuperUserPermissions(boolean isSuperUser) {
         mCallBellContainer.setVisibility(isSuperUser || mSimpleMode ? View.GONE : View.VISIBLE);
     }

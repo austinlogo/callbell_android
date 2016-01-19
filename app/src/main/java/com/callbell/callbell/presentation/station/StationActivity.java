@@ -143,6 +143,13 @@ public class StationActivity
         }
     }
 
+
+    @Override
+    public void refresh() {
+        Intent i = new Intent(this, StationActivity.class);
+        startActivity(i);
+    }
+
     @Override
     public void clearValues() {
         // NOOP
@@ -152,6 +159,8 @@ public class StationActivity
     public void toggleSimpleMode() {
         // NOOP
     }
+
+
 }
 
 

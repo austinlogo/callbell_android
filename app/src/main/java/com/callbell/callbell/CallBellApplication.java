@@ -22,8 +22,6 @@ public class CallBellApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-
-
         new POCValues(this);
         new MedicationValues(this);
     }

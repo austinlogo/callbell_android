@@ -3,6 +3,9 @@ package com.callbell.callbell.presentation.title;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import android.support.v4.content.LocalBroadcastManager;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
@@ -22,6 +26,8 @@ import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
 import com.callbell.callbell.util.PrefManager;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -41,6 +47,9 @@ public class TitleBarFragment extends Fragment {
 
     @Inject
     PrefManager prefs;
+
+    @InjectView(R.id.fragment_title_bar_lang)
+    Button mLangButton;
 
     @InjectView(R.id.fragment_title_mode_button)
     ImageButton mAdminButton;
@@ -64,6 +73,11 @@ public class TitleBarFragment extends Fragment {
     RelativeLayout mDefaultLayout;
 
     private static final String TAG = TitleBarFragment.class.getSimpleName();
+
+    public enum AvailableLocales {
+        EN,
+        ES
+    }
 
 
     public static TitleBarFragment newInstance(int fragmentValue) {
@@ -116,6 +130,7 @@ public class TitleBarFragment extends Fragment {
                 mPainButton.setVisibility(View.GONE);
         }
 
+        mLangButton.setText(getActivity().getApplicationContext().getResources().getConfiguration().locale.getLanguage().toUpperCase());
     }
 
     public void initListeners() {
@@ -159,6 +174,22 @@ public class TitleBarFragment extends Fragment {
             }
         });
 
+        mLangButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String lang = getActivity().getApplicationContext().getResources().getConfiguration().locale.getLanguage().toUpperCase();
+
+                if (AvailableLocales.EN.name().equals(lang)) {
+                    setLocale(AvailableLocales.ES);
+                    mLangButton.setText(AvailableLocales.ES.name());
+                } if (AvailableLocales.ES.name().equals(lang)) {
+                    setLocale(AvailableLocales.EN);
+                    mLangButton.setText(AvailableLocales.EN.name());
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -189,6 +220,29 @@ public class TitleBarFragment extends Fragment {
         setUI();
     }
 
+    private void setLocale(AvailableLocales loc) {
+        Locale newLocale;
+        Resources res = getActivity().getApplicationContext().getResources();
+
+        switch(loc) {
+            case EN:
+                newLocale = Locale.ENGLISH;
+                break;
+            case ES:
+                newLocale = new Locale("es");
+                break;
+            default:
+                newLocale = Locale.ENGLISH;
+        }
+
+        Configuration config = res.getConfiguration();
+        config.setLocale(newLocale);
+        res.updateConfiguration(config, res.getDisplayMetrics());
+
+        mListener.refresh();
+
+    }
+
     public void adminSettings() {
         if (!prefs.isSuperUser()) {
             EnableSuperUserDialog d = EnableSuperUserDialog.newInstance(null);
@@ -213,5 +267,6 @@ public class TitleBarFragment extends Fragment {
     public interface TitleBarListener {
         void clearValues();
         void toggleSimpleMode();
+        void refresh();
     }
 }

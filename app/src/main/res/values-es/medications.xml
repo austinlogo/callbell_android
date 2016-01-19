@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ancef">Ancef</string>
+
+    <string name="aspirin">Aspirin</string>
+
+    <string name="ativan">Ativan</string>
+
+    <string name="avelox">Avelox</string>
+
+    <string name="benadryl">Benadryl</string>
+
+    <string name="cipro">Cipro</string>
+
+    <string name="catapres">Catapres</string>
+
+    <string name="decadron">Decadron</string>
+
+    <string name="digoxin">Digoxin</string>
+
+    <string name="diprivan">Diprivan</string>
+
+    <string name="dilaudid">Dilaudid</string>
+
+    <string name="haldol">Haldol</string>
+
+    <string name="heparin">Heparin</string>
+
+    <string name="lasix">Lasix</string>
+
+    <string name="lopressor">Lopressor</string>
+
+    <string name="lovenox">Lovenox</string>
+
+    <string name="morphine">Morphine</string>
+
+    <string name="motrin">Motrin</string>
+
+    <string name="nitroglycerin">Nitroglycerin</string>
+
+    <string name="percocet">Percocet</string>
+
+    <string name="phenergan">Phenergan</string>
+
+    <string name="plavix">Plavix</string>
+
+    <string name="prednisone">Prednisone</string>
+
+    <string name="reglan">Reglan</string>
+
+    <string name="rocephin">Rocephin</string>
+
+    <string name="solu_medrol">Solu-medrol</string>
+
+    <string name="tylenol">Tylenol</string>
+
+    <string name="toradol">Toradol</string>
+
+    <string name="unasyn">Unasyn</string>
+
+    <string name="valium">Valium</string>
+
+    <string name="vicodin">Vicodin</string>
+
+    <string name="zithromax">Zithromax</string>
+
+    <string name="zofran">Zofran</string>
+
+    <string name="zosyn">Zosyn</string>
+
+    <string name="adenosine">Adenosine</string>
+
+    <string name="amoxicillin">Amoxicillin</string>
+
+    <string name="ambien">Ambien</string>
+
+    <string name="atenolol">Atenolol</string>
+
+    <string name="augmentin">Augmentin</string>
+
+    <string name="bactrim">Bactrim</string>
+
+    <string name="clindamycin">Clindamycin</string>
+
+    <string name="coumadin">Coumadin</string>
+
+    <string name="compazine">Compazine</string>
+
+    <string name="dilantin">Dilantin</string>
+
+    <string name="diltiazem">Diltiazem</string>
+
+    <string name="dopamine">Dopamine</string>
+
+    <string name="epinephrine">Epinephrine</string>
+
+    <string name="fentanyl">Fentanyl</string>
+
+    <string name="flagyl">Flagyl</string>
+
+    <string name="flomax">Flomax</string>
+
+    <string name="keflex">Keflex</string>
+
+    <string name="levaquin">Levaquin</string>
+
+    <string name="linsiopril">Linsiopril</string>
+
+    <string name="narcan">Narcan</string>
+
+    <string name="oxycdone">Oxycdone</string>
+
+    <string name="oxybutynin">Oxybutynin</string>
+
+    <string name="spironolactone">Spironolactone</string>
+
+    <string name="versed">Versed</string>
+
+    <string name="xanax">Xanax</string>
+
+    <string name="albuterol">Albuterol</string>
+
+    <string name="gi_cocktail">GI Cocktail</string>
+
+    <string name="albuterol_description">Esta medicina ayuda a los pacientes a respirar más fácilmente.  Albuterol abre las vías respiratorias pequeñas en los pulmones para permitir que el aire ingrese fácilmente. </string>
+
+    <string name="gi_cocktail_description">Este es un grupo de 2 ó 3 medicamentos.  El paciente los toma para ayudar con dolor y ardor que tienen en su tórax o parte superior de su abdomen.  Los doctores dan estos medicamentos cuando ellos piensan que el paciente está teniendo acidez estomacal o reflujo de ácido.  </string>
+
+    <string name="ancef_description">Un antibiótico de cefalosporinas.  Ancef es utilizado para curar infecciones.  Esta puede también ser utilizada antes o durante una cirugía para prevenir infecciones.  </string>
+
+    <string name="aspirin_description">Utilizado para aliviar dolor, fiebre y reducir inflamación.  Esta también tiene otros usos tales como prevenir un ataque al corazón, derrame cerebral y dolores en el pecho si es recetado por un doctor.</string>
+
+    <string name="ativan_description">Una benzodiazepina utilizado para aliviar la ansiedad.  Ativan también puede ser utilizado para las náuseas, migrañas y convulsiones.  </string>
+
+    <string name="avelox_description">Un antibiótico en el grupo de medicinas llamadas fluoroquinolonas.  La medicina Avelox combate infección en la piel, en la cavidad nasal, pulmones o estómago.</string>
+
+    <string name="benadryl_description">Un antihistamínico utilizado para aliviar las reacciones alérgicas (urticaria &amp; sarpullidos).  Benadryl también es utilizado para ayudar a pacientes a dormir o aliviar migrañas.</string>
+
+    <string name="cipro_description">Un antibiótico del grupo llamado fluoroquinolonas.  Cipro es utilizado para curar infecciones en el cuerpo.  </string>
+
+    <string name="catapres_description">Esto es principalmente utilizado para tratar la presión sanguínea alta.  Catapres también es utilizado para los síntomas de abstinencia de alcohol, nicotina, o sínomas de abstinencia al benzodiazepine.</string>
+
+    <string name="decadron_description">Utilizado para aliviar la inflamación en el cuerpo.  Decadron puede ser tomado para condiciones tales como hinchazón, reacciones alérgicas, asma, problemas en los riñones, condiciones de la piel, o brote de MS (Esclerósis Múltiple).</string>
+
+    <string name="digoxin_description">Utilizado para ayudar a tratar la insuficiencia cardíaca así como también la fibrilación atrial.  Digoxin hace que el corazón lata más fuerte y más regular.  </string>
+
+    <string name="diprivan_description">Utilizado durante procedimientos quirúrgicos cortos o largos como sedante.  Diprivan también es utilizado en la sala de emergencias o la unidad de cuidados intensivos (ER o ICU) mientras los pacientes están respirando por medio de un ventilador.</string>
+
+    <string name="dilaudid_description">Este es un medicamento opioide para el dolor.  Dilaudid es utilizado para aliviar el dolor de niveles severos.   </string>
+
+    <string name="haldol_description">Utilizado principalmente para tratar desórdenes psiquiátricos.  Haldol es utilizado para aliviar los síntomas de náuseas. </string>
+
+    <string name="heparin_description">Un anticoagulante (adelgazador de sangre) el cual previene la formación de coágulos de sangre.  Estos coágulos de sangre se forman en las piernas, brazos, pulmones, corazón o cerebro.  </string>
+
+    <string name="lasix_description">Más comúnmente referida como la “pastilla del agua”.  Lasix es utilizada por pacientes con CHF (Insuficiencia Cardíaca Congestiva), enfermedad del hígado, desórdenes de los riñones y presión alta.   </string>
+
+    <string name="lopressor_description">En la clase llamados bloqueadores beta.  Lopressor es utilizado para tratar el dolor en el pecho, presión alta e insuficiencia cardíaca.  Utilizar este medicamento para bajar la presión puede ayudar a prevenir derrames cerebrales, problemas en los riñones y ataques al corazón.  </string>
+
+    <string name="lovenox_description">Previene la formación de coágulos de sangre.  Lovenox es utilizado para tratar o prevenir trombosis de vena profunda  (DVT) y coágulos de sangre en los pulmones (embolia pulmonar).   </string>
+
+    <string name="morphine_description">Un medicamento narcótico utilizado para dolor moderado o severo.  Morfina puede ser tomada oralmente, por medio de un catéter intravenoso o como una inyección en el músculo.   </string>
+
+    <string name="motrin_description">Un NSAID (droga anti-inflamatoria no esteroide) utilizado para tratar el dolor.  Motrin también reduce la inflamación y fiebre.   </string>
+
+    <string name="nitroglycerin_description">Un nitrato utilizado para prevenir el dolor en el pecho (angina) el cual ocurre cuando el corazón no recibe suficiente sangre.  Nitroglycerina abre los vasos sanguíneos para facilitar que la sangre circule por el cuerpo.  </string>
+
+    <string name="percocet_description">Un medicamento opioide para el dolor con los dos acetaminofeno (tylenol) y oxycodone.  Percocet es utilizado para tratar el dolor moderado a severo.</string>
+
+    <string name="phenergan_description">Un medicamento utilizado para ayudar a tratar y prevenir las náuseas y vómitos.  Phenergan también puede ser utilizado para ayudar a dormir o con síntomas de alergia (ex. Sarpullido o picazón). </string>
+
+    <string name="plavix_description">Este medicamento es un adelgazador de sangre.  Plavix es primordialmente utilizado para prevenir un derrame cerebral, ataque al corazón, y otros problemas cardíacos. </string>
+
+    <string name="prednisone_description">Un esteroide que ayuda con la inflamación.  Prednisone es utilizado para tratar la artritis, problemas de respiración, o reacciones alérgicas.  </string>
+
+    <string name="reglan_description">Un medicamento que ayuda a que el estómago funcione mejor.  Reglan es también utilizado para la acidez estomacal o náuseas.  </string>
+
+    <string name="rocephin_description">Un antibiótico cefalosporinas.  Rocephin es utilizado para tratar un amplio rango de infecciones dentro del cuerpo.   </string>
+
+    <string name="solu_medrol_description">Un esteroide el cual previene la hinchazón.  Solu Medrol es utilizado para tratar la artritis, inflamación de los intestinos, estómago, pulmones y problemas de alergias.     </string>
+
+    <string name="tylenol_description">Utilizado para tratar el dolor y fiebre.  </string>
+
+    <string name="toradol_description">Un NSAID (droga anti-inflamatoria no-esteroide) la cual alivia el dolor e hinchazón en el cuerpo.   </string>
+
+    <string name="unasyn_description">Un antibiótico que es utilizado para combatir bacteria en el cuerpo.  Unasyn es dado a la sangre por medio de un catéter intravenoso.  </string>
+
+    <string name="valium_description">Un benzodiazepine, utilizado para calmar la ansiedad.  Valium también es utilizado para tratar la abstinencia de alcohol, y espasmos musculares.</string>
+
+    <string name="vicodin_description">Un medicamento opioide.  Vicodin es hecho con los dos tylenol (acetaminofeno) e hydrocodone.  Utilizado para tratar dolores leves a severos.     </string>
+
+    <string name="zithromax_description">Un antibiótico utilizado para curar infecciones. Zithromax es utilizado para curar infecciones en los pulmones, piel, y oído así como también enfermedad inflamatoria de la pélvica (PID).</string>
+
+    <string name="zofran_description">Utilizado para prevenir o tratar náuseas y vómitos.</string>
+
+    <string name="zosyn_description">Antibiótico utilizado para curar infecciones en el cuerpo.  Zosyn es comúnmente utilizado para las infecciones de orina, articulaciones, piel y pulmones (neumonía). </string> 
+
+    <string name="adenosine_description"> Un medicamento anti arrítmico utilizado para tratar los latidos del corazón irregulares.  Adenosine es también utilizado para disminuir el ritmo del corazón y convertirlo a un ritmo normal.   </string>
+
+    <string name="amoxicillin_description">Un antibiótico utilizado para curar infecciones bacteriales.  Este medicamento cura infecciones en los pulmones, garganta, piel, nariz, oído y orina.   </string>
+
+    <string name="ambien_description"> Un medicamento en la clase de drogas sedantes.  Es utilizado para ayudar a las personas que tienen dificultad para dormir.    </string>
+
+    <string name="atenolol_description"> Un medicamento en el grupo de drogas llamados Bloquesdores Beta.  Estos medicamentos afectan el corazón y la circulación de la sangre.  Es utilizado para tratar la presión alta, dolor de pecho y reducir la posibilidad de ataques al corazón.  </string>
+
+    <string name="augmentin_description"> Un antibiótico utilizado para curar bacteria dentro del cuerpo. Augmentin es frecuentemente utilizado para curar infecciones en los senos nasales, pulmones y orina. </string>
+
+    <string name="bactrim_description"> Un antibiótico utilizado para curar infecciones en el cuerpo.  Bactrim es utilizado frecuentemente para curar infecciones de diarrea, orina, pulmones y oído. </string>
+
+    <string name="clindamycin_description">  Un antibiótico que es utilizado para curar infecciones bacteriales en el cuerpo.  Es utilizada comúnmente para curar problemas dentales o infecciones en la boca o garganta.  </string>
+
+    <string name="coumadin_description"> Un anticoagulante, también conocido como adelgazador de sangre.  Es utilizado para prevenir derrames cerebrales, coágulos de sangre, y prevenir ataques al corazón.  Si un paciente está tomando cumadin, ellos tendrán análisis de sangre programados regularmente para asegurar que el INR (prueba de sangre) está dentro del rango predefinido.     </string>
+
+    <string name="compazine_description"> Un anti-psicótico y medicamento para las náuseas.  Compazine es utilizado para tratar la ansiedad.  Esta también puede ser utilizada para náuseas, vómitos y problemas psiquiátricos.  </string>
+
+    <string name="dilantin_description"> Un medicamento anticonvulsivo.  Es utilizado para reducir la actividad en el cerebro para disminuir la posibilidad de convulsiones.   </string>
+
+    <string name="diltiazem_description"> Un medicamento bloqueador de los canales de calcio.  Es utilizado para tratar la presión alta, dolor en el pecho y ritmo cardíacos anormales tales como fibrilación atrial.  </string>
+
+    <string name="dopamine_description"> Un medicamento que ayuda a mejorar la fortaleza de bombeo del corazón.  Esto ayuda al cuerpo a recibir más circulación de la sangre y oxigeno.  Es utilizado para tratar presión sanguínea baja, problemas en los riñones, problemas cardíacos, u otras condiciones.  </string>
+
+    <string name="epinephrine_description"> Un medicamento utilizado para tratar la presión sanguínea baja, silbido en el pecho, y reacciones alérgicas.  Es utilizado en el departamento de emergencia por doctores y enfermeras.  Algunos pacientes también llevan consigo un “lapicero epi” en caso de tener una reacción alérgica a picaduras de mosquitos o alimentos. </string>
+
+    <string name="fentanyl_description"> Un medicamento narcótico utilizado para tratar dolor medio o severo.    </string>
+
+    <string name="flagyl_description">Un antibiótico utilizado para combatir infecciones en el cuerpo.    </string>
+
+    <string name="flomax_description"> Un medicamento que facilita el orinar.  Este lo hace ayudando a relajar los músculos en la vejiga y la próstata.  Es frecuentemente utilizado para piedras en los riñones o próstatas engrandecidas (una glándula cerca de la vejiga). </string>
+
+    <string name="keflex_description"> En el grupo de drogas llamadas cefalosporinas.  Este es un antibiótico utilizado para tratar infecciones en el cuerpo.  Los pacientes toman Keflex para curar infecciones en la piel, tracto urinario, infecciones respiratorias y otros tipos de infecciones.  </string>
+
+    <string name="levaquin_description"> Un antibiótico en el grupo de drogas llamadas Floroquinolonas.  Ellas son utilizadas para combatir infecciones en el cuerpo.  Frecuentemente, levaquin es utilizado para tratar bronquitis, neumonía, infecciones en los riñones, o infecciones severas en la sangre. </string>
+
+    <string name="linsiopril_description"> Un medicamento en la clase de drogas llamadas Inhibidores Ace.  Este medicamento es primordialmente utilizado para tratar la presión alta.  </string>
+
+    <string name="narcan_description"> Un medicamento utilizado en pacientes que han tomado mucha medicina opioide.   Esta revierte los efectos del opioide.   </string>
+
+    <string name="oxycdone_description"> Un medicamento en la clase de drogas llamadas opioides.  Oxycodone es utlizado para tratar dolor leve o severo.  </string>
+
+    <string name="oxybutynin_description"> Utilizada comúnmente para espasmos musculares de la vejiga.  Este medicamento ayuda a los pacientes a orinar normalmente.  </string>
+
+    <string name="spironolactone_description"> Llamado comúnmente la “pastilla de agua”.  Es diferente de otras “pastillas de agua” porque protege las células importantes llamadas potasio de salir del cuerpo cuando el paciente orina.  Es utilizado principalmente por pacientes con problemas del corazón (insuficiencia cardíaca congestiva).</string>
+
+    <string name="versed_description"> Una medicina en la clase llamada benzodiazepinas.  Versed es utilizada como sedante durante muchos procedimientos médicos cortos.  </string>
+
+    <string name="xanax_description"> En la clase de medicinas llamadas benzodiazepinas.  Xanax es utilizado para tratar la ansiedad, depresión y desórdenes de pánico.</string> 
+
+    <string name="ancef_expanded">cefazolin</string>
+
+    <string name="aspirin_expanded">acetylsalicylic acid</string>
+
+    <string name="ativan_expanded">lorazepam</string>
+
+    <string name="avelox_expanded">moxifloxacin</string>
+
+    <string name="benadryl_expanded">diphenhydramine</string>
+
+    <string name="cipro_expanded">ciprofloxacin</string>
+
+    <string name="catapres_expanded">clonidine</string>
+
+    <string name="decadron_expanded">dexamethasone</string>
+
+    <string name="digoxin_expanded">lanoxin</string>
+
+    <string name="diprivan_expanded">propofol</string>
+
+    <string name="dilaudid_expanded">hydromorphone</string>
+
+    <string name="haldol_expanded">haloperidol</string>
+
+    <string name="heparin_expanded">blood thinner</string>
+
+    <string name="lasix_expanded">congestive heart failure</string>
+
+    <string name="lopressor_expanded">metoprolol</string>
+
+    <string name="lovenox_expanded">pulmonary embolisms</string>
+
+    <string name="motrin_expanded">nonsteroidal anti-inflammatory drug</string>
+
+    <string name="nitroglycerin_expanded">angina</string>
+
+    <string name="percocet_expanded">tylenol</string>
+
+    <string name="phenergan_expanded">promethazine</string>
+
+    <string name="plavix_expanded">clopidogrel</string>
+
+    <string name="reglan_expanded">metoclopramide</string>
+
+    <string name="rocephin_expanded">ceftriaxone</string>
+
+    <string name="solu_medrol_expanded">methylprednisolone</string>
+
+    <string name="tylenol_expanded">acetaminophen</string>
+
+    <string name="toradol_expanded">nonsteroidal anti-inflammatory drug</string>
+
+    <string name="unasyn_expanded">ampicillin and sulbactam</string>
+
+    <string name="valium_expanded">diazepam</string>
+
+    <string name="vicodin_expanded">tylenol</string>
+
+    <string name="zithromax_expanded">PID</string>
+
+    <string name="zofran_expanded">ondansetron</string>
+
+    <string name="zosyn_expanded">piperacillin &amp; tazobactam</string> 
+
+    <string name="adenosine_expanded">Adenocard</string>
+
+    <string name="amoxicillin_expanded">amoxil</string>
+
+    <string name="ambien_expanded">zolpidem</string>
+
+    <string name="atenolol_expanded">Tenormin</string>
+
+    <string name="augmentin_expanded">amoxicillin &amp; clavulanate potassium</string>
+
+    <string name="bactrim_expanded">sulfamethoxazole &amp; trimethoprim</string>
+
+    <string name="clindamycin_expanded">Cleocin HCl</string>
+
+    <string name="coumadin_expanded">warfarin</string>
+
+    <string name="compazine_expanded">prochlorperazine</string>
+
+    <string name="dilantin_expanded">phenytoin</string>
+
+    <string name="diltiazem_expanded">Cardizem</string>
+
+    <string name="dopamine_expanded">Intropin</string>
+
+    <string name="epinephrine_expanded">Adrenalin</string>
+
+    <string name="fentanyl_expanded">Sublimaze</string>
+
+    <string name="flagyl_expanded">metronidazole</string>
+
+    <string name="flomax_expanded">Flomax</string>
+
+    <string name="keflex_expanded">cephalexin</string>
+
+    <string name="levaquin_expanded">Levofloxacin</string>
+
+    <string name="linsiopril_expanded">Prinivil</string>
+
+    <string name="narcan_expanded">Naloxone</string>
+
+    <string name="oxycdone_expanded">Oxycontin</string>
+
+    <string name="oxybutynin_expanded">Ditropan XL</string>
+
+    <string name="spironolactone_expanded">Aldactone</string>
+
+    <string name="versed_expanded">Midazolam</string>
+
+    <string name="xanax_expanded">Alprazolam</string>
+
+
+</resources>

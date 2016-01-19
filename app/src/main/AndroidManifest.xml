@@ -82,7 +82,7 @@
             android:name=".presentation.bed.BedModeActivity"
             android:label="@string/title_activity_bed_mode"
             android:screenOrientation="landscape"
-            android:configChanges="orientation">
+            android:configChanges="orientation|locale">
         </activity>
         <activity android:name=".presentation.BaseActivity"
             android:screenOrientation="landscape"

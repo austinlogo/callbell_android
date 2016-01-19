@@ -13,6 +13,8 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
+import com.callbell.callbell.models.Station.PriorityList;
+import com.callbell.callbell.models.Station.StateItemWrapper;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
@@ -26,21 +28,23 @@ public class StationItemAdapter extends BaseAdapter {
 
     private static final String TAG = StationItemAdapter.class.getSimpleName();
     private Context context;
-    private List<State> stateList;
-    private List<MessageReason> stateListCallSettings;
+    private PriorityList<StateItemWrapper> stateList;
+//    private List<MessageReason> stateListCallSettings;
     private static LayoutInflater mInflater = null;
     private MessageRouting mMessageRouting;
 
     public StationItemAdapter(Context cxt, List<State> sl, MessageRouting routing) {
 
         context = cxt;
-        stateList = sl;
+        stateList = new PriorityList<>();
+//        stateList = sl;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        stateListCallSettings = new ArrayList<>();
+//        stateListCallSettings = new ArrayList<>();
         mMessageRouting = routing;
 
-        for (int i = 0; i < sl.size();i++) {
-            stateListCallSettings.add(MessageReason.QUIET);
+        for (State st: sl) {
+            stateList.add(new StateItemWrapper(st, MessageReason.QUIET));
+//            stateListCallSettings.add(MessageReason.QUIET);
         }
     }
 
@@ -51,7 +55,7 @@ public class StationItemAdapter extends BaseAdapter {
 
     @Override
     public State getItem(int position) {
-        return stateList.get(position);
+        return stateList.get(position).getState();
     }
 
     @Override
@@ -74,25 +78,25 @@ public class StationItemAdapter extends BaseAdapter {
         ImageButton painRatingButton = (ImageButton) convertView.findViewById(R.id.station_item_image_button);
         View connectionIndicator = convertView.findViewById(R.id.station_item_state_indicator);
 
-        locationField.setText(stateList.get(position).getLocation());
-        physicianField.setText(stateList.get(position).getPhysician());
-        nurseField.setText(stateList.get(position).getNurse());
-        chiefComplaintField.setText(stateList.get(position).getChiefComplaint());
-        painRatingField.setText(String.valueOf(stateList.get(position).getPainRating()));
+        locationField.setText(stateList.get(position).getState().getLocation());
+        physicianField.setText(stateList.get(position).getState().getPhysician());
+        nurseField.setText(stateList.get(position).getState().getNurse());
+        chiefComplaintField.setText(stateList.get(position).getState().getChiefComplaint());
+        painRatingField.setText(String.valueOf(stateList.get(position).getState().getPainRating()));
 
-        connectionIndicator.setBackgroundColor(stateList.get(position).isConnected()
+        connectionIndicator.setBackgroundColor(stateList.get(position).getState().isConnected()
                 ? context.getResources().getColor(R.color.colorPrimary)
                 : context.getResources().getColor(R.color.red));
 
-        if (stateListCallSettings.get(position) == MessageReason.PAIN) {
+        if (stateList.get(position).getMessageReason() == MessageReason.PAIN) {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.pain_color));
-        } else if (stateListCallSettings.get(position) == MessageReason.RESTROOM) {
+        } else if (stateList.get(position).getMessageReason() == MessageReason.RESTROOM) {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.restroom_color));
-        } else if (stateListCallSettings.get(position) == MessageReason.BLANKET) {
+        } else if (stateList.get(position).getMessageReason() == MessageReason.BLANKET) {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.blanket_color));
-        } else if (stateListCallSettings.get(position) == MessageReason.FOOD) {
+        } else if (stateList.get(position).getMessageReason() == MessageReason.FOOD) {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.food_color));
-        } else if (stateListCallSettings.get(position) == MessageReason.HELP) {
+        } else if (stateList.get(position).getMessageReason() == MessageReason.HELP) {
             convertView.setBackgroundColor(context.getResources().getColor(R.color.help_color));
         } else {
             convertView.setBackgroundColor(0);
@@ -101,7 +105,7 @@ public class StationItemAdapter extends BaseAdapter {
         painRatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMessageRouting.sendMessage(stateList.get(position).getLocation(), PrefManager.CATEGORY_RATE_PAIN, MessageReason.RATE_PAIN);
+                mMessageRouting.sendMessage(stateList.get(position).getState().getLocation(), PrefManager.CATEGORY_RATE_PAIN, MessageReason.RATE_PAIN);
             }
         });
 
@@ -115,10 +119,10 @@ public class StationItemAdapter extends BaseAdapter {
 
         int index = getPosition(st);
         if (index < 0) {
-            stateList.add(new State(st));
-            stateListCallSettings.add(MessageReason.QUIET);
+            stateList.add(new StateItemWrapper(new State(st), MessageReason.QUIET));
         } else {
-            stateList.set(index, new State(st));
+            MessageReason reason = stateList.get(index).getMessageReason();
+            stateList.set(index, new StateItemWrapper(st, reason));
         }
 
         notifyDataSetChanged();
@@ -131,8 +135,8 @@ public class StationItemAdapter extends BaseAdapter {
             Log.d(TAG, "Item is not in the list");
             // TODO: implement
         } else {
-            stateList.set(index, new State(st));
-            stateListCallSettings.set(index, reason);
+            stateList.set(index, new StateItemWrapper(st, reason));
+            reorderList(index, reason);
         }
 
         notifyDataSetChanged();
@@ -140,13 +144,24 @@ public class StationItemAdapter extends BaseAdapter {
     }
 
     public void updateItem(int position, MessageReason reason) {
-        stateListCallSettings.set(position, reason);
+
+        stateList.get(position).setMessageReason(reason);
+        reorderList(position, reason);
+
         notifyDataSetChanged();
+    }
+
+    private void reorderList(int position, MessageReason reason) {
+        if (reason.equals(MessageReason.QUIET)) {
+            stateList.setPriorityState(position, PriorityList.PriorityState.LOW);
+        } else {
+            stateList.setPriorityState(position, PriorityList.PriorityState.HIGH);
+        }
     }
 
     private int getPosition(State st) {
         for (int index = 0; index < stateList.size(); index++) {
-            if (st.equals(stateList.get(index))) {
+            if (st.equals(stateList.get(index).getState())) {
                 return index;
             }
         }
@@ -154,25 +169,29 @@ public class StationItemAdapter extends BaseAdapter {
     }
 
     public MessageReason getReason(int position) {
-        return stateListCallSettings.get(position);
+        return stateList.get(position).getMessageReason();
     }
 
     public void updateConnectedStatuses(List<String> connectedTablets) {
-        for (State state : stateList) {
-            state.setConnected(connectedTablets.contains(state.getTabletName()));
+        for (StateItemWrapper item : stateList) {
+            item.getState().setConnected(connectedTablets.contains(item.getState().getTabletName()));
         }
 
         notifyDataSetChanged();
     }
 
     public void updateConnectedStatus(String tabletName, boolean connectedStatus) {
-        for (State state : stateList) {
-            if (state.getTabletName().equals(tabletName)) {
-                state.setConnected(connectedStatus);
+        for (StateItemWrapper item : stateList) {
+            if (item.getState().getTabletName().equals(tabletName)) {
+                item.getState().setConnected(connectedStatus);
 
                 notifyDataSetChanged();
                 return;
             }
         }
+    }
+
+    public boolean isPriorityListEmpty() {
+        return stateList.getPriorityItems().size() == 0;
     }
 }

@@ -86,7 +86,14 @@ public class LoginActivity
     }
 
     @Override
+    public void refresh() {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+    }
+
+    @Override
     public void register() {
+        super.refresh();
         if (SocketService.mService != null) {
             mMessage.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
             mMessage.retrieveState(prefs.getCurrentState());

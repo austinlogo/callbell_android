@@ -21,6 +21,8 @@ import android.widget.Button;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.data.MedicationValues;
+import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
@@ -163,5 +165,13 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public Intent refreshIntent() {
+        return new Intent(getApplicationContext(), getCallingActivity().getClass());
+    }
 
+
+    public void refresh() {
+        new POCValues(this);
+        new MedicationValues(this);
+    }
 }
