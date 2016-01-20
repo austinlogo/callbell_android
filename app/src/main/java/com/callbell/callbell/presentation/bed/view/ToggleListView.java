@@ -43,9 +43,7 @@ public class ToggleListView extends LinearLayout {
     PlanOfCareListViewAdapter patientAdapter;
 
     public static PlanOfCareCheckBoxAdapter getAdminAdapter(Activity context, List<String> allItems, String selectedChiefComplaint) {
-        List<String> initialAdminValues = (!allItems.isEmpty() )
-                ? allItems
-                : new ArrayList<>(POCValues.pocMap.get(selectedChiefComplaint));
+        List<String> initialAdminValues = new ArrayList<>(POCValues.pocMap.get(selectedChiefComplaint));
         return new PlanOfCareCheckBoxAdapter(context, R.layout.item_ternary_checkbox, initialAdminValues);
     }
 

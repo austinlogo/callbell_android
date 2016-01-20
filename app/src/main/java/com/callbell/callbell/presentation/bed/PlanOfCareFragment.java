@@ -149,10 +149,7 @@ public class PlanOfCareFragment extends Fragment {
 
         //Inflate the Medication List
         List<String> savedMeds = mState.getAllMedications();
-        List<String> initialAdminMedicationValues = (savedMeds != null && savedMeds.size() > 0)
-                ? savedMeds
-                : new ArrayList<>(MedicationValues.medicationMap.keySet());
-
+        List<String> initialAdminMedicationValues = new ArrayList<>(MedicationValues.medicationMap.keySet());
         mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(), R.layout.item_ternary_checkbox, initialAdminMedicationValues));
         mPlanOfCareMedications.setTitle(R.string.poc_current_medications_title);
         mPlanOfCareMedications.setCheckedItems(mState.getPendingMedications(), mState.getDoneMedications());
