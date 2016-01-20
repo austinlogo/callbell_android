@@ -147,6 +147,8 @@ public class StationFragment
 
         mListener = null;
 
+        R.string.abdominal_pain;
+
         //Needed to Fix Bug in V4 Fragment Implementation
         if (sChildFragmentManagerField != null) {
             try {

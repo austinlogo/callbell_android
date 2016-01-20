@@ -255,6 +255,7 @@ public class BedModeActivity
     public void refresh() {
         super.refresh();
         Intent i = new Intent(this, BedModeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 

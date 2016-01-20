@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abdominal_pain">Dolor Abdominal</string>
+    <string name="arm_pain">Dolor en el Brazo</string>
+    <string name="asthma">Asma</string>
+    <string name="urinalysis">Urinálisis</string>
+    <string name="iv">IV</string>
+    <string name="pain_medication">Medicamento para Aliviar el Dolor</string>
+    <string name="nausea_medication">Medicamento para las Náuseas</string>
+    <string name="ct_scan">Tomografía Computarizada</string>
+    <string name="ultrasound">Ecografía</string>
+    <string name="x_ray">Rayos-X</string>
+    <string name="urology_consult">Consulta de Urología</string>
+    <string name="headache">Dolor de Cabeza</string>
+    <string name="medical_evaluation">Evaluación Médica</string>
+    <string name="cbc">CBC</string>
+    <string name="bmp">BMP</string>
+    <string name="inr">INR</string>
+    <string name="lactic_acid">Acido Láctico</string>
+    <string name="iv_therapy">Terapia por un catéter intravenoso</string>
+    <string name="iv_fluid">Fluídos por un catéter intravenoso</string>
+    <string name="mri">MRI</string>
+    <string name="neurosurgery_consult">Consulta en Neurocirugía</string>
+    <string name="neurology_consult">Consulta en Neurología</string>
+    <string name="leg_pain">Dolor en la Pierna</string>
+    <string name="cmp">CMP</string>
+    <string name="esr">ESR</string>
+    <string name="d_dimer">Dímero D</string>
+    <string name="c_reactive_protein">Proteína C Reactiva</string>
+    <string name="uric_acid">Acido Urico</string>
+    <string name="ultrasound__">Ecografía  </string>
+    <string name="pregnancy_problems">Problemas del Embarazo</string>
+    <string name="hcg">HCG</string>
+    <string name="pelvic_exam">Examinación Pélvica</string>
+    <string name="pelvic_cultures">Cultivos Pélvicos</string>
+    <string name="blood_cultures">Cultivos de Sangre</string>
+    <string name="obgyn_consult">Consulta de OBGYN</string>
+    <string name="rectal_bleeding">Sangrado Rectal</string>
+    <string name="type_screen">Tipo y evaluación</string>
+    <string name="blood_transfusion">Transfusión de Sangre</string>
+    <string name="chest_x_ray">Rayos X del Tórax</string>
+    <string name="shortness_of_breath">Falta de Aire</string>
+    <string name="ekg">EKG</string>
+    <string name="oxygen">Oxígeno</string>
+    <string name="troponin">Troponina</string>
+    <string name="bnp">BNP</string>
+    <string name="blood_gas">Gases en la Sangre</string>
+    <string name="iv_placement">Colocación de un Catéter Intravenoso</string>
+    <string name="echo">ECHO</string>
+    <string name="nebulizer_treatment">Tratamiento de Nebulización</string>
+    <string name="peak_flow_meter">Medidor de Capacidad Pulmonar Máxima</string>
+    <string name="inpatient_consult">Consulta de Paciente Interno</string>
+    <string name="slurred_speak">Habla Mal Articulada</string>
+    <string name="ammonia">Amoníaco</string>
+    <string name="finger_stick">Prueba de Azúcar con Pinchazo en el Dedo</string>
+    <string name="swallow_screen">Evaluación de Tragar</string>
+    <string name="testicular_pain">Dolor Testicular</string>
+    <string name="foley_catheter">Sonda de Foley</string>
+    <string name="vaginal_bleeding">Sangrado Vaginal</string>
+    <string name="altered_mental_status">Estado Mental Alterado</string>
+    <string name="ethanol">Etanol</string>
+    <string name="lipase">Lipasa</string>
+    <string name="amylase">Amilasa</string>
+    <string name="flu_screening">Evaluación de Influenza</string>
+    <string name="cat_scan">Escaneo Computarizado</string>
+    <string name="vomiting_blood">Vomitando Sangre</string>
+    <string name="antacid_medication">Medicamento Antiácido</string>
+    <string name="gi_consult">Consulta con Gastroenterología</string>
+    <string name="nausea_vomiting">Náuseas/Vómitos</string>
+    <string name="medical_evaluation_inr">Evaluación Médica INR</string>
+    <string name="stool_culture">Cultivo de Heces</string>
+    <string name="lft">LFT’s</string>
+    <string name="laceration">Laceración</string>
+    <string name="tetanus_shot">Vacuna contra el Tétano</string>
+    <string name="stitches">Sutura</string>
+    <string name="eye_injury">Daño a los Ojos</string>
+    <string name="eye_drops">Gotas para los Ojos</string>
+    <string name="eye_irrigation">Irrigación en los Ojos</string>
+    <string name="antibiotics">Antibióticos</string>
+    <string name="leg_swelling">Hinchazón en las Piernas</string>
+    <string name="facial_swelling">Hinchazón Facial</string>
+    <string name="allergic_reaction">Reacción Alérgica</string>
+    <string name="monitor">Monitoreo</string>
+    <string name="palpitations">Palpitaciones</string>
+    <string name="echocardiogram">Ecocardiograma (EKG)</string>
+    <string name="pt">PT</string>
+    <string name="ptt_inr">PTT/INR</string>
+    <string name="repeat_troponin">Repetir Troponina</string>
+    <string name="stress_test">Prueba de Estrés</string>
+    <string name="holter_monitor">Monitoreo de Holter</string>
+    <string name="cardiology_consult">Consulta en Cardiología</string>
+    <string name="rash">Sarpullido</string>
+    <string name="iv_insertion">Inserción de IV</string>
+    <string name="overdose">Sobredosis</string>
+    <string name="acetaminophen_level">Nivel de Acetaminofeno</string>
+    <string name="aspirin_level">Nivel de Aspirina</string>
+    <string name="social_work_consult">Consulta con el Asistente Social</string>
+    <string name="abnormal_labs">Análisis de Laboratorio Anormales</string>
+    <string name="tsh">TSH</string>
+    <string name="crp">CRP</string>
+    <string name="back_pain">Dolor de Espalda</string>
+    <string name="blood_in_urine">Sangre en la Orina</string>
+    <string name="flank_pain">Dolor en el Costado</string>
+    <string name="chest_pain">Dolor en el Pecho</string>
+    <string name="general_surgery">Consulta en Cirugía General</string>
+    <string name="back">Espalda</string>
+    <string name="visual_exam">Examen de Agudeza Visual</string>
+    <string name="assault">Asalto</string>
+    <string name="blood_sugar_problem">Problema de Azúcar en la Sangre</string>
+    <string name="burn">Quemadura</string>
+    <string name="diarrhea">Diarrea</string>
+    <string name="eye_problems">Problemas en los Ojos</string>
+    <string name="fall">Caída</string>
+    <string name="fever">Fiebre</string>
+    <string name="ingestion">Ingestión</string>
+    <string name="pediatric_fever">Fiebre Pediátrica</string>
+    <string name="psychiatric_behavioral">Psiquiátrico/Comportamiento</string>
+    <string name="rapid_heart_rate">Ritmo Rápido en el Corazón</string>
+    <string name="respiratory_failure">Insuficiencia Respiratoria</string>
+    <string name="seizure">Convulsión</string>
+    <string name="stroke_cva">Derrame Cerebral/CVA</string>
+    <string name="trauma">Trauma</string>
+    <string name="unresponsive">Inconsciente</string>
+    <string name="urinary_tract_infection">Infección al Tracto Urinario</string>
+    <string name="vaginal_discharge">Flujo Vaginal</string>
+    <string name="valproic_acid">Acido Valproico</string>
+    <string name="opthalmologist_consult">Consulta con Oftalmología</string>
+    <string name="rapid_strep">Prueba Rápida de Estreptococo</string>
+    <string name="encourage_nutrition">Alentar Nutrición</string>
+    <string name="orthopedics_consult">Consulta con Ortopedia</string>
+    //TEST DESCRIPTIONS
+    <string name="medical_evaluation_description">
+    Esta es la primera evaluación realizada por un doctor o enfermera.  Se realizan una serie de pruebas para revisar el cuerpo por cualquier anormalidad.  El doctor o la enfermera le preguntará acerca de los medicamentos tomados y tratar de averiguar el por qué no se siente bien.
+    </string>
+    <string name="cbc_description">
+    Esta prueba de sangre es utilizada para evaluar la salud en general.  Es realizada durante un examen por un doctor o enfermera para revisar si hay infección, niveles de sangre bajos, y otras enfermedades..
+    </string>
+    <string name="valproic_acid_description">
+    Esta prueba de sangre mide la cantidad de Acido Valproico en la sangre.  El ácido Valproico es un medicamento anticonvulsivo utilizado en pacientes que son propensos a convulsiones.
+    </string>
+    <string name="blood_cultures_description">
+    Sangre es extraída de dos venas diferentes para evaluar por infección en la sangre.  La sangre es enviada al laboratorio para evaluación.  Los resultados positivos o negativos no estarán disponibles el mismo día, debido a que toma tiempo a que crezca la bacteria en la sangre.
+    </string>
+    <string name="obgyn_consult_description">
+    Un OBGYN es un doctor que ayuda a mujeres jóvenes y mayores.  Ellos curan enfermedades en el sistema reproductivo de una mujer y también asisten en un parto.
+    </string>
+    <string name="pelvic_cultures_description">
+    Este procedimiento es realizado por un doctor o enfermera especializada.  Ellos realizan un examen por la vagina para evaluar si hay sangrado, infección o razones por las cuales una mujer tenga dolor.
+    </string>
+    <string name="bmp_description">
+    Esta prueba de sangre es utilizada para evaluar la salud en general.  Evalúa los riñones, el azúcar en la sangre y electrolitos importantes en el cuerpo.
+    </string>
+    <string name="antibiotics_description">
+    Este medicamento mata la bacteria en el cuerpo.  Los doctores recetan este medicamento a los pacientes que tienen infecciones como neumonía o infección urinaria.
+    </string>
+    <string name="obgyn_description">
+    OBGYN son las siglas de los doctores especialistas en obstetricia y ginecología.  Estos doctores tratan y cuidan al sistema reproductivo de las mujeres, embarazos y partos.
+    </string>
+    <string name="inr_description">
+    Esta prueba de sangre provee información en la rapidez de coagulación de un paciente.  Si un paciente está tomando un adelgazador de sangre, el doctor revisará esta prueba de sangre para asegurarse que la medicina está en la dosis correcta.
+    </string>
+    <string name="stitches_description">
+    Sutura también es conocido como puntos.  Esto es utilizado para reparar cortes que no sanarán a menos que la piel sea juntada por un largo período de tiempo.
+    </string>
+    <string name="bnp_description">
+    Esta prueba de sangre es realizada para ver si el corazón del paciente está funcionando correctamente.  Usualmente es realizada cuando un paciente ha ganado peso, presenta piernas hinchadas, tiene dificultad para respirar o tiene insuficiencia cardíaca congestiva.
+    </string>
+    <string name="visual_exam_description">
+    Una prueba de agudeza visual es realizada para conocer qué tan bien puede ver el paciente.  Siempre es realizada cuando un paciente tiene daño a los ojos o está teniendo problemas de visión.  El paciente se encuentra a 20 pies de un papel con letras (Tabla de Snellen).  El paciente lee las letras más pequeñas que pueda para obtener un puntaje de agudeza visual.
+    </string>
+    <string name="acetaminophen_level_description">
+    Esta prueba de sangre mide cuánto Acetaminofeno está en el cuerpo.  Esta medicina también es conocida como Tylenol.  Es utilizada comúnmente para aliviar el dolor, pero es peligrosa si un paciente toma mucho.
+    </string>
+    <string name="aspirin_level_description">
+    Esta prueba de sangre mide cuánta aspirina está en el cuerpo.  Aspirina tiene muchos beneficios para aliviar el dolor y condiciones del corazón pero también puede ser peligrosa si un paciente toma mucha cantidad.
+    </string>
+    <string name="rapid_strep_description">
+    Una prueba rápida de faringitis estreptocócica evalúa la existencia de una bacteria en la parte de atrás de la garganta.  Esta bacteria causa comúnmente malestar en la garganta, fiebre y dolor en todo el cuerpo.
+    </string>
+    <string name="eye_drops_description">
+    Gotas para ojos son pequeñas gotas de medicina líquida que es colocada en los ojos por razones diferentes incluyendo dolor o para curar infecciones o daño en los ojos.
+    </string>
+    <string name="cmp_description">
+    Esta prueba de sangre es utilizada para evaluar la salud en general.  Realiza más de 10 pruebas que evalúan los riñones, azúcar en la sangre, electrolitos y el hígado.
+    </string>
+    <string name="lipase_description">
+    Esta prueba de sangre revisa en el cuerpo niveles altos de lipasa.  Cantidades altas de lipasa pueden indicar que el paciente tiene pancreatitis o inflamación del páncreas.  Frecuentemente los pacientes también presentan dolor en su abdomen, fiebre y sienten náuseas.
+    </string>
+    <string name="esr_description">
+    Esta prueba de sangre busca enfermedades dentro del cuerpo.  Los doctores utilizan esta prueba para buscar inflamaciones, hinchazón, dolor o artritis.  Esta no le indica al doctor exactamente la enfermedad, pero sí confirma que existe algo anormal en el cuerpo.
+    </string>
+    <string name="d_dimer_description">
+    Esta prueba de sangre es realizada cuando el doctor piensa que un paciente puede tener un coágulo de sangre en el cuerpo.  Estos coágulos se forman comúnmente en las piernas, brazos o en los pulmones.  Coágulos pueden causar dolor en los brazos o piernas del paciente o dolor en el pecho y problemas de respiración si el coágulo está en el pulmón.
+    </string>
+    <string name="troponin_description">
+    Esta prueba de sangre busca cualquier síntoma que indique daño al corazón del paciente.  Este daño puede haber sido por un ataque al corazón u otra condición cardíaca.  Realizar un examen de sangre troponina es común cuando un paciente tiene dolor en el pecho o problemas para respirar apropiadamente.
+    </string>
+    <string name="inpatient_consult_description">
+    El doctor de la sala de emergencia conversa con los doctores de pacientes internos.  Los doctores de pacientes internos realizarán más pruebas y observarán a los pacientes que se quedarán internados en el hospital.
+    </string>
+    <string name="monitor_description">
+    Una pantalla de computadora en la habitación monitorea el corazón y los pulmones del paciente.  Registra la rapidez de los latidos del corazón, la rapidez de su respiración, su nivel de oxígeno y su presión de sangre.
+    </string>
+    <string name="finger_stick_description">
+    Esta prueba es utilizada para revisar el nivel de azúcar en la sangre.  El doctor o la enfermera pinchará el dedo del paciente y realiza la prueba con una pequeña gota de sangre.
+    </string>
+    <string name="amylase_description">
+    Esta prueba de sangre evalúa si hay infección en el abdomen del paciente.  Puede ser realizado si el paciente está teniendo dolores de estómago, toma mucho alcohol, o está teniendo problemas para comer o tomar.
+    </string>
+    <string name="gi_consult_description">
+    Estos son doctores que se especializan en el cuidado del tracto digestivo de un paciente.  Esto incluye el esófago, estómago, intestino delgado, intestino grueso, y sistema biliar (hígado, páncreas, vesícula, y ductos biliares).
+    </string>
+    <string name="stool_culture_description">
+    Esta prueba es una recolección de heces.  Las razones comunes para realizar esta prueba son diarrea, dolor abdominal severo, o sangre en las heces.
+    </string>
+    <string name="lft_description">
+    Esta prueba de sangre evalúa el estado general de salud del hígado.  El hígado es un órgano grande que convierte los alimentos en energía.  La orina oscura, dolor abdominal, cansancio, la piel amarilla son todas razones para realizar esta prueba.
+    </string>
+    <string name="hcg_description">
+    Esta prueba de sangre es utilizada para determinar si una mujer está embarazada, evaluando los niveles de la hormona HCG en la sangre.  Los niveles de HCG aumentan en los primeros 3 meses de embarazo.  Esta prueba también puede ser realizada si una mujer tiene sangrado vaginal o cólicos.
+    </string>
+    <string name="tsh_description">
+    Esta es una prueba de sangre que revisa si existen problemas en su tiroides.  La tiroides es una glándula en su garganta.  Si hay problemas con su tiroides, usted puede estar ganando o perdiendo peso, puede tener cambios de humor, o estar más cansado de los normal.  La tiroides de baja acción o sobre activa tienen síntomas diferentes cada una.
+    </string>
+    <string name="uric_acid_description">
+    Esta prueba de sangre mide el nivel de ácido úrico en la corriente sanguínea.  El ácido úrico aumenta cuando los riñones no pueden deshacer éste del cuerpo apropiadamente por medio de la orina.  Más comúnmente el ácido úrico excesivo se encuentra cuando los pacientes tienen aumento de dolor en las articulaciones o piedras en los riñones.  Adicionalmente, se pueden presentar síntomas de acumulación de ácido úrico, los cuales incluyen hinchazón de las articulaciones y enrojecimiento.
+    </string>
+    <string name="type_screen_description">
+    Esta prueba de sangre es realizada si el doctor piensa que el paciente ha perdido sangre o va a tener cirugía.  Esta prueba identifica qué tipo de sangre es el paciente.  Si el paciente necesita una transfusión de sangre, el doctor entonces conocerá qué tipo de sangre dar al paciente.
+    <br />
+    <br />
+    Tipo de sangre:  O positivo, O negativo, A positivo, A negativo, B positivo, B negativo, AB positivo, AB negativo
+    </string>
+    <string name="urinalysis_description">
+    Esta es una prueba que busca infecciones o sangre en la orina.  Es usualmente realizada cuando un paciente tiene dificultad en orinar, arde al orinar, o durante un examen físico.
+    </string>
+    <string name="abg_vbg_description">
+    Esta es una prueba de sangre que es tomada de una vena o una arteria usualmente del brazo o muñeca.  Es utilizada para evaluar lo bien que los pulmones de un paciente están funcionando.  Tener exceso de ácido (acidosis) o base (alkalosis) puede ser extremadamente peligroso para la salud de un paciente.
+    Estas pruebas son realizadas comúnmente cuando una persona tiene dificultad en respirar, tiene agotamiento, está desorientada, o ha tenido inhalación excesiva de humo.
+    </string>
+    <string name="ekg_description">
+    Se colocan 12 adhesivos en los brazos, piernas y pecho.  Los adhesivos son conectados a una computadora que dibuja una figura de la electricidad del corazón.  El doctor revisa esta figura para determinar si hay algo anormal con el cuerpo o con el corazón.  Esta prueba es frecuentemente realizada en la sala de emergencia o en el consultorio del doctor.
+    </string>
+    <string name="iv_placement_description">
+    Durante la colocación de un catéter intravenoso, se inserta una pequeña aguja en el brazo del paciente.  Al principio es incómodo, pero será retirada inmediatamente.  Un pequeño catéter plástico de quedará en el brazo del paciente para realizar pruebas de sangre o darles medicina.
+    </string>
+    <string name="iv_therapy_description">
+    Esta terapia es comúnmente referida como “goteo IV”.  Durante este proceso, se infunde líquido a la vena por medio de un catéter intravenoso.  Esta terapia puede ser utilizada para corregir desbalance de electrolitos, rehidratación, dar medicamentos o transfusión de sangre.
+    </string>
+    <string name="iv_fluid_description">
+    Fluido intravenoso entra por el catéter intravenoso a la vena del paciente.  Se administra fluido intravenoso para ayudar a los pacientes que tienen deshidratación o han estado vomitando.  Este contiene nutrientes que son importantes para el cuerpo.
+    </string>
+    <string name="flu_screening_description">
+    Esta prueba es utilizada para diagnosticar la influenza.  Su doctor o enfermera le colocará un hisopo en la parte de atrás de su nariz para evaluar por influenza.  La prueba no duele, pero es incómoda y puede darle cosquilleo en la parte de atrás de la nariz o provocar tos en el paciente.
+    </string>
+    <string name="blood_gas_description">
+    Esta prueba determina lo bien que el paciente está respirando el aire en su medio ambiente.  Para realizar esta prueba, se coloca una aguja pequeña en el brazo del paciente y se saca una muestra de sangre de la vena o de la arteria.
+    </string>
+
+</resources>
