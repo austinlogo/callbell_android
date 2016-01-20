@@ -6,21 +6,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.util.LocaleUtil;
 import com.callbell.callbell.presentation.BaseActivity;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.PrefManager;
 import com.github.nkzawa.socketio.client.Socket;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -87,13 +83,23 @@ public class LoginActivity
 
     @Override
     public void refresh() {
+        super.refresh();
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (!isActivityLocaleUpdated()) {
+            currentLocale = LocaleUtil.getLocale(this);
+            refresh();
+        }
+    }
+
+    @Override
     public void register() {
-        super.refresh();
         if (SocketService.mService != null) {
             mMessage.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
             mMessage.retrieveState(prefs.getCurrentState());

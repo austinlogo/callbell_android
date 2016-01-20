@@ -23,6 +23,7 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
+import com.callbell.callbell.util.LocaleUtil;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
@@ -44,6 +45,7 @@ public class BaseActivity extends AppCompatActivity {
     MessageRouting mMessageRouting;
 
     protected Menu mOptionsMenu;
+    protected LocaleUtil.AvailableLocales currentLocale;
 
     public MediaPlayer notificationSound;
 
@@ -53,6 +55,8 @@ public class BaseActivity extends AppCompatActivity {
 
         notificationSound = MediaPlayer.create(getApplicationContext(), R.raw.notification);
         notificationSound.setLooping(true);
+
+        currentLocale = LocaleUtil.getLocale(this);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.base_layout);
@@ -165,10 +169,9 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public Intent refreshIntent() {
-        return new Intent(getApplicationContext(), getCallingActivity().getClass());
+    public boolean isActivityLocaleUpdated() {
+        return currentLocale.equals(LocaleUtil.getLocale(this));
     }
-
 
     public void refresh() {
         new POCValues(this);
