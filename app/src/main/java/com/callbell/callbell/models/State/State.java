@@ -57,9 +57,8 @@ public class State {
     private List<Integer> pendingTests,
             pendingMedications,
             doneTests,
-            doneMedications;
-
-    private List<String> allTests,
+            doneMedications,
+            allTests,
             allMedications;
 
     private String[] shownActions;
@@ -78,8 +77,8 @@ public class State {
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
-                new ArrayList<String>(),
-                new ArrayList<String>(),
+                new ArrayList<Integer>(),
+                new ArrayList<Integer>(),
                 0,
                 0
         );
@@ -111,8 +110,8 @@ public class State {
             List<Integer> meds,
             List<Integer> dt,
             List<Integer> dm,
-            List<String> at,
-            List<String> am,
+            List<Integer> at,
+            List<Integer> am,
             int ap,
             int pr) {
 
@@ -168,8 +167,8 @@ public class State {
         pendingMedications = JSONUtil.getvalueListIfExists(object, PENDING_MEDICATIONS_ID);
         doneTests = JSONUtil.getvalueListIfExists(object, DONE_TESTS_ID);
         doneMedications = JSONUtil.getvalueListIfExists(object, DONE_MEDICATIONS_ID);
-        allTests = JSONUtil.getValueStringListIfExists(object, ALL_TESTS_ID);
-        allMedications = JSONUtil.getValueStringListIfExists(object, ALL_MEDICATIONS_ID);
+        allTests = JSONUtil.getvalueListIfExists(object, ALL_TESTS_ID);
+        allMedications = JSONUtil.getvalueListIfExists(object, ALL_MEDICATIONS_ID);
         acceptablePain = JSONUtil.getValueIntIfExists(object, ACCEPTABLE_PAIN_ID);
         isConnectedValue = JSONUtil.getValueBooleanFromIntIfExists(object, CONNECTION_INDICATOR_ID);
     }
@@ -272,8 +271,8 @@ public class State {
             object.put(PENDING_MEDICATIONS_ID, JSONUtil.integerListToJSONArray(pendingMedications));
             object.put(DONE_TESTS_ID, JSONUtil.integerListToJSONArray(doneTests));
             object.put(DONE_MEDICATIONS_ID, JSONUtil.integerListToJSONArray(doneMedications));
-            object.put(ALL_TESTS_ID, JSONUtil.stringListToJSONArray(allTests));
-            object.put(ALL_MEDICATIONS_ID, JSONUtil.stringListToJSONArray(allMedications));
+            object.put(ALL_TESTS_ID, JSONUtil.integerListToJSONArray(allTests));
+            object.put(ALL_MEDICATIONS_ID, JSONUtil.integerListToJSONArray(allMedications));
             object.put(CONNECTION_INDICATOR_ID, isConnectedValue ? 1 : 0);
             object.put(ACCEPTABLE_PAIN_ID, acceptablePain);
 
@@ -328,19 +327,19 @@ public class State {
         this.isConnectedValue = connected;
     }
 
-    public void setAllMedications(List<String> allMeds) {
+    public void setAllMedications(List<Integer> allMeds) {
         allMedications = allMeds;
     }
 
-    public void setAllTests(List<String> at) {
+    public void setAllTests(List<Integer> at) {
         allTests = at;
     }
 
-    public List<String> getAllMedications() {
+    public List<Integer> getAllMedications() {
         return allMedications;
     }
 
-    public List<String> getAllTests() {
+    public List<Integer> getAllTests() {
         return allTests;
     }
 

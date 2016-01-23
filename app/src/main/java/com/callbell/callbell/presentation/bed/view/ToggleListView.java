@@ -107,7 +107,7 @@ public class ToggleListView extends LinearLayout {
         return patientList;
     }
 
-    public List<String> getActionList() {
+    public List<Integer> getActionList() {
         return adminAdapter.getList();
     }
 

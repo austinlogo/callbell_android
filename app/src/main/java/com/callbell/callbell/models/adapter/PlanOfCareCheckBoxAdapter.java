@@ -32,10 +32,10 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
         mDoneItems = new HashSet<>();
     }
 
-    public List<String> getList() {
-        List<String> list = new ArrayList<>();
+    public List<Integer> getList() {
+        List<Integer> list = new ArrayList<>();
         for (int index = 0; index < getCount(); index++) {
-            list.add(getItem(index));
+            list.add(POCValues.masterMap.getKey(getItem(index)));
         }
 
         return list;

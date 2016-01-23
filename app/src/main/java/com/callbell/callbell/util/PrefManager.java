@@ -70,10 +70,10 @@ public class PrefManager {
     public static boolean isSuperUser;
 
     private static List<Integer> pendingTestItems;
-    private static List<String> allTestItems;
+    private static List<Integer> allTestItems;
 
     private static List<Integer> pendingMedicationItems;
-    private static List<String> allMedicationItems;
+    private static List<Integer> allMedicationItems;
 
     private List<Integer> mDoneTestItems;
     private List<Integer> mDoneMedications;
@@ -188,10 +188,11 @@ public class PrefManager {
 
     // Plan of Care ////////////////////////////////////////////////////////////////////////////////
 
-    public List<String> allTestItems() {
+    public List<Integer> allTestItems() {
         if (allTestItems == null) {
-            Set<String> set = prefs.getStringSet(ALL_TEST_ITEMS_KEY, new HashSet<String>());
-            return new ArrayList<>(set);
+//            Set<Integer> set = prefs.getSe.get(ALL_TEST_ITEMS_KEY, new HashSet<String>());
+//            Set<Integer> set = getIntListFromPrefs(ALL_TEST_ITEMS_KEY);
+            return getIntListFromPrefs(ALL_TEST_ITEMS_KEY);
         }
 
         return allTestItems;
@@ -282,7 +283,7 @@ public class PrefManager {
         return isSuperUser;
     }
 
-    public void setAllActionTestItems(List<String> actionList) {
+    public void setAllActionTestItems(List<Integer> actionList) {
         if (actionList != null) {
             allTestItems = actionList;
         } else {
@@ -290,22 +291,25 @@ public class PrefManager {
         }
         allTestItems = actionList;
 
-        SharedPreferences.Editor sp = prefs.edit();
-        sp.putStringSet(ALL_TEST_ITEMS_KEY, new HashSet<>(actionList)).commit();
+//        SharedPreferences.Editor sp = prefs.edit();
+//        sp.put.putStringSet(ALL_TEST_ITEMS_KEY, new HashSet<>(actionList)).commit();
+
+        setIntList(actionList, ALL_TEST_ITEMS_KEY);
     }
 
-    public void setAllActionMedicationItems(List<String> actionList) {
+    public void setAllActionMedicationItems(List<Integer> actionList) {
         if (actionList == null) {
             allMedicationItems = new ArrayList<>();
         } else {
             allMedicationItems = actionList;
         }
 
-        SharedPreferences.Editor sp = prefs.edit();
-        sp.putStringSet(ALL_MEDICATION_ITEMS_KEY, new HashSet<>(allMedicationItems)).commit();
+//        SharedPreferences.Editor sp = prefs.edit();
+        setIntList(actionList, ALL_MEDICATION_ITEMS_KEY);
+//        sp.putStringSet(ALL_MEDICATION_ITEMS_KEY, new HashSet<>(allMedicationItems)).commit();
     }
 
-    public List<String> getAllMedicationItems() {
+    public List<Integer> getAllMedicationItems() {
         return allMedicationItems;
     }
 
