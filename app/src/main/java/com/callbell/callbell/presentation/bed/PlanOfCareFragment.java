@@ -140,12 +140,8 @@ public class PlanOfCareFragment extends Fragment {
 
         //Inflate the Test List
         mPlanOfCareTests.setTitle(R.string.poc_current_tests_title);
-
-        mPlanOfCareTests.setAdminAdapter(ToggleListView.getAdminAdapter(getActivity(),
-                mState.getAllTests(),
-                chiefComplaintSpinner.getSelectedItem().toString()));
-
-        mPlanOfCareTests.setCheckedItems(mState.getPendingTests(), mState.getDoneTests());
+        List<String> initialAdminValues = new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
+        mPlanOfCareTests.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getContext(), R.layout.item_ternary_checkbox, initialAdminValues));
 
         //Inflate the Medication List
         List<String> savedMeds = mState.getAllMedications();
