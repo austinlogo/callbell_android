@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.callbell.callbell.data.POCValues;
+import com.callbell.callbell.models.State.BiMap;
 import com.callbell.callbell.presentation.view.TernaryListItem;
 
 import java.util.ArrayList;
@@ -20,22 +21,23 @@ import java.util.Set;
  * Created by austin on 10/15/15.
  */
 public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
-
+    private BiMap<Integer, String> map;
     private Set<Integer> mPendingItems, mDoneItems;
     private boolean isSuperUser;
 
-    public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects) {
+    public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects, BiMap<Integer, String> mapping) {
         super(context, resource, objects);
 
         isSuperUser = false;
         mPendingItems = new HashSet<>();
         mDoneItems = new HashSet<>();
+        map = mapping;
     }
 
     public List<Integer> getList() {
         List<Integer> list = new ArrayList<>();
         for (int index = 0; index < getCount(); index++) {
-            list.add(POCValues.masterMap.getKey(getItem(index)));
+            list.add(map.getKey(getItem(index)));
         }
 
         return list;

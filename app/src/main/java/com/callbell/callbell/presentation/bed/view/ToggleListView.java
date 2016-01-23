@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.callbell.callbell.R;
 import com.callbell.callbell.data.POCValues;
+import com.callbell.callbell.models.State.BiMap;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 import com.callbell.callbell.models.adapter.PlanOfCareListViewAdapter;
 import com.callbell.callbell.presentation.view.TernaryListItem;
@@ -27,7 +28,6 @@ import butterknife.InjectView;
  * Compound view of Admin and Patient Lists
  */
 public class ToggleListView extends LinearLayout {
-
     private static final String TAG = ToggleListView.class.getSimpleName();
 
     @InjectView(R.id.layout_display_title)

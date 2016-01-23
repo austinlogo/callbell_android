@@ -30,8 +30,8 @@ public class PrefManager {
     public static final String SHOWN_TESTS_KEY = "shown_actions_id";
     public static final String SHOWN_MEDICATIONS_KEY = "shown_tests_id";
     public static final String STATELIST_KEY = "stateList";
-    public static final String ALL_TEST_ITEMS_KEY = "all_action_items";
-    private static final String ALL_MEDICATION_ITEMS_KEY = "all_med_items";
+//    public static final String ALL_TEST_ITEMS_KEY = "all_action_items";
+//    private static final String ALL_MEDICATION_ITEMS_KEY = "all_med_items";
 
 
     //GLOBAL VALUES
@@ -83,6 +83,8 @@ public class PrefManager {
         prefs = PreferenceManager.getDefaultSharedPreferences(c);
         currentState = new State(this);
         isSuperUser = false;
+        allTestItems = getIntListFromPrefs(State.ALL_TESTS_ID);
+        allMedicationItems = getIntListFromPrefs(State.ALL_MEDICATIONS_ID);
         pendingTestItems = getIntListFromPrefs(State.PENDING_TESTS_ID);
         pendingMedicationItems = getIntListFromPrefs(State.PENDING_MEDICATIONS_ID);
         mDoneTestItems = getIntListFromPrefs(State.DONE_TESTS_ID);
@@ -192,7 +194,7 @@ public class PrefManager {
         if (allTestItems == null) {
 //            Set<Integer> set = prefs.getSe.get(ALL_TEST_ITEMS_KEY, new HashSet<String>());
 //            Set<Integer> set = getIntListFromPrefs(ALL_TEST_ITEMS_KEY);
-            return getIntListFromPrefs(ALL_TEST_ITEMS_KEY);
+            return getIntListFromPrefs(State.ALL_TESTS_ID);
         }
 
         return allTestItems;
@@ -294,7 +296,7 @@ public class PrefManager {
 //        SharedPreferences.Editor sp = prefs.edit();
 //        sp.put.putStringSet(ALL_TEST_ITEMS_KEY, new HashSet<>(actionList)).commit();
 
-        setIntList(actionList, ALL_TEST_ITEMS_KEY);
+        setIntList(actionList, State.ALL_TESTS_ID);
     }
 
     public void setAllActionMedicationItems(List<Integer> actionList) {
@@ -305,7 +307,7 @@ public class PrefManager {
         }
 
 //        SharedPreferences.Editor sp = prefs.edit();
-        setIntList(actionList, ALL_MEDICATION_ITEMS_KEY);
+        setIntList(allMedicationItems, State.ALL_MEDICATIONS_ID);
 //        sp.putStringSet(ALL_MEDICATION_ITEMS_KEY, new HashSet<>(allMedicationItems)).commit();
     }
 
