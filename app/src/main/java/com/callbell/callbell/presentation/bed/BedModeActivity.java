@@ -254,6 +254,12 @@ public class BedModeActivity
     @Override
     public void refresh() {
         super.refresh();
+
+        //Save State
+        savePOCState(mPlanOfCareFragment.getState());
+        saveStaffState(mStaffFragment.getState());
+
+        //Restart Activity
         Intent i = new Intent(this, BedModeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);

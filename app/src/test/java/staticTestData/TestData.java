@@ -19,11 +19,14 @@ public class TestData {
                 "NURSE",
                 "RES",
                 "CHIEF",
-                Arrays.asList(0,1,2,3),
-                Arrays.asList(4,5,6,7),
+                Arrays.asList(0,1),
+                Arrays.asList(5,6),
+                Arrays.asList(4,7),
+                Arrays.asList(6,7),
                 Arrays.asList("one", "two", "three", "four"),
                 Arrays.asList("five", "six", "seven", "eight"),
-                1);
+                1,
+                10);
     }
     public static State state_station() {
         return new State("TEST",
@@ -36,9 +39,12 @@ public class TestData {
                 "",
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
+                new ArrayList<Integer>(),
+                new ArrayList<Integer>(),
                 new ArrayList<String>(),
                 new ArrayList<String>(),
-                1);
+                1,
+                10);
     }
 
 }

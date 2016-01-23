@@ -176,6 +176,7 @@ public class PlanOfCareFragment extends Fragment {
 
         chiefComplaintSpinner.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
 
+        overrideNextChiefComplaintSpinnerUpdate = true;
         mPlanOfCareTests.getPatientListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
