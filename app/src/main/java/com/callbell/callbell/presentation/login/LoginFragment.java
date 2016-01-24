@@ -198,7 +198,6 @@ public class LoginFragment extends Fragment {
             );
         }
 
-        mListener.register();
     }
 
     private void intiStateAndUI() {
@@ -245,7 +244,6 @@ public class LoginFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface LoginFragmentCallback {
-        void register();
 
     }
 }

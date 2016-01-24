@@ -48,7 +48,9 @@ public class State {
         mode,
         physician,
         nurse,
-        resident,
+        resident;
+
+    private Integer
         chiefComplaint;
 
     private int painRating,
@@ -72,7 +74,7 @@ public class State {
                 "",
                 "",
                 "",
-                "",
+                0,
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
@@ -105,7 +107,7 @@ public class State {
             String doc,
             String nurs,
             String res,
-            String cc,
+            int  cc,
             List<Integer> tests,
             List<Integer> meds,
             List<Integer> dt,
@@ -161,7 +163,7 @@ public class State {
         physician = JSONUtil.getValueStringIfExists(object, PHYSICIAN);
         resident = JSONUtil.getValueStringIfExists(object, RESIDENT);
         nurse = JSONUtil.getValueStringIfExists(object, NURSE);
-        chiefComplaint = JSONUtil.getValueStringIfExists(object, CHIEF_COMPLAINT);
+        chiefComplaint = JSONUtil.getValueIntIfExists(object, CHIEF_COMPLAINT);
         painRating = JSONUtil.getValueIntIfExists(object, PAIN_RATING);
         pendingTests = JSONUtil.getvalueListIfExists(object, PENDING_TESTS_ID);
         pendingMedications = JSONUtil.getvalueListIfExists(object, PENDING_MEDICATIONS_ID);
@@ -213,15 +215,15 @@ public class State {
         return (resident != null) ? resident : "";
     }
 
-    public String getChiefComplaint() {
-        return (chiefComplaint != null) ? chiefComplaint : POCValues.DEFAULT_CHOICE;
+    public Integer getChiefComplaint() {
+        return (chiefComplaint != null) ? chiefComplaint : 0;
     }
 
     public boolean isConnected() {
         return isConnectedValue;
     }
 
-    public void setChiefComplaint(String cc) {
+    public void setChiefComplaint(int cc) {
         chiefComplaint = cc;
     }
 

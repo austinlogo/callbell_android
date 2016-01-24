@@ -130,8 +130,8 @@ public class PrefManager {
         return prefs.getString(State.NURSE, "");
     }
 
-    public String chiefComplaint() {
-        return prefs.getString(State.CHIEF_COMPLAINT, POCValues.DEFAULT_CHOICE);
+    public int chiefComplaint() {
+        return prefs.getInt(State.CHIEF_COMPLAINT, 0);
     }
 
     public void setState(State newState) {
@@ -146,7 +146,7 @@ public class PrefManager {
         sp.putString(State.PHYSICIAN, newState.getPhysician());
         sp.putString(State.NURSE, newState.getNurse());
         sp.putString(State.RESIDENT, newState.getResident());
-        sp.putString(State.CHIEF_COMPLAINT, newState.getChiefComplaint());
+        sp.putInt(State.CHIEF_COMPLAINT, newState.getChiefComplaint());
         sp.putInt(State.PAIN_RATING, newState.getPainRating());
         sp.apply();
 

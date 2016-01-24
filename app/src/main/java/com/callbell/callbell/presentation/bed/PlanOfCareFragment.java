@@ -32,11 +32,13 @@ import com.callbell.callbell.presentation.bed.view.ToggleListView;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.presentation.view.TernaryListItem;
 import com.callbell.callbell.util.JSONUtil;
+import com.callbell.callbell.util.MixedListUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -132,22 +134,25 @@ public class PlanOfCareFragment extends Fragment {
     private void initListsAndValues() {
         //Inflate the spinner
         List<String> spinnerArray = new ArrayList<>(POCValues.pocMap.keySet());
-        Collections.sort(spinnerArray);
+//        Collections.sort(spinnerArray);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.item_simple_spinner, spinnerArray);
         chiefComplaintSpinner.setAdapter(adapter);
         Log.d(TAG, "Current Selection: " + mState.getChiefComplaint());
-        chiefComplaintSpinner.setSelection(adapter.getPosition(mState.getChiefComplaint()), false);
+        chiefComplaintSpinner.setSelection(mState.getChiefComplaint(), false);
 
         //Inflate the Test List
         mPlanOfCareTests.setTitle(R.string.poc_current_tests_title);
-        List<String> initialAdminValues = new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
+        List<String> initialAdminValues = (mState.getAllTests().size() > 0)
+                ? MixedListUtil.decodeTestList(mState.getAllTests())
+                : new ArrayList<>(POCValues.pocMap.get(chiefComplaintSpinner.getSelectedItem().toString()));
         mPlanOfCareTests.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(),
                 R.layout.item_ternary_checkbox,
                 initialAdminValues,
                 POCValues.masterMap));
+        mPlanOfCareTests.setCheckedItems(mState.getPendingTests(), mState.getDoneTests());
 
         //Inflate the Medication List
-        List<Integer> savedMeds = mState.getAllMedications();
+//        List<Integer> savedMeds = mState.getAllMedications();
         List<String> initialAdminMedicationValues = new ArrayList<>(MedicationValues.medicationMap.keySet());
         mPlanOfCareMedications.setAdminAdapter(new PlanOfCareCheckBoxAdapter(getActivity(),
                 R.layout.item_ternary_checkbox,
@@ -159,7 +164,9 @@ public class PlanOfCareFragment extends Fragment {
 
 
         //Set AutoComplete options
-        String[] str = POCValues.testDescriptions.keySet().toArray(new String[0]);
+        List<String> str = new ArrayList<>(POCValues.testDescriptions.keySet());
+        str.addAll(new ArrayList<>(MedicationValues.medicationMap.keySet()));
+
         autoCompleteOptions = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_dropdown_item_1line,
                 str);
@@ -235,23 +242,34 @@ public class PlanOfCareFragment extends Fragment {
     public void submitOtherTestItem() {
         String item = otherEditText.getText().toString();
         if (item.isEmpty()) {
+            //empty case
             BeaToast.makeText(getActivity().getApplicationContext(), R.string.empty_action_item, Toast.LENGTH_SHORT).show();
             return;
         } else if (mPlanOfCareTests.contains(item)) {
+            //Already in list
             int index = mPlanOfCareTests.getPosition(item);
-
 
             mPlanOfCareTests.setPendingItem(index, true);
             otherEditText.setText("");
             return;
+        } else if (mPlanOfCareMedications.contains(item)) {
+
+            mPlanOfCareMedications.setPendingItem(mPlanOfCareMedications.getPosition(item), true);
+            otherEditText.setText("");
+            return;
+        } else if (POCValues.testDescriptions.keySet().contains(item)) {
+            // not a test we know of
+            String action = otherEditText.getText().toString();
+
+            mPlanOfCareTests.add(action);
+            mPlanOfCareTests.setPendingItem(mPlanOfCareTests.getCount() - 1, true);
+            mState.getAllTests().add(POCValues.masterMap.getKey(item));
+            otherEditText.setText("");
+            return;
+        } else {
+            //Not found
+            BeaToast.makeText(getActivity(), R.string.test_or_med_not_available, BeaToast.LENGTH_SHORT).show();
         }
-
-        int index = mPlanOfCareTests.getCount() - 1;
-
-        String action = otherEditText.getText().toString();
-        mPlanOfCareTests.add(action);
-        mPlanOfCareTests.setPendingItem(mPlanOfCareTests.getCount() - 1, true);
-        otherEditText.setText("");
     }
 
     @Override
@@ -329,7 +347,6 @@ public class PlanOfCareFragment extends Fragment {
     public void updateState(State st) {
         overrideNextChiefComplaintSpinnerUpdate = true;
         mState = st;
-
         mListener.savePOCState(mState);
         initListsAndValues();
         setSuperUserPermissions(prefs.isSuperUser());
@@ -355,7 +372,7 @@ public class PlanOfCareFragment extends Fragment {
             String selectedComplaint = parent.getSelectedItem().toString();
 
 
-            mState.setChiefComplaint(selectedComplaint);
+            mState.setChiefComplaint(POCValues.chiefComplaintMap.getKey(selectedComplaint));
             mPlanOfCareTests.resetList(selectedComplaint);
 
             mState.setPendingTests(new ArrayList<Integer>());

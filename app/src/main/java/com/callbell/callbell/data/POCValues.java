@@ -20,9 +20,14 @@ public class POCValues {
     public static Map<String, List<String>> pocMap;
     public static Map<String, String> testDescriptions;
     public static Map<String, String> expandedNames;
+
     public static BiMap<Integer, String> masterMap;
+    public static BiMap<Integer, String> chiefComplaintMap;
 
     private Context mContext;
+
+    //index that we are adding the chiefComplaint in
+    private int chiefComplaintIndex = 0;
 
     public static String DEFAULT_CHOICE = "";
 
@@ -148,6 +153,7 @@ public class POCValues {
     @Inject
     public POCValues(Context context) {
         pocMap = new LinkedHashMap<>();
+        chiefComplaintMap = new BiMap<>();
         mContext = context;
 
         //TESTS
@@ -335,59 +341,58 @@ public class POCValues {
         masterMap.put(0x3d, LACERATION);
         masterMap.put(0x3e, TETANUS_SHOT);
         masterMap.put(0x3f, STITCHES);
-        masterMap.put(0x4, EYE_INJURY);
-        masterMap.put(0x4, EYE_DROPS);
-        masterMap.put(0x4, EYE_IRRIGATION);
-        masterMap.put(0x4, ANTIBIOTICS);
-        masterMap.put(0x4, LEG_SWELLING);
-        masterMap.put(0x4, FACIAL_SWELLING);
-        masterMap.put(0x4, ALLERGIC_REACTION);
-        masterMap.put(0x4, MONITOR);
-        masterMap.put(0x4, PALPITATIONS);
-        masterMap.put(0x4, ECHOCARDIOGRAM);
-        masterMap.put(0x4, REPEAT_TROPONIN);
-        masterMap.put(0x4, STRESS_TEST);
-        masterMap.put(0x4, CARDIOLOGY_CONSULT);
-        masterMap.put(0x4, RASH);
-        masterMap.put(0x4, IV_INSERTION);
-        masterMap.put(0x4, OVERDOSE);
-        masterMap.put(0x5, ACETAMINOPHEN_LEVEL);
-        masterMap.put(0x5, ASPIRIN_LEVEL);
-        masterMap.put(0x5, SOCIAL_WORK_CONSULT);
-        masterMap.put(0x5, ABNORMAL_LABS);
-        masterMap.put(0x5, TSH);
-        masterMap.put(0x5, ARM_PAIN);
-        masterMap.put(0x5, ASTHMA);
-        masterMap.put(0x5, BACK_PAIN);
-        masterMap.put(0x5, BLOOD_IN_URINE);
-        masterMap.put(0x5, FLANK_PAIN);
-        masterMap.put(0x5, CHEST_PAIN);
-        masterMap.put(0x5, GENERAL_SURGERY);
-        masterMap.put(0x5, VISUAL_EXAM);
-        masterMap.put(0x5, BLOOD_CULTURES);
-        masterMap.put(0x5, ASSAULT);
-        masterMap.put(0x5, BLOOD_SUGAR_PROBLEM);
-        masterMap.put(0x6, BURN);
-        masterMap.put(0x6, DIARRHEA);
-        masterMap.put(0x6, EYE_PROBLEMS);
-        masterMap.put(0x6, FALL);
-        masterMap.put(0x6, FEVER);
-        masterMap.put(0x6, INGESTION);
-        masterMap.put(0x6, PEDIATRIC_FEVER);
-        masterMap.put(0x6, PSYCHIATRIC_BEHAVIORAL);
-        masterMap.put(0x6, RAPID_HEART_RATE);
-        masterMap.put(0x6, RESPIRATORY_FAILURE);
-        masterMap.put(0x6, SEIZURE);
-        masterMap.put(0x6, STROKE_CVA);
-        masterMap.put(0x6, TRAUMA);
-        masterMap.put(0x6, UNRESPONSIVE);
-        masterMap.put(0x6, URINARY_TRACT_INFECTION);
-        masterMap.put(0x6, VAGINAL_DISCHARGE);
-        masterMap.put(0x7, VALPROIC_ACID);
-        masterMap.put(0x7, OPTHALMOLOGIST_CONSULT);
-        masterMap.put(0x7, RAPID_STREP);
-        masterMap.put(0x7, ENCOURAGE_NUTRITION);
-
+        masterMap.put(0x40, EYE_INJURY);
+        masterMap.put(0x41, EYE_DROPS);
+        masterMap.put(0x42, EYE_IRRIGATION);
+        masterMap.put(0x43, ANTIBIOTICS);
+        masterMap.put(0x44, LEG_SWELLING);
+        masterMap.put(0x45, FACIAL_SWELLING);
+        masterMap.put(0x46, ALLERGIC_REACTION);
+        masterMap.put(0x47, MONITOR);
+        masterMap.put(0x48, PALPITATIONS);
+        masterMap.put(0x49, ECHOCARDIOGRAM);
+        masterMap.put(0x4a, REPEAT_TROPONIN);
+        masterMap.put(0x4b, STRESS_TEST);
+        masterMap.put(0x4c, CARDIOLOGY_CONSULT);
+        masterMap.put(0x4d, RASH);
+        masterMap.put(0x4e, IV_INSERTION);
+        masterMap.put(0x4f, OVERDOSE);
+        masterMap.put(0x50, ACETAMINOPHEN_LEVEL);
+        masterMap.put(0x51, ASPIRIN_LEVEL);
+        masterMap.put(0x52, SOCIAL_WORK_CONSULT);
+        masterMap.put(0x53, ABNORMAL_LABS);
+        masterMap.put(0x54, TSH);
+        masterMap.put(0x55, ARM_PAIN);
+        masterMap.put(0x56, ASTHMA);
+        masterMap.put(0x57, BACK_PAIN);
+        masterMap.put(0x58, BLOOD_IN_URINE);
+        masterMap.put(0x59, FLANK_PAIN);
+        masterMap.put(0x5a, CHEST_PAIN);
+        masterMap.put(0x5b, GENERAL_SURGERY);
+        masterMap.put(0x5c, VISUAL_EXAM);
+        masterMap.put(0x5d, BLOOD_CULTURES);
+        masterMap.put(0x5e, ASSAULT);
+        masterMap.put(0x5f, BLOOD_SUGAR_PROBLEM);
+        masterMap.put(0x60, BURN);
+        masterMap.put(0x61, DIARRHEA);
+        masterMap.put(0x62, EYE_PROBLEMS);
+        masterMap.put(0x63, FALL);
+        masterMap.put(0x64, FEVER);
+        masterMap.put(0x65, INGESTION);
+        masterMap.put(0x66, PEDIATRIC_FEVER);
+        masterMap.put(0x67, PSYCHIATRIC_BEHAVIORAL);
+        masterMap.put(0x68, RAPID_HEART_RATE);
+        masterMap.put(0x69, RESPIRATORY_FAILURE);
+        masterMap.put(0x6a, SEIZURE);
+        masterMap.put(0x6b, STROKE_CVA);
+        masterMap.put(0x6c, TRAUMA);
+        masterMap.put(0x6d, UNRESPONSIVE);
+        masterMap.put(0x6e, URINARY_TRACT_INFECTION);
+        masterMap.put(0x6f, VAGINAL_DISCHARGE);
+        masterMap.put(0x70, VALPROIC_ACID);
+        masterMap.put(0x71, OPTHALMOLOGIST_CONSULT);
+        masterMap.put(0x72, RAPID_STREP);
+        masterMap.put(0x73, ENCOURAGE_NUTRITION);
 
         // This list is at the top of every Chief Complaint
         final List<String> commonList = new ArrayList<>();
@@ -420,9 +425,9 @@ public class POCValues {
         abdPain.add(PAIN_MEDICATION);
         abdPain.add(NAUSEA_MEDICATION);
         abdPain.add(CT_SCAN);
-
         abdPain.add(BLOOD_CULTURES);
         pocMap.put(ABDOMINAL_PAIN, abdPain);
+        chiefComplaintMap.put(chiefComplaintIndex++, ABDOMINAL_PAIN);
 
         final List<String> armPain = new ArrayList<>();
         armPain.addAll(commonList);
@@ -440,6 +445,7 @@ public class POCValues {
         armPain.add(ULTRASOUND);
         armPain.add(INPATIENT_CONSULT);
         pocMap.put(ARM_PAIN, armPain);
+        chiefComplaintMap.put(chiefComplaintIndex++, ARM_PAIN);
 
         final List<String> asthma = new ArrayList<>();
         asthma.addAll(commonList);
@@ -464,6 +470,7 @@ public class POCValues {
         asthma.add(BLOOD_GAS);
         asthma.add(INPATIENT_CONSULT);
         pocMap.put(ASTHMA, asthma);
+        chiefComplaintMap.put(chiefComplaintIndex++, ASTHMA);
 
         final List<String> backPain = new ArrayList<>();
         backPain.addAll(commonList);
@@ -482,6 +489,7 @@ public class POCValues {
         backPain.add(MRI);
         backPain.add(INPATIENT_CONSULT);
         pocMap.put(BACK_PAIN, backPain);
+        chiefComplaintMap.put(chiefComplaintIndex++, BACK_PAIN);
 
         final List<String> bloodInUrine = new ArrayList<>();
         bloodInUrine.addAll(commonList);
@@ -497,6 +505,7 @@ public class POCValues {
         bloodInUrine.add(UROLOGY_CONSULT);
 
         pocMap.put(BLOOD_IN_URINE, bloodInUrine);
+        chiefComplaintMap.put(chiefComplaintIndex++, BLOOD_IN_URINE);
 
         final List<String> chestPain = new ArrayList<>();
         chestPain.addAll(commonList);
@@ -516,6 +525,7 @@ public class POCValues {
         chestPain.add(STRESS_TEST);
         chestPain.add(ECHO);
         pocMap.put(CHEST_PAIN, chestPain);
+        chiefComplaintMap.put(chiefComplaintIndex++, CHEST_PAIN);
 
         final List<String> flankPain = new ArrayList<>();
         flankPain.addAll(commonList);
@@ -532,6 +542,7 @@ public class POCValues {
         flankPain.add(X_RAY);
         flankPain.add(UROLOGY_CONSULT);
         pocMap.put(FLANK_PAIN, flankPain);
+        chiefComplaintMap.put(chiefComplaintIndex++, FLANK_PAIN);
 
         final List<String> headAche = new ArrayList<>();
         headAche.addAll(commonList);
@@ -550,6 +561,7 @@ public class POCValues {
         headAche.add(NEUROSURGERY_CONSULT);
         headAche.add(NEUROLOGY_CONSULT);
         pocMap.put(HEADACHE, headAche);
+        chiefComplaintMap.put(chiefComplaintIndex++, HEADACHE);
 
         final List<String> legPain = new ArrayList<>();
         legPain.addAll(commonList);
@@ -569,6 +581,7 @@ public class POCValues {
         legPain.add(CT_SCAN);
         legPain.add(MRI);
         pocMap.put(LEG_PAIN, legPain);
+        chiefComplaintMap.put(chiefComplaintIndex++, LEG_PAIN);
 
         final List<String> pregProblems = new ArrayList<>();
         pregProblems.addAll(commonList);
@@ -585,6 +598,7 @@ public class POCValues {
         pregProblems.add(PELVIC_EXAM);
         pregProblems.add(OBGYN_CONSULT);
         pocMap.put(PREGNANCY_PROBLEMS, pregProblems);
+        chiefComplaintMap.put(chiefComplaintIndex++, PREGNANCY_PROBLEMS);
 
         final List<String> rectal = new ArrayList<>();
         rectal.addAll(commonList);
@@ -601,6 +615,7 @@ public class POCValues {
         rectal.add(GI_CONSULT);
         rectal.add(INPATIENT_CONSULT);
         pocMap.put(RECTAL_BLEEDING, rectal);
+        chiefComplaintMap.put(chiefComplaintIndex++, RECTAL_BLEEDING);
 
         final List<String> shortnessBreath = new ArrayList<>();
         shortnessBreath.addAll(commonList);
@@ -624,6 +639,7 @@ public class POCValues {
         shortnessBreath.add(PEAK_FLOW_METER);
         shortnessBreath.add(INPATIENT_CONSULT);
         pocMap.put(SHORTNESS_OF_BREATH, shortnessBreath);
+        chiefComplaintMap.put(chiefComplaintIndex++, SHORTNESS_OF_BREATH);
 
         final List<String> slurred = new ArrayList<>();
         slurred.addAll(commonList);
@@ -647,6 +663,7 @@ public class POCValues {
         slurred.add(NEUROLOGY_CONSULT);
         slurred.add(INPATIENT_CONSULT);
         pocMap.put(SLURRED_SPEAK, slurred);
+        chiefComplaintMap.put(chiefComplaintIndex++, SLURRED_SPEAK);
 
         final List<String> testicular = new ArrayList<>();
         testicular.addAll(commonList);
@@ -664,6 +681,7 @@ public class POCValues {
         testicular.add(ULTRASOUND);
         testicular.add(UROLOGY_CONSULT);
         pocMap.put(TESTICULAR_PAIN, testicular);
+        chiefComplaintMap.put(chiefComplaintIndex++, TESTICULAR_PAIN);
 
         final List<String> vaginalBleeding = new ArrayList<>();
         vaginalBleeding.addAll(commonList);
@@ -684,6 +702,7 @@ public class POCValues {
         vaginalBleeding.add(OBGYN_CONSULT);
         vaginalBleeding.add(PELVIC_CULTURES);
         pocMap.put(VAGINAL_BLEEDING, vaginalBleeding);
+        chiefComplaintMap.put(chiefComplaintIndex++, VAGINAL_BLEEDING);
 
         final List<String> ams = new ArrayList<>();
         ams.addAll(commonList);
@@ -709,6 +728,7 @@ public class POCValues {
         ams.add(CT_SCAN);
         ams.add(NEUROLOGY_CONSULT);
         pocMap.put(ALTERED_MENTAL_STATUS, ams);
+        chiefComplaintMap.put(chiefComplaintIndex++, ALTERED_MENTAL_STATUS);
 
         final List<String> vomitingBlood = new ArrayList<>();
         vomitingBlood.addAll(commonList);
@@ -731,6 +751,7 @@ public class POCValues {
         vomitingBlood.add(CT_SCAN);
         vomitingBlood.add(GI_CONSULT);
         pocMap.put(VOMITING_BLOOD, vomitingBlood);
+        chiefComplaintMap.put(chiefComplaintIndex++, VOMITING_BLOOD);
 
         final List<String> nausea = new ArrayList<>();
         nausea.addAll(commonList);
@@ -756,6 +777,7 @@ public class POCValues {
         nausea.add(GI_CONSULT);
         nausea.add(INPATIENT_CONSULT);
         pocMap.put(NAUSEA_VOMITING, nausea);
+        chiefComplaintMap.put(chiefComplaintIndex++, NAUSEA_VOMITING);
 
         final List<String> laceration = new ArrayList<>();
         laceration.addAll(commonList);
@@ -764,6 +786,7 @@ public class POCValues {
         laceration.add(NAUSEA_MEDICATION);
         laceration.add(STITCHES);
         pocMap.put(LACERATION, laceration);
+        chiefComplaintMap.put(chiefComplaintIndex++, LACERATION);
 
         // eye injury
         final List<String> eye = new ArrayList<>();
@@ -772,6 +795,7 @@ public class POCValues {
         eye.add(EYE_IRRIGATION);
         eye.add(VISUAL_EXAM);
         pocMap.put(EYE_INJURY, eye);
+        chiefComplaintMap.put(chiefComplaintIndex++, EYE_INJURY);
 
         final List<String> legSwell = new ArrayList<>();
         legSwell.addAll(commonList);
@@ -791,6 +815,7 @@ public class POCValues {
         legSwell.add(CT_SCAN);
         legSwell.add(ULTRASOUND);
         pocMap.put(LEG_SWELLING, legSwell);
+        chiefComplaintMap.put(chiefComplaintIndex++, LEG_SWELLING);
 
         final List<String> facialSwelling = new ArrayList<>();
         facialSwelling.addAll(commonList);
@@ -807,6 +832,7 @@ public class POCValues {
         facialSwelling.add(CT_SCAN);
         facialSwelling.add(INPATIENT_CONSULT);
         pocMap.put(FACIAL_SWELLING, facialSwelling);
+        chiefComplaintMap.put(chiefComplaintIndex++, FACIAL_SWELLING);
 
         final List<String> allergicReaction = new ArrayList<>();
         allergicReaction.addAll(commonList);
@@ -816,6 +842,7 @@ public class POCValues {
         allergicReaction.add(IV_PLACEMENT);
         allergicReaction.add(PAIN_MEDICATION);
         pocMap.put(ALLERGIC_REACTION, allergicReaction);
+        chiefComplaintMap.put(chiefComplaintIndex++, ALLERGIC_REACTION);
 
         final List<String> palpitations = new ArrayList<>();
         palpitations.addAll(commonList);
@@ -834,6 +861,7 @@ public class POCValues {
         palpitations.add(CARDIOLOGY_CONSULT);
         palpitations.add(INPATIENT_CONSULT);
         pocMap.put(PALPITATIONS, palpitations);
+        chiefComplaintMap.put(chiefComplaintIndex++, PALPITATIONS);
 
         final List<String> rash = new ArrayList<>();
         rash.addAll(commonList);
@@ -843,6 +871,7 @@ public class POCValues {
         rash.add(IV_PLACEMENT);
         rash.add(PAIN_MEDICATION);
         pocMap.put(RASH, rash);
+        chiefComplaintMap.put(chiefComplaintIndex++, RASH);
 
         final List<String> overdose = new ArrayList<>();
         overdose.addAll(commonList);
@@ -866,6 +895,7 @@ public class POCValues {
         overdose.add(SOCIAL_WORK_CONSULT);
         overdose.add(INPATIENT_CONSULT);
         pocMap.put(OVERDOSE, overdose);
+        chiefComplaintMap.put(chiefComplaintIndex++, OVERDOSE);
 
         final List<String> abnormalLabs = new ArrayList<>();
         abnormalLabs.addAll(commonList);
@@ -888,6 +918,7 @@ public class POCValues {
         abnormalLabs.add(CT_SCAN);
         abnormalLabs.add(INPATIENT_CONSULT);
         pocMap.put(ABNORMAL_LABS, abnormalLabs);
+        chiefComplaintMap.put(chiefComplaintIndex++, ABNORMAL_LABS);
 
         final List<String> assault = new ArrayList<>();
         assault.addAll(commonList);
@@ -904,6 +935,7 @@ public class POCValues {
         assault.add(INPATIENT_CONSULT);
         assault.add(GENERAL_SURGERY);
         pocMap.put(ASSAULT, assault);
+        chiefComplaintMap.put(chiefComplaintIndex++, ASSAULT);
 
         //blood sugar problem
         final List<String> bsp = new ArrayList<>();
@@ -927,6 +959,7 @@ public class POCValues {
         bsp.add(NAUSEA_MEDICATION);
         bsp.add(INPATIENT_CONSULT);
         pocMap.put(BLOOD_SUGAR_PROBLEM, bsp);
+        chiefComplaintMap.put(chiefComplaintIndex++, BLOOD_SUGAR_PROBLEM);
 
         List<String> diarrhea = new ArrayList<>();
         diarrhea.addAll(commonList);
@@ -954,6 +987,7 @@ public class POCValues {
         diarrhea.add(INPATIENT_CONSULT);
         diarrhea.add(GI_CONSULT);
         pocMap.put(DIARRHEA, diarrhea);
+        chiefComplaintMap.put(chiefComplaintIndex++, DIARRHEA);
 
         List<String> burn = new ArrayList<>();
         burn.addAll(commonList);
@@ -971,6 +1005,7 @@ public class POCValues {
         burn.add(INPATIENT_CONSULT);
         burn.add(GENERAL_SURGERY);
         pocMap.put(BURN, burn);
+        chiefComplaintMap.put(chiefComplaintIndex++, BURN);
 
         List<String> eye_prob = new ArrayList<>();
         eye_prob.addAll(commonList);
@@ -978,6 +1013,7 @@ public class POCValues {
         eye_prob.add(EYE_DROPS);
         eye_prob.add(OPTHALMOLOGIST_CONSULT);
         pocMap.put(EYE_PROBLEMS, eye_prob);
+        chiefComplaintMap.put(chiefComplaintIndex++, EYE_PROBLEMS);
 
         List<String> fall = new ArrayList<>();
         fall.addAll(commonList);
@@ -1000,6 +1036,7 @@ public class POCValues {
         fall.add(INPATIENT_CONSULT);
         fall.add(GENERAL_SURGERY);
         pocMap.put(FALL, fall);
+        chiefComplaintMap.put(chiefComplaintIndex++, FALL);
 
         List<String> fever = new ArrayList<>();
         fever.addAll(commonList);
@@ -1025,6 +1062,7 @@ public class POCValues {
         fever.add(CT_SCAN);
         fever.add(NEUROLOGY_CONSULT);
         pocMap.put(FEVER, fever);
+        chiefComplaintMap.put(chiefComplaintIndex++, FEVER);
 
         List<String> ingestion = new ArrayList<>();
         ingestion.addAll(commonList);
@@ -1047,6 +1085,7 @@ public class POCValues {
         ingestion.add(SOCIAL_WORK_CONSULT);
         ingestion.add(INPATIENT_CONSULT);
         pocMap.put(INGESTION, ingestion);
+        chiefComplaintMap.put(chiefComplaintIndex++, INGESTION);
 
         List<String> pedFever = new ArrayList<>();
         pedFever.addAll(commonList);
@@ -1058,6 +1097,7 @@ public class POCValues {
         pedFever.add(IV_FLUID);
         pedFever.add(URINALYSIS);
         pocMap.put(PEDIATRIC_FEVER, pedFever);
+        chiefComplaintMap.put(chiefComplaintIndex++, PEDIATRIC_FEVER);
 
         List<String> psych = new ArrayList<>();
         psych.addAll(commonList);
@@ -1080,6 +1120,7 @@ public class POCValues {
         psych.add(SOCIAL_WORK_CONSULT);
         psych.add(INPATIENT_CONSULT);
         pocMap.put(PSYCHIATRIC_BEHAVIORAL, psych);
+        chiefComplaintMap.put(chiefComplaintIndex++, PSYCHIATRIC_BEHAVIORAL);
 
         List<String> rapid = new ArrayList<>();
         rapid.addAll(commonList);
@@ -1100,6 +1141,7 @@ public class POCValues {
         rapid.add(CARDIOLOGY_CONSULT);
         rapid.add(INPATIENT_CONSULT);
         pocMap.put(RAPID_HEART_RATE, rapid);
+        chiefComplaintMap.put(chiefComplaintIndex++, RAPID_HEART_RATE);
 
         List<String> respiratory = new ArrayList<>();
         respiratory.addAll(commonList);
@@ -1123,6 +1165,7 @@ public class POCValues {
         respiratory.add(NEBULIZER_TREATMENT);
         respiratory.add(PEAK_FLOW_METER);
         pocMap.put(RESPIRATORY_FAILURE, respiratory);
+        chiefComplaintMap.put(chiefComplaintIndex++, RESPIRATORY_FAILURE);
 
         List<String> seizure = new ArrayList<>();
         seizure.addAll(commonList);
@@ -1143,6 +1186,7 @@ public class POCValues {
         seizure.add(SOCIAL_WORK_CONSULT);
         seizure.add(INPATIENT_CONSULT);
         pocMap.put(SEIZURE, seizure);
+        chiefComplaintMap.put(chiefComplaintIndex++, SEIZURE);
 
         List<String> stroke= new ArrayList<>();
         stroke.addAll(commonList);
@@ -1162,6 +1206,7 @@ public class POCValues {
         stroke.add(X_RAY);
         stroke.add(MRI);
         pocMap.put(STROKE_CVA, stroke);
+        chiefComplaintMap.put(chiefComplaintIndex++, STROKE_CVA);
 
         List<String> trauma = new ArrayList<>();
         trauma.addAll(commonList);
@@ -1184,6 +1229,7 @@ public class POCValues {
         trauma.add(GENERAL_SURGERY);
         trauma.add(INPATIENT_CONSULT);
         pocMap.put(TRAUMA, trauma);
+        chiefComplaintMap.put(chiefComplaintIndex++, TRAUMA);
 
         List<String> unresponsive = new ArrayList<>();
         unresponsive.addAll(commonList);
@@ -1210,6 +1256,7 @@ public class POCValues {
         unresponsive.add(MRI);
         unresponsive.add(INPATIENT_CONSULT);
         pocMap.put(UNRESPONSIVE, unresponsive);
+        chiefComplaintMap.put(chiefComplaintIndex++, UNRESPONSIVE);
 
         List<String> urinary = new ArrayList<>();
         urinary.addAll(commonList);
@@ -1228,6 +1275,7 @@ public class POCValues {
         urinary.add(OBGYN_CONSULT);
         urinary.add(INPATIENT_CONSULT);
         pocMap.put(URINARY_TRACT_INFECTION, urinary);
+        chiefComplaintMap.put(chiefComplaintIndex++, URINARY_TRACT_INFECTION);
 
         List<String> vaginalDischarge = new ArrayList<>();
         vaginalDischarge.addAll(commonList);
@@ -1245,6 +1293,7 @@ public class POCValues {
         vaginalDischarge.add(OBGYN_CONSULT);
         vaginalDischarge.add(INPATIENT_CONSULT);
         pocMap.put(VAGINAL_DISCHARGE, vaginalDischarge);
+        chiefComplaintMap.put(chiefComplaintIndex++, VAGINAL_DISCHARGE);
 
 
         // MAPPING TESTS TO THEIR DESCRIPTIONS

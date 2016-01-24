@@ -252,6 +252,21 @@ public class BedModeActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        register();
+    }
+
+    private void register() {
+        if (SocketService.mService != null) {
+            messageRouting.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
+            messageRouting.retrieveState(prefs.getCurrentState());
+
+        }
+    }
+
+    @Override
     public void refresh() {
         super.refresh();
 

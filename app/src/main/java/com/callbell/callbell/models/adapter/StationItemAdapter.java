@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
+import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State.MessageReason;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.Station.PriorityList;
@@ -81,7 +82,7 @@ public class StationItemAdapter extends BaseAdapter {
         locationField.setText(stateList.get(position).getState().getLocation());
         physicianField.setText(stateList.get(position).getState().getPhysician());
         nurseField.setText(stateList.get(position).getState().getNurse());
-        chiefComplaintField.setText(stateList.get(position).getState().getChiefComplaint());
+        chiefComplaintField.setText(POCValues.chiefComplaintMap.getValue(stateList.get(position).getState().getChiefComplaint()));
         painRatingField.setText(String.valueOf(stateList.get(position).getState().getPainRating()));
 
         connectionIndicator.setBackgroundColor(stateList.get(position).getState().isConnected()
