@@ -87,9 +87,9 @@ public class BedModeActivity
         ButterKnife.inject(this);
         ((CallBellApplication) getApplication()).inject(this);
 
-        mStaffFragment = StaffFragment.newInstance(prefs.getCurrentState());
+        mStaffFragment = StaffFragment.newInstance(PrefManager.getCurrentState());
         mCallBellsFragment = CallBellsFragment.newInstance();
-        mPlanOfCareFragment = PlanOfCareFragment.newInstance(prefs.getCurrentState());
+        mPlanOfCareFragment = PlanOfCareFragment.newInstance(PrefManager.getCurrentState());
         mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.BED_MODE_ACTIVITY);
 
         getFragmentManager()
@@ -140,6 +140,7 @@ public class BedModeActivity
                     Log.d(TAG, "TABLET STATE UPDATED");
                     State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
 
+                    prefs.setState(st);
                     mStaffFragment.updateState(st);
                     mPlanOfCareFragment.updateState(st);
                     playSoundOnce();
@@ -258,13 +259,7 @@ public class BedModeActivity
         register();
     }
 
-    private void register() {
-        if (SocketService.mService != null) {
-            messageRouting.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
-            messageRouting.retrieveState(prefs.getCurrentState());
 
-        }
-    }
 
     @Override
     public void refresh() {
@@ -276,7 +271,7 @@ public class BedModeActivity
 
         //Restart Activity
         Intent i = new Intent(this, BedModeActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 

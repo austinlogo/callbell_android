@@ -24,8 +24,6 @@ import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.presentation.bed.BedModeActivity;
 import com.callbell.callbell.presentation.station.StationActivity;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -75,6 +73,15 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        initStateAndUI();
+        setButtonsEnableStatus();
+        setSuperUserPermission(prefs.isSuperUser());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -83,10 +90,6 @@ public class LoginFragment extends Fragment {
         ((CallBellApplication) getActivity().getApplication()).inject(this);
         ButterKnife.inject(this, view);
 
-        intiStateAndUI();
-        setButtonsEnableStatus();
-        setSuperUserPermission(prefs.isSuperUser());
-
         bedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,8 +97,10 @@ public class LoginFragment extends Fragment {
 
                 register(prefs.BED_MODE);
                 Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
-                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(newActivity);
+//                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(newActivity);
+
+                mListener.launchActivity(newActivity);
             }
         });
 
@@ -104,8 +109,10 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 register(prefs.STATION_MODE);
                 Intent newActivity = new Intent(getActivity().getApplicationContext(), StationActivity.class);
-                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(newActivity);
+//                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(newActivity);
+                mListener.launchActivity(newActivity);
+
             }
         });
 
@@ -156,23 +163,24 @@ public class LoginFragment extends Fragment {
 
 
     public void register(String mod) {
+
+        State thisState = State.newBlankInstance(
+                hospital_id.getText().toString(),
+                group_id.getText().toString(),
+                location_id.getText().toString(),
+                mod
+        );
+
         if (PrefManager.BED_MODE.equals(mod)) {
 
-            State thisState = new State(prefs);
-
             if (thisState.equals(PrefManager.getCurrentState())) {
-                prefs.setState(thisState);
+                prefs.setState(lastState);
             } else {
-                prefs.setState(State.newBlankInstance(
-                        hospital_id.getText().toString(),
-                        group_id.getText().toString(),
-                        location_id.getText().toString(),
-                        mod
-                ));
+                prefs.setState(thisState);
                 prefs.setPainRating(0);
             }
 
-        } else {
+        } else { // STATION
             prefs.setState(State.newBlankInstance(
                     hospital_id.getText().toString(),
                     group_id.getText().toString(),
@@ -183,7 +191,7 @@ public class LoginFragment extends Fragment {
 
     }
 
-    private void intiStateAndUI() {
+    private void initStateAndUI() {
         lastState = new State(prefs);
         hospital_id.setText(lastState.getHospital());
         group_id.setText(lastState.getGroup());
@@ -227,6 +235,6 @@ public class LoginFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface LoginFragmentCallback {
-
+        void launchActivity(Intent i);
     }
 }

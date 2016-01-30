@@ -92,13 +92,6 @@ public class TitleBarFragment extends Fragment {
         ((CallBellApplication) getActivity().getApplication()).inject(this);
         ButterKnife.inject(this, view);
 
-        //Set Values
-        mBedNumber.setText(String.format(
-                "%s %s #%s",
-                prefs.getCurrentState().getGroup(),
-                getText(R.string.bed),
-                prefs.getCurrentState().getLocation()));
-
         mActivityValue = bundle.getInt(ACTIVITY);
 
         setUI();
@@ -117,6 +110,13 @@ public class TitleBarFragment extends Fragment {
     }
 
     private void setUI() {
+
+        //Set Values
+        mBedNumber.setText(String.format(
+                "%s %s #%s",
+                PrefManager.getCurrentState().getGroup(),
+                getText(R.string.bed),
+                PrefManager.getCurrentState().getLocation()));
 
         switch (mActivityValue) {
             case BED_MODE_ACTIVITY:

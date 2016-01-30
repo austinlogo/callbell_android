@@ -30,6 +30,7 @@ public class LoginActivity
 
     private SocketService mService;
     private boolean mBound = false;
+    private IntentFilter filter;
 
     TitleBarFragment mTitleBarFragment;
     LoginFragment mLoginFragment;
@@ -56,7 +57,7 @@ public class LoginActivity
                 .commit();
 
 
-        IntentFilter filter = new IntentFilter();
+        filter = new IntentFilter();
         filter.addAction(PrefManager.EVENT_SU_MODE_CHANGE);
 
         mBroadcastReceiver = new BroadcastReceiver() {
@@ -68,7 +69,7 @@ public class LoginActivity
                 }
             }
         };
-        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, filter);
+
     }
 
     @Override
@@ -92,9 +93,23 @@ public class LoginActivity
     protected void onResume() {
         super.onResume();
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, filter);
+
         if (!isActivityLocaleUpdated()) {
             currentLocale = LocaleUtil.getLocale(this);
             refresh();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+    }
+
+    @Override
+    public void launchActivity(Intent i) {
+        startActivity(i);
     }
 }

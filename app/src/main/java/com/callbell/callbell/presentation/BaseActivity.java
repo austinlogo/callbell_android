@@ -23,10 +23,11 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
-import com.callbell.callbell.util.LocaleUtil;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
+import com.callbell.callbell.service.services.SocketService;
+import com.callbell.callbell.util.LocaleUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import javax.inject.Inject;
@@ -49,7 +50,16 @@ public class BaseActivity extends AppCompatActivity {
 
     public MediaPlayer notificationSound;
 
+    public static int DEFAULT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            | Intent.FLAG_ACTIVITY_CLEAR_TOP;
+
+
     @Override
+    public void startActivity(Intent intent) {
+        intent.addFlags(BaseActivity.DEFAULT_FLAGS);
+        super.startActivity(intent);
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -74,6 +84,13 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
+    protected void register() {
+        if (SocketService.mService != null) {
+            mMessageRouting.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
+            mMessageRouting.retrieveState(prefs.getCurrentState());
+
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

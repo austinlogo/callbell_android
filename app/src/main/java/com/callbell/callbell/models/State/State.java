@@ -81,7 +81,7 @@ public class State {
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
-                0,
+                10,
                 0
         );
     }

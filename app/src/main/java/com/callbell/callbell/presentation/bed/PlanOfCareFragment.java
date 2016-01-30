@@ -185,7 +185,7 @@ public class PlanOfCareFragment extends Fragment {
 
         chiefComplaintSpinner.setOnItemSelectedListener(new ChiefComplaintItemSelectedListener());
 
-        overrideNextChiefComplaintSpinnerUpdate = true;
+//        overrideNextChiefComplaintSpinnerUpdate = true;
         mPlanOfCareTests.getPatientListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -342,6 +342,7 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     public void updateState(State st) {
+        Log.d(TAG, "Setting Chief Complaint override to true");
         overrideNextChiefComplaintSpinnerUpdate = true;
         mState = st;
         mListener.savePOCState(mState);
@@ -361,8 +362,10 @@ public class PlanOfCareFragment extends Fragment {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            if (overrideNextChiefComplaintSpinnerUpdate) {
+            if (!prefs.isSuperUser()) {
+
                 overrideNextChiefComplaintSpinnerUpdate = false;
+                Log.d(TAG, "Setting Chief Complaint override to False");
                 return;
             }
 
