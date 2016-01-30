@@ -236,6 +236,8 @@ public class SocketService extends Service {
     }
 
     public void registerDevice(State state) {
+
+
         mPingThreadRunnable = new PingServer(state.getTabletName());
         mPingThread = new Thread(mPingThreadRunnable);
         startSocketEmitter(SocketOperation.REGISTER, state.toJSON().toString());
@@ -244,6 +246,7 @@ public class SocketService extends Service {
 
     public void unregisterDevice(State state) {
         startSocketEmitter(SocketOperation.UNREGISTER, state.toJSON().toString());
+
         mPingThreadRunnable.terminate();
         mThread.interrupt();
 

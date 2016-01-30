@@ -26,10 +26,6 @@ public class LoginActivity
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private BroadcastReceiver mBroadcastReceiver;
-    private Socket socket;
-
-    private SocketService mService;
-    private boolean mBound = false;
     private IntentFilter filter;
 
     TitleBarFragment mTitleBarFragment;
@@ -37,9 +33,6 @@ public class LoginActivity
 
     @Inject
     PrefManager prefs;
-
-    @Inject
-    MessageRouting mMessage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
