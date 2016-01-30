@@ -95,6 +95,12 @@ public class State {
         nurse = prefs.nurse();
         resident = prefs.resident();
         chiefComplaint = prefs.chiefComplaint();
+        pendingTests = prefs.pendingTestItems();
+        pendingMedications = prefs.pendingMedicationItems();
+        allTests = prefs.allTestItems();
+        allMedications = prefs.getAllMedicationItems();
+        doneTests = prefs.doneTestItems();
+        doneMedications = prefs.doneMedicationItems();
         acceptablePain = prefs.acceptablePain();
         painRating = prefs.painRating();
     }

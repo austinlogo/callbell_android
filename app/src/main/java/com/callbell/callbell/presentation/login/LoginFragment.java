@@ -158,26 +158,9 @@ public class LoginFragment extends Fragment {
     public void register(String mod) {
         if (PrefManager.BED_MODE.equals(mod)) {
 
-            State thisState = new State(
-                    hospital_id.getText().toString(),
-                    group_id.getText().toString(),
-                    location_id.getText().toString(),
-                    mod,
-                    prefs.physician(),
-                    prefs.nurse(),
-                    prefs.resident(),
-                    prefs.chiefComplaint(),
-                    prefs.pendingTestItems(),
-                    prefs.pendingMedicationItems(),
-                    prefs.doneTestItems(),
-                    prefs.doneMedicationItems(),
-                    prefs.allTestItems(),
-                    prefs.getAllMedicationItems(),
-                    // TODO: Set some standards for this
-                    10,
-                    prefs.painRating());
+            State thisState = new State(prefs);
 
-            if (thisState.equals(prefs.getCurrentState())) {
+            if (thisState.equals(PrefManager.getCurrentState())) {
                 prefs.setState(thisState);
             } else {
                 prefs.setState(State.newBlankInstance(

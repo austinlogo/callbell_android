@@ -329,10 +329,7 @@ public class PlanOfCareFragment extends Fragment {
         chiefComplaintSpinner.setEnabled(isSuperUser);
         mPOCSpinnerAndAcceptablePainContainer.setVisibility(isSuperUser ? View.VISIBLE : View.GONE);
 
-        Log.d(TAG, "AFL " + mState.getPendingTests().size());
-
         mPlanOfCareTests.setVisibility((!isSuperUser && mState.isTestListEmpty()) ? View.GONE : View.VISIBLE);
-        Log.d(TAG, "AFL " + mPlanOfCareTests.getShownItemCount());
         mPlanOfCareMedications.setVisibility( (!isSuperUser && mState.isMedicationListEmpty() ) ? View.GONE : View.VISIBLE);
     }
 

@@ -348,6 +348,6 @@ public class PrefManager {
     }
 
     public int acceptablePain() {
-        return prefs.getInt(State.ACCEPTABLE_PAIN_ID, 0);
+        return prefs.getInt(State.ACCEPTABLE_PAIN_ID, 10);
     }
 }
