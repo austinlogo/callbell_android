@@ -137,8 +137,6 @@ public class PrefManager {
     public void setState(State newState) {
         SharedPreferences.Editor sp = prefs.edit();
 
-        Log.d(TAG, "RES: " + resident());
-
         sp.putString(State.HOSPITAL_ID, newState.getHospital());
         sp.putString(State.LOCATION_ID, newState.getLocation());
         sp.putString(State.GROUP_ID, newState.getGroup());
@@ -157,8 +155,6 @@ public class PrefManager {
 
         setAllActionTestItems(newState.getAllTests());
         setAllActionMedicationItems(newState.getAllMedications());
-
-        Log.d(TAG, "RES2: " + resident());
 
         currentState = new State(newState);
     }
@@ -238,7 +234,7 @@ public class PrefManager {
     }
 
     public void setIntList(List<Integer> list, String key) {
-        Log.d(TAG, "SET SHOWN ACTIONS");
+        Log.d(TAG, "SET SHOWN ACTIONS: " + key);
         SharedPreferences.Editor sp = prefs.edit();
 
 
@@ -258,7 +254,6 @@ public class PrefManager {
     private List<Integer> getIntListFromPrefs(String key) {
         try {
             String arrayString = prefs.getString(key, "");
-            Log.d(TAG, "pendingTestItems-checkedValuePostions: " + arrayString);
 
             if (arrayString.isEmpty()) {
                 return new ArrayList<Integer>();

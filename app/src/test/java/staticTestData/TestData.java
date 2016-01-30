@@ -18,13 +18,13 @@ public class TestData {
                 "DOC",
                 "NURSE",
                 "RES",
-                "CHIEF",
+                0,
                 Arrays.asList(0,1),
                 Arrays.asList(5,6),
                 Arrays.asList(4,7),
                 Arrays.asList(6,7),
-                Arrays.asList("one", "two", "three", "four"),
-                Arrays.asList("five", "six", "seven", "eight"),
+                Arrays.asList(0,1,2,3,4),
+                Arrays.asList(5,6,7,8),
                 1,
                 10);
     }
@@ -36,13 +36,13 @@ public class TestData {
                 "",
                 "",
                 "",
-                "",
+                0,
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
                 new ArrayList<Integer>(),
-                new ArrayList<String>(),
-                new ArrayList<String>(),
+                new ArrayList<Integer>(),
+                new ArrayList<Integer>(),
                 1,
                 10);
     }
