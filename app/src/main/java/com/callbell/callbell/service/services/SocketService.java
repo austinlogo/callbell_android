@@ -2,7 +2,6 @@ package com.callbell.callbell.service.services;
 
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.EmbossMaskFilter;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -43,14 +42,15 @@ public class SocketService extends Service {
     public static SocketService mService;
 
     private static boolean isServerDisconnected = false;
+    public static boolean isRegistered = false;
 
 
     private static final String TAG = SocketService.class.getSimpleName();
     private final IBinder mBinder = new LocalBinder();
     public Socket mSocket;
 
-    Thread mThread, mPingThread;
-    SocketListeners mThreadRunnable;
+    Thread mSocketListenerThread, mPingThread;
+    SocketListeners mSocketListenerRunnable;
     PingServer mPingThreadRunnable;
 
     public enum SocketOperation {
@@ -81,9 +81,9 @@ public class SocketService extends Service {
             Log.e(TAG, "Exception with Socket: " + e);
         }
 
-        mThreadRunnable = new SocketListeners();
-        mThread = new Thread(mThreadRunnable);
-        mThread.start();
+        mSocketListenerRunnable = new SocketListeners();
+        mSocketListenerThread = new Thread(mSocketListenerRunnable);
+        mSocketListenerThread.start();
 
         return START_STICKY;
     }
@@ -184,13 +184,16 @@ public class SocketService extends Service {
                     }
                 }
             });
+        }
 
+        public void unregister() {
+            mSocket.disconnect();
         }
     }
 
     public class PingServer implements Runnable {
 
-        private volatile boolean running = true;
+        private boolean running = true;
         String name;
 
         public PingServer(String tabletName) {
@@ -237,19 +240,24 @@ public class SocketService extends Service {
 
     public void registerDevice(State state) {
 
-
         mPingThreadRunnable = new PingServer(state.getTabletName());
         mPingThread = new Thread(mPingThreadRunnable);
         startSocketEmitter(SocketOperation.REGISTER, state.toJSON().toString());
         mPingThread.start();
+
+        isRegistered = true;
     }
 
     public void unregisterDevice(State state) {
+
+        isRegistered = false;
         startSocketEmitter(SocketOperation.UNREGISTER, state.toJSON().toString());
 
+        mPingThread.interrupt();
         mPingThreadRunnable.terminate();
-        mThread.interrupt();
 
+        mSocketListenerRunnable.unregister();
+        mSocketListenerThread.interrupt();
     }
 
     public void sendMessage(Request request) {

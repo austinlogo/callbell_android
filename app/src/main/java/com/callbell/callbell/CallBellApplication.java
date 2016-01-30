@@ -1,11 +1,13 @@
 package com.callbell.callbell;
 
 import android.app.Application;
+import android.content.Intent;
 import android.view.WindowManager;
 
 import com.callbell.callbell.dagger.AndroidModule;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
+import com.callbell.callbell.service.services.SocketService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,8 @@ public class CallBellApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        startService(new Intent(getApplicationContext(), SocketService.class));
 
         new POCValues(this);
         new MedicationValues(this);

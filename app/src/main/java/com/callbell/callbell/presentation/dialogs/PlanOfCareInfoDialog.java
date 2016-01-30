@@ -114,9 +114,6 @@ public class PlanOfCareInfoDialog extends Activity {
         mVideo.setMediaController(videoControls);
         mVideo.start();
 
-
-
-
         mTitleText.setText(mTitle);
         mExpandedNameText.setText(mExpandedName);
         mBodyText.setText(mBody);

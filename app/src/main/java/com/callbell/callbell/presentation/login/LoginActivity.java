@@ -41,7 +41,6 @@ public class LoginActivity
         mLoginFragment = LoginFragment.newInstance();
         mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.LOGIN_MODE_ACTIVITY);
 
-        startService(new Intent(getApplicationContext(), SocketService.class));
 
         getFragmentManager()
                 .beginTransaction()

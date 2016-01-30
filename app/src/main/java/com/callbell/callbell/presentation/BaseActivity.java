@@ -85,7 +85,8 @@ public class BaseActivity extends AppCompatActivity {
 
 
     protected void register() {
-        if (SocketService.mService != null) {
+        if (SocketService.mService != null && !SocketService.isRegistered) {
+
             mMessageRouting.register(prefs.getCurrentState(), prefs.getCurrentState().getTabletName());
             mMessageRouting.retrieveState(prefs.getCurrentState());
 

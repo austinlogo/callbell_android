@@ -162,11 +162,9 @@ public class BedModeActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        messageRouting.uploadEducationMetrics(prefs.getCurrentState(), EducationMetricLogger.getInstance().getEducationMetricList());
         SocketService.getInstance().unregisterDevice(prefs.getCurrentState());
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
-
-        messageRouting.uploadEducationMetrics(prefs.getCurrentState(), EducationMetricLogger.getInstance().getEducationMetricList());
-
     }
 
     @Override

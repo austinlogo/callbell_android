@@ -68,6 +68,10 @@ public class MessageRouting implements PostRequestWithCallbackTask.PostRequestTa
     }
 
     public void uploadEducationMetrics(State st, List<EducationMetric> educationMetricList) {
+        if (educationMetricList.isEmpty()) {
+            return;
+        }
+
         UploadEducationMetricsRequest request = new UploadEducationMetricsRequest(st, educationMetricList);
         SocketService.getInstance().uploadEducationMetrics(request);
         EducationMetricLogger.getInstance().getEducationMetricList().clear();
