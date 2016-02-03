@@ -1,6 +1,8 @@
 package com.callbell.callbell.presentation.bed;
 
+import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -30,11 +30,8 @@ import com.callbell.callbell.presentation.dialogs.PlanOfCareInfoDialog;
 import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.service.services.SocketService;
-import com.callbell.callbell.service.tasks.PainRatingAsyncTask;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -81,6 +78,7 @@ public class BedModeActivity
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "BedModeActivity");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_mode);
 
@@ -147,7 +145,6 @@ public class BedModeActivity
                     BeaToast.makeText(context, R.string.new_info, BeaToast.LENGTH_LONG).show();
                 } else if (PrefManager.EVENT_RATE_PAIN.equals(intent.getAction())) {
                     playSoundOnce();
-
                     PainRatingDialog dialog = new PainRatingDialog();
                     dialog.show(getFragmentManager(), "PAIN RATING DIALOG");
                 }
@@ -160,11 +157,45 @@ public class BedModeActivity
     ////////// ACTIVITY ////////////////////////////////////////////////////////////////////////////
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if (!hasFocus) {
+            Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+            sendBroadcast(closeDialog);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        lockScreen();
+
+        if (persistConnectionOnDestroy) {
+            persistConnectionOnDestroy = false;
+        }
+
+        register();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "pause called");
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        messageRouting.uploadEducationMetrics(prefs.getCurrentState(), EducationMetricLogger.getInstance().getEducationMetricList());
-        SocketService.getInstance().unregisterDevice(prefs.getCurrentState());
+
+        unlockScreen();
+
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
+        if (!persistConnectionOnDestroy) {
+            messageRouting.uploadEducationMetrics(prefs.getCurrentState(), EducationMetricLogger.getInstance().getEducationMetricList());
+            SocketService.getInstance().unregisterDevice(prefs.getCurrentState());
+        }
     }
 
     @Override
@@ -251,17 +282,9 @@ public class BedModeActivity
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        register();
-    }
-
-
-
-    @Override
     public void refresh() {
         super.refresh();
+        persistConnectionOnDestroy = true;
 
         //Save State
         savePOCState(mPlanOfCareFragment.getState());
@@ -269,7 +292,7 @@ public class BedModeActivity
 
         //Restart Activity
         Intent i = new Intent(this, BedModeActivity.class);
-//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
         startActivity(i);
     }
 

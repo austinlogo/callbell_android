@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -47,11 +48,37 @@ public class BaseActivity extends AppCompatActivity {
 
     protected Menu mOptionsMenu;
     protected LocaleUtil.AvailableLocales currentLocale;
+    protected boolean active;
+
+    private PowerManager mPowerManager;
+    private PowerManager.WakeLock mWakeLock;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        active = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        active = false;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 
     public MediaPlayer notificationSound;
 
     public static int DEFAULT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TASK
             | Intent.FLAG_ACTIVITY_CLEAR_TOP;
+
+
+    // Determine if we want to unregister the device onDestroy()
+    protected boolean persistConnectionOnDestroy = false;
 
 
     @Override
@@ -67,6 +94,7 @@ public class BaseActivity extends AppCompatActivity {
         notificationSound.setLooping(true);
 
         currentLocale = LocaleUtil.getLocale(this);
+        mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.base_layout);
@@ -194,5 +222,16 @@ public class BaseActivity extends AppCompatActivity {
     public void refresh() {
         new POCValues(this);
         new MedicationValues(this);
+    }
+
+    public void lockScreen(){
+        // turn on screen
+        Log.v(TAG, "ON!");
+        mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "tag");
+        mWakeLock.acquire();
+    }
+
+    public void unlockScreen() {
+        mWakeLock.release();
     }
 }

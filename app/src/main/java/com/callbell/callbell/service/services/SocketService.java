@@ -249,13 +249,16 @@ public class SocketService extends Service {
     }
 
     public void unregisterDevice(State state) {
-
         isRegistered = false;
+
+        mPingThreadRunnable.terminate();
         startSocketEmitter(SocketOperation.UNREGISTER, state.toJSON().toString());
 
-        mPingThread.interrupt();
-        mPingThreadRunnable.terminate();
 
+    }
+
+    private void cleanUp() {
+//        mPingThread.interrupt();
         mSocketListenerRunnable.unregister();
         mSocketListenerThread.interrupt();
     }
@@ -349,6 +352,10 @@ public class SocketService extends Service {
         public void run() {
             Log.d(TAG, "Starting SocketEmitter Runnable with Operation: " + mOperation.name());
             mSocket.emit(mOperation.name(), payload);
+
+            if (mOperation.equals(SocketOperation.UNREGISTER)) {
+                cleanUp();
+            }
         }
     }
 

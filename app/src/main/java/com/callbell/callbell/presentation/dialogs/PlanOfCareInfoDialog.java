@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.callbell.callbell.R;
+import com.callbell.callbell.data.EducationMetricLogger;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.presentation.bed.PlanOfCareFragment;
 
@@ -124,5 +125,12 @@ public class PlanOfCareInfoDialog extends Activity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        EducationMetricLogger.getInstance().add(mTitle, timeOpen, new Date().getTime() - timeOpen.getTime());
     }
 }
