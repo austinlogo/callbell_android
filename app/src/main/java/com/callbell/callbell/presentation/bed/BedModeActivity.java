@@ -170,7 +170,7 @@ public class BedModeActivity
     protected void onResume() {
         super.onResume();
 
-        lockScreen();
+//        lockScreen();
 
         if (persistConnectionOnDestroy) {
             persistConnectionOnDestroy = false;
@@ -189,7 +189,7 @@ public class BedModeActivity
     protected void onDestroy() {
         super.onDestroy();
 
-        unlockScreen();
+//        unlockScreen();
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
         if (!persistConnectionOnDestroy) {
