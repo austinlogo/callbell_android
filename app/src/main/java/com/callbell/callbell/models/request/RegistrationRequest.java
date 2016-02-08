@@ -23,11 +23,6 @@ public class RegistrationRequest extends Request {
         register_id = reg;
     }
 
-    public RegistrationRequest(RegistrationRequest request) {
-        mState = new State(request.getState());
-        register_id = request.getRegisterId();
-    }
-
     public State getState() {
         return mState;
     }

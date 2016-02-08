@@ -73,8 +73,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public MediaPlayer notificationSound;
 
-    public static int DEFAULT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TASK
-            | Intent.FLAG_ACTIVITY_CLEAR_TOP;
+    public static int DEFAULT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 
     // Determine if we want to unregister the device onDestroy()

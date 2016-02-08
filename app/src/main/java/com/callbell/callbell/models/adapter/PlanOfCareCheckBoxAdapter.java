@@ -22,12 +22,14 @@ import java.util.Set;
  */
 public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
     private BiMap<Integer, String> map;
+    private List<String> mObjects;
     private Set<Integer> mPendingItems, mDoneItems;
     private boolean isSuperUser;
 
     public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects, BiMap<Integer, String> mapping) {
-        super(context, resource, objects);
+        super(context, resource);
 
+        mObjects = objects;
         isSuperUser = false;
         mPendingItems = new HashSet<>();
         mDoneItems = new HashSet<>();
@@ -45,8 +47,12 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
     @Override
     public void add(String object) {
-        super.add(object);
-//        mItems.add(object);
+        mObjects.add(object);
+    }
+
+    @Override
+    public int getCount() {
+        return mObjects.size();
     }
 
     @Override
@@ -85,14 +91,14 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
     public void resetList(String key) {
         super.clear();
+
         List<String> newList = new ArrayList<>(POCValues.pocMap.get(key));
-//        Collections.sort(newList);
-        super.addAll(newList);
+        mObjects.addAll(newList);
     }
 
     @Override
     public String getItem(int position) {
-        return super.getItem(position);
+        return mObjects.get(position);
 
     }
 
@@ -145,28 +151,6 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
     public Set<Integer> getDoneItems() {
         return mDoneItems;
     }
-
-//    public List<Integer> getPendingItems() {
-//        List<Integer> pendingItems = new ArrayList<>();
-//        for (int index : mPendingItems.keySet()) {
-//            if (mPendingItems.get(index)) {
-//                pendingItems.add(index);
-//            }
-//        }
-//
-//        return pendingItems;
-//    }
-//
-//    public List<Integer> getDoneItems() {
-//        List<Integer> doneItems = new ArrayList<>();
-//        for (int index : mDoneItems.keySet()) {
-//            if (mDoneItems.get(index)) {
-//                doneItems.add(index);
-//            }
-//        }
-//
-//        return doneItems;
-//    }
 
     public static TernaryListItem getViewByPosition(int pos, ListView listView) {
         try {
