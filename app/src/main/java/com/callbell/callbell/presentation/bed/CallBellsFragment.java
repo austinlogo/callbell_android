@@ -41,10 +41,10 @@ public class CallBellsFragment extends Fragment {
 
     private int mOrientation = -1;
 
-    public static CallBellsFragment newInstance() {
+    public static CallBellsFragment newInstance(boolean isSimpleMode) {
         CallBellsFragment fragment = new CallBellsFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ORIENTATION_KEY, LinearLayout.VERTICAL);
+        bundle.putBoolean(ORIENTATION_KEY, isSimpleMode);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -58,7 +58,7 @@ public class CallBellsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mOrientation = LinearLayout.VERTICAL;
+//        mOrientation = LinearLayout.VERTICAL;
     }
 
     @Override
@@ -75,7 +75,9 @@ public class CallBellsFragment extends Fragment {
         mButtonHelp.setOnClickListener(new CallBellListener());
 
         if (mOrientation == -1) {
-            mOrientation = getArguments().getInt(ORIENTATION_KEY);
+            mOrientation = getArguments().getBoolean(ORIENTATION_KEY)
+                    ? LinearLayout.HORIZONTAL
+                    : LinearLayout.VERTICAL;
         }
 
         toggleMode(mOrientation == LinearLayout.HORIZONTAL);

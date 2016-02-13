@@ -92,6 +92,7 @@ public class PlanOfCareFragment extends Fragment {
 
     ArrayAdapter<String> autoCompleteOptions;
     private boolean overrideNextChiefComplaintSpinnerUpdate = false;
+    private boolean isInitialized = false;
 
     // TODO: Rename and change types of parameters
     public static PlanOfCareFragment newInstance(State st) {
@@ -121,6 +122,8 @@ public class PlanOfCareFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_planofcare, container, false);
+        isInitialized = true;
+
         ButterKnife.inject(this, view);
         ((CallBellApplication) getActivity().getApplication()).inject(this);
 
@@ -292,6 +295,9 @@ public class PlanOfCareFragment extends Fragment {
     }
 
     private void saveValues() {
+        if (!isInitialized) {
+            return;
+        }
 
         mPlanOfCareMedications.updatePatientList();
         mPlanOfCareTests.updatePatientList();

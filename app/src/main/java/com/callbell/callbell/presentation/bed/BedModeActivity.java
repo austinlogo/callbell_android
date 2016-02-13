@@ -62,7 +62,7 @@ public class BedModeActivity
     private CallBellsFragment mCallBellsFragment;
     private PlanOfCareFragment mPlanOfCareFragment;
     private TitleBarFragment mTitleBarFragment;
-    private boolean mSimpleMode = false;
+    private boolean mSimpleMode;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,22 +80,33 @@ public class BedModeActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_mode);
+        mSimpleMode = prefs.isSimpleMode();
 
         ButterKnife.inject(this);
         ((CallBellApplication) getApplication()).inject(this);
 
         mStaffFragment = StaffFragment.newInstance(PrefManager.getCurrentState());
-        mCallBellsFragment = CallBellsFragment.newInstance();
+        mCallBellsFragment = CallBellsFragment.newInstance(mSimpleMode);
         mPlanOfCareFragment = PlanOfCareFragment.newInstance(PrefManager.getCurrentState());
-        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.BED_MODE_ACTIVITY);
+        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.BED_MODE_ACTIVITY, mSimpleMode);
 
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.bed_mode_title_bar_fragment_container, mTitleBarFragment, "Title Bar")
-                .add(R.id.bed_mode_staff_fragment_container, mStaffFragment, "Staff Information")
-                .add(R.id.bed_mode_plan_of_care_fragment_container, mPlanOfCareFragment, "Plan of Care")
-                .add(R.id.bed_mode_CallBellsFragment_container, mCallBellsFragment, "Call Bells")
-                .commit();
+        FragmentManager fm = getFragmentManager();
+        if (mSimpleMode) {
+            fm.beginTransaction()
+                    .add(R.id.bed_mode_title_bar_fragment_container, mTitleBarFragment, "Title Bar")
+                    .add(R.id.bed_mode_staff_fragment_container, mStaffFragment, "Staff Information")
+                    .add(R.id.bed_mode_plan_of_care_fragment_container, mCallBellsFragment, "Plan of Care")
+                    .commit();
+        } else {
+            fm.beginTransaction()
+                    .add(R.id.bed_mode_title_bar_fragment_container, mTitleBarFragment, "Title Bar")
+                    .add(R.id.bed_mode_staff_fragment_container, mStaffFragment, "Staff Information")
+                    .add(R.id.bed_mode_plan_of_care_fragment_container, mPlanOfCareFragment, "Plan of Care")
+                    .add(R.id.bed_mode_CallBellsFragment_container, mCallBellsFragment, "Call Bells")
+                    .commit();
+        }
+        fm.executePendingTransactions();
+//        mCallBellsFragment.toggleMode(mSimpleMode);
 
         setSuperUserPermissions(prefs.isSuperUser());
 
@@ -191,8 +202,6 @@ public class BedModeActivity
     protected void onDestroy() {
         super.onDestroy();
 
-//        unlockScreen();
-
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
         if (!persistConnectionOnDestroy) {
             messageRouting.uploadEducationMetrics(prefs.getCurrentState(), EducationMetricLogger.getInstance().getEducationMetricList());
@@ -231,6 +240,10 @@ public class BedModeActivity
 
     @Override
     public void savePOCState(State st) {
+        // If we start in Simple Mode we will not have anything set for POC and the state will be blank
+        if (st == null) {
+            return;
+        }
         prefs.setPOC(st);
         prefs.setAcceptablePain(st.getAcceptablePain());
 
@@ -251,6 +264,7 @@ public class BedModeActivity
     @Override
     public void toggleSimpleMode() {
         mSimpleMode = !mSimpleMode;
+        prefs.setSimpleMode(mSimpleMode);
 
         mCallBellContainer.setVisibility(mSimpleMode ? View.GONE : View.VISIBLE);
         FragmentManager fm = getFragmentManager();

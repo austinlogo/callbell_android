@@ -35,7 +35,7 @@ public class StationActivity
 
     @Inject
     PrefManager prefs;
-    private TitleBarFragment mTitleBarFragment;
+//    private TitleBarFragment mTitleBarFragment;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -49,7 +49,7 @@ public class StationActivity
 
         Log.d(TAG, "Started Station");
 
-        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.STATION_MODE_ACTIVITY);
+//        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.STATION_MODE_ACTIVITY);
         mStationFragment = StationFragment.newInstance();
 
 
@@ -93,7 +93,7 @@ public class StationActivity
                     Log.d(TAG, st.toString());
                 } else if (PrefManager.EVENT_SERVER_CONNECTION_CHANGED.equals(intent.getAction())) {
                     boolean isConnected = intent.getBooleanExtra(PrefManager.SERVER_CONNECTED, false);
-                    mTitleBarFragment.toggleServerconnectedView(isConnected);
+//                    mTitleBarFragment.toggleServerconnectedView(isConnected);
                     mStationFragment.getDeviceStates();
 
                 } else if (PrefManager.EVENT_TABLET_CONNECTIONS_RECEIVED.equals(intent.getAction())) {

@@ -39,7 +39,9 @@ public class TitleBarFragment extends Fragment {
     public static final int LOGIN_MODE_ACTIVITY = 0x2;
 
     private static final String ACTIVITY = "ACTIVITY";
+    private static final String SIMPLE_MODE = "SIMPLE_MODE";
     private int mActivityValue = -1;
+    private boolean mSimpleMode;
 
     private TitleBarListener mListener;
 
@@ -73,9 +75,10 @@ public class TitleBarFragment extends Fragment {
     private static final String TAG = TitleBarFragment.class.getSimpleName();
 
 
-    public static TitleBarFragment newInstance(int fragmentValue) {
+    public static TitleBarFragment newInstance(int fragmentValue, boolean isSimpleMode) {
         Bundle bundle = new Bundle();
         bundle.putInt(ACTIVITY, fragmentValue);
+        bundle.putBoolean(SIMPLE_MODE, isSimpleMode);
         TitleBarFragment fragment = new TitleBarFragment();
         fragment.setArguments(bundle);
 
@@ -93,6 +96,7 @@ public class TitleBarFragment extends Fragment {
         ButterKnife.inject(this, view);
 
         mActivityValue = bundle.getInt(ACTIVITY);
+        mSimpleMode = bundle.getBoolean(SIMPLE_MODE);
 
         setUI();
         initListeners();
@@ -131,6 +135,8 @@ public class TitleBarFragment extends Fragment {
         }
 
         mLangButton.setText(getActivity().getApplicationContext().getResources().getConfiguration().locale.getLanguage().toUpperCase());
+        mSimpleToggle.setText(mSimpleMode ? R.string.normal_layout : R.string.simple_layout);
+
     }
 
     public void initListeners() {

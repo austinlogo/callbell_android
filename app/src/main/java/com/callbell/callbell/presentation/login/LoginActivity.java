@@ -39,7 +39,7 @@ public class LoginActivity
         ((CallBellApplication) getApplication()).inject(this);
 
         mLoginFragment = LoginFragment.newInstance();
-        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.LOGIN_MODE_ACTIVITY);
+        mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.LOGIN_MODE_ACTIVITY, false);
 
 
         getFragmentManager()

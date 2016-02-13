@@ -63,6 +63,7 @@ public class PrefManager {
     public static final String CATEGORY_CALL_BELL_RESPONSE = "call_bell_response";
     public static final String SERVER_CONNECTED = "SERVER DISCONNECTED";
     public static final String PAYLOAD = "PAYLOAD";
+    private static final String SIMPLE_MODE = "SIMPLE_MODE";
 
 
     public static SharedPreferences prefs;
@@ -344,5 +345,13 @@ public class PrefManager {
 
     public int acceptablePain() {
         return prefs.getInt(State.ACCEPTABLE_PAIN_ID, 10);
+    }
+
+    public boolean isSimpleMode() {
+        return prefs.getBoolean(SIMPLE_MODE, false);
+    }
+
+    public void setSimpleMode(boolean isSimpleMode) {
+        prefs.edit().putBoolean(SIMPLE_MODE, isSimpleMode).apply();
     }
 }
