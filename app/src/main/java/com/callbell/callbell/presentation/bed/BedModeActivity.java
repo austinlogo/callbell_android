@@ -77,8 +77,7 @@ public class BedModeActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "BedModeActivity");
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_mode);
 
@@ -144,12 +143,12 @@ public class BedModeActivity
                     if (mPlanOfCareFragment.isAdded()) {
                         mPlanOfCareFragment.updateState(st);
                     }
-                    playSoundOnce();
+
                     BeaToast.makeText(context, R.string.new_info, BeaToast.LENGTH_LONG).show();
                 } else if (PrefManager.EVENT_RATE_PAIN.equals(intent.getAction())) {
                     playSoundOnce();
                     PainRatingDialog dialog = new PainRatingDialog();
-                    dialog.show(getFragmentManager(), "PAIN RATING DIALOG");
+                    dialog.show(getFragmentManager(), PainRatingDialog.TAG);
                 }
             }
         };

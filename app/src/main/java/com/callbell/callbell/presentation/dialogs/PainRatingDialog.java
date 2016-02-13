@@ -2,6 +2,8 @@ package com.callbell.callbell.presentation.dialogs;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import butterknife.InjectView;
  */
 public class PainRatingDialog
         extends DialogFragment {
+
+    public static final String TAG = PainRatingDialog.class.getSimpleName();
 
     @Inject
     PrefManager prefs;
@@ -71,6 +75,13 @@ public class PainRatingDialog
 
     private DialogDismissedCallback mCallback;
     private int selectedChoice;
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        if (manager.findFragmentByTag(TAG) == null) {
+            super.show(manager, tag);
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

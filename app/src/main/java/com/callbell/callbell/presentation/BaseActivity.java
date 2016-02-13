@@ -59,6 +59,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private PowerManager mPowerManager;
     private DevicePolicyManager mDpm;
+    public static boolean isTabletLocked = false;
 
     @Override
     protected void onResume() {
@@ -108,6 +109,8 @@ public class BaseActivity extends AppCompatActivity {
         mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         setContentView(R.layout.base_layout);
         ((CallBellApplication) getApplication()).inject(this);
 
@@ -213,9 +216,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setSuperUserPermissions(boolean isSuperUser) {
         if (!isSuperUser) {
-            startLockTask();
+            enableKioskMode(true);
         } else {
-            stopLockTask();
+            enableKioskMode(false);
         }
     }
 
@@ -250,13 +253,14 @@ public class BaseActivity extends AppCompatActivity {
     private void enableKioskMode(boolean enabled) {
         try {
             if (enabled) {
-                startLockTask();
-                if (mDpm.isLockTaskPermitted(this.getPackageName())) {
+                if (!isTabletLocked && mDpm.isLockTaskPermitted(this.getPackageName())) {
+                    isTabletLocked = true;
                     startLockTask();
-                } else {
-                    Toast.makeText(this, "Lock not permitted", Toast.LENGTH_SHORT).show();
+                } else if (!mDpm.isLockTaskPermitted(this.getPackageName())) {
+                    Toast.makeText(this, "Unable to lock tablet", Toast.LENGTH_SHORT).show();
                 }
             } else {
+                isTabletLocked = false;
                 stopLockTask();
 //                mIsKioskEnabled = false;
 //                mButton.setText(getString(R.string.enter_kiosk_mode));
