@@ -300,7 +300,9 @@ public class BedModeActivity
         startActivity(i);
     }
 
+    @Override
     public void setSuperUserPermissions(boolean isSuperUser) {
+        super.setSuperUserPermissions(isSuperUser);
         mCallBellContainer.setVisibility(isSuperUser || mSimpleMode ? View.GONE : View.VISIBLE);
     }
 }

@@ -57,6 +57,7 @@ public class LoginActivity
             public void onReceive(Context context, Intent intent) {
 
                 if (PrefManager.EVENT_SU_MODE_CHANGE.equals(intent.getAction())) {
+                    setSuperUserPermissions(prefs.isSuperUser());
                     mTitleBarFragment.setSuperUserPermissions(prefs.isSuperUser());
                 }
             }

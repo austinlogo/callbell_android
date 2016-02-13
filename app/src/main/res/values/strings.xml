@@ -62,4 +62,6 @@
     <string name="other_cancel">Cancel</string>
     <string name="english_language_abbrevation">en</string>
     <string name="test_or_med_not_available">Sorry, that test or medication is not available</string>
+    <string name="not_device_admin">Not Device Admin</string>
+    <string name="not_device_owner">Not device Owner</string>
 </resources>

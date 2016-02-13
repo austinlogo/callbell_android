@@ -1,6 +1,8 @@
 package com.callbell.callbell.presentation;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
@@ -27,9 +30,13 @@ import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
 import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
+import com.callbell.callbell.presentation.toast.BeaToast;
+import com.callbell.callbell.service.AdminReceiver;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.LocaleUtil;
 import com.callbell.callbell.util.PrefManager;
+
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -51,7 +58,7 @@ public class BaseActivity extends AppCompatActivity {
     protected boolean active;
 
     private PowerManager mPowerManager;
-    private PowerManager.WakeLock mWakeLock;
+    private DevicePolicyManager mDpm;
 
     @Override
     protected void onResume() {
@@ -114,12 +121,28 @@ public class BaseActivity extends AppCompatActivity {
             }
         }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
 
-
-        // Status bar hack
-
-
+        setDeviceOwner();
     }
 
+    private void setDeviceOwner() {
+        ComponentName deviceAdmin = new ComponentName(this, AdminReceiver.class);
+        mDpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        if (!mDpm.isAdminActive(deviceAdmin)) {
+            BeaToast.makeText(this, getString(R.string.not_device_admin) + " ME", BeaToast.LENGTH_SHORT).show();
+        }
+
+        if (!mDpm.isDeviceOwnerApp(getPackageName())) {
+            try {
+                Runtime.getRuntime().exec("dpm set-device-owner com.callbell.callbell/.service.AdminReceiver");
+            } catch (IOException e) {
+                Log.e(TAG, "Setting Device Owner failed");
+                e.printStackTrace();
+            }
+        }
+
+        mDpm.setLockTaskPackages(deviceAdmin, new String[]{getPackageName()});
+        enableKioskMode(true);
+    }
 
     protected void register() {
         if (SocketService.mService != null && !SocketService.isRegistered) {
@@ -188,29 +211,11 @@ public class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    public void adminSettingsAction(View view) {
-        Button button = (Button)view;
-        // Moving into SuperUser Mode
-        if (!prefs.isSuperUser()) {
-            EnableSuperUserDialog d = EnableSuperUserDialog.newInstance(null);
-            d.show(getFragmentManager(), "SUDO");
-
+    public void setSuperUserPermissions(boolean isSuperUser) {
+        if (!isSuperUser) {
+            startLockTask();
         } else {
-            prefs.setSuperUser(false);
-            Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
-            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(i);
-            button.setText(R.string.admin_mode);
-            prefs.setState(prefs.getCurrentState());
-        }
-    }
-
-    public void painSettingsDisplayAction(View view) {
-        if (prefs.isSuperUser()) {
-            SetPainRatingDialog dialog = new SetPainRatingDialog();
-            dialog.show(getFragmentManager(), "PAIN SET");
-        } else {
-            PainRatingDialog prDialog = new PainRatingDialog();
-            prDialog.show(getFragmentManager(), "PAIN RATING DIALOG");
+            stopLockTask();
         }
     }
 
@@ -242,17 +247,22 @@ public class BaseActivity extends AppCompatActivity {
         new MedicationValues(this);
     }
 
-    public void lockScreen(){
-        // turn on screen
-        Log.v(TAG, "ON!");
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "tag");
-        mWakeLock.acquire();
+    private void enableKioskMode(boolean enabled) {
+        try {
+            if (enabled) {
+                startLockTask();
+                if (mDpm.isLockTaskPermitted(this.getPackageName())) {
+                    startLockTask();
+                } else {
+                    Toast.makeText(this, "Lock not permitted", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                stopLockTask();
+//                mIsKioskEnabled = false;
+//                mButton.setText(getString(R.string.enter_kiosk_mode));
+            }
+        } catch (Exception e) {
+            // TODO: Log and handle appropriately
+        }
     }
-
-    public void unlockScreen() {
-        mWakeLock.release();
-    }
-
-
-    
 }
