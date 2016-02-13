@@ -35,7 +35,7 @@
     <string name="wait">Espere un momento</string>
     <string name="call_received">Llamada Recibida</string>
     <string name="message_sent">Mensaje Enviado</string>
-    <string name="pain_header">Pain Timer</string>
+    <string name="pain_header">Minutero de Dolor</string>
     <string name="pain_text_0">Sin Dolor</string>
     <string name="pain_text_2" >Un Poquito de Dolor</string>
     <string name="pain_text_4" >Un Poco más de Dolor</string>

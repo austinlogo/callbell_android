@@ -113,7 +113,6 @@ public class BedModeActivity
 
                 if(intent.getAction().equals(PrefManager.EVENT_MESSAGE_RECEIVED)) {
                     MessageResponse response = new MessageResponse(intent.getExtras());
-                    playSoundOnce();
                     BeaToast.makeText(getApplicationContext(), response.messageReason, Toast.LENGTH_SHORT).show();
 
                 } else if (intent.getAction().equals(PrefManager.EVENT_SU_MODE_CHANGE)) {
@@ -140,7 +139,11 @@ public class BedModeActivity
 
                     prefs.setState(st);
                     mStaffFragment.updateState(st);
-                    mPlanOfCareFragment.updateState(st);
+
+                    //we're not always showing the plan of care fragment (e.g. Simple mode)
+                    if (mPlanOfCareFragment.isAdded()) {
+                        mPlanOfCareFragment.updateState(st);
+                    }
                     playSoundOnce();
                     BeaToast.makeText(context, R.string.new_info, BeaToast.LENGTH_LONG).show();
                 } else if (PrefManager.EVENT_RATE_PAIN.equals(intent.getAction())) {
@@ -222,6 +225,7 @@ public class BedModeActivity
             i = new Intent(this, PlanOfCareInfoDialog.class);
             i.putExtras(PlanOfCareInfoDialog.newInstance(tit, expandedName, bod));
         }
+
 
         startActivity(i);
     }

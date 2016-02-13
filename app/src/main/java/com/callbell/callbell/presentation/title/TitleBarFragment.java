@@ -252,7 +252,7 @@ public class TitleBarFragment extends Fragment {
             prefs.setSuperUser(false);
             Intent i = new Intent(PrefManager.EVENT_SU_MODE_CHANGE);
             LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(i);
-            mAdminButton.setImageResource(R.drawable.save);
+            mAdminButton.setImageResource(R.drawable.save_check);
 //            prefs.setState(prefs.getCurrentState());
         }
     }

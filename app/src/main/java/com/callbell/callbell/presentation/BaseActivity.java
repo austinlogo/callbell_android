@@ -81,6 +81,11 @@ public class BaseActivity extends AppCompatActivity {
 
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+    }
+
+    @Override
     public void startActivity(Intent intent) {
         intent.addFlags(BaseActivity.DEFAULT_FLAGS);
         super.startActivity(intent);
@@ -108,6 +113,11 @@ public class BaseActivity extends AppCompatActivity {
                 determineSuperUserText(mOptionsMenu);
             }
         }, new IntentFilter(PrefManager.EVENT_SU_MODE_CHANGE));
+
+
+        // Status bar hack
+
+
     }
 
 
@@ -141,6 +151,15 @@ public class BaseActivity extends AppCompatActivity {
         if (prefs.isSuperUser()) {
             adminItem.setTitle(R.string.user_mode);
         } else adminItem.setTitle(R.string.admin_mode);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!prefs.isSuperUser()) {
+            return;
+        }
+
+        super.onBackPressed();
     }
 
     @Override
@@ -233,4 +252,7 @@ public class BaseActivity extends AppCompatActivity {
     public void unlockScreen() {
         mWakeLock.release();
     }
+
+
+    
 }
