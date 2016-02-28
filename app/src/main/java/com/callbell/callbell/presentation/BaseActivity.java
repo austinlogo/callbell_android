@@ -108,6 +108,11 @@ public class BaseActivity extends AppCompatActivity {
         currentLocale = LocaleUtil.getLocale(this);
         mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -143,8 +148,8 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
 
-        mDpm.setLockTaskPackages(deviceAdmin, new String[]{getPackageName()});
-        enableKioskMode(true);
+//        mDpm.setLockTaskPackages(deviceAdmin, new String[]{getPackageName()});
+//        enableKioskMode(true);
     }
 
     protected void register() {
@@ -216,9 +221,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setSuperUserPermissions(boolean isSuperUser) {
         if (!isSuperUser) {
-            enableKioskMode(true);
+//            enableKioskMode(true);
         } else {
-            enableKioskMode(false);
+//            enableKioskMode(false);
         }
     }
 
