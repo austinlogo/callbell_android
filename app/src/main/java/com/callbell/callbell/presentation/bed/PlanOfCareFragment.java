@@ -95,11 +95,15 @@ public class PlanOfCareFragment extends Fragment {
     // TODO: Rename and change types of parameters
     public static PlanOfCareFragment newInstance(State st) {
         PlanOfCareFragment fragment = new PlanOfCareFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(State.STATE_ID, st.toJSON().toString());
-        fragment.setArguments(bundle);
+        fragment.setArguments(newBundle(st));
 
         return fragment;
+    }
+
+    public static Bundle newBundle(State st) {
+        Bundle bundle = new Bundle();
+        bundle.putString(State.STATE_ID, st.toJSON().toString());
+        return bundle;
     }
 
     /**
@@ -139,7 +143,7 @@ public class PlanOfCareFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.item_simple_spinner, spinnerArray);
         chiefComplaintSpinner.setAdapter(adapter);
         Log.d(TAG, "Current Selection: " + mState.getChiefComplaint());
-        chiefComplaintSpinner.setSelection(mState.getChiefComplaint(), false);
+        chiefComplaintSpinner.setSelection(mState.getChiefComplaint());
 
         //Inflate the Test List
         mPlanOfCareTests.setTitle(R.string.poc_current_tests_title);
@@ -281,7 +285,7 @@ public class PlanOfCareFragment extends Fragment {
             mListener = (PlanOfCareInteraction) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement StationActivityListener");
+                    + " must implement PlanOfCareInteraction");
         }
     }
 

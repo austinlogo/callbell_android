@@ -55,5 +55,9 @@ public class BeaToast extends Toast {
         super(context);
     }
 
+    public BeaToast() {
+        super (null);
+    }
+
 
 }

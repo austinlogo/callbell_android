@@ -63,9 +63,6 @@ public class CallBellsFragmentTest  {
         mhelp = (RelativeLayout) fragment.getView().findViewById(R.id.call_button_help);
         Assert.assertNotNull(mBlanketButton);
 
-//        mBlanketButton.performClick();
-//        doNothing().when(activity).onCallBellPressed(MessageReason.PAIN);
-
         mBlanketButton.performClick();
         mPain.performClick();
         mWater.performClick();
