@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
 import com.callbell.callbell.models.State.State;
-import com.callbell.callbell.presentation.bed.view.ToggleListView;
+import com.callbell.callbell.presentation.view.ToggleListView;
 import com.callbell.callbell.util.JSONUtil;
 
 import butterknife.ButterKnife;

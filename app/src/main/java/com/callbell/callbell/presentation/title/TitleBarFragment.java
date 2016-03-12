@@ -88,21 +88,16 @@ public class TitleBarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView");
+
         View view = inflater.inflate(R.layout.fragment_title_bar, container, false);
-
-        Bundle bundle = getArguments();
-
         ((CallBellApplication) getActivity().getApplication()).inject(this);
         ButterKnife.inject(this, view);
 
+        Bundle bundle = getArguments();
         mActivityValue = bundle.getInt(ACTIVITY);
         mSimpleMode = bundle.getBoolean(SIMPLE_MODE);
 
-        setUI();
         initListeners();
-
-        setSuperUserPermissions(prefs.isSuperUser());
-        
         return view;
     }
 
@@ -110,7 +105,7 @@ public class TitleBarFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        setUI();
+        setSuperUserPermissions(prefs.isSuperUser());
     }
 
     private void setUI() {

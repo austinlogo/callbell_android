@@ -87,13 +87,13 @@
        android:layout_below="@id/fragment_poc_tests_or_title_container"
        android:orientation="horizontal">
 
-       <com.callbell.callbell.presentation.bed.view.ToggleListView
+       <com.callbell.callbell.presentation.view.ToggleListView
            android:id="@+id/fragment_poc_tests"
            android:layout_weight="1"
            android:layout_width="match_parent"
            android:layout_height="wrap_content" />
 
-       <com.callbell.callbell.presentation.bed.view.ToggleListView
+       <com.callbell.callbell.presentation.view.ToggleListView
            android:id="@+id/fragment_poc_medications"
            android:layout_weight="1"
            android:layout_width="match_parent"

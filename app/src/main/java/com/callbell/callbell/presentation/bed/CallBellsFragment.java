@@ -19,7 +19,7 @@ import butterknife.InjectView;
 
 public class CallBellsFragment extends Fragment {
     private static String  ORIENTATION_KEY = "ORIENTATION_KEY";
-    private OnFragmentInteractionListener mActivityListener;
+    private onCallBellFragmentInteractionListener mActivityListener;
 
     @InjectView(R.id.call_button_layout)
     LinearLayout mCallButtonLayout;
@@ -89,10 +89,10 @@ public class CallBellsFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mActivityListener = (OnFragmentInteractionListener) activity;
+            mActivityListener = (onCallBellFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement LoginFragmentCallback");
+                    + " must implement onCallBellFragmentInteractionListener");
         }
     }
 
@@ -145,7 +145,7 @@ public class CallBellsFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface onCallBellFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onCallBellPressed(MessageReason reason);
     }

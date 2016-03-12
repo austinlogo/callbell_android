@@ -1,6 +1,5 @@
-package com.callbell.callbell.presentation.bed.view;
+package com.callbell.callbell.presentation.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,11 +9,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.callbell.callbell.R;
-import com.callbell.callbell.data.POCValues;
-import com.callbell.callbell.models.State.BiMap;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
 import com.callbell.callbell.models.adapter.PlanOfCareListViewAdapter;
-import com.callbell.callbell.presentation.view.TernaryListItem;
 
 import java.util.ArrayList;
 import java.util.Collection;

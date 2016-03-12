@@ -1,8 +1,6 @@
 package com.callbell.callbell.presentation.bed;
 
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -41,7 +38,7 @@ import butterknife.InjectView;
 public class BedModeActivity
         extends BaseActivity
         implements
-                CallBellsFragment.OnFragmentInteractionListener,
+        CallBellsFragment.onCallBellFragmentInteractionListener,
                 PlanOfCareFragment.PlanOfCareInteraction,
                 TitleBarFragment.TitleBarListener,
                 StaffFragment.StaffFragmentListener {

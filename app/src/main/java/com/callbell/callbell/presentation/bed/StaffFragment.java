@@ -105,7 +105,7 @@ public class StaffFragment extends Fragment {
             mListener = (StaffFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement StationActivityListener");
+                    + " must implement StaffFragmentListener");
         }
     }
 

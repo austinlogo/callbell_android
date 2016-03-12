@@ -28,7 +28,7 @@ import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.models.State.State;
 import com.callbell.callbell.models.adapter.PlanOfCareCheckBoxAdapter;
-import com.callbell.callbell.presentation.bed.view.ToggleListView;
+import com.callbell.callbell.presentation.view.ToggleListView;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.presentation.view.TernaryListItem;
 import com.callbell.callbell.util.JSONUtil;
@@ -36,9 +36,7 @@ import com.callbell.callbell.util.MixedListUtil;
 import com.callbell.callbell.util.PrefManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 
