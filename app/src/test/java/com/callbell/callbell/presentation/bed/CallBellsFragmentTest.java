@@ -64,13 +64,18 @@ public class CallBellsFragmentTest  {
         Assert.assertNotNull(mBlanketButton);
 
         mBlanketButton.performClick();
+        verify(activity).onCallBellPressed(MessageReason.BLANKET);
         mPain.performClick();
+        verify(activity).onCallBellPressed(MessageReason.PAIN);
         mWater.performClick();
+        verify(activity).onCallBellPressed(MessageReason.FOOD);
         mrestroom.performClick();
+        verify(activity).onCallBellPressed(MessageReason.RESTROOM);
         mhelp.performClick();
+        verify(activity).onCallBellPressed(MessageReason.HELP);
 
 
-        verify(activity, times(5)).onCallBellPressed(any(MessageReason.class));
+
     }
 
 

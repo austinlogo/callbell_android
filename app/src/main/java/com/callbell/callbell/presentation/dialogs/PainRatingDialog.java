@@ -134,7 +134,7 @@ public class PainRatingDialog
         }
     }
 
-    public void setSelectedChoice(int selectedChoice) {
+    private void setSelectedChoice(int selectedChoice) {
 
         switch (selectedChoice) {
             case 0:

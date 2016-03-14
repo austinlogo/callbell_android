@@ -22,9 +22,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by austin on 10/9/15.
- */
 public class CallBellDialog extends DialogFragment {
     public static String TAG = CallBellDialog.class.getSimpleName();
 
@@ -54,14 +51,16 @@ public class CallBellDialog extends DialogFragment {
 
     public static CallBellDialog newInstance(State st, MessageReason reason) {
         CallBellDialog dialog = new CallBellDialog();
+        dialog.setArguments(newBundle(st, reason));
+        return dialog;
+    }
+
+    public static Bundle newBundle(State st, MessageReason reason) {
         Bundle bundle = new Bundle();
 
         bundle.putString(FROM_KEY, st.getLocation());
         bundle.putString(REASON_KEY, reason.name());
-
-        dialog.setArguments(bundle);
-
-        return dialog;
+        return bundle;
     }
 
     @Override

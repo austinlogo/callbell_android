@@ -22,6 +22,7 @@ import butterknife.InjectView;
 public class SetPainRatingDialog extends DialogFragment {
 
     private static final String TAG = SetPainRatingDialog.class.getSimpleName();
+    private PainRatingAsyncTask mTask;
 
     @InjectView (R.id.layout_dialog_set_pain_5)
     Button mPainSetting5;
@@ -39,6 +40,13 @@ public class SetPainRatingDialog extends DialogFragment {
     Button mPainSetting30;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mTask = new PainRatingAsyncTask(getActivity());
+    }
+
+        @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -66,8 +74,6 @@ public class SetPainRatingDialog extends DialogFragment {
 
 
             Log.d(TAG, "Submitted new Pain Rating Task");
-
-            PainRatingAsyncTask mTask = new PainRatingAsyncTask(getActivity());
             mTask.execute(interval);
 
             dismiss();

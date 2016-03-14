@@ -244,7 +244,7 @@ public class PlanOfCareFragment extends Fragment {
         otherEditText.setOnEditorActionListener(new SubmitOtherTextListener());
     }
 
-    public void submitOtherTestItem() {
+    private void submitOtherTestItem() {
         String item = otherEditText.getText().toString();
         if (item.isEmpty()) {
             //empty case

@@ -19,7 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -28,8 +27,6 @@ import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
 import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
-import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
-import com.callbell.callbell.presentation.dialogs.SetPainRatingDialog;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.service.AdminReceiver;
 import com.callbell.callbell.service.services.SocketService;

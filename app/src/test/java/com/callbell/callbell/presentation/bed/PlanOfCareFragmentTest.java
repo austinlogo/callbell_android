@@ -1,8 +1,9 @@
 package com.callbell.callbell.presentation.bed;
 
 import android.app.Activity;
-import android.content.Context;
+import android.test.mock.MockContext;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,26 +13,19 @@ import android.widget.Spinner;
 import com.callbell.callbell.BuildConfig;
 import com.callbell.callbell.R;
 import com.callbell.callbell.models.State.State;
-import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.presentation.view.ToggleListView;
 import com.callbell.callbell.util.PrefManager;
 import com.callbell.callbell.util.shell.BlankPlanOfCareFragmentActivity;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.rule.PowerMockRule;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.FragmentTestUtil;
@@ -41,8 +35,7 @@ import java.util.ArrayList;
 import staticTestData.TestData;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricGradleTestRunner.class)
@@ -51,6 +44,15 @@ public class PlanOfCareFragmentTest {
 
     @Mock(name = "prefs")
     PrefManager prefs;
+
+    @Mock(name = "mPOCSpinnerAndAcceptablePainContainer")
+    LinearLayout spinnerLayout;
+
+    @Mock(name = "mPlanOfCareMedications")
+    ToggleListView mPlanOfCareMedications;
+
+    @Mock(name = "mPlanOfCareTests")
+    ToggleListView mPlanOfCareTests;
 
     @Mock(name = "mListener")
     BlankPlanOfCareFragmentActivity activity;
@@ -64,15 +66,15 @@ public class PlanOfCareFragmentTest {
     @InjectMocks
     PlanOfCareFragment fragment = new PlanOfCareFragment();
 
-    ToggleListView mPlanOfCareTests;
-    ToggleListView mPlanOfCareMedications;
     Spinner mChiefComplaintSpinner;
     LinearLayout mSpinnerAndPainContainer;
     EditText mAcceptablePainText;
     Button otherCancel;
     Button submitOther;
     LinearLayout otherLayout;
+    AutoCompleteTextView otherEditText;
 
+    ListView listView;
 
     @Before
     public void setUp() throws Exception {
@@ -80,29 +82,50 @@ public class PlanOfCareFragmentTest {
         FragmentTestUtil.startFragment(fragment, BlankPlanOfCareFragmentActivity.class);
 //        fragment.onAttach(activity);
 
+        listView = ((ToggleListView) fragment.getView().findViewById(R.id.fragment_poc_tests)).getPatientListView();
+        Assert.assertNotNull(listView);
+
         MockitoAnnotations.initMocks(this);
 
-        mPlanOfCareTests = (ToggleListView) fragment.getView().findViewById(R.id.fragment_poc_tests);
-        mPlanOfCareMedications = (ToggleListView) fragment.getView().findViewById(R.id.fragment_poc_medications);
         mChiefComplaintSpinner = (Spinner) fragment.getView().findViewById(R.id.fragment_poc_main_complaint_spinner);
         mSpinnerAndPainContainer = (LinearLayout) fragment.getView().findViewById(R.id.fragment_poc_tests_or_title_container);
         mAcceptablePainText = (EditText) fragment.getView().findViewById(R.id.fragment_poc_acceptable_pain_value);
         otherCancel = (Button) fragment.getView().findViewById(R.id.other_cancel);
         submitOther = (Button) fragment.getView().findViewById(R.id.other_submit);
         otherLayout = (LinearLayout) fragment.getView().findViewById(R.id.other_layout);
+        otherEditText = (AutoCompleteTextView) fragment.getView().findViewById(R.id.other_edittext);
+
         Assert.assertNotNull(mPlanOfCareTests);
-        Assert.assertNotNull(mPlanOfCareMedications);
+//        Assert.assertNotNull(mPlanOfCareMedications);
         Assert.assertNotNull(mChiefComplaintSpinner);
         Assert.assertNotNull(mSpinnerAndPainContainer);
         Assert.assertNotNull(mAcceptablePainText);
         Assert.assertNotNull(otherCancel);
         Assert.assertNotNull(submitOther);
         Assert.assertNotNull(otherLayout);
+        Assert.assertNotNull(otherEditText);
     }
 
     @Test
     public void testSubmitOtherTestItem() throws Exception {
+        String medItem = "item";
+        String testItem = "testItem";
 
+        //ADDING AN ITEM THAT IS A MEDICATION
+        Mockito.when(mPlanOfCareMedications.contains(medItem)).thenReturn(true);
+        otherEditText.setText(medItem);
+        Assert.assertTrue(otherEditText.getText().length() != 0);
+        submitOther.performClick();
+        verify(mPlanOfCareMedications).setPendingItem(any(Integer.class), eq(true));
+
+        Assert.assertTrue(otherEditText.getText().toString().isEmpty());
+
+        // ADDING AN ITEM THAT IS A TEST
+        Mockito.when(mPlanOfCareTests.contains(testItem)).thenReturn(true);
+        otherEditText.setText(testItem);
+        Assert.assertTrue(otherEditText.getText().equals(testItem));
+        submitOther.performClick();
+        verify(mPlanOfCareTests).setPendingItem(any(Integer.class), eq(true));
     }
 
     @Test (expected = ClassCastException.class)
@@ -119,14 +142,24 @@ public class PlanOfCareFragmentTest {
     public void testSetSuperUserPermissions_true() throws Exception {
         fragment.setSuperUserPermissions(true);
 
-        Assert.assertTrue(mPlanOfCareTests.getAdminListView().getVisibility() == View.VISIBLE);
+        verify(mPlanOfCareTests).setDisplayMode(true);
+        verify(mPlanOfCareMedications).setDisplayMode(true);
+
+        Assert.assertTrue(otherLayout.getVisibility() == View.VISIBLE);
+        Assert.assertTrue(mChiefComplaintSpinner.isEnabled());
     }
 
     @Test
     public void testSetSuperUserPermissions_false() throws Exception {
-        fragment.setSuperUserPermissions(false);
+        boolean value = false;
 
-        Assert.assertTrue(mPlanOfCareTests.getAdminListView().getVisibility() == View.GONE);
+        fragment.setSuperUserPermissions(value);
+
+        verify(mPlanOfCareTests).setDisplayMode(value);
+        verify(mPlanOfCareMedications).setDisplayMode(value);
+
+        Assert.assertTrue(otherLayout.getVisibility() == View.GONE);
+        Assert.assertTrue(!mChiefComplaintSpinner.isEnabled());
     }
 
     @Test
@@ -140,25 +173,6 @@ public class PlanOfCareFragmentTest {
     public void testUpdateState() throws Exception {
         fragment.updateState(mStateReplace);
         Assert.assertEquals(fragment.getState(), mStateReplace);
-    }
-
-    @Test
-    public void testPlanOfCareTestListeners() {
-        int index = 0;
-        ListView patientList = mPlanOfCareTests.getPatientListView();
-        patientList.performItemClick(patientList.getAdapter().getView(index, null, null), index, index);
-
-        verify(activity).showInfoDialog(any(String.class), any(String.class), any(String.class));
-    }
-
-
-    @Test
-    public void testPlanOfCareMedicationListeners() {
-        int index = 0;
-        ListView patientList = mPlanOfCareMedications.getPatientListView();
-        patientList.performItemClick(patientList.getAdapter().getView(index, null, null), index, index);
-
-        verify(activity).showInfoDialog(any(String.class), any(String.class), any(String.class));
     }
 
     @Test

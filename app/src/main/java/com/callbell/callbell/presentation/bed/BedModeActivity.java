@@ -231,7 +231,6 @@ public class BedModeActivity
             i.putExtras(PlanOfCareInfoDialog.newInstance(tit, expandedName, bod));
         }
 
-
         startActivity(i);
     }
 

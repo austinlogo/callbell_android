@@ -1,7 +1,6 @@
 package com.callbell.callbell.presentation.station;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -21,12 +20,9 @@ import com.callbell.callbell.models.adapter.StationItemAdapter;
 import com.callbell.callbell.models.response.ConnectionStatusUpdateResponse;
 import com.callbell.callbell.models.response.MessageResponse;
 import com.callbell.callbell.presentation.dialogs.CallBellDialog;
-import com.callbell.callbell.presentation.dialogs.RemoteUpdateDialogFragment;
 import com.callbell.callbell.presentation.remoteUpdate.RemoteUpdateActivity;
 import com.callbell.callbell.util.JSONUtil;
 import com.callbell.callbell.util.PrefManager;
-
-import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

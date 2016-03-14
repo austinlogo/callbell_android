@@ -1,6 +1,7 @@
 package com.callbell.callbell.presentation.dialogs;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,9 +24,6 @@ import java.util.Date;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by austin on 10/15/15.
- */
 public class PlanOfCareInfoDialog extends Activity {
 
     public static final String TITLE_KEY = "DIALOG_TITLE";
@@ -84,6 +82,8 @@ public class PlanOfCareInfoDialog extends Activity {
 
         timeOpen = new Date();
 
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
         if (getIntent().getExtras().containsKey(EXPANDED_KEY)) {
             mExpandedName = getIntent().getStringExtra(EXPANDED_KEY);
         }
