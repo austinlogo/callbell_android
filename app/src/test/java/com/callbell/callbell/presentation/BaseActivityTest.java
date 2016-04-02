@@ -1,67 +1,61 @@
 package com.callbell.callbell.presentation;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.ActivityUnitTestCase;
-import android.test.InstrumentationTestCase;
-
-import com.callbell.callbell.BuildConfig;
-import com.callbell.callbell.R;
+import android.os.Bundle;
+import android.test.mock.MockContext;
 
 import junit.framework.Assert;
 
-import org.bouncycastle.jce.provider.symmetric.ARC4;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.rule.PowerMockRule;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.*;
 
-@PrepareForTest({MediaPlayer.class})
 @RunWith (PowerMockRunner.class)
-@Config(constants = BuildConfig.class)
-public class BaseActivityTest extends ActivityUnitTestCase<BaseActivity> {
+@PowerMockIgnore({ "org.mockito.*", "org.robolectric.*", "android.*", "javax.management.*"})
+@PrepareForTest(MediaPlayer.class)
+public class BaseActivityTest {
+//
+//    @Rule
+//    public PowerMockRule rule = new PowerMockRule();
 
-    @Mock (name = "notificationSound")
-    MediaPlayer notificationSound;
+    @Mock
+    MediaPlayer mediaPlayer;
 
-    BaseActivity activity;
+    @Mock
+            Bundle b;
 
-    public BaseActivityTest() {
-        super(BaseActivity.class);
-    }
+    MockContext ctx = new MockContext();
+    BaseActivity activity = new BaseActivity();
 
     @Before
     public void setUp() throws Exception {
-        super.setUp();
+//        activity = Robolectric.buildActivity(BaseActivity.class).create().get();
 
-        PowerMockito.mockStatic(MediaPlayer.class);
-
-        PowerMockito.when(MediaPlayer.create(Matchers.any(Context.class), Matchers.any(Integer.class)))
-                .thenReturn(notificationSound);
-
-        super.setUp();
-        Intent intent = new Intent(getInstrumentation().getTargetContext(),
-                BaseActivity.class);
-        startActivity(intent, null, null);
-        activity = getActivity();
     }
 
     @Test
-    public void start() {
+    public void start() throws Exception {
+        PowerMockito.mockStatic(MediaPlayer.class);
+        Mockito.when(MediaPlayer.create(Matchers.any(Context.class), Matchers.anyInt()))
+                .thenReturn(mediaPlayer);
+
+        activity.onCreate(b);
+
         Assert.assertTrue(true);
     }
 }

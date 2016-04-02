@@ -54,7 +54,6 @@ public class BaseActivity extends AppCompatActivity {
     protected LocaleUtil.AvailableLocales currentLocale;
     protected boolean active;
 
-    private PowerManager mPowerManager;
     private DevicePolicyManager mDpm;
     public static boolean isTabletLocked = false;
 
@@ -103,7 +102,6 @@ public class BaseActivity extends AppCompatActivity {
         notificationSound.setLooping(true);
 
         currentLocale = LocaleUtil.getLocale(this);
-        mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
