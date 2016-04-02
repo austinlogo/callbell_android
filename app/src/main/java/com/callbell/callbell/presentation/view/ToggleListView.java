@@ -175,7 +175,6 @@ public class ToggleListView extends LinearLayout {
     // Adapter wrappers
 
     public boolean contains(String item) {
-        int index = adminAdapter.getPosition(item);
         return adminAdapter.contains(item);
     }
 

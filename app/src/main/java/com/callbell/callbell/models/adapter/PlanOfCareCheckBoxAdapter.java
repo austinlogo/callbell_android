@@ -28,7 +28,6 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
     public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects, BiMap<Integer, String> mapping) {
         super(context, resource, objects);
-//        super(context, resource);
 
         mObjects = objects;
         isSuperUser = false;
