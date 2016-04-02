@@ -60,8 +60,9 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         active = true;
+        setSuperUserPermissions(prefs.isSuperUser());
+
     }
 
     @Override
@@ -128,10 +129,17 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void setDeviceOwner() {
+        try {
+            Runtime.getRuntime().exec("dpm set-device-owner com.callbell.callbell/.service.AdminReceiver");
+        } catch (IOException e) {
+            Log.e(TAG, "Setting device Admin went Sideways");
+            e.printStackTrace();
+        }
+
         ComponentName deviceAdmin = new ComponentName(this, AdminReceiver.class);
         mDpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         if (!mDpm.isAdminActive(deviceAdmin)) {
-            BeaToast.makeText(this, getString(R.string.not_device_admin) + " ME", BeaToast.LENGTH_SHORT).show();
+            BeaToast.makeText(this, getString(R.string.not_device_admin), BeaToast.LENGTH_SHORT).show();
         }
 
         if (!mDpm.isDeviceOwnerApp(getPackageName())) {
@@ -216,9 +224,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setSuperUserPermissions(boolean isSuperUser) {
         if (!isSuperUser) {
-//            enableKioskMode(true);
+            enableKioskMode(true);
         } else {
-//            enableKioskMode(false);
+            enableKioskMode(false);
         }
     }
 
