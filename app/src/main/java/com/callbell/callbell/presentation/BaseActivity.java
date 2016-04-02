@@ -151,8 +151,8 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
 
-//        mDpm.setLockTaskPackages(deviceAdmin, new String[]{getPackageName()});
-//        enableKioskMode(true);
+        mDpm.setLockTaskPackages(deviceAdmin, new String[]{getPackageName()});
+        enableKioskMode(true);
     }
 
     protected void register() {
