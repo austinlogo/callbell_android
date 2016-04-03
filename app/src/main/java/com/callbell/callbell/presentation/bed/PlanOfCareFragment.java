@@ -143,7 +143,7 @@ public class PlanOfCareFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.item_simple_spinner, spinnerArray);
         chiefComplaintSpinner.setAdapter(adapter);
         Log.d(TAG, "Current Selection: " + mState.getChiefComplaint());
-        chiefComplaintSpinner.setSelection(mState.getChiefComplaint());
+        chiefComplaintSpinner.setSelection(mState.getChiefComplaint(), false);
 
         //Inflate the Test List
         mPlanOfCareTests.setTitle(R.string.poc_current_tests_title);
