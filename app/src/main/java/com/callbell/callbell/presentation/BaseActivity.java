@@ -129,12 +129,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void setDeviceOwner() {
-        try {
-            Runtime.getRuntime().exec("dpm set-device-owner com.callbell.callbell/.service.AdminReceiver");
-        } catch (IOException e) {
-            Log.e(TAG, "Setting device Admin went Sideways");
-            e.printStackTrace();
-        }
 
         ComponentName deviceAdmin = new ComponentName(this, AdminReceiver.class);
         mDpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
