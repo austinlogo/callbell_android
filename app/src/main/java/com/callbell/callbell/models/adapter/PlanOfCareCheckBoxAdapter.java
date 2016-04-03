@@ -22,14 +22,14 @@ import java.util.Set;
  */
 public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
     private BiMap<Integer, String> map;
-    private List<String> mObjects;
+//    private List<String> mObjects;
     private Set<Integer> mPendingItems, mDoneItems;
     private boolean isSuperUser;
 
     public PlanOfCareCheckBoxAdapter(Context context, int resource, List objects, BiMap<Integer, String> mapping) {
         super(context, resource, objects);
 
-        mObjects = objects;
+//        mObjects = objects;
         isSuperUser = false;
         mPendingItems = new HashSet<>();
         mDoneItems = new HashSet<>();
@@ -47,12 +47,8 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
 
     @Override
     public void add(String object) {
-        mObjects.add(object);
-    }
-
-    @Override
-    public int getCount() {
-        return mObjects.size();
+        super.add(object);
+//        mObjects.add(object);
     }
 
     @Override
@@ -89,17 +85,16 @@ public class PlanOfCareCheckBoxAdapter extends ArrayAdapter<String>{
         return false;
     }
 
+    @Override
+    public int getPosition(String item) {
+        return super.getPosition(item);
+    }
+
     public void resetList(String key) {
         super.clear();
 
         List<String> newList = new ArrayList<>(POCValues.pocMap.get(key));
-        mObjects.addAll(newList);
-    }
-
-    @Override
-    public String getItem(int position) {
-        return mObjects.get(position);
-
+        super.addAll(newList);
     }
 
     public void resetSelectedItems() {
