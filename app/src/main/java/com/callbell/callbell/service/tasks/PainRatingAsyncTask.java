@@ -19,6 +19,7 @@ public class PainRatingAsyncTask
     private static final String TAG = PainRatingAsyncTask.class.getSimpleName();
     private int mIntervalInMinutes;
     private long mIntervalInMilliseconds;
+    private boolean threadCompletedSuccessfully;
     private Activity activity;
     private Thread mThread;
     private MediaPlayer notificationSound;
@@ -32,6 +33,10 @@ public class PainRatingAsyncTask
         super.onPostExecute(aVoid);
 
         Log.d(TAG, "onPostExecute");
+
+        if (!threadCompletedSuccessfully) {
+            return;
+        }
 
         notificationSound = MediaPlayer.create(activity, R.raw.notification);
         notificationSound.setLooping(false);
@@ -47,6 +52,7 @@ public class PainRatingAsyncTask
             return null;
         }
 
+        threadCompletedSuccessfully = false;
         mIntervalInMinutes = params[0];
 
         if (mIntervalInMinutes == 0) {
@@ -62,10 +68,11 @@ public class PainRatingAsyncTask
             Thread.sleep(mIntervalInMilliseconds);
         } catch (InterruptedException e) {
             mRunningTask = null;
-            Log.e(TAG, "Thread interrupted: " + e);
+            Log.w(TAG, "Thread interrupted: " + e);
+            return null;
         }
 
-
+        threadCompletedSuccessfully = true;
         return null;
     }
 
