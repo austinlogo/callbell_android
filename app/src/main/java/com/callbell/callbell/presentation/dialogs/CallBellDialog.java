@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.callbell.callbell.CallBellApplication;
@@ -28,6 +29,9 @@ public class CallBellDialog extends DialogFragment {
     @Inject
     MessageRouting mMessageRouting;
 
+    @InjectView(R.id.dialog_station_reason)
+    LinearLayout reasonImage;
+
     @InjectView(R.id.dialog_station_acknowledge)
     Button acknowledgeButton;
 
@@ -47,6 +51,7 @@ public class CallBellDialog extends DialogFragment {
     private String fromString;
     private String mBody;
     private int mImage;
+    private int mColor;
     private MessageReason mReason;
 
     public static CallBellDialog newInstance(State st, MessageReason reason) {
@@ -72,18 +77,23 @@ public class CallBellDialog extends DialogFragment {
         fromString = getArguments().getString(FROM_KEY);
         mTitle = getText(R.string.bed) + ": " + fromString;
         mReason = MessageReason.valueOf(getArguments().getString(REASON_KEY));
-        mBody = mReason.name() + " " + getString(R.string.requested);
+        mBody = mReason.name();
 
         if (mReason == MessageReason.HELP) {
             mImage = R.drawable.call_bell_help;
+
         } else if (mReason == MessageReason.PAIN) {
             mImage = R.drawable.call_bell_pain;
+            mColor = R.color.pain_color;
         } else if (mReason == MessageReason.RESTROOM) {
             mImage = R.drawable.call_bell_restroom;
+            mColor = R.color.restroom_color;
         } else if (mReason == MessageReason.BLANKET) {
             mImage = R.drawable.call_bell_blanket;
+            mColor = R.color.blanket_color;
         } else if (mReason == MessageReason.FOOD) {
             mImage = R.drawable.call_bell_food;
+            mColor = R.color.food_color;
         }
 
     }
@@ -99,6 +109,7 @@ public class CallBellDialog extends DialogFragment {
         titleText.setText(mTitle);
         bodyText.setText(mBody);
         image.setImageResource(mImage);
+        reasonImage.setBackgroundColor(getResources().getColor(mColor));
 
         acknowledgeButton.setOnClickListener(new DialogButtonOnClickListener());
 

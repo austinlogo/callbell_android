@@ -9,6 +9,7 @@
     <color name="black">#000000</color>
     <color name="black_overlay">#66000000</color>
     <color name="charcoal">#272727</color>
+    <color name="grey">#888</color>
     <color name="coal">#171818</color>
 
     <color name="red">#F00</color>

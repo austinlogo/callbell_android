@@ -37,16 +37,16 @@ dependencies {
     testCompile "org.powermock:powermock-api-mockito:1.6.4"
     testCompile "org.powermock:powermock-classloading-xstream:1.6.4"
 
-    androidTestCompile 'com.android.support:support-annotations:23.0.1'
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
     compile files('libs/dagger-1.2.2.jar')
     compile files('libs/javax.inject.jar')
     compile files('libs/dagger-compiler-1.2.2.jar')
     compile files('libs/javawriter-2.2.1.jar')
-//    compile 'com.google.guava:guava:19.0'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:design:23.0.1'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.github.nkzawa:socket.io-client:0.3.0'

@@ -1,22 +1,33 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <!-- Corners -->
+    <dimen name="small_corner_radius">2dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
+
+    <!-- Drawing -->
+    <dimen name="stroke">2dp</dimen>
+    <dimen name="scrollbar_width">4dp</dimen>
+
+    <!-- Margins & Padding -->
+    <dimen name="small_padding">5dp</dimen>
+    <dimen name="standard_padding">14dp</dimen>
+    <dimen name="indent_padding">14dp</dimen>
+    <dimen name="heavy_margin">200dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="list_margin">16dp</dimen>
     <dimen name="item_margin">8dp</dimen>
-    <dimen name="small_corner_radius">2dp</dimen>
-    <dimen name="corner_radius">8dp</dimen>
-    <dimen name="stroke">2dp</dimen>
-    <dimen name="small_padding">5dp</dimen>
-    <dimen name="standard_padding">14dp</dimen>
-    <dimen name="indent_padding">14dp</dimen>
-    <dimen name="scrollbar_width">4dp</dimen>
+
+    <!-- Text Sizes -->
     <dimen name="small_text">10pt</dimen>
     <dimen name="paragraph">12pt</dimen>
     <dimen name="title_size">16pt</dimen>
+    <dimen name="banner_size">48pt</dimen>
+
+    <!-- Misc -->
     <dimen name="icon_edge_length">50dp</dimen>
     <dimen name="small_column">100dp</dimen>
-    <dimen name="heavy_margin">200dp</dimen>
+
 
 </resources>

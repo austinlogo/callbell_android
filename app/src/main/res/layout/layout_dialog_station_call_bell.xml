@@ -2,65 +2,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:background="@color/silver"
-    android:minWidth="300dp"
+    android:minWidth="600dp"
     style="@style/Bea_Theme.AlertDialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:padding="@dimen/standard_padding"
-        android:id="@+id/dialog_station_title"
-        android:background="@color/colorPrimary"
-        android:layout_weight="6"
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/standard_padding"
-        android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/dialog_station_image"
+        <!-- Image Section -->
+        <LinearLayout
+            android:id="@+id/dialog_station_reason"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:maxHeight="10dp"
-            android:src="@drawable/call_bell_pain"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/dialog_station_body"
-            android:text="Someone has hit the pain button"
-            android:textColor="@color/black"
-            android:layout_gravity="center_vertical"
-            android:padding="@dimen/standard_padding"
+            <ImageView
+                android:id="@+id/dialog_station_image"
+                android:layout_width="wrap_content"
+                android:maxHeight="10dp"
+                android:src="@drawable/call_bell_pain"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dialog_station_body"
+                android:textAlignment="center"
+                android:paddingBottom="@dimen/standard_padding"
+                android:text="PAIN"
+                android:textSize="@dimen/title_size"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+        <!-- Text half -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:textSize="@dimen/title_size"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/standard_padding"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/dialog_station_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/banner_size"
+                    android:textAppearance="@style/coolvetica"
+                    android:text="Bed: 01"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <!-- Button Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey">
+
+                <Button
+                    android:id="@+id/dialog_station_acknowledge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Bea_Theme.TitleBarButton"
+                    android:text="@string/acknowledge"
+                    android:textColor="@color/white"
+                    android:background="@drawable/background_button_default"
+                    android:textSize="@dimen/title_size"
+                    android:gravity="center"
+                    android:padding="@dimen/standard_padding" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:padding="@dimen/standard_padding"
-        android:layout_weight="6">
-
-        <Button
-            android:id="@+id/dialog_station_acknowledge"
-            style="@style/Bea_Theme.TitleBarButton"
-            android:text="@string/acknowledge"
-            android:textColor="@color/black"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
-
-
-
 </LinearLayout>
