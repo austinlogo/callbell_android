@@ -85,9 +85,9 @@ public class StationActivity
                     Log.d(TAG, "TABLET STATE UPDATED");
                     State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
 
-                    if (st.isInPain()) {
-                        playContinualNotificationSound();
-                    }
+//                    if (st.isInPain()) {
+//                        playContinualNotificationSound();
+//                    }
 
                     mStationFragment.updateList(st);
                     Log.d(TAG, st.toString());
@@ -106,7 +106,7 @@ public class StationActivity
                     mStationFragment.updateConnectionStatuses(response);
                 }
             }
-        };
+       };
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, filter);
     }

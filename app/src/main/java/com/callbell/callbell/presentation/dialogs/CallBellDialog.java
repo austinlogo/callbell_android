@@ -46,6 +46,7 @@ public class CallBellDialog extends DialogFragment {
 
     public static final String REASON_KEY = "payload";
     public static final String FROM_KEY = "bed_id";
+    public static String BED_FORMAT = "";
 
     private String mTitle;
     private String fromString;
@@ -74,8 +75,9 @@ public class CallBellDialog extends DialogFragment {
         ((CallBellApplication) getActivity().getApplication()).inject(this);
 
         Log.d(TAG, "Bundle: " + getArguments().toString());
+        BED_FORMAT = "" + getString(R.string.bed) + " #%s";
         fromString = getArguments().getString(FROM_KEY);
-        mTitle = getText(R.string.bed) + ": " + fromString;
+        mTitle = String.format(BED_FORMAT, fromString);
         mReason = MessageReason.valueOf(getArguments().getString(REASON_KEY));
         mBody = mReason.name();
 

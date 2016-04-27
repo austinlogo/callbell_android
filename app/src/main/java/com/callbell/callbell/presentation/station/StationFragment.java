@@ -156,9 +156,9 @@ public class StationFragment
     public void updateList(State st) {
         adapter.updateItem(st);
 
-        if (st.isInPain()) {
-            adapter.updateItem(st, MessageReason.PAIN);
-        }
+//        if (st.isInPain()) {
+//            adapter.updateItem(st, MessageReason.PAIN);
+//        }
     }
 
 
