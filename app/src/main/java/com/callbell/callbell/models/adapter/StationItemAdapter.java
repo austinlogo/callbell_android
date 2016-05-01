@@ -112,6 +112,9 @@ public class StationItemAdapter extends BaseAdapter {
 
         painRatingButton.setFocusable(false);
 
+        int color = stateList.get(position).getState().isInPain() ? R.color.pain_color : R.color.white;
+        painRatingField.setTextColor(context.getResources().getColor(color));
+
         return convertView;
     }
 

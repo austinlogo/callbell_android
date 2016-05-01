@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,7 +25,6 @@ import com.callbell.callbell.R;
 import com.callbell.callbell.business.MessageRouting;
 import com.callbell.callbell.data.MedicationValues;
 import com.callbell.callbell.data.POCValues;
-import com.callbell.callbell.presentation.dialogs.EnableSuperUserDialog;
 import com.callbell.callbell.presentation.toast.BeaToast;
 import com.callbell.callbell.service.AdminReceiver;
 import com.callbell.callbell.service.services.SocketService;
@@ -80,6 +78,13 @@ public class BaseActivity extends AppCompatActivity {
 
     public static int DEFAULT_FLAGS = Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        notificationSound.pause();
+    }
 
     // Determine if we want to unregister the device onDestroy()
     protected boolean persistConnectionOnDestroy = false;

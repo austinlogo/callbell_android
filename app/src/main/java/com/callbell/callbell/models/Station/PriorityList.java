@@ -133,7 +133,7 @@ public class PriorityList<E> implements Iterable<E>{
 
             @Override
             public boolean hasNext() {
-                return currentIndex < size() - 1 && get(currentIndex) != null;
+                return currentIndex <= size() - 1 && get(currentIndex) != null;
             }
 
             @Override
