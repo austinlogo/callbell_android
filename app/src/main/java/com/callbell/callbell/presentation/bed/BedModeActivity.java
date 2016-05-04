@@ -254,7 +254,10 @@ public class BedModeActivity
         }
 
         mStaffFragment.clearValues();
-        mPlanOfCareFragment.clearValues();
+
+        if (!mSimpleMode) {
+            mPlanOfCareFragment.clearValues();
+        }
     }
 
     @Override

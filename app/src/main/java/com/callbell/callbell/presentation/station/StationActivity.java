@@ -85,9 +85,9 @@ public class StationActivity
                     Log.d(TAG, "TABLET STATE UPDATED");
                     State st = new State(JSONUtil.getJSONFromString(intent.getStringExtra(State.STATE_ID)));
 
-                    if (st.isInPain()) {
-                        playSoundOnce();
-                    }
+//                    if (st.isInPain()) {
+//                        playSoundOnce();
+//                    }
 
                     mStationFragment.updateList(st);
                     Log.d(TAG, st.toString());

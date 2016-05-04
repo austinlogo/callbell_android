@@ -83,7 +83,7 @@ public class CallBellDialog extends DialogFragment {
 
         if (mReason == MessageReason.HELP) {
             mImage = R.drawable.call_bell_help;
-
+            mColor = R.color.help_color;
         } else if (mReason == MessageReason.PAIN) {
             mImage = R.drawable.call_bell_pain;
             mColor = R.color.pain_color;
