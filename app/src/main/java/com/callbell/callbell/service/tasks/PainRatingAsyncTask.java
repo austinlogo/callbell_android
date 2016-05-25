@@ -1,12 +1,17 @@
 package com.callbell.callbell.service.tasks;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.callbell.callbell.R;
 import com.callbell.callbell.presentation.dialogs.PainRatingDialog;
+import com.callbell.callbell.util.PrefManager;
 
 /**
  * Created by austin on 10/26/15.
@@ -20,12 +25,12 @@ public class PainRatingAsyncTask
     private int mIntervalInMinutes;
     private long mIntervalInMilliseconds;
     private boolean threadCompletedSuccessfully;
-    private Activity activity;
+    private Context applicationContext;
     private Thread mThread;
     private MediaPlayer notificationSound;
 
-    public PainRatingAsyncTask(Activity act) {
-        activity = act;
+    public PainRatingAsyncTask(Context act) {
+        applicationContext = act;
     }
 
     @Override
@@ -38,12 +43,11 @@ public class PainRatingAsyncTask
             return;
         }
 
-        notificationSound = MediaPlayer.create(activity, R.raw.notification);
-        notificationSound.setLooping(false);
-        notificationSound.start();
+        Bundle bundle = new Bundle();
+        Intent i = new Intent(PrefManager.EVENT_RATE_PAIN);
+        i.putExtras(bundle);
 
-        PainRatingDialog dialog = new PainRatingDialog();
-        dialog.show(activity.getFragmentManager(), "TASK TIMER");
+        LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(i);
     }
 
     @Override
