@@ -132,6 +132,7 @@ public class TitleBarFragment extends Fragment {
         mLangButton.setText(getActivity().getApplicationContext().getResources().getConfiguration().locale.getLanguage().toUpperCase());
         mSimpleToggle.setText(mSimpleMode ? R.string.normal_layout : R.string.simple_layout);
 
+
     }
 
     public void initListeners() {

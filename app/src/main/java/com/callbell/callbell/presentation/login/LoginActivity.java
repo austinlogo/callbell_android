@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.callbell.callbell.CallBellApplication;
 import com.callbell.callbell.R;
@@ -16,6 +17,7 @@ import com.callbell.callbell.presentation.title.TitleBarFragment;
 import com.callbell.callbell.service.services.SocketService;
 import com.callbell.callbell.util.PrefManager;
 import com.github.nkzawa.socketio.client.Socket;
+import com.google.android.gms.games.GamesMetadata;
 
 
 import javax.inject.Inject;
@@ -37,6 +39,8 @@ public class LoginActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((CallBellApplication) getApplication()).inject(this);
+
+        Log.d(TAG, "me");
 
         mLoginFragment = LoginFragment.newInstance();
         mTitleBarFragment = TitleBarFragment.newInstance(TitleBarFragment.LOGIN_MODE_ACTIVITY, false);

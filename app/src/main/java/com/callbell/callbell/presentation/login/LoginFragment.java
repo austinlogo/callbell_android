@@ -97,8 +97,6 @@ public class LoginFragment extends Fragment {
 
                 register(prefs.BED_MODE);
                 Intent newActivity = new Intent(getActivity().getApplicationContext(), BedModeActivity.class);
-//                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(newActivity);
 
                 mListener.launchActivity(newActivity);
             }
@@ -109,14 +107,12 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 register(prefs.STATION_MODE);
                 Intent newActivity = new Intent(getActivity().getApplicationContext(), StationActivity.class);
-//                newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(newActivity);
                 mListener.launchActivity(newActivity);
 
             }
         });
 
-        location_id.addTextChangedListener(new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // NOOP
@@ -131,7 +127,13 @@ public class LoginFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 setButtonsEnableStatus();
             }
-        });
+        };
+
+        hospital_id.addTextChangedListener(textWatcher);
+        group_id.addTextChangedListener(textWatcher);
+        location_id.addTextChangedListener(textWatcher);
+
+
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(new BroadcastReceiver() {
             @Override
@@ -201,12 +203,12 @@ public class LoginFragment extends Fragment {
     private void setSuperUserPermission(boolean isSuperUser) {
         hospital_id.setEnabled(isSuperUser);
         group_id.setEnabled(isSuperUser);
-        stationButton.setEnabled(isSuperUser);
+        setButtonsEnableStatus();
     }
     
     private void setButtonsEnableStatus() {
         boolean enableStation = prefs.isSuperUser()
-                &&group_id.getText().length() > 0
+                && group_id.getText().length() > 0
                 && hospital_id.getText().length() > 0;
 
         boolean enableBed = location_id.getText().length() > 0

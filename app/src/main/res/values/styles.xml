@@ -66,6 +66,7 @@
     
     <style name="Bea_Theme.EditText" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@drawable/bea_theme_edittext_text_color</item>
+        <item name="android:textColorHint">@drawable/bea_theme_edittext_text_color_hint</item>
         <item name="android:textSize">@dimen/paragraph</item>
         <item name="android:singleLine">true</item>
     </style>
