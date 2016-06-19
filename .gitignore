@@ -7,3 +7,4 @@ app/app.iml
 CallBell.iml
 /build
 /captures
+*.iml
