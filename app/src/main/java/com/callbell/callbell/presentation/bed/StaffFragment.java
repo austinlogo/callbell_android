@@ -196,6 +196,12 @@ public class StaffFragment extends Fragment {
         nurseBox.setVisibility((isSuperUser || nurseField.getText().length() > 0) ? View.VISIBLE : View.GONE);
     }
 
+    public boolean getStaffVisibitity() {
+        return physicianBox.getVisibility() == View.VISIBLE
+                || residentBox.getVisibility() == View.VISIBLE
+                || nurseBox.getVisibility() == View.VISIBLE;
+    }
+
     public void clearValues() {
         physicianField.setText("");
         residentField.setText("");

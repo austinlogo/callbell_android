@@ -28,6 +28,7 @@
             android:id="@+id/staff_physician_field"
             android:nextFocusDown="@+id/staff_nurse_field"
             android:layout_width="match_parent"
+            android:inputType="textNoSuggestions"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -47,6 +48,7 @@
             style="@style/Bea_Theme.EditText"
             android:nextFocusDown="@+id/staff_resident_field"
             android:layout_width="match_parent"
+            android:inputType="textNoSuggestions"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -66,6 +68,7 @@
             style="@style/Bea_Theme.EditText"
             android:nextFocusDown="@+id/staff_physician_field"
             android:layout_width="match_parent"
+            android:inputType="textNoSuggestions"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

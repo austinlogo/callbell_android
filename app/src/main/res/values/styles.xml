@@ -87,6 +87,15 @@
         <!--<item name="android:padding">@dimen/standard_padding</item>-->
     </style>
 
+    <style name="Bea_Theme.listView">
+        <item name="android:visibility">gone</item>
+        <item name="android:color">@color/white</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+    </style>
+
     <style name="Bea_Theme.TextView" parent="android:Widget.TextView">
         <item name="android:textSize">@dimen/paragraph</item>
     </style>

@@ -10,22 +10,21 @@
         <TextView
             android:id="@+id/layout_display_title"
             android:layout_gravity="center_horizontal"
+            android:text="Header"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/title_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <ListView android:id="@+id/layout_display_item_list_admin"
+            style="@style/Bea_Theme.listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbarThumbVertical="@drawable/scrollbar"
             android:fadeScrollbars="false"/>
 
         <ListView android:id="@+id/layout_display_item_patient"
-            android:visibility="gone"
-            android:color="@color/white"
-            android:fadeScrollbars="false"
-            android:scrollbarThumbVertical="@drawable/scrollbar"
-            android:scrollbarTrackVertical="@color/white_overlay"
+            style="@style/Bea_Theme.listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

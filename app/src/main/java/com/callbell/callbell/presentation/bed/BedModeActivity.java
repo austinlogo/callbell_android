@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.callbell.callbell.CallBellApplication;
@@ -53,6 +54,9 @@ public class BedModeActivity
 
     @InjectView(R.id.bed_mode_CallBellsFragment_container)
     FrameLayout mCallBellContainer;
+
+    @InjectView (R.id.staff_fragment_divider)
+    TableRow divider;
 
     private BroadcastReceiver mBroadcastReceiver;
     private StaffFragment mStaffFragment;
@@ -104,8 +108,6 @@ public class BedModeActivity
         }
         fm.executePendingTransactions();
 //        mCallBellsFragment.toggleMode(mSimpleMode);
-
-        setSuperUserPermissions(prefs.isSuperUser());
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(PrefManager.EVENT_SU_MODE_CHANGE);
@@ -185,6 +187,11 @@ public class BedModeActivity
         if (persistConnectionOnDestroy) {
             persistConnectionOnDestroy = false;
         }
+
+        setSuperUserPermissions(prefs.isSuperUser());
+
+        boolean h = mStaffFragment.getStaffVisibitity();
+        divider.setVisibility(h ? View.VISIBLE : View.GONE);
 
         register();
     }
@@ -316,5 +323,6 @@ public class BedModeActivity
     public void setSuperUserPermissions(boolean isSuperUser) {
         super.setSuperUserPermissions(isSuperUser);
         mCallBellContainer.setVisibility(isSuperUser || mSimpleMode ? View.GONE : View.VISIBLE);
+        divider.setVisibility(mStaffFragment.getStaffVisibitity() ? View.VISIBLE : View.GONE);
     }
 }
